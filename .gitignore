@@ -1,0 +1,23 @@
+.DS_Store
+# Xcode
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+.swiftpm/
+SourcePackages/
+# Model weights
+*.safetensors
+*.gguf
+*.mlmodel
+*.mlpackage
+# ESP-IDF
+managed_components/
+sdkconfig
+sdkconfig.old
+*.log
+# Secrets
+.env
+*.pem
+*.p12
+*.mobileprovision

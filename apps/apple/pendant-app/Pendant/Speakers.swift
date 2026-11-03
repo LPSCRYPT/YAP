@@ -107,7 +107,8 @@ enum Speakers {
         let people = Set(lines.compactMap(\.speaker))
         if people.count < max(1, minPeople) {
             let all = lines.map { $0.text.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }.joined(separator: " ")
-            return all.isEmpty ? [] : [SpeakerLine(id: 0, speaker: nil, text: all, start: lines.first?.start ?? -1)]
+            // minPeople 1: no separate voices found, so it's all one person (still shown as a bubble)
+            return all.isEmpty ? [] : [SpeakerLine(id: 0, speaker: minPeople <= 1 ? 1 : nil, text: all, start: lines.first?.start ?? -1)]
         }
         return lines.map { SpeakerLine(id: $0.id, speaker: $0.speaker, text: $0.text.trimmingCharacters(in: .whitespaces), start: $0.start) }
             .filter { !$0.text.isEmpty }
@@ -149,6 +150,7 @@ enum Speakers {
     /// The words only, without "Person N:" names (to compare two versions of a transcript).
     static func words(_ text: String) -> String {
         parse(text).map(\.text).joined(separator: " ")
+            .split(whereSeparator: \.isWhitespace).joined(separator: " ")
     }
 
     /// Keeps the phrases and turns between `from` and `to` seconds, with times moved to start at 0.

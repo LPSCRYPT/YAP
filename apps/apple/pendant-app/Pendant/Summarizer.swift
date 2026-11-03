@@ -156,9 +156,20 @@ enum Summarizer {
 }
 
 extension Array where Element == NoteInsights.Item {
-    /// Drops tasks a small model made up: too short, duplicated, or not grounded in what was said. At most 5.
+    /// Phrases that mean someone committed to, or was asked to do, something
+    static let commitmentCues = ["i will", "i'll", "ill ", "we will", "we'll", "i'm going to", "im going to", "i am going to",
+        "gonna", "need to", "needs to", "have to", "has to", "got to", "gotta", "must", "should", "remind me", "don't forget",
+        "dont forget", "remember to", "make sure", "can you", "could you", "would you", "will you", "please", "let's", "lets ",
+        "todo", "to do", "to-do", "deadline", "by tomorrow", "by monday", "by friday", "by next", "send ", "call ", "email "]
+
+    /// Drops tasks a small model made up: too short, duplicated, or not tied to a sentence where
+    /// someone actually commits to it. At most 3.
     func filteredTasks(transcript: String) -> [NoteInsights.Item] {
-        let said = Set(transcript.lowercased().split { !$0.isLetter && !$0.isNumber }.map(String.init))
+        // Only words from sentences with a commitment in them count
+        let sentences = transcript.lowercased().split { ".?!\n".contains($0) }.map { " " + $0 + " " }
+        let committed = sentences.filter { s in Self.commitmentCues.contains { s.contains($0) } }
+        let said = Set(committed.joined(separator: " ").split { !$0.isLetter && !$0.isNumber }.map(String.init))
+        guard !said.isEmpty else { return [] }
         var seen: Set<String> = []
         return filter { item in
             let words = item.text.lowercased().split { !$0.isLetter && !$0.isNumber }.map(String.init)
@@ -168,9 +179,9 @@ extension Array where Element == NoteInsights.Item {
             guard !content.isEmpty else { return false }
             // Most of its words must come from the conversation itself
             let found = content.filter { said.contains($0) }.count
-            return Double(found) / Double(content.count) >= 0.5
+            return Double(found) / Double(content.count) >= 0.6
         }
-        .prefix(5).map { $0 }
+        .prefix(3).map { $0 }
     }
 }
 

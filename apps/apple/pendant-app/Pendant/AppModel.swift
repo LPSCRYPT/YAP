@@ -101,6 +101,12 @@ final class AppModel: ObservableObject {
         // One voice only, from before single-person bubbles: label it now
         for n in store.notes where !n.discarded && store.turns(for: n.name) != nil
             && !(n.transcript.map { Speakers.parse($0).contains { $0.speaker != nil } } ?? true) { queueSpeakers(n.name) }
+        // Drop to-dos saved before the stricter check (keeps ticks on the ones that stay)
+        for n in store.notes {
+            guard var i = n.insights, let t = n.transcript else { continue }
+            let kept = i.actionItems.filteredTasks(transcript: t)
+            if kept != i.actionItems { i.actionItems = kept; store.setInsights(i, for: n.name) }
+        }
         // Summarize anything transcribed earlier that has no summary yet
         for n in store.notes where n.transcript != nil && n.insights == nil { queueSummary(n.name) }
         // Older notes have a summary but no title yet: add one, keeping their summary and ticks

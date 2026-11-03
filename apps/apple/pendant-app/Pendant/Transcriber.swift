@@ -31,7 +31,7 @@ enum Transcriber {
     }
 
     /// Target piece length. Each cut moves back up to `searchSeconds` to land in a pause.
-    static let pieceSeconds = 60.0
+    static let pieceSeconds = 30.0
     static let searchSeconds = 8.0
 
     /// The transcript as phrases of timed pieces (times in seconds from the start of the file).

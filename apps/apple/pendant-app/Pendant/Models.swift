@@ -324,6 +324,7 @@ struct SettingsView: View {
                     Label(model.people.me == nil ? "Teach Pendant your voice" : "People", systemImage: "person.2")
                 }
             }
+            DailyRecapSettings()
             Section("Pendant") {
                 Toggle("Free up pendant after download", isOn: $model.deleteAfterDownload)
                 Toggle("Split on 2 min of quiet, hide silent clips", isOn: $model.autoSplit)

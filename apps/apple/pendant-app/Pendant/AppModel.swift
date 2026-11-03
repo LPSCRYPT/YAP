@@ -26,6 +26,8 @@ final class AppModel: ObservableObject {
     @Published var labelingSpeakers: Set<String> = []
     /// What's transcribed so far, shown while the rest is still working (memory only)
     @Published var partialPhrases: [String: [[TimedText]]] = [:]
+    /// Who spoke when, so far, while working it out (memory only)
+    @Published var partialTurns: [String: [SpeakerTurn]] = [:]
     @Published var summarizing: Set<String> = []
     /// Why summaries can't be made on this phone right now (nil when they can)
     @Published var summaryUnavailable: String?
@@ -188,6 +190,17 @@ final class AppModel: ObservableObject {
         while let name = transcribeQueue.first {
             transcribing.insert(name)
             if let note = store.notes.first(where: { $0.name == name }) {
+                // Who spoke runs at the same time as the words (like Omi), not after them
+                let url = note.audioURL
+                var speakerTask: Task<[SpeakerTurn]?, Never>?
+                if Speakers.isIncluded {
+                    labelingSpeakers.insert(name)
+                    speakerTask = Task { [weak self] in
+                        await Speakers.turns(for: url) { t in
+                            Task { @MainActor in self?.partialTurns[name] = t }
+                        }
+                    }
+                }
                 do {
                     transcribeProgress[name] = 0
                     let phrases = try await Transcriber.transcribe(note.audioURL, progress: { [weak self] p in
@@ -198,16 +211,27 @@ final class AppModel: ObservableObject {
                     let text = Transcriber.plain(phrases)
                     if text.isEmpty, autoSplit, note.transcript == nil {
                         // Nobody talked: hide it under Discarded instead of deleting (like Omi)
+                        speakerTask?.cancel(); endSpeakers(name)
                         store.setTranscript(Self.noSpeech, for: name)
                         store.setDiscarded(true, for: name)
                     } else {
-                        // Text first, so the note is usable right away; speakers are added after
+                        // Text first, so the note is usable right away
                         store.saveWords(phrases, for: name)
                         store.setTranscript(text.isEmpty ? Self.noSpeech : text, for: name)
-                        queueSummary(name)
-                        if !text.isEmpty { queueSpeakers(name) }
+                        if let speakerTask, !text.isEmpty {
+                            // Usually done already; then names go in and the summary sees "Person 1:" lines
+                            Task { [weak self] in
+                                let turns = await speakerTask.value
+                                self?.applySpeakers(name, phrases: phrases, turns: turns)
+                                self?.queueSummary(name)
+                            }
+                        } else {
+                            endSpeakers(name)
+                            queueSummary(name)
+                        }
                     }
                 } catch {
+                    speakerTask?.cancel(); endSpeakers(name)
                     lastError = "Couldn't transcribe: \(error.localizedDescription)"
                 }
                 transcribeProgress[name] = nil
@@ -224,6 +248,9 @@ final class AppModel: ObservableObject {
     /// Built from the saved word times; falls back to the saved text.
     func displayLines(for note: Note) -> [SpeakerLine] {
         guard let t = note.transcript else { return [] }
+        if labelingSpeakers.contains(note.name), partialTurns[note.name] != nil, t != Self.noSpeech {
+            return progressLines(note.name)
+        }
         if let phrases = store.words(for: note.name),
            phrases.contains(where: { ($0.first?.start ?? -1) >= 0 }) {
             let labeled = Speakers.parse(t).contains { $0.speaker != nil }
@@ -266,21 +293,46 @@ final class AppModel: ObservableObject {
     private func runSpeakers() async {
         while let name = speakerQueue.first {
             labelingSpeakers.insert(name)
-            if let note = store.notes.first(where: { $0.name == name }), let phrases = store.words(for: name),
-               let turns = await Speakers.turns(for: note.audioURL) {
-                store.saveTurns(turns, for: name)
-                let lines = Speakers.lines(phrases, turns: turns, minPeople: 1)
-                // Only if the text wasn't changed meanwhile
-                if lines.contains(where: { $0.speaker != nil }),
-                   let now = store.notes.first(where: { $0.name == name })?.transcript,
-                   Speakers.words(now) == Speakers.words(Transcriber.plain(phrases)) {
-                    store.setLabeledTranscript(Speakers.text(lines), for: name)
-                    queueIdentify(name)
+            if let note = store.notes.first(where: { $0.name == name }), let phrases = store.words(for: name) {
+                let turns = await Speakers.turns(for: note.audioURL) { [weak self] t in
+                    Task { @MainActor in self?.partialTurns[name] = t }
                 }
+                applySpeakers(name, phrases: phrases, turns: turns)
+            } else {
+                endSpeakers(name)
             }
-            labelingSpeakers.remove(name)
             speakerQueue.removeFirst()
         }
+    }
+
+    /// Puts Person labels on a transcript once who-spoke-when is known.
+    private func applySpeakers(_ name: String, phrases: [[TimedText]], turns: [SpeakerTurn]?) {
+        defer { endSpeakers(name) }
+        guard let turns else { return }
+        store.saveTurns(turns, for: name)
+        let lines = Speakers.lines(phrases, turns: turns, minPeople: 1)
+        // Only if the text wasn't changed meanwhile
+        if lines.contains(where: { $0.speaker != nil }),
+           let now = store.notes.first(where: { $0.name == name })?.transcript,
+           Speakers.words(now) == Speakers.words(Transcriber.plain(phrases)) {
+            store.setLabeledTranscript(Speakers.text(lines), for: name)
+            queueIdentify(name)
+        }
+    }
+
+    private func endSpeakers(_ name: String) {
+        labelingSpeakers.remove(name)
+        partialTurns[name] = nil
+    }
+
+    /// Bubbles while the words and voices are still being worked out.
+    func progressLines(_ name: String) -> [SpeakerLine] {
+        let phrases = partialPhrases[name] ?? store.words(for: name) ?? []
+        if let t = partialTurns[name], !t.isEmpty {
+            let l = Speakers.lines(phrases, turns: t, minPeople: 1)
+            if l.contains(where: { $0.speaker != nil }) { return l }
+        }
+        return Self.paragraphs(phrases)
     }
 
     func queueSummary(_ name: String) {

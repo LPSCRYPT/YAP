@@ -24,7 +24,10 @@ struct Note: Identifiable, Hashable {
     }
     /// The made-up title once there is one, otherwise "Note 7"
     var heading: String { insights?.title ?? title }
-    var title: String { part.map { "Note \(number), part \($0)" } ?? "Note \(number)" }
+    var title: String {
+        let kind = name.hasPrefix("P") ? "Phone note" : "Note"
+        return part.map { "\(kind) \(number), part \($0)" } ?? "\(kind) \(number)"
+    }
 }
 
 /// Keeps downloaded notes in Documents/Notes: <name>.wav, <name>.txt for the transcript

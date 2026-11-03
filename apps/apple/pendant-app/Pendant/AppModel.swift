@@ -16,6 +16,8 @@ final class AppModel: ObservableObject {
     }
     /// The live transcript screen is open
     @Published var showLive = false
+    /// The phone recording screen is open
+    @Published var showPhoneRecorder = false
 
     @Published var transcribing: Set<String> = []
     /// How far along each transcription is (0...1), for long recordings
@@ -93,6 +95,12 @@ final class AppModel: ObservableObject {
 
         // Transcribe anything saved earlier that has no text yet
         for n in store.notes where n.transcript == nil { queueTranscription(n.name) }
+        // Find who spoke in notes that never got it (the queue doesn't survive closing the app)
+        for n in store.notes where !n.discarded && n.transcript != nil && n.transcript != Self.noSpeech
+            && store.words(for: n.name) != nil && store.turns(for: n.name) == nil { queueSpeakers(n.name) }
+        // One voice only, from before single-person bubbles: label it now
+        for n in store.notes where !n.discarded && store.turns(for: n.name) != nil
+            && !(n.transcript.map { Speakers.parse($0).contains { $0.speaker != nil } } ?? true) { queueSpeakers(n.name) }
         // Summarize anything transcribed earlier that has no summary yet
         for n in store.notes where n.transcript != nil && n.insights == nil { queueSummary(n.name) }
         // Older notes have a summary but no title yet: add one, keeping their summary and ticks
@@ -154,7 +162,7 @@ final class AppModel: ObservableObject {
             return
         }
         store.saveWords(live.phrases, for: name)
-        store.setTranscript(Speakers.text(Speakers.lines(live.phrases, turns: live.turns)), for: name)
+        store.setTranscript(Speakers.text(Speakers.lines(live.phrases, turns: live.turns, minPeople: live.turns.isEmpty ? 2 : 1)), for: name)
         queueSummary(name)
         if live.turns.isEmpty {
             queueSpeakers(name)   // voice model wasn't ready live: do it now
@@ -214,7 +222,7 @@ final class AppModel: ObservableObject {
            phrases.contains(where: { ($0.first?.start ?? -1) >= 0 }) {
             let labeled = Speakers.parse(t).contains { $0.speaker != nil }
             if labeled, let turns = store.turns(for: note.name) {
-                let l = Speakers.lines(phrases, turns: turns)
+                let l = Speakers.lines(phrases, turns: turns, minPeople: 1)
                 if l.contains(where: { $0.speaker != nil }) { return l }
             } else if !labeled {
                 return Self.paragraphs(phrases)
@@ -255,8 +263,8 @@ final class AppModel: ObservableObject {
             if let note = store.notes.first(where: { $0.name == name }), let phrases = store.words(for: name),
                let turns = await Speakers.turns(for: note.audioURL) {
                 store.saveTurns(turns, for: name)
-                let lines = Speakers.lines(phrases, turns: turns)
-                // Only when 2+ voices, and only if the text wasn't changed meanwhile
+                let lines = Speakers.lines(phrases, turns: turns, minPeople: 1)
+                // Only if the text wasn't changed meanwhile
                 if lines.contains(where: { $0.speaker != nil }),
                    let now = store.notes.first(where: { $0.name == name })?.transcript,
                    Speakers.words(now) == Speakers.words(Transcriber.plain(phrases)) {
@@ -380,7 +388,7 @@ final class AppModel: ObservableObject {
         guard let note = store.notes.first(where: { $0.name == name }),
               let phrases = store.words(for: name), let turns = store.turns(for: name) else { return nil }
         let slots = Speakers.slots(phrases, turns: turns)
-        guard slots.count >= 2 else { return nil }
+        guard !slots.isEmpty else { return nil }
         var out: [Int: [Float]] = [:]
         for (n, slot) in slots {
             let ranges = turns.filter { $0.speaker == slot && $0.end - $0.start >= 1 }.map { ($0.start, $0.end) }

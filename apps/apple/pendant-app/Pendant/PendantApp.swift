@@ -2,12 +2,20 @@ import SwiftUI
 
 @main
 struct PendantApp: App {
-    @StateObject private var model = AppModel()
+    @StateObject private var model = AppModel.shared
 
     var body: some Scene {
         WindowGroup {
-            NotesView()
-                .environmentObject(model)
+            TabView {
+                NotesView()
+                    .tabItem { Label("Conversations", systemImage: "waveform") }
+                TodosView()
+                    .tabItem { Label("To-dos", systemImage: "checklist") }
+            }
+            .environmentObject(model)
+            .sheet(isPresented: $model.showPhoneRecorder) {
+                PhoneRecordView().environmentObject(model)
+            }
         }
     }
 }

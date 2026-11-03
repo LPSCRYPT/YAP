@@ -109,13 +109,23 @@ enum Summarizer {
         switch engine {
         case .apple:
             #if canImport(FoundationModels)
-            if #available(iOS 26.0, *) { return try await OnDevice.summarize(transcript) }
+            if #available(iOS 26.0, *) {
+                var i = try await OnDevice.summarize(transcript)
+                i.actionItems = i.actionItems.filteredTasks(transcript: transcript)
+                return i
+            }
             #endif
             throw Failure.unavailable(appleUnavailableReason ?? "")
         case .qwenSmall:
-            return try await LocalModel.summarize(transcript, engine: engine, progress: progress)
+            var i = try await LocalModel.summarize(transcript, engine: engine, progress: progress)
+            i.actionItems = i.actionItems.filteredTasks(transcript: transcript)
+            return i
         }
     }
+
+    /// Words that don't count when checking a task against the transcript
+    static let filler: Set<String> = ["the", "a", "an", "to", "and", "or", "of", "for", "with", "on", "in", "at", "my", "your",
+                                      "his", "her", "their", "our", "about", "some", "it", "this", "that", "be", "is", "get", "make", "do"]
 
     /// Trims quotes, "Title:" and a trailing period, and keeps it short.
     static func cleanTitle(_ raw: String) -> String? {
@@ -145,6 +155,25 @@ enum Summarizer {
     }
 }
 
+extension Array where Element == NoteInsights.Item {
+    /// Drops tasks a small model made up: too short, duplicated, or not grounded in what was said. At most 5.
+    func filteredTasks(transcript: String) -> [NoteInsights.Item] {
+        let said = Set(transcript.lowercased().split { !$0.isLetter && !$0.isNumber }.map(String.init))
+        var seen: Set<String> = []
+        return filter { item in
+            let words = item.text.lowercased().split { !$0.isLetter && !$0.isNumber }.map(String.init)
+            let key = words.joined(separator: " ")
+            guard words.count >= 2, seen.insert(key).inserted else { return false }
+            let content = words.filter { $0.count > 2 && !Summarizer.filler.contains($0) }
+            guard !content.isEmpty else { return false }
+            // Most of its words must come from the conversation itself
+            let found = content.filter { said.contains($0) }.count
+            return Double(found) / Double(content.count) >= 0.5
+        }
+        .prefix(5).map { $0 }
+    }
+}
+
 #if canImport(FoundationModels)
 @available(iOS 26.0, *)
 @Generable
@@ -163,7 +192,7 @@ struct GeneratedSummary {
     var category: GeneratedCategory
     @Guide(description: "Two to four sentences saying what the note is about and the key points, in plain language.")
     var summary: String
-    @Guide(description: "Every task, follow-up, reminder or fix the speaker needs to do, in the order mentioned, each a short imperative sentence. Empty if there are none.", .maximumCount(10))
+    @Guide(description: "Only clear commitments: something a person explicitly said they will do, must do, or was asked to do, with a concrete action. Not opinions, ideas, plans being discussed, past events or small talk. Most conversations have none: then leave it empty. Short imperative sentences.", .maximumCount(5))
     var actionItems: [String]
 }
 
@@ -171,7 +200,8 @@ struct GeneratedSummary {
 private enum OnDevice {
     static let instructions = """
     You summarize voice notes recorded on a wearable pendant. The text is an automatic transcript and may have \
-    errors or missing punctuation. Lines may start with "Person 1:", "Person 2:" when several people talk. Only use what is in the transcript. Do not invent tasks, names or dates.
+    errors or missing punctuation. Lines may start with "Person 1:", "Person 2:" when several people talk. Only use what is in the transcript. Do not invent tasks, names or dates. \
+    Most conversations have no tasks; only list one when someone clearly commits to or is asked to do something specific.
     """
 
     /// The on-device model has a small context window (about 4,000 tokens), so long notes are

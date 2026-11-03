@@ -317,6 +317,9 @@ struct SettingsView: View {
                 NavigationLink { ModelsView() } label: {
                     Label("Models and downloads", systemImage: "cpu")
                 }
+                NavigationLink { VocabularyView() } label: {
+                    Label("Language and custom words", systemImage: "character.book.closed")
+                }
                 NavigationLink { PeopleView() } label: {
                     Label(model.people.me == nil ? "Teach Pendant your voice" : "People", systemImage: "person.2")
                 }

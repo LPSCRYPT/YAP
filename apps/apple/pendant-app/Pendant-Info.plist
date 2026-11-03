@@ -3,9 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Record 20 seconds of your voice so Pendant can tell when you are the one talking. Only a voice fingerprint is kept, on this phone.</string>
+	<string>Record with your phone when the pendant isn't around, and teach Pendant your voice. Everything stays on this phone.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>Add tasks from your conversations to Reminders when you ask.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>bluetooth-central</string>
 	</array>
 </dict>

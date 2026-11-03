@@ -29,9 +29,17 @@ enum LocalModel {
     TASKS:
     - <one task per line>
 
-    Any sentence where the speaker needs to do something (need to, have to, remember to, should, will, todo) is a task. Write "TASKS: none" only if there is nothing to do.
+    A task is only a clear commitment: someone says they will do, must do, or are asked to do something specific. Ideas, opinions, plans being discussed, past events and small talk are not tasks. Most conversations have no tasks: then write "TASKS: none".
 
-    Example
+    Example 1
+    Transcript: We had lunch and talked about movies. Sam liked the new one, I thought it was too long.
+    TITLE: Lunch and movie talk
+    CATEGORY: personal
+    OVERVIEW: Sam and I talked about movies over lunch.
+    SUMMARY: Over lunch we talked about the new movie. Sam liked it and I found it too long.
+    TASKS: none
+
+    Example 2
     Transcript: Talked to Sam about the launch. It moves to May. I need to update the website and email the beta users tomorrow.
     TITLE: Launch moved to May
     CATEGORY: work

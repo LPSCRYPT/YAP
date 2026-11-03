@@ -17,6 +17,7 @@ This directory preserves the source-backed investigation informing YAP's data st
 | [AudioMoth / MicroMoth](audiomoth-micromoth.md) | WAV capture/provenance and the boundary between recording and speech intelligence |
 | [Graphiti](graphiti.md) | Adjacent temporal graph framework; candidate adapter, not a pendant product |
 | [YAP synthesis and open questions](yap-data-model-synthesis.md) | Proposed evidence/assertion/projection separation, temporal semantics, processing stages, and evaluation scenarios |
+| [Data Plan UX and policy](data-plan-ux-and-policy.md) | First-class controls for processing placement, explicit transfers, storage, audio expiry, and policy enforcement |
 
 ## Evidence standard
 

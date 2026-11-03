@@ -1,0 +1,1386 @@
+<title>Pendant Build Research</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: field-notebook for a hardware build — sticky contents rail on wide screens, single reading column, wide tables scroll in place */
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --fg:#17201d; --muted:#5a6a64; --rule:#d5dedb;
+  --accent:#1d6b57; --signal:#b86b00; --code-bg:#eaf0ee;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1513; --surface:#151d1a; --fg:#e3ebe8; --muted:#93a6a0; --rule:#2a3733;
+  --accent:#5cc3a5; --signal:#f0a640; --code-bg:#1b2622; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1513; --surface:#151d1a; --fg:#e3ebe8; --muted:#93a6a0; --rule:#2a3733;
+  --accent:#5cc3a5; --signal:#f0a640; --code-bg:#1b2622; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:1.0625rem;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 4rem}
+.wrap{max-width:74rem;margin:0 auto;display:grid;grid-template-columns:15rem minmax(0,1fr);gap:3.5rem}
+header.mast{grid-column:1/-1;padding-block:3rem 1.5rem;border-bottom:1px solid var(--rule)}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+.eyebrow b{color:var(--accent);font-weight:500}
+header.mast h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.5vw,3.25rem);line-height:1.08;letter-spacing:-.02em;margin:.8rem 0 .6rem;text-wrap:balance;max-width:22ch}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.chips span{font-family:var(--mono);font-size:.75rem;border:1px solid var(--rule);background:var(--surface);padding:.25rem .6rem;border-radius:3px;color:var(--muted)}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1.5rem);align-self:start;padding-top:2rem;font-family:var(--display);font-size:.9rem}
+nav.toc p{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .6rem}
+nav.toc ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;counter-reset:s}
+nav.toc ul ul{display:none}
+nav.toc a{color:var(--fg);text-decoration:none;line-height:1.3;display:block;border-left:2px solid var(--rule);padding-left:.75rem}
+nav.toc a:hover,nav.toc a:focus-visible{border-color:var(--accent);color:var(--accent)}
+main{min-width:0;max-width:46rem;padding-top:1.5rem}
+main h1{display:none}
+main h2{font-family:var(--display);font-weight:700;font-size:1.6rem;line-height:1.2;letter-spacing:-.01em;margin:3rem 0 1rem;text-wrap:balance;padding-top:1.25rem;border-top:2px solid var(--fg)}
+main h3{font-family:var(--display);font-weight:500;font-size:1.2rem;margin:2rem 0 .6rem}
+main p,main li{max-width:65ch}
+main > p:first-of-type{font-size:1.15rem;line-height:1.6;padding:1.25rem 1.4rem;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+main strong{font-weight:600}
+a{color:var(--accent);text-underline-offset:2px;text-decoration-thickness:1px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+code{font-family:var(--mono);font-size:.85em;background:var(--code-bg);padding:.08em .35em;border-radius:3px;overflow-wrap:anywhere}
+pre{overflow-x:auto;background:var(--code-bg);border:1px solid var(--rule);border-radius:4px;padding:1rem;font-size:.78rem;line-height:1.5}
+pre code{background:none;padding:0;font-size:inherit;overflow-wrap:normal}
+.tbl{overflow-x:auto;margin:1.25rem 0;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-family:var(--display);font-size:.85rem;line-height:1.4;font-variant-numeric:tabular-nums}
+th,td{text-align:left;vertical-align:top;padding:.6rem .75rem;border-bottom:1px solid var(--rule);min-width:7rem}
+th{font-family:var(--mono);font-weight:500;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--code-bg)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:500}
+blockquote{margin:1.5rem 0;padding:.25rem 0 .25rem 1rem;border-left:3px solid var(--signal);color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:2.5rem 0}
+footer{grid-column:1/-1;font-family:var(--mono);font-size:.75rem;color:var(--muted);border-top:1px solid var(--rule);padding-top:1rem}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}nav.toc{position:static;padding-top:1.25rem;border-bottom:1px solid var(--rule);padding-bottom:1.25rem}}
+</style>
+<div class="wrap">
+<header class="mast">
+<div class="eyebrow"><b>Research report</b><span>AI note-taking pendant</span><span>Atharv &amp; Zoo</span><span>26 Oct 2026</span></div>
+<h1>Speak Omi's protocol, then beat it on Wi-Fi</h1>
+<div class="chips"><span>Waveshare ESP32-S3-Touch-LCD-1.46</span><span>16 kHz Opus</span><span>BLE + Wi-Fi sync</span><span>Omi-compatible</span><span>Flutter, Android first</span></div>
+</header>
+<nav class="toc" aria-label="Contents"><p>Contents</p><ul>
+<li><a href="#speak-omis-protocol-then-beat-it-on-wi-fi"
+id="toc-speak-omis-protocol-then-beat-it-on-wi-fi">Speak Omi's protocol,
+then beat it on Wi-Fi</a>
+<ul>
+<li><a
+href="#commercial-pendants-converge-on-ble-a-phone-app-and-a-2030-subscription"
+id="toc-commercial-pendants-converge-on-ble-a-phone-app-and-a-2030-subscription">Commercial
+pendants converge on BLE, a phone app and a $20–30 subscription</a></li>
+<li><a href="#three-mit-codebases-cover-most-of-the-build"
+id="toc-three-mit-codebases-cover-most-of-the-build">Three MIT codebases
+cover most of the build</a></li>
+<li><a
+href="#the-waveshare-146-works-as-a-prototype-if-its-screen-stays-dark"
+id="toc-the-waveshare-146-works-as-a-prototype-if-its-screen-stays-dark">The
+Waveshare 1.46 works as a prototype if its screen stays dark</a></li>
+<li><a
+href="#store-and-forward-opus-with-a-thin-server-is-the-architecture-to-build"
+id="toc-store-and-forward-opus-with-a-thin-server-is-the-architecture-to-build">Store-and-forward
+Opus with a thin server is the architecture to build</a></li>
+<li><a
+href="#a-four-phase-mvp-path-that-starts-with-an-sd-card-recorder"
+id="toc-a-four-phase-mvp-path-that-starts-with-an-sd-card-recorder">A
+four-phase MVP path that starts with an SD-card recorder</a></li>
+<li><a href="#risks-to-retire-early-and-four-ways-to-stand-apart"
+id="toc-risks-to-retire-early-and-four-ways-to-stand-apart">Risks to
+retire early, and four ways to stand apart</a></li>
+<li><a
+href="#features-to-build-beyond-the-market-voice-only-added-31-oct"
+id="toc-features-to-build-beyond-the-market-voice-only-added-31-oct">Features
+to build beyond the market (voice only, added 31 Oct)</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+</ul></li>
+</ul></nav>
+<main>
+<h1 id="speak-omis-protocol-then-beat-it-on-wi-fi">Speak Omi's protocol,
+then beat it on Wi-Fi</h1>
+<p>Atharv and Zoo should build their pendant as an
+<strong>Omi-compatible BLE audio device on ESP-IDF</strong>: an I2S mic
+feeding 16 kHz Opus that is always written to microSD first, streamed
+over BLE when a phone is in range, and bulk-uploaded over Wi-Fi when it
+is not. The two MIT-licensed projects that make this a weeks-long job
+rather than a months-long one are <strong>xiaozhi-esp32</strong>, which
+already ships a working board definition for their exact Waveshare
+ESP32-S3-Touch-LCD-1.46, and <strong>BasedHardware/omi</strong>, whose
+documented GATT protocol and ESP32-S3 "omiGlass" firmware let the stock
+Omi app act as their companion app on day one. The commercial market
+(Plaud, Bee, Omi, Fieldy, with Limitless absorbed by Meta) has settled
+on a common pattern: a BLE accessory relays audio through a phone to
+cloud speech-to-text and an LLM, sold as $50–250 hardware plus a free
+tier of 150–300 minutes and an unlimited plan at $20–30/month. That
+gives the students a clear target to match, and three gaps the market
+leaves open: Hindi-English code-switched speech, local-first or
+self-hosted processing that cannot be "rug-pulled", and direct Wi-Fi
+sync, which is the ESP32's natural strength. The Waveshare board is a
+capable but power-hungry prototype. With the screen dark, a 500 mAh cell
+gives an estimated <strong>~7 h of SD-only recording or ~4–5 h of BLE
+streaming</strong>, against 20 h for Plaud's NotePin. Running costs are
+dominated by speech-to-text at roughly <strong>$0.10–0.36 per audio
+hour</strong>, while LLM summarization costs well under a cent per hour
+with small models. The first two weeks should produce a
+record-to-SD-then-laptop pipeline that A/B-tests real Hinglish audio
+across STT vendors, because microphone quality and language accuracy are
+the two biggest unknowns.</p>
+<h2
+id="commercial-pendants-converge-on-ble-a-phone-app-and-a-2030-subscription">Commercial
+pendants converge on BLE, a phone app and a $20–30 subscription</h2>
+<p>The category has split three ways. <strong>Press-to-record
+professional recorders</strong> (Plaud, Fieldy) are alive and growing.
+<strong>Always-on "memory" pendants</strong> have been bought by big
+tech: Meta acquired Limitless and ended Pendant sales on Dec 5, 2025 (<a
+href="https://9to5mac.com/2025/12/05/rewind-limitless-meta-acquisition/">9to5Mac</a>),
+and Amazon bought Bee, which still ships (<a
+href="https://techcrunch.com/2026/01/12/why-amazon-bought-bee-an-ai-wearable/">TechCrunch</a>).
+<strong>Companion devices</strong> (Friend, the Sandbar Stream ring)
+chase a different use case. Under the branding, almost every product is
+the same machine: a BLE accessory relaying audio through a phone app to
+cloud ASR and LLMs.</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Product</th>
+<th>Status (Oct 2026)</th>
+<th>Hardware price</th>
+<th>Subscription</th>
+<th>Battery (real use)</th>
+<th>Capture model and notable features</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Plaud NotePin / NotePin S / Note Pro</strong></td>
+<td>Market leader; launched in India</td>
+<td>$159 / $179 / $189</td>
+<td>Free 300 min/mo; Pro 1,200 min $17.99/mo; Unlimited $29.99/mo</td>
+<td>NotePin up to 20 h; Note Pro up to 50 h "Endurance"</td>
+<td>Press-to-record. Note Pro has a 4-mic beamforming array, 16.4 ft
+pickup, AMOLED screen and "Press to Highlight"; NotePin S adds Apple
+Find My (<a
+href="https://www.plaud.ai/blogs/articles/plaud-anniversary">Plaud</a>,
+<a
+href="https://in.plaud.ai/blogs/news/plaud-launches-in-india-bringing-conversational-intelligence-to-a-new-generation-of-india-s-ambitious-professionals">Plaud
+India</a>)</td>
+</tr>
+<tr class="even">
+<td><strong>Limitless Pendant</strong></td>
+<td>Acquired by Meta; sales ended Dec 2025</td>
+<td>was $99</td>
+<td>Free 10 h/mo; Unlimited $29/mo (one source says $49)</td>
+<td>6–7 h continuous recording vs 100 h advertised (vendor review)</td>
+<td>Always-on; local buffering, Wi-Fi/BLE sync. Service ended in the EU,
+UK and five other markets, and user data there was deleted (<a
+href="https://9to5mac.com/2025/12/05/rewind-limitless-meta-acquisition/">9to5Mac</a>,
+<a
+href="https://techcrunch.com/2025/11/21/the-hottest-ai-wearables-and-gadgets-you-can-buy-right-now">TechCrunch</a>,
+<a
+href="https://www.fast.io/resources/limitless-ai-review-2026.md">fast.io</a>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Bee (Amazon)</strong></td>
+<td>Shipping; shown at CES 2026</td>
+<td>$49.99</td>
+<td>Conflicting: "none required" vs $19/mo</td>
+<td>Up to 7 days claimed (secondary)</td>
+<td>Always-on clip or wristband with 2 mics and a mute button.
+<strong>Discards audio after transcription</strong>. Gmail, Calendar and
+Apple Health integrations; iOS only (<a
+href="https://techcrunch.com/2026/01/12/why-amazon-bought-bee-an-ai-wearable/">TechCrunch</a>,
+<a
+href="https://www.notebookcheck.net/Amazon-acquires-Bee-maker-of-budget-friendly-AI-wearable-without-mandatory-subscription.1065535.0.html">Notebookcheck</a>)</td>
+</tr>
+<tr class="even">
+<td><strong>Omi (BasedHardware)</strong></td>
+<td>Shipping; open source</td>
+<td>$89 (TechCrunch) vs $129–179 (secondary)</td>
+<td>Free plan; Unlimited $29.99/mo (secondary)</td>
+<td>10–14 h (secondary); a battery-drain bug has been reported</td>
+<td>Always-on; open BLE protocol, SDKs, plugin app store (<a
+href="https://docs.omi.me/docs/hardware/DevKit1">Omi docs</a>, <a
+href="https://www.layer3labs.io/guides/best-ai-wearable-pendants-2026">layer3labs</a>,
+<a
+href="https://omi.featurebase.app/p/l-pendant-battery-draining-way-faster">Omi
+Featurebase</a>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Fieldy</strong></td>
+<td>Shipping</td>
+<td>$89–149</td>
+<td>Free 150 min/mo; Plus $12.99; Unlimited $19.99/mo</td>
+<td>~3 days claimed</td>
+<td>99 languages, voice-fingerprint speaker ID. Criticized for BLE drops
+and <strong>no recording indicator</strong> (<a
+href="https://www.autonomous.ai/en-NL/ourblog/fieldy-ai-review">autonomous.ai</a>)</td>
+</tr>
+<tr class="even">
+<td><strong>Friend 2.0</strong></td>
+<td>Relaunched Jul 2026</td>
+<td>$249</td>
+<td>$9.99/mo to keep memories past 30 days</td>
+<td>n/a</td>
+<td>A companion rather than a note-taker; adds a speaker. Met public
+backlash (<a
+href="https://thenextweb.com/news/friend-ai-pendant-relaunch-speaker-double-price">The
+Next Web</a>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Sandbar Stream ring</strong></td>
+<td>Pre-order; shipping not confirmed</td>
+<td>$249–299</td>
+<td>3 months of Pro free, then limited</td>
+<td>"All day"</td>
+<td>Hold-to-record touchpad, iOS first (<a
+href="https://www.tomsguide.com/wellness/smart-rings/new-wearable-aims-to-be-an-ai-powered-decoder-ring-for-your-life-heres-how">Tom's
+Guide</a>)</td>
+</tr>
+<tr class="even">
+<td><strong>NeoSapien Neo 1 (India)</strong></td>
+<td>Shipping</td>
+<td>~₹10,000</td>
+<td>n/a</td>
+<td>n/a</td>
+<td>Claims 40+ Indic languages; cloud only; LED while listening (<a
+href="https://inc42.com/startups/ai-wearables-neosapien-make-the-most-of-this-wave/">Inc42</a>)</td>
+</tr>
+<tr class="odd">
+<td><strong>Humane AI Pin</strong></td>
+<td>Dead (Feb 2025)</td>
+<td>was $700</td>
+<td>—</td>
+<td>—</td>
+<td>Servers shut down and devices bricked: the cautionary tale (<a
+href="https://www.tomsguide.com/ai/the-humane-ai-pin-is-officially-dead-and-hp-is-picking-up-humanes-leftovers">Tom's
+Guide</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Reviews show what users will judge the students' device on. Users
+praise <strong>capturing in-person conversations that meeting bots miss,
+near-perfect single-speaker transcripts, and automatic action
+items</strong>. They complain about <strong>battery claims versus
+reality</strong> (Limitless advertised 100 h but recorded for 6–7 h),
+<strong>speaker mislabeling, garbled mixed-language
+transcripts</strong>, BLE pairing drops, cluttered apps and subscription
+cost (<a
+href="https://www.fast.io/resources/limitless-ai-review-2026.md">fast.io</a>,
+<a
+href="https://www.autonomous.ai/en-NL/ourblog/fieldy-ai-review">autonomous.ai</a>).
+Bee's audio-discarding design is good for privacy, but it means users
+cannot check transcripts against the recording (<a
+href="https://techcrunch.com/2026/01/12/why-amazon-bought-bee-an-ai-wearable/">TechCrunch</a>).
+Investors are funding privacy-by-design: a former Apple engineer raised
+$5M for a pendant that <strong>records only the wearer's voice</strong>
+(<a
+href="https://macventurecapital.com/former-apple-engineer-raises-5m-for-a-note-taking-pendant-that-only-records-your-voice/">MaC
+VC</a>). Plaud's arrival in India and NeoSapien's ₹10,000 device show
+the local market is live but, in NeoSapien's words, "yet to be crowded"
+(<a
+href="https://inc42.com/startups/ai-wearables-neosapien-make-the-most-of-this-wave/">Inc42</a>).</p>
+<p>The baseline feature set users now treat as standard is transcripts,
+summaries, action items, speaker labels, searchable memory and calendar
+hooks. Features that still set a product apart are a physical record or
+highlight button, a visible recording indicator, user control over
+whether raw audio is kept, data export, and a choice of LLM.</p>
+<h2 id="three-mit-codebases-cover-most-of-the-build">Three MIT codebases
+cover most of the build</h2>
+<p>The students should not write a pendant stack from scratch, and they
+should not fork one wholesale either. Each of the strong open-source
+bases solves a different layer.</p>
+<p><strong>BasedHardware/omi</strong> (MIT, ~13.8k stars, very active)
+contains a Flutter mobile app, a FastAPI backend, nRF/Zephyr pendant
+firmware, and, most usefully, <code>omiGlass/firmware</code>: an
+<strong>ESP32-S3 implementation of the Omi BLE protocol</strong> built
+for the Seeed XIAO ESP32S3 Sense, the board the students already own (<a
+href="https://github.com/BasedHardware/omi">GitHub</a>, <a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omiGlass/firmware/platformio.ini">platformio.ini</a>).
+The protocol is small. Audio service
+<code>19B10000-E8F2-537E-4F6C-D104768A1214</code> sends notifications on
+<code>…0001</code>, and each notification carries a 3-byte header: a
+2-byte little-endian packet counter plus a 1-byte fragment index. Frames
+are split at MTU−3 bytes. A codec ID is exposed on <code>…0002</code>,
+and current firmware sends <strong>Opus, 16 kHz mono, 20 ms/320-sample
+frames, codec ID 21, 32 kbps VBR, complexity 3</strong> (<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omi/firmware/omi/src/lib/core/transport.c">transport.c</a>,
+<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omiGlass/firmware/src/config.h">omiGlass
+config.h</a>). The Omi app already accepts third-party wearables and
+offers webhooks, a realtime raw-PCM audio webhook and a custom-STT hook
+(<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/app/lib/backend/schema/bt_device/bt_device.dart">bt_device.dart</a>,
+<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/docs/doc/developer/apps/AudioStreaming.mdx">AudioStreaming.mdx</a>).
+A Waveshare board that exposes this service should therefore get
+transcription, summaries and memories in the stock Omi app with zero app
+code. One trap: the protocol docs list PCM codec IDs 0/10/11, but the
+current app only decodes IDs 1, 20 and 21, so <strong>use Opus (21) and
+never rely on raw PCM</strong> (<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/app/lib/services/devices/connectors/omi_connection.dart">omi_connection.dart</a>).</p>
+<p><strong>78/xiaozhi-esp32</strong> (MIT, ~31.9k stars) has a
+first-party target,
+<code>BOARD_TYPE_WAVESHARE_ESP32_S3_TOUCH_LCD_1_46</code>, which covers
+both the 1.46 and the 1.46B. Its board files are effectively a verified
+pin map and driver set: an I2S mic on WS 2 / SCK 15 / DIN 39, a PCM5101
+speaker on 47/48/38, the SPD2010 QSPI display driver, the TCA9554
+expander, the PWR button on GPIO6 and power-hold on GPIO7 (<a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/main/boards/waveshare/esp32-s3-touch-lcd-1.46/config.h">config.h</a>,
+<a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/main/boards/waveshare/esp32-s3-touch-lcd-1.46/esp32-s3-touch-lcd-1.46.cc">board
+.cc</a>). Xiaozhi itself is a Wi-Fi conversational assistant (WebSocket
+or MQTT+UDP, 60 ms Opus frames, ESP-SR wake word, LVGL UI). It
+<strong>requires ESP-IDF v6.0.1+</strong> and defaults to the xiaozhi.me
+cloud (<a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/README.md">README</a>).
+Treat it as a parts bin for board bring-up, not as the product.</p>
+<p><strong>Espressif's own components</strong> handle the signal layer.
+ESP-SR provides the audio front end, the VADNet neural voice-activity
+detector (released Feb 2025 to replace WebRTC VAD) and WakeNet (<a
+href="https://raw.githubusercontent.com/espressif/esp-sr/master/README.md">ESP-SR
+README</a>). <code>esp_audio_codec</code>, which xiaozhi uses, or the
+esphome <code>micro-opus</code> component provides Opus, and
+<code>ble_ota</code> handles firmware updates over BLE (<a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/main/idf_component.yml">idf_component.yml</a>,
+<a
+href="https://components.espressif.com/components/espressif/ble_ota/versions/0.1.16/examples/ble_ota">ble_ota</a>).</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Project</th>
+<th>License</th>
+<th>What to reuse</th>
+<th>Caveat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>omi <code>omiGlass/firmware</code> (ESP32-S3)</td>
+<td>MIT (<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/LICENSE">LICENSE</a>)</td>
+<td>GATT UUIDs, codec-21 framing, NimBLE setup; a closest-template
+<code>app.cpp</code></td>
+<td>Arduino framework; depends on the <strong>retired</strong>
+arduino-libopus (<a
+href="https://raw.githubusercontent.com/pschatzmann/arduino-libopus/main/README.md">README</a>)</td>
+</tr>
+<tr class="even">
+<td>omi <code>omi/firmware</code> (nRF/Zephyr)</td>
+<td>MIT</td>
+<td>Logic reference: MTU-aware fragmentation, offline-storage
+service</td>
+<td>Zephyr APIs, so not portable to ESP-IDF</td>
+</tr>
+<tr class="odd">
+<td>omi <code>app/</code> (Flutter)</td>
+<td>MIT</td>
+<td>Day-1 companion app; later a fork base</td>
+<td>Large and Firebase-coupled; the "Omi" trademark is not licensed</td>
+</tr>
+<tr class="even">
+<td>omi <code>backend/</code> (FastAPI)</td>
+<td>MIT</td>
+<td>Pipeline design: 120 s silence segmentation, structured extraction,
+memories</td>
+<td>Self-hosting needs Firebase/GCP, Redis, Pinecone and Typesense (<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/docs/doc/developer/backend/Backend_Setup.mdx">Backend_Setup</a>)</td>
+</tr>
+<tr class="odd">
+<td>xiaozhi-esp32 Waveshare 1.46 board dir</td>
+<td>MIT (<a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/LICENSE">LICENSE</a>)</td>
+<td>Pin map, SPD2010/LVGL init, buttons, power hold</td>
+<td>IDF v6-only; Wi-Fi-first; no BLE audio code</td>
+</tr>
+<tr class="even">
+<td>xinnan-tech/xiaozhi-esp32-server</td>
+<td>MIT (<a
+href="https://raw.githubusercontent.com/xinnan-tech/xiaozhi-esp32-server/main/LICENSE">LICENSE</a>)</td>
+<td>Python server patterns: Silero VAD, FunASR, any OpenAI-compatible
+LLM</td>
+<td>Built for conversational turns, not note archives</td>
+</tr>
+<tr class="odd">
+<td>ESP-SR / ESP-ADF</td>
+<td>Espressif MIT, Espressif chips only (<a
+href="https://raw.githubusercontent.com/espressif/esp-sr/master/LICENSE">LICENSE</a>)</td>
+<td>VADNet gating, AFE noise suppression, optional wake word</td>
+<td>Cannot be ported to an nRF later; ESP-ADF v3 needs IDF 5.5.2+</td>
+</tr>
+<tr class="even">
+<td>Owl</td>
+<td>MIT (<a
+href="https://raw.githubusercontent.com/OwlAIProject/Owl/main/LICENSE">LICENSE</a>)</td>
+<td>Server ideas: VAD conversation endpointing, speaker verification,
+Ollama</td>
+<td>Smaller project (~658 stars)</td>
+</tr>
+<tr class="odd">
+<td>SenseCAP Watcher SDK</td>
+<td>Apache-2.0 (<a
+href="https://raw.githubusercontent.com/Seeed-Studio/SenseCAP-Watcher-Firmware/main/LICENSE">LICENSE</a>)</td>
+<td>Watcher drivers, if that board is used later</td>
+<td>Watcher is a desk device</td>
+</tr>
+<tr class="even">
+<td>whisper.cpp / faster-whisper</td>
+<td>MIT / MIT (<a
+href="https://raw.githubusercontent.com/ggml-org/whisper.cpp/master/LICENSE">1</a>,
+<a
+href="https://raw.githubusercontent.com/SYSTRAN/faster-whisper/master/LICENSE">2</a>)</td>
+<td>Free local STT for Phase 0 and a privacy mode</td>
+<td>Hinglish accuracy unverified</td>
+</tr>
+<tr class="odd">
+<td>Vosk / NVIDIA NeMo (Parakeet)</td>
+<td>Apache-2.0 (<a
+href="https://raw.githubusercontent.com/alphacep/vosk-api/master/COPYING">Vosk</a>,
+<a
+href="https://raw.githubusercontent.com/NVIDIA/NeMo/main/LICENSE">NeMo</a>)</td>
+<td>Self-hosted STT; Omi itself now self-hosts Parakeet</td>
+<td>Parakeet needs a GPU</td>
+</tr>
+<tr class="even">
+<td>Silero VAD / pyannote.audio</td>
+<td>MIT / MIT code (<a
+href="https://raw.githubusercontent.com/snakers4/silero-vad/master/LICENSE">Silero</a>,
+<a
+href="https://raw.githubusercontent.com/pyannote/pyannote-audio/develop/LICENSE">pyannote</a>)</td>
+<td>Server VAD; diarization via <code>community-1</code></td>
+<td>pyannote model weights are gated on Hugging Face; terms not
+checked</td>
+</tr>
+<tr class="odd">
+<td>Adeus</td>
+<td><strong>CC BY-NC-ND</strong> (<a
+href="https://raw.githubusercontent.com/adamcohenhillel/ADeus/main/LICENSE">LICENSE</a>)</td>
+<td>Ideas only</td>
+<td>No commercial use, no derivatives</td>
+</tr>
+<tr class="even">
+<td>OpenInterpreter 01</td>
+<td><strong>AGPL-3.0</strong> (<a
+href="https://raw.githubusercontent.com/OpenInterpreter/01/main/LICENSE">LICENSE</a>)</td>
+<td>Ideas only</td>
+<td>Network use triggers source disclosure</td>
+</tr>
+<tr class="odd">
+<td>ESPHome C++ / HA Voice PE</td>
+<td><strong>GPLv3</strong> for C++ (<a
+href="https://raw.githubusercontent.com/esphome/esphome/dev/LICENSE">LICENSE</a>)</td>
+<td>Ideas only</td>
+<td>Copying code makes the firmware GPL</td>
+</tr>
+</tbody>
+</table></div>
+<p>The licensing picture favours a commercial future. Everything on the
+recommended path is MIT, Apache or Espressif-MIT, so keeping copyright
+notices is the only obligation. The real constraint is the <strong>Omi
+trademark</strong>: the device must not call itself "Omi". This is less
+awkward than it sounds, because omiGlass advertises as "OMI Glass" and
+still works with the app, which suggests discovery is not strictly tied
+to the name "Omi". That still needs testing on hardware (<a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omiGlass/firmware/src/config.h">omiGlass
+config.h</a>).</p>
+<h2
+id="the-waveshare-146-works-as-a-prototype-if-its-screen-stays-dark">The
+Waveshare 1.46 works as a prototype if its screen stays dark</h2>
+<p>The board packs an ESP32-S3R8 (8 MB PSRAM, 16 MB flash, Wi-Fi 4, BLE
+5), a 412×412 round touch display, one I2S mic, a PCM5101 DAC with
+speaker, a QMI8658 IMU, a PCF85063 RTC, a microSD slot and a LiPo
+charger, all for <strong>$26.99</strong> (<a
+href="https://waveshare.com/esp32-s3-touch-lcd-1.46b.htm?sku=29565">Waveshare</a>,
+<a target="_blank" rel="noopener" href="https://docs.waveshare.com/ESP32-S3-Touch-LCD-1.46">Waveshare
+docs</a>). Every pendant subsystem has a home on it, but each comes with
+a catch.</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Pendant function</th>
+<th>Waveshare 1.46 resource</th>
+<th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Microphone</td>
+<td>1× I2S mic, BCK 15 / WS 2 / DIN 39, data on the right slot; part
+number unpublished (<a
+href="https://lcdwizard.com/boards/waveshare-s3-touch-lcd-146b">LCD
+Wizard</a>)</td>
+<td>Use <code>i2s_std</code> RX at 16 kHz in 32-bit mono slots and shift
+down to 16-bit (estimate). SNR is unknown, so test pickup across a table
+early. GPIO39 doubles as the JTAG MTCK pin (inference).</td>
+</tr>
+<tr class="even">
+<td>Audio codec</td>
+<td>ESP32-S3 software Opus</td>
+<td>The fixed-point build encodes at <strong>RTF 0.20–0.26</strong>
+(complexity 0, 10–32 kbps). <strong>The floating-point build is slower
+than real time (RTF 1.53)</strong> (<a
+href="https://components.espressif.com/components/esphome/micro-opus/versions/0.4.1/examples/encode_benchmark">micro-opus
+benchmark</a>)</td>
+</tr>
+<tr class="odd">
+<td>BLE streaming</td>
+<td>BLE 5, measured <strong>0.73 Mbit/s on 1M PHY, 1.35 Mbit/s on 2M
+PHY</strong> between two ESP32-S3s (<a
+href="https://docs.espressif.com/projects/esp-faq/en/latest/software-framework/bt/ble.html">Espressif
+FAQ</a>)</td>
+<td>Opus at 16–32 kbps uses a few percent of that. Phone links deliver
+much less, so raw PCM is risky</td>
+</tr>
+<tr class="even">
+<td>Wi-Fi sync</td>
+<td>2.4 GHz b/g/n, ceramic antenna plus IPEX option</td>
+<td>Bulk upload of SD backlog: the differentiator nRF-based Omi
+lacks</td>
+</tr>
+<tr class="odd">
+<td>Storage</td>
+<td>microSD in <strong>SPI mode only</strong> (D1/D2 unwired; CS via
+expander EXIO3) (<a
+href="https://docs.waveshare.com/ESP32-S3-Touch-LCD-1.46">Waveshare
+docs</a>)</td>
+<td>Still far faster than the 2–4 KB/s Opus write rate. Use FAT32 cards
+of 32 GB or less</td>
+</tr>
+<tr class="even">
+<td>Battery</td>
+<td>MX1.25 LiPo header, unnamed charger, <strong>GPIO8 battery ADC (÷3),
+GPIO7 power-hold latch</strong> (<a
+href="https://lcdwizard.com/boards/waveshare-s3-touch-lcd-146b">LCD
+Wizard</a>)</td>
+<td>No battery included. GPIO7 gives a true-off state. Charge current is
+unpublished</td>
+</tr>
+<tr class="odd">
+<td>UI</td>
+<td>1.46" display, backlight on GPIO5 (PWM), touch, BOOT/PWR buttons,
+IMU</td>
+<td>Keep the backlight off. Wake on button or IMU tap for status, timer
+and sync state</td>
+</tr>
+<tr class="even">
+<td>Clock</td>
+<td>PCF85063 RTC with backup-cell header</td>
+<td>Timestamps for offline segments, set from the phone at connect</td>
+</tr>
+</tbody>
+</table></div>
+<p>The numbers that size the design are simple. Raw 16 kHz/16-bit PCM is
+<strong>256 kbps (32 KB/s, ~115 MB/h)</strong>. IMA-ADPCM is 64 kbps
+(~29 MB/h). <strong>Opus at 16 kbps is ~7.2 MB/h</strong>, and at Omi's
+32 kbps about 14 MB/h. A 32 GB card therefore holds thousands of hours,
+so storage is a non-issue; the real risks are FAT corruption on power
+loss and write-latency spikes. All of these figures are arithmetic
+estimates from the notes, not measurements.</p>
+<p>Power is the hard constraint. No one has published current
+measurements for this board. The nearest anchor is the XIAO ESP32S3
+Sense, which uses the same chip and measured <strong>~54 mA average for
+mic plus SD writing, ~102 mA with BLE active and ~110 mA with Wi-Fi
+active</strong> on battery (<a
+href="https://core-electronics.com.au/seeed-studio-xiao-esp32s3-54467.html.plain.md">Core
+Electronics / Seeed figures</a>). The table below adds a guessed 5–15 mA
+for the Waveshare's extra chips and treats 85% of rated capacity as
+usable. Every figure is an estimate to be replaced by a USB power-meter
+reading in week one.</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>LiPo</th>
+<th>SD-only recording (~62 mA)</th>
+<th>BLE Opus stream (~90 mA)</th>
+<th>Wi-Fi stream (~125 mA)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>300 mAh</td>
+<td>~4 h</td>
+<td>~2.8 h</td>
+<td>~2 h</td>
+</tr>
+<tr class="even">
+<td>500 mAh</td>
+<td>~6.9 h</td>
+<td>~4.7 h</td>
+<td>~3.4 h</td>
+</tr>
+<tr class="odd">
+<td>800 mAh</td>
+<td>~11 h</td>
+<td>~7.6 h</td>
+<td>~5.4 h</td>
+</tr>
+<tr class="even">
+<td>1000 mAh</td>
+<td>~13.7 h</td>
+<td>~9.4 h</td>
+<td>~6.8 h</td>
+</tr>
+</tbody>
+</table></div>
+<p>A lit display probably adds another 30–80 mA, which would cut these
+figures by roughly 40%. That is why the screen must be a
+glance-and-sleep surface, not an always-on face. To come close to
+commercial benchmarks (Limitless's real 6–7 h, NotePin's 20 h), the
+firmware needs several techniques together. It should run the CPU at
+80–160 MHz with automatic light sleep between I2S DMA buffers. It should
+gate encoding and radio with VAD, which roughly halves radio time at a
+50% speech duty cycle. It should send BLE in bursts after buffering 1–2
+s, use a longer connection interval, and use Wi-Fi only when charging or
+for short bursts. The Omi-class nRF chips draw several times less during
+BLE streaming. That is a general inference rather than a measured
+head-to-head result, but it explains why Omi's consumer device uses an
+nRF5340 with two TDK T5838 PDM mics on a 21 mm board (<a
+href="https://docs.omi.me/doc/hardware/consumer/electronics">Omi
+docs</a>).</p>
+<p>The physical form follows from the panel. A 1.46" round display
+implies an outline of roughly 40–42 mm, so with a 500 mAh cell the
+pendant ends up at an estimated <strong>40–45 mm across, 12–18 mm thick
+and 30–45 g</strong>. That is fine on a lanyard and heavy on a shirt
+clip. The enclosure needs a mic port hole of at least 1 mm aligned with
+the mic, and the design must reconcile two directions: the display faces
+outward while the mic needs to face the speaker.</p>
+<p>The other two boards have narrower roles. The <strong>XIAO ESP32S3
+Sense</strong> is the exact target of omiGlass firmware. Flashing
+omiGlass on it is a near-free way to prove the Omi-app path before
+porting the protocol to the Waveshare, and it remains the best candidate
+for a later small, display-less "v2" clip. The <strong>SenseCAP
+Watcher</strong> (400 mAh battery, camera, Himax AI co-processor,
+xiaozhi-supported) is a desk device, so it belongs in the plan as a
+future home base or charging dock, not as a wearable (<a
+href="https://wiki.seeedstudio.com/watcher_hardware_overview/">Seeed
+wiki</a>).</p>
+<h2
+id="store-and-forward-opus-with-a-thin-server-is-the-architecture-to-build">Store-and-forward
+Opus with a thin server is the architecture to build</h2>
+<p>The recommended system has four tiers, and each one's job is
+clear:</p>
+<pre><code> PENDANT (ESP32-S3, ESP-IDF)                PHONE (Flutter)                SERVER (FastAPI + Supabase)
+ I2S mic 16 kHz ─► VADNet gate ─► Opus 20 ms ─┬─► SD: 1-min segments + manifest (always)
+                                              ├─► BLE GATT notify (Omi codec 21) ──► receive, persist Opus ──► HTTPS chunk upload
+                                              └─► Wi-Fi HTTPS bulk upload of backlog (home/campus Wi-Fi) ─────────────────┐
+ RTC timestamps · seq numbers · LED/mute                                                                                 ▼
+ BLE sync control point (LIST/ACK)       foreground service / iOS bluetooth-central       STT (batch) ─► diarize ─► LLM JSON
+                                         local SQLite cache                               Postgres + pgvector ─► &quot;ask my memories&quot;</code></pre>
+<p>On the <strong>pendant</strong>, the core rule is that audio is
+always written to SD before anything else happens. Each Opus frame gets
+a 32-bit sequence number, a boot ID and an RTC timestamp, and frames are
+grouped into roughly 1-minute segment files listed in a manifest that
+records which segments have been uploaded. Omi's 16-bit packet counter
+wraps after about 22 minutes, which is too short to index an offline
+backfill, so it stays only as the live-stream header. Live notifications
+use the Omi audio service, so the stock app works. A custom sync control
+point (list segments since the last ACK, stream them, ACK ranges, then
+mark them uploaded) handles backfill. Wi-Fi HTTPS upload sends the same
+segments directly to the server whenever a known network is in range.
+Pairing should use LE Secure Connections bonding with encrypted-only
+characteristics. For updates, ESP-IDF dual OTA partitions with rollback
+come first, then <code>esp_https_ota</code> over Wi-Fi, then Espressif's
+<code>ble_ota</code>, which sends 4 KB sectors with CRC16 and supports
+pre-encrypted images (<a
+href="https://components.espressif.com/components/espressif/ble_ota/versions/0.1.16/examples/ble_ota">ble_ota</a>).</p>
+<p>One decision has to be made up front: the toolchain version.
+Xiaozhi's board files need IDF v6, Waveshare's own demos were written
+for IDF 5.x, and ESP-ADF v3 needs 5.5.2+ (<a
+href="https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-1.46B">Waveshare
+wiki</a>, <a
+href="https://raw.githubusercontent.com/espressif/esp-adf/master/README.md">ESP-ADF
+README</a>). The students should pick one IDF release in week one,
+preferably v6.x so the xiaozhi board files drop in cleanly, then confirm
+that NimBLE, <code>ble_ota</code> and the Opus component all build on
+it.</p>
+<p>The <strong>server</strong> should start thin: Supabase for auth,
+Postgres with pgvector and storage, plus a small FastAPI worker that
+runs STT, diarization, LLM extraction and embedding on uploaded
+segments. Omi's production stack (Firestore, Pinecone, Redis, GCS,
+WebSocket streaming to <code>/v4/listen</code>) is the proven end state,
+but it is heavier than a two-person team needs (<a
+href="https://docs.omi.me/doc/developer/backend/backend_deepdive.md">Omi
+backend deep dive</a>). A server matters even early on for three
+reasons: API keys cannot live safely in an app binary, batch jobs need
+retries, and the Android and iOS apps will later share one backend.
+Chunked HTTPS uploads are more robust than a long-lived WebSocket on
+patchy Indian mobile data, and they work with batch STT pricing, which
+is cheaper than streaming. Conversation boundaries can borrow Omi's
+<strong>120-second silence timeout</strong>. After that timeout, a
+single structured-output LLM call produces the title, summary, action
+items (owner, due date, source timestamp), calendar events, durable
+memories, people, the language detected and a "discard" flag for TV or
+background chatter. Passing existing memories into that call and asking
+only for new facts keeps duplicates down (<a
+href="https://docs.omi.me/doc/developer/backend/backend_deepdive.md">Omi
+backend deep dive</a>).</p>
+<p>Speech-to-text is the one material running cost, and language
+accuracy is the main factor in choosing a vendor.</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>STT option</th>
+<th>Batch $/audio-hr</th>
+<th>Streaming $/hr</th>
+<th>Diarization</th>
+<th>Est. cost for 60 h/month (2 h/day)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Soniox</td>
+<td>$0.10</td>
+<td>$0.12</td>
+<td>Included; claims mid-sentence Hindi↔︎English switching (<a
+href="https://soniox.com/speech-to-text/hindi">Soniox</a>)</td>
+<td>~$6–7</td>
+</tr>
+<tr class="even">
+<td>AssemblyAI Universal-2</td>
+<td>$0.15</td>
+<td>$0.15</td>
+<td>+$0.02/hr (<a
+href="https://www.assemblyai.com/pricing.md">AssemblyAI</a>)</td>
+<td>~$10</td>
+</tr>
+<tr class="odd">
+<td>Speechmatics Melia 1</td>
+<td>$0.129</td>
+<td>$0.24</td>
+<td>?</td>
+<td>~$8; free 50 h/month (3rd-party tracker, <a
+href="https://usagepricing.com/blueprint/activity/speechmatics-2026-07-06-realtime-stt-price-cut">usagepricing</a>)</td>
+</tr>
+<tr class="even">
+<td>ElevenLabs Scribe v2</td>
+<td>$0.22</td>
+<td>$0.39</td>
+<td>not stated (<a
+href="https://elevenlabs.io/pricing/api">ElevenLabs</a>)</td>
+<td>~$13</td>
+</tr>
+<tr class="odd">
+<td>Deepgram Nova-3 multilingual</td>
+<td>$0.312</td>
+<td>$0.552 list</td>
+<td>~+$0.12/hr (<a
+href="https://diyai.io/ai-tools/speech-to-text/deepgram-pricing-2026/">diyai.io</a>)</td>
+<td>~$19</td>
+</tr>
+<tr class="even">
+<td>OpenAI gpt-4o-transcribe / mini</td>
+<td>$0.36 / $0.18</td>
+<td>—</td>
+<td>diarize variant same price (<a
+href="https://costgoat.com/pricing/openai-transcription">CostGoat</a>)</td>
+<td>~$22 / ~$11</td>
+</tr>
+<tr class="odd">
+<td>Sarvam (India)</td>
+<td>₹29.40 (₹35.40 diarized)</td>
+<td>₹29.40</td>
+<td>Batch only (<a
+href="https://docs.sarvam.ai/api/pricing.md">Sarvam</a>)</td>
+<td>~₹1,760–2,120</td>
+</tr>
+<tr class="even">
+<td>faster-whisper / whisper.cpp (self-hosted)</td>
+<td>$0 + compute</td>
+<td>—</td>
+<td>via pyannote</td>
+<td>$0 on a laptop</td>
+</tr>
+</tbody>
+</table></div>
+<p>LLM cost barely registers by comparison. An hour of speech is roughly
+12–15k tokens, so one summary call costs about <strong>$0.002 on Claude
+Haiku 5.5 or Gemini 2.5 Flash-Lite and about $0.045 on Claude Sonnet
+5.5</strong> (estimates based on list prices of $0.10/$0.50 and $2/$10
+per million tokens; <a
+href="https://www.anthropic.com/pricing">Anthropic pricing</a>, <a
+href="https://www.morphllm.com/gemini-api-pricing">morphllm</a>).
+Devanagari text tokenizes less efficiently, which could multiply that by
+1.5–3×. The sensible split is a cheap model for per-conversation
+extraction and a stronger one for weekly digests and "ask my memories"
+Q&amp;A. Even daily Sonnet use costs only about $1–3 per user per month.
+The levers that matter are batch rather than streaming STT and VAD
+gating, so silence is never uploaded. Development can run at close to $0
+on free credits: Deepgram $200, AssemblyAI $50, Speechmatics 50 h/month
+and Sarvam ₹100 (<a
+href="https://www.assemblyai.com/pricing.md">AssemblyAI</a>, <a
+href="https://docs.sarvam.ai/api/pricing.md">Sarvam</a>). One caution
+for real users: free LLM tiers such as Gemini AI Studio may use the
+content to improve the provider's products, so real users' audio belongs
+on paid, no-training tiers (<a
+href="https://www.morphllm.com/gemini-api-pricing">morphllm</a>).</p>
+<h2 id="a-four-phase-mvp-path-that-starts-with-an-sd-card-recorder">A
+four-phase MVP path that starts with an SD-card recorder</h2>
+<p>The sequencing principle is to <strong>prove the audio and the
+prompts before building anything mobile</strong>. The roadmap's effort
+estimates are judgment rather than sourced benchmarks.</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Duration (est.)</th>
+<th>Build</th>
+<th>Exit criterion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>0: Recorder + laptop pipeline</strong></td>
+<td>1–2 weeks</td>
+<td>ESP-IDF firmware on the Waveshare: I2S mic → 1-minute timestamped
+WAV/Opus files on SD → Wi-Fi HTTP POST to a laptop FastAPI script. A
+Python pipeline runs faster-whisper plus 2–3 cloud STT APIs → LLM JSON
+summary → Markdown + SQLite</td>
+<td>STT vendor chosen on real Hinglish audio; prompt v1; measured
+current draw and mic pickup distance</td>
+</tr>
+<tr class="even">
+<td><strong>1: BLE device + Android app</strong></td>
+<td>3–5 weeks</td>
+<td>NimBLE GATT server with Omi audio service (codec 21) + Battery
+<code>0x180F</code> + DIS <code>0x180A</code> + custom sync control
+point; validate with the stock Omi app. Minimal Flutter Android app:
+scan/bond, receive, persist Opus, <code>connectedDevice</code>
+foreground service, upload to Supabase + FastAPI worker; seq/ACK
+backfill</td>
+<td>A full day of capture with phone disconnects loses no audio</td>
+</tr>
+<tr class="odd">
+<td><strong>2: Notes product</strong></td>
+<td>3–4 weeks</td>
+<td>VAD-based conversation segmentation (120 s), summaries, action
+items, memories; pgvector "ask my memories" with timestamp citations;
+daily digest; Hindi/English output toggle; on-device screen showing
+record state, timer and sync status</td>
+<td>Students use it daily for two weeks and keep using it</td>
+</tr>
+<tr class="even">
+<td><strong>3: Polish + iOS</strong></td>
+<td>ongoing</td>
+<td>iOS from the same Flutter codebase (bluetooth-central, state
+restoration, TestFlight); Wi-Fi HTTPS OTA, then BLE OTA; Wi-Fi bulk
+sync; retention, delete-all and export; LED/mute hardware; store and
+DPDP prep; optional on-device Whisper privacy mode</td>
+<td>Shareable beta</td>
+</tr>
+</tbody>
+</table></div>
+<p>The first concrete steps, in order, are these:</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Step</th>
+<th>Source to copy from</th>
+<th>Done when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Install a single ESP-IDF version (prefer v6.x) and build xiaozhi for
+<code>BOARD_TYPE_WAVESHARE_ESP32_S3_TOUCH_LCD_1_46</code> unchanged</td>
+<td><a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/main/Kconfig.projbuild">xiaozhi
+Kconfig</a></td>
+<td>Display, mic and buttons are proven working on your unit</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Start a clean IDF project; copy the board's <code>config.h</code>
+pins and the power-hold (GPIO7) and backlight (GPIO5) logic</td>
+<td><a
+href="https://raw.githubusercontent.com/78/xiaozhi-esp32/main/main/boards/waveshare/esp32-s3-touch-lcd-1.46/config.h">board
+config.h</a></td>
+<td>Board boots, holds power and the backlight turns off</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Record 16 kHz mono from the I2S mic to SD as rotating 1-minute WAV
+files with <code>fsync</code> on close</td>
+<td><a
+href="https://components.espressif.com/components/espressif/esp_board_manager/versions/0.5.11/examples/record_to_sdcard">Espressif
+record_to_sdcard</a>, <a
+href="https://wiki.seeedstudio.com/xiao_esp32s3_sense_mic/">Seeed mic
+example</a></td>
+<td>Clean audio plays back on a laptop</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Fit a 500–1000 mAh LiPo, log GPIO8 voltage, measure current with a
+USB meter in record-only, Wi-Fi and BLE modes</td>
+<td>—</td>
+<td>The battery estimates above are replaced by real numbers</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Record 20–30 minutes of real Hinglish conversation through the
+pendant (clipped on, across a table, in a noisy café) and A/B test
+Soniox, Sarvam, AssemblyAI, ElevenLabs, gpt-4o-transcribe and
+faster-whisper</td>
+<td>Section above</td>
+<td>Vendor picked on evidence, not marketing</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Write the LLM extraction prompt with a JSON schema and run it on
+those transcripts</td>
+<td>Omi extraction fields</td>
+<td>Summaries the students would actually reread</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>In parallel (optional): flash omiGlass firmware onto the XIAO
+ESP32S3 Sense and pair it with the Omi app</td>
+<td><a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omiGlass/firmware/platformio.ini">omiGlass
+firmware</a></td>
+<td>Omi-app compatibility confirmed before porting the protocol</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Add the fixed-point Opus encoder (320-sample frames) and the NimBLE
+GATT audio service on the Waveshare</td>
+<td><a
+href="https://raw.githubusercontent.com/BasedHardware/omi/main/omi/firmware/omi/src/lib/core/transport.c">omi
+transport.c</a>, <a
+href="https://components.espressif.com/components/esphome/micro-opus/versions/0.4.1/examples/encode_benchmark">micro-opus</a></td>
+<td>Waveshare shows up and transcribes in the Omi app</td>
+</tr>
+</tbody>
+</table></div>
+<p>For the <strong>mobile apps</strong>, the pragmatic stack is
+<strong>Flutter with flutter_blue_plus</strong>. A BLE-focused review
+calls Flutter "a clear edge" over React Native for BLE,
+flutter_blue_plus is the maintained plugin, and Omi ships the same
+stack, so its MIT app serves as a reference (<a
+href="https://novelbits.io/native-vs-cross-platform-bluetooth-low-energy-mobile-app-platforms/">Novel
+Bits</a>, <a target="_blank" rel="noopener" href="https://docs.omi.me/doc/developer/AppSetup.md">Omi
+App Setup</a>). Android should come first. Sideloading is free, and a
+foreground service of type <strong><code>connectedDevice</code></strong>
+(not <code>microphone</code>, because the phone's own mic is unused)
+keeps BLE alive on Android 14+. It needs the
+<code>FOREGROUND_SERVICE_CONNECTED_DEVICE</code> permission and
+Bluetooth permissions (<a
+href="https://developer.android.com/about/versions/14/changes/fgs-types-required?hl=pl">Android
+14 FGS</a>). Indian OEM skins such as Xiaomi, Realme, Oppo and Vivo
+aggressively kill background apps, so the app should request a
+battery-optimization exemption. That is a widely reported community
+issue, though no source in the notes covers it.</p>
+<p>iOS can keep receiving notifications in the background with the
+<code>bluetooth-central</code> mode. State restoration
+(<code>CBCentralManagerOptionRestoreIdentifierKey</code>) relaunches the
+app after the system kills it for memory, but each wake allows only
+about 10 s of work, and Apple recommends a session-based UX (<a
+href="https://developer.apple.com/library/archive/documentation/NetworkingInternetWeb/Conceptual/CoreBluetooth_concepts/CoreBluetoothBackgroundProcessingForIOSApps/PerformingTasksWhileYourAppIsInTheBackground.html">Apple
+Core Bluetooth</a>). A force-quit likely ends background delivery
+entirely. The device's SD-first buffering is therefore what makes iOS
+viable, not a nice-to-have. The team should check whether
+flutter_blue_plus supports state restoration; if it does not, they will
+need a small Swift plugin. On-phone Whisper transcription (WhisperKit on
+iOS, whisper.cpp on Android) works best as an overnight-while-charging
+privacy mode, not as continuous processing (<a
+href="https://arxiv.org/html/2507.10860v1">WhisperKit paper</a>). For
+app-store review, the team will need a demo mode or video for reviewers
+who lack the hardware, purpose strings for background Bluetooth, a
+privacy policy, account deletion, and disclosure labels for audio
+data.</p>
+<h2 id="risks-to-retire-early-and-four-ways-to-stand-apart">Risks to
+retire early, and four ways to stand apart</h2>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Risk / unknown</th>
+<th>Why it matters</th>
+<th>How to retire it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Onboard mic quality (part, SNR unknown)</td>
+<td>A single mic muffled by clothing is the dominant factor in
+transcript quality</td>
+<td>Phase 0 pickup test; fallback to an external INMP441 on the 1.27 mm
+header, or a second mic plus ESP-SR AFE</td>
+</tr>
+<tr class="even">
+<td>Hinglish STT accuracy</td>
+<td>No independent Hindi/Hinglish WER benchmark was found; all claims
+are vendor marketing</td>
+<td>Step 5 A/B test on your own audio</td>
+</tr>
+<tr class="odd">
+<td>Battery life on ESP32-S3</td>
+<td>Estimates of 4–7 h on 500 mAh fall short of the 20 h commercial
+benchmark</td>
+<td>Measure; VAD gating, burst radio, display off, larger cell; nRF port
+only if it becomes a product</td>
+</tr>
+<tr class="even">
+<td>ESP32-S3 → phone BLE throughput</td>
+<td>No measured S3-to-iPhone/Android figures exist</td>
+<td>Log notification throughput at 2M PHY, MTU 247–517</td>
+</tr>
+<tr class="odd">
+<td>Omi protocol drift</td>
+<td>The firmware has a TODO to change the service UUID; docs and app
+disagree on codec IDs</td>
+<td>Pin to codec 21; own your protocol by Phase 2</td>
+</tr>
+<tr class="even">
+<td>Data leaving to Omi's cloud</td>
+<td>The stock app sends audio to api.omi.me</td>
+<td>Use the Omi app only for testing; your own app and backend from
+Phase 1</td>
+</tr>
+<tr class="odd">
+<td>SD corruption / power loss</td>
+<td>FAT writes interrupted by a dead battery</td>
+<td>Segment files, <code>fsync</code> on close, a manifest repaired on
+boot</td>
+</tr>
+<tr class="even">
+<td>Legal consent</td>
+<td>California requires all-party consent and can treat covert recording
+as a crime (<a
+href="https://sfstandard.com/2025/08/05/ai-wearables-recording-devices/">SF
+Standard</a>). India's DPDP Rules phase in by about May 2027, with
+consent notices, security safeguards, 72-hour breach reports and erasure
+(<a
+href="https://www.mondaq.com/india/data-protection/1708164/digital-personal-data-protection-rules-2025-notified">Mondaq</a>).
+India's own recording-consent position was not verified</td>
+<td>Visible LED, mute, short retention; get legal review before any
+public launch</td>
+</tr>
+</tbody>
+</table></div>
+<p>Differentiation should come from where incumbents are structurally
+weak, not from feature parity.</p>
+<p><strong>Hindi-English code-switching is the clearest wedge.</strong>
+Reviewers already report garbled mixed-language transcripts on
+Limitless, NeoSapien calls the Indian market uncrowded, and Soniox and
+Sarvam make Hinglish workable on cost (<a
+href="https://www.fast.io/resources/limitless-ai-review-2026.md">fast.io</a>,
+<a
+href="https://inc42.com/startups/ai-wearables-neosapien-make-the-most-of-this-wave/">Inc42</a>).</p>
+<p><strong>A local-first, no-subscription design answers the rug-pull
+fear.</strong> Limitless deleted EU and UK users' data within two weeks
+of its acquisition, and Humane bricked its devices. An open,
+self-hostable stack with export and bring-your-own-key LLMs speaks
+directly to that distrust (<a
+href="https://9to5mac.com/2025/12/05/rewind-limitless-meta-acquisition/">9to5Mac</a>,
+<a
+href="https://www.tomsguide.com/ai/the-humane-ai-pin-is-officially-dead-and-hp-is-picking-up-humanes-leftovers">Tom's
+Guide</a>).</p>
+<p><strong>Direct Wi-Fi sync is the ESP32's unique trick.</strong> No
+mainstream pendant uploads straight to a server; the only Wi-Fi claim
+found, ANYPIN, is unverified. Wi-Fi upload frees the phone from being a
+constant relay and makes iOS background limits far less painful.</p>
+<p><strong>The display can become a feature instead of a
+liability.</strong> The screen is off by default, but a tap could show
+the recording state, a highlight button in the spirit of Plaud's "Press
+to Highlight", a review of the day's action items, or a "forget the last
+5 minutes" control. Plaud's Note Pro already has a screen, which shows
+users value it (<a
+href="https://www.plaud.ai/blogs/articles/plaud-anniversary">Plaud</a>).
+A wearer-voice-only mode built on speaker profiles adds a privacy story
+that investors have already funded.</p>
+<p>Honest battery claims (continuous-recording hours, not standby) and a
+recording LED that firmware cannot silently disable cost almost nothing
+and fix two of the most common complaints in the category.</p>
+<h2
+id="features-to-build-beyond-the-market-voice-only-added-31-oct">Features
+to build beyond the market (voice only, added 31 Oct)</h2>
+<p>This section answers a follow-up: no camera for now, voice only on
+the Waveshare board, with always-on recording, a button that pauses it,
+and features the market doesn't offer, such as talking to AI agents like
+Claude. It is a brainstorm ranked by judgment, not by sourced research.
+Difficulty is an estimate for a two-person team that has already
+finished Phase 1 (recording, BLE and a basic app).</p>
+<p>The Waveshare board has two things most pendants lack: <strong>a
+speaker</strong> (PCM5101 audio output) and <strong>a round
+touchscreen</strong>, plus a motion sensor (QMI8658). Those are what
+make the ideas below possible. Most commercial pendants are a mic and
+one button, with every interaction happening on the phone. Your pendant
+can answer back and show things, so that's the advantage to build on. Of
+the products in this report, only Friend 2.0 has a speaker, and it's
+built for companionship rather than getting work done.</p>
+<h3 id="one-button-a-clear-set-of-gestures">One button, a clear set of
+gestures</h3>
+<p>Decide the button behaviour first, because every feature hangs off
+it:</p>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>Gesture</th>
+<th>Action</th>
+<th>Screen shows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nothing (default)</td>
+<td>Always-on ambient recording, with silence skipped by voice
+detection</td>
+<td>Thin green ring, recording timer</td>
+</tr>
+<tr class="even">
+<td>Short press</td>
+<td><strong>Bookmark</strong>: mark the last 60 s as important</td>
+<td>Ring flashes, "Saved"</td>
+</tr>
+<tr class="odd">
+<td>Long press (1 s)</td>
+<td><strong>Pause recording</strong> (privacy). Long-press again to
+resume. Optional auto-resume after 30 min</td>
+<td>Ring turns red, "Paused"</td>
+</tr>
+<tr class="even">
+<td>Hold and speak</td>
+<td><strong>Talk to your agent</strong> (push-to-talk)</td>
+<td>Ring turns blue, live "Listening…"</td>
+</tr>
+<tr class="odd">
+<td>Double-tap the case (motion sensor)</td>
+<td>Bookmark without finding the button</td>
+<td>Same as short press</td>
+</tr>
+<tr class="even">
+<td>Turn face-down on a table</td>
+<td>Pause recording</td>
+<td>Screen off</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ranked-feature-list">Ranked feature list</h3>
+<div class="tbl"><table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Feature</th>
+<th>What it does</th>
+<th>Who already does something like it</th>
+<th>Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><strong>Privacy pause + "forget last 5 min"</strong></td>
+<td>Long-press pauses. A swipe on the screen deletes the last 5 minutes
+from SD before it ever uploads. A visible ring shows recording state to
+people around you</td>
+<td>Bee has a mute button; deleting recent audio on the device itself is
+rare</td>
+<td>Easy</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><strong>Bookmarks ("clip that")</strong></td>
+<td>Short press marks a moment. Summaries put bookmarked moments first,
+and you can say "what did I bookmark today?"</td>
+<td>Some recorders have highlight marks; few feed them into the AI
+summary</td>
+<td>Easy</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><strong>Push-to-talk agent with your day as context</strong></td>
+<td>Hold the button and ask: "What did Zoo say about the deadline?" or
+"Summarise the last meeting." Claude answers on the round screen, and
+optionally out loud through the speaker. It searches your own
+transcripts first</td>
+<td>Omi, Bee and Plaud have chat inside the phone app. Asking from the
+pendant and hearing the answer from it is rare</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td><strong>Agent actions with on-screen confirm</strong></td>
+<td>"Add a reminder to call Mum at 7", "Put this in my Notion", "Open a
+GitHub issue for the bug we just discussed", "Message Zoo the summary".
+Claude calls tools (MCP servers or your own APIs). The screen shows the
+draft and you tap to confirm before anything is sent</td>
+<td>Omi has an app store with integrations; voice-triggered actions
+confirmed on the device are rare</td>
+<td>Medium–hard</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td><strong>Glance screen</strong></td>
+<td>The round display shows your next open action item, battery, time
+since last sync and a recording timer, in a few seconds then dark
+again</td>
+<td>Plaud Note Pro has a small status display; a glanceable to-do face
+is rare</td>
+<td>Easy–medium (LVGL)</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td><strong>Promise tracker</strong></td>
+<td>Catches commitments ("I'll send it tomorrow") from you and from
+others, and reminds you on the pendant or phone when they come due: "You
+told Rahul you'd send the slides"</td>
+<td>Everyone extracts action items; tracking who promised what and
+following up later is rare</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td><strong>Study mode</strong> (fits you as students)</td>
+<td>A "lecture" button on the screen tags a session as a class. You get
+structured notes, key terms, flashcards and a 5-question quiz, and can
+ask "explain what the professor said about X" later</td>
+<td>Plaud has templates for meetings and lectures; flashcards and
+quizzes from your own lectures are rare</td>
+<td>Easy–medium</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td><strong>Hinglish-first</strong></td>
+<td>Transcribe mixed Hindi-English well, and let the user pick the
+language summaries come out in</td>
+<td>NeoSapien claims Indian languages; the big players handle
+code-switching poorly according to reviews</td>
+<td>Medium (vendor choice)</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td><strong>Your memory as an MCP server</strong></td>
+<td>Expose transcripts, memories and to-dos as an MCP server, so Claude
+Desktop, Claude Code or other agents can ask "what did I discuss today?"
+from your laptop</td>
+<td>Omi already offers an MCP server, so copy its approach rather than
+calling it new</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><strong>Morning and evening voice briefing</strong></td>
+<td>Press in the morning and the pendant speaks your open promises and
+today's events; in the evening it reads back what you did</td>
+<td>Daily summaries exist in apps; spoken from the device is rare</td>
+<td>Easy once #3 works</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td><strong>Voice rules ("if I say…")</strong></td>
+<td>User-defined triggers: "note to self" goes to Notion, "remind me"
+goes to the calendar, "idea:" goes to an ideas list</td>
+<td>Omi plugins do some of this with webhooks</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td><strong>Works without the phone</strong></td>
+<td>At home or on campus Wi-Fi, the pendant uploads straight to your
+server, so the phone app is optional</td>
+<td>Almost no commercial pendant does this</td>
+<td>Medium (already in the roadmap)</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><strong>Conversation coach</strong></td>
+<td>After a talk or meeting: how much you spoke versus others, filler
+words, speaking pace, interruptions</td>
+<td>Rare in pendants; exists in sales-call software</td>
+<td>Medium (server-side)</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><strong>"Only my voice" mode</strong></td>
+<td>Keep only the wearer's speech and drop other people's, which helps
+with consent laws</td>
+<td>A funded startup is building this; no shipping product found</td>
+<td>Hard (speaker verification)</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><strong>Offline wake word</strong></td>
+<td>"Hey pendant" instead of the button, using Espressif's ESP-SR on the
+chip</td>
+<td>Common in smart speakers</td>
+<td>Medium; costs battery, so keep the button as the main way in</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="suggested-build-order">Suggested build order</h3>
+<ol type="1">
+<li><strong>Button gestures, privacy pause and bookmarks</strong> (#1,
+#2). Small firmware work, and they make the device trustworthy.</li>
+<li><strong>Push-to-talk agent</strong> (#3). This is your signature
+feature. The pipeline is: the pendant records the question, the phone or
+server transcribes it, Claude answers using a search over your
+transcripts, and the answer appears on screen (text first, speech
+later). Expect an answer in roughly 2–5 seconds; that latency is an
+estimate, so measure it.</li>
+<li><strong>Glance screen</strong> (#5) and <strong>promise
+tracker</strong> (#6), which give people a reason to look at the pendant
+every day.</li>
+<li><strong>Study mode</strong> (#7), because you are your own first
+users.</li>
+<li><strong>Agent actions</strong> (#4) and <strong>voice rules</strong>
+(#11), with confirm-on-screen from day one.</li>
+<li><strong>Memory MCP server</strong> (#9), <strong>briefings</strong>
+(#10) and the rest when the core is solid.</li>
+</ol>
+<h3 id="notes-on-building-the-agent-part">Notes on building the agent
+part</h3>
+<ul>
+<li>Claude has no built-in speech-to-text or speech output, so the agent
+is a chain: speech-to-text (the same vendor you pick in Phase 0), then
+Claude, then text-to-speech for spoken answers (for example ElevenLabs,
+OpenAI or Sarvam for Hindi voices).</li>
+<li>Run the agent on your server, not on the ESP32. The pendant only
+records, shows text and plays audio. Claude's API supports tool use and
+connecting to remote MCP servers, which is how actions like Notion or
+the calendar would plug in.</li>
+<li>Use a small, fast model for quick questions and a stronger one for
+"plan my week" or long summaries.</li>
+<li>Never let the agent send a message, pay, or delete anything without
+a tap on the screen. Voice commands get misheard, and the transcript can
+contain other people's speech that sounds like a command.</li>
+<li>Battery: the speaker and screen are the most power-hungry parts.
+Default to short text answers on screen and make spoken answers
+optional.</li>
+</ul>
+<h3 id="what-not-to-promise-yet">What not to promise yet</h3>
+<ul>
+<li><strong>Full on-device transcription.</strong> The ESP32-S3 can do
+wake words and short command lists (ESP-SR), but not full
+speech-to-text. That has to happen on the phone or server.</li>
+<li><strong>Live translation through the speaker.</strong> Latency and
+the small speaker make this a poor experience on this board.</li>
+<li><strong>All-day battery with the screen and speaker in use.</strong>
+Measure first. The earlier estimate of 4–7 hours assumed the screen
+stays dark.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The research changes the problem's shape. The hard parts of an AI
+pendant are no longer firmware or AI plumbing. MIT code already provides
+a working board layer for this exact Waveshare unit and a
+phone-compatible audio protocol, and summarization costs fractions of a
+cent. What remains hard is <strong>acoustics, power and
+language</strong>: whether one unnamed mic behind a 3D-printed shell can
+capture a Hinglish conversation across a table well enough for any STT
+vendor, and whether an ESP32-S3 can do it for a full working day. Both
+questions can be answered in the first fortnight with an SD card, a USB
+power meter and a laptop script, before a single line of app code
+exists. The students should treat that test as the decision gate for
+everything after it.</p>
+<p>Strategically, the Waveshare board is a learning platform, not the
+product. If the concept holds, the likely end state is the students' own
+protocol and app, a display-less ESP32-S3 clip (the XIAO is the stepping
+stone) that keeps Wi-Fi sync as its signature advantage, and a pipeline
+tuned for Indian languages that commercial incumbents, now owned by Meta
+and Amazon, have little incentive to prioritise. Building
+Omi-compatibility first is a cheap hedge: it gives them a working
+product on day one and an escape hatch if their own app slips, at the
+cost of a protocol they should replace once they own the data path.</p>
+</main>
+<footer>Compiled from four research tracks: commercial products, open-source projects, board hardware, and architecture/apps. Prices and battery figures are estimates where marked; check primary sources before buying.</footer>
+</div>

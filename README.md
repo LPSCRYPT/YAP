@@ -158,4 +158,4 @@ The diagrams omit worker-management details for readability. Each executing node
 | `data-structures/` | Versioned artifact contracts, knowledge-model semantics, and projection definitions, independent of app UI and core capture behavior |
 | `build/` | Physical pendant parts, wiring, and build configurations |
 
-Only this README is populated as part of the architecture review. Model providers, graph/search technologies, API schemas, and firmware details will be selected and documented separately.
+See [data structures and processing research](data-structures/research/README.md) for source-backed project comparisons, temporal knowledge modeling notes, and open design questions. These research recommendations are not finalized schemas or technology selections.

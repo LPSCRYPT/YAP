@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/56ed82d816d189900bc420e4f9267822.jpg
+
+OBSERVATIONS
+An elongated silver-coloured tapered pendant on a fine curved cable. Its upper outline rises to an off-centre pentagonal peak, its long sides narrow towards a blunt lower tip, and seven dark angular windows descend through the centre, ending in a small terminal window. Broad pale metal-looking margins and oblique bridges separate the irregular openings. No wording, brand or logo is copied. Dimensions, alloy and backing material cannot be established from the photograph.
+
+ENCLOSURE INTERPRETATION
+A tapered whole-body wedge with an off-centre upper peak, slanted sidewalls and a truncated lower end. Seven descending recesses preserve the reference's broken-window rhythm. Fixed microphones, SD board and side motor require a broader, shorter proportion than the jewel: 54 by 58 mm, bottom width31 mm and inclined roof approximately21.5 to24.7 mm. Windows shift around the real status guide and acoustic ports. They are backed pockets, not exposed holes into the electronics.
+
+FINISH / LIMITS
+Silver-grey body and graphite pocket floors preview optional nonconductive finishes. Seven polygonal recesses are0.65 mm deep vertically and follow the inclined roof. The cavity ceiling sits2.2 mm below the roof before recessing, leaving approximately1.55 mm backing. The small terminal window and bridges need print-preview/physical validation. The reduced taper and truncated tip are hardware compromises. No physical print, material, strength, RF or acoustic validation is claimed.
+
+VERIFIED BODY SIZE mm: [54.0, 58.0, 24.7]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

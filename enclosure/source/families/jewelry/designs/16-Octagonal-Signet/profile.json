@@ -1,0 +1,64 @@
+{
+  "id": "16",
+  "name": "Octagonal Signet",
+  "source": "Sleek_Round",
+  "source_image": "references/jewelry/d5654c9e8d9ed1e136a89babfad47192.jpg",
+  "reference_analysis": "A compact eight-sided pendant with a broad bright beveled perimeter, brushed-looking vertical sides and a nearly black flat octagonal center with its own narrow sloping edge. A large rounded bail projects above one side. The photo strongly distinguishes the silver-coloured structural border from the dark inset but does not establish actual metal, stone, scale or assembly method.",
+  "interpretation": "A true regular-octagonal whole-body signet with eight continuous side panels, a broad single-facet shoulder and a second raised octagonal roof island. The body is 49.8 mm across flats and peaks at 23.4 mm. The round hardware source preserves the retained carrier arrangement within the octagon's 23.5 mm nominal base cavity apothem. The dark roof is an integral shell volume, not a cosmetic sticker or a separate fake gemstone. The apparent sheet-like source depth is expanded to enclose the retained two-level hardware. A standard rear-connected necklace eye replaces the photograph's oversized thick metal bail for compactness and shell withdrawal.",
+  "finish_notes": "Light satin grey perimeter and near-black raised octagon preview optional nonconductive finishing. Eight real sloping roof facets form the inset edge; the broad bright border is also physical sloped geometry. No engraved microtexture, conductive coating, actual gemstone or hardness claim is implied. The main roof follows the nominal 1.4 mm lofted shell and the integral octagonal island adds roof thickness. See verification.json for completed CAD checks; no physical fit, RF, thermal, acoustic, coating or fatigue validation has been performed.",
+  "footprint": [
+    [
+      -24.9,
+      -10.314917
+    ],
+    [
+      -10.314917,
+      -24.9
+    ],
+    [
+      10.314917,
+      -24.9
+    ],
+    [
+      24.9,
+      -10.314917
+    ],
+    [
+      24.9,
+      10.314917
+    ],
+    [
+      10.314917,
+      24.9
+    ],
+    [
+      -10.314917,
+      24.9
+    ],
+    [
+      -24.9,
+      10.314917
+    ]
+  ],
+  "kind": "profile_loft",
+  "shoulder": 20.2,
+  "top": 22.4,
+  "top_scale": 0.91,
+  "roof_steps": 1,
+  "custom_module": "geometry.py",
+  "color": [
+    0.65,
+    0.68,
+    0.7
+  ],
+  "accent_color": [
+    0.055,
+    0.06,
+    0.065
+  ],
+  "view_angle": 30,
+  "reference_provenance": {
+    "original_filename": "d5654c9e8d9ed1e136a89babfad47192.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

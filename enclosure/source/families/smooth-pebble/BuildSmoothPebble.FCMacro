@@ -1,0 +1,90 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart, math, json, os
+ROOT=output_dir('smooth-pebble');os.makedirs(ROOT,exist_ok=True)
+src=document('Sleek_Round');V=App.Vector
+TOP=25.0
+# Two analytically matched Bezier spans become ONE C2 degree-five meridian.
+# Monotone control heights prevent interpolated-profile loops at the widest point.
+from smooth_envelope import envelope
+outer,meridian=envelope();inner,inner_meridian=envelope(1.6)
+wall_min=meridian.toShape().distToShape(inner_meridian.toShape())[0]
+assert wall_min>=1.2,('minimum shell wall',wall_min)
+def box(x,y,z,w,l,h):return Part.makeBox(w,l,h,V(x,y,z))
+def cyl(x,y,z,r,h):return Part.makeCylinder(r,h,V(x,y,z))
+def moved(s,z):
+ s=s.copy();s.translate(V(0,0,z));return s
+hood=outer.cut(inner).common(box(-40,-40,1.4,80,80,40))
+base=outer.common(box(-40,-40,0,80,80,1.4))
+features=src.FlatRearBase.Shape.common(box(-40,-40,1.4,80,80,7)).cut(cyl(0,27,1.4,4.5,7))
+base=base.fuse(features)
+for x in [-14,14]:base=base.cut(cyl(x,-15,-0.1,1.6,3.3))
+rear_radius=25.5;eye_y=rear_radius+2.4
+base=base.fuse(cyl(0,eye_y,0,4.2,2.5).cut(cyl(0,eye_y,-0.1,2.2,2.7)))
+hood=hood.cut(cyl(0,eye_y,1.4,4.4,1.3))
+closure=[(23.8*math.cos(math.radians(a)),23.8*math.sin(math.radians(a))) for a in [20,145,280]]
+for x,y in closure:
+ hood=hood.fuse(cyl(x,y,1.4,1.6,5.4).common(outer)).cut(cyl(x,y,1.3,0.65,5.2))
+ base=base.cut(cyl(x,y,1.4,1.85,1.3)).cut(cyl(x,y,-0.1,0.9,1.6)).cut(Part.makeCone(1.6,0.9,0.7,V(x,y,0)))
+hood=hood.cut(box(-6,-40,7.9,12,21,5.2))
+hood=hood.cut(Part.makeCylinder(1.5,20,V(18,-5,13),V(1,0,0)))
+for x in [-7.3,7.3]:hood=hood.cut(cyl(x,14.3,17,0.6,15))
+for x in [-2,0,2]:
+ for y in [2.5,4.5,6.5]:hood=hood.cut(cyl(x,y,17,0.45,15))
+hood=hood.cut(cyl(0,0,17,1.1,15)).removeSplitter();base=base.removeSplitter()
+d=new_document('Smooth_Pebble');d.Label='Continuous smooth pebble — 54 x 25 mm'
+def obj(name,s,color=(0.74,0.76,0.77)):
+ o=d.addObject('Part::Feature',name);o.Shape=s;o.ViewObject.ShapeColor=color;o.ViewObject.DisplayMode='Shaded';return o
+printed=[obj('FlatRearBase',base),obj('SmoothHood',hood)]
+for name in ['LowerCarrier','UpperCarrier','TopRetainer']:
+ s=src.getObject(name).Shape.copy()
+ for x,y in closure:s=s.cut(cyl(x,y,7,1.9,13))
+ printed.append(obj(name,s.removeSplitter(),(0.24,0.62,0.55)))
+printed.append(obj('LightGuide',cyl(0,0,18.5,0.8,TOP-18.5),(0.2,0.9,0.4)))
+for name in ['ClipReceiverAdapter','SlideOnClip']:printed.append(obj(name,src.getObject(name).Shape.copy(),(0.25,0.35,0.5)))
+refs=d.addObject('App::DocumentObjectGroup','ComponentReferences')
+for original in src.ComponentReferences.Group:refs.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+hardware=d.addObject('App::DocumentObjectGroup','RequiredHardware')
+for original in src.RequiredHardware.Group:hardware.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+profile=d.addObject('Part::Feature','ContinuousMeridian');profile.Shape=meridian.toShape();profile.ViewObject.Visibility=False
+profile.addProperty('App::PropertyString','Construction');profile.Construction='Single C2 B-spline meridian revolved 360 degrees; no cylindrical side section or planar front face.'
+issues=[]
+for o in printed:
+ if not o.Shape.isValid() or len(o.Shape.Solids)!=1:issues.append([o.Name,'invalid solid',len(o.Shape.Solids)])
+ for other in refs.Group:
+  v=o.Shape.common(other.Shape).Volume
+  if v>0.001:issues.append([o.Name,other.Name,v])
+ for wire in [box(16.05,-13.5,1.9,3,4,3),box(5,3,14.4,4,3,3)]:
+  v=o.Shape.common(wire).Volume
+  if v>0.001:issues.append([o.Name,'wire reservation',v])
+for i,a in enumerate(printed):
+ for b in printed[i+1:]:
+  v=a.Shape.common(b.Shape).Volume
+  if v>0.001:issues.append([a.Name,b.Name,v])
+for o in hardware.Group:
+ for other in printed[1:]:
+  v=o.Shape.common(other.Shape).Volume
+  if v>0.001:issues.append([o.Name,other.Name,v])
+print('SMOOTH SHELL ISSUES',json.dumps(issues));assert not issues,issues
+for dz in [0.2,1,2,4,6,8,12,16,20,24,30]:
+ moving=moved(hood,dz)
+ for other in [printed[0]]+printed[2:5]+list(refs.Group)+list(hardware.Group):
+  assert moving.common(other.Shape).Volume<0.001,('hood extraction',dz,other.Name)
+# Rear clip assembly is unchanged; check the new rear plate does not obstruct release.
+for distance in [0,0.5,1,4,12,25,40]:
+ s=src.SlideOnClip.Shape.copy();s.translate(V(0,-distance,0));assert s.common(base).Volume<0.001,('clip/base clearance',distance)
+checks=[]
+for i,o in enumerate(printed,1):
+ s=o.Shape.copy()
+ if o.Name in ['ClipReceiverAdapter','SlideOnClip']:s.rotate(V(),V(0,1,0),90)
+ bb=s.BoundBox;s.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
+ mesh=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.04,AngularDeflection=0.12,Relative=False)
+ assert mesh.isSolid() and not mesh.hasNonManifolds() and not mesh.hasSelfIntersections(),o.Name
+ path=ROOT+'/%02d-%s.stl'%(i,o.Name);mesh.write(path)
+ imported=Mesh.Mesh(path);assert imported.isSolid() and not imported.hasNonManifolds(),path
+ checks.append({'part':o.Name,'closed_reimported_mesh':True,'facets':imported.CountFacets})
+for o in printed+list(refs.Group)+list(hardware.Group):o.ViewObject.Visibility=o.Name in ['FlatRearBase','SmoothHood','LightGuide']
+d.recompute();d.saveAs(ROOT+'/Smooth-Pebble.FCStd');Part.export(printed[:6],ROOT+'/Necklace-Assembly.step');Part.export(printed[6:],ROOT+'/Optional-Clip.step')
+report={'outer_width_mm':outer.BoundBox.XLength,'outer_length_mm':outer.BoundBox.YLength,'body_thickness_mm':TOP,'rear_diameter_mm':2*rear_radius,'clip_mode_thickness_mm':TOP+12,'single_continuous_meridian':True,'meridian_degree':meridian.Degree,'meridian_multiplicities':meridian.getMultiplicities(),'minimum_unperforated_wall_mm':wall_min,'issues':issues,'hood_removal_checked':True,'clip_interface_unchanged':True,'parts':checks,'status':'CAD-checked fit prototype, not physically printed or acoustically validated'}
+with open(ROOT+'/verification.json','w') as f:json.dump(report,f,indent=2)
+print(json.dumps(report))
+Gui.activeDocument().activeView().viewAxonometric()

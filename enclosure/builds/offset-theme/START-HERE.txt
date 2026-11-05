@@ -1,0 +1,54 @@
+SIX DISTINCT OFFSET-THEME BODY ARCHITECTURES
+
+These reinterpret asymmetry and diagonal geometry, rather than repeating the previous eight-sided Offset Cut outline. Earlier designs and files are preserved.
+
+VIEWING
+Comparison.FCStd is the native equal-scale six-design overview, saved in an angled view. Front.png and Angled.png show THE SAME SIX DESIGNS, not twelve alternatives. All use the same neutral body colour. Read left-to-right, top row then bottom row.
+
+BODY WIDTH x LENGTH x MAXIMUM THICKNESS, mm
+01 Offset Wedge       50.0 x 53.0 x 26.96
+02 Split Level        50.0 x 50.0 x 21.80
+03 Diagonal Capsule   49.6 x 57.6 x 22.60
+04 Folded Shell       50.0 x 56.0 x 26.40
+05 Asymmetric Shield  52.0 x 54.5 x 23.40
+06 Soft Hard Hybrid   50.0 x 50.0 x 22.20
+Dimensions exclude the necklace eye and optional rear clip. Per-design verification.json includes eye-inclusive length and clip thickness. These are fits around the retained component arrangement, not proven global minimum dimensions.
+
+WHAT CHANGES
+01: A sheared four-sided body with one genuinely sloping roof. Thickness varies approximately20.64..26.96 mm across the footprint. No flat face plus decorative bevel: the entire roof is inclined.
+02: A50x50 mm lower volume, a smaller46x48.8 mm upper volume shifted(+1,-.2) mm, and a recessed waist band. Upper corners and shoulder are softened. This is one continuous hood with a modeled waist, not an extra detachable mid-case seam. Electronics still service from the rear.
+03: A true elongated capsule with circular ends and short straight flanks, sliced diagonally at the upper right through its full height. Narrower but longer than the original theme body.
+04: Two broad roof planes meet along a real off-centre diagonal ridge, x+0.4y=2. Edge thickness drops to20.8 mm; ridge reaches26.4 mm. These are exterior folded-looking surfaces, not a sheet-metal fabrication claim.
+05: Broad shoulders taper along unequal lower diagonals to a lower end offset4 mm right. Directional silhouette instead of a clipped square.
+06: A half-round left flank opposed by a flat right flank and broad diagonal facets. It keeps a50x50 mm footprint while contrasting curved and planar sides.
+
+The wedge and folded concepts deliberately add depth to express their forms. Split Level and Soft Hard Hybrid are the compact shortlist. Sharp/faceted edges are CAD concept geometry: comfort, snagging and edge finishing require a physical fit print. Curved outlines/shoulders use sampled profiles and may show small facets.
+
+FILES PER VARIANT
+01-RearBase.stl;02-WholeBodyShell.stl;03-LowerCarrier.stl;
+04-UpperCarrier.stl;05-TopRetainer.stl;06-LightGuide.stl;
+07-ClipReceiverAdapter.stl;08-SlideOnClip.stl.
+Assembly.FCStd;Necklace-Assembly.step;Optional-Clip.step;verification.json.
+All48 STL files are bed-normalized in millimeters. Use all parts from ONE folder; closure positions, carrier outlines and optical-guide tops differ. Do not scale in the slicer. Native/STEP geometry is in assembled position.
+The wedge/folded light guides terminate against their actual roof geometry, rather than protruding to the maximum body height. Keep their orientation when fitting.
+
+RETAINED ELECTRONICS / ASSEMBLY
+Battery24.5x24.5x5 mm protected pack, supported with locating stops and nominal0.4 mm upper clearance; do not compress a pouch cell. Split Level and Diagonal Capsule use the existing rounded-square carrier stack; others use the round stack. Unused carrier perimeter is trimmed to the new enclosure outline. Components remain independently retained, not held by pressing the hood onto them.
+Three M2x14 mm countersunk carrier screws engage plastic pilots; head envelope about diameter4 x1.2 mm. Three M1.6x6 mm countersunk screws close the hood into1.3 mm plastic pilots. Verify actual screw dimensions and a suitable plastic-compatible thread; no longer screws or overtightening.
+XIAO/amplifier/driver need thin insulating retaining bands, up to3 mm wide and about0.15 mm thick. Driver band runs along Y, other two along X. Thick cable ties do not fit. Nominal0.3 mm soft insulating pads restrain microphone/speaker rims, motor and connector; nominal0.5 mm pad at the SD bridge. Pad only the speaker's rigid rim, never its diaphragm. Antenna requires removable insulating adhesive. Bands/pads/adhesive are additional nonprinted hardware, with material and preload requiring validation.
+Install lower components/carrier, upper components/carrier, bands/pads and retainer. Secure the carrier screws. Install LED and matching light guide, lower the shell over the retained stack, then secure rear closure screws. SD remains internal; leave wiring service slack. The button envelope/opening remains provisional pending the actual actuator.
+Necklace eye has a3.6 mm bore. Use a breakaway cord; printed eye strength remains untested.
+Optional clip adds12 mm to maximum thickness. Its receiver uses two M2x8 mm countersunk screws into flush inserts at x=+-14,y=-15, assumed about3.2 mm OD x3 mm long; follow the real insert manufacturer's pilot guidance. Clip slides off tool-free. Removing its receiver for a fully flat necklace back needs two screws removed, without dismantling electronics. Existing latch/dovetail geometry is unchanged: about0.305 mm minimum flank allowance,0.35 mm floor and0.4 mm per-side mouth allowance. Real print fit and latch fatigue remain untested.
+
+VERIFICATION / LIMITS
+All six passed valid-single-solid checks; detailed shell/base Boolean checks; component containment; component/hardware/wire-reservation interference checks; eight sampled shell-extraction positions; seven clip-release positions. Carrier screw penetration into base pilots is intentional threaded engagement. Each STL was checked closed/manifold/self-intersection-free before export and reimported closed/manifold. See per-design or root verification.json.
+These checks do not establish continuous-motion clearance, manufacturing tolerance stacks, minimum manufactured wall thickness, strength or production readiness. Nominal walls/roofs start at1.4 mm; Split Level uses a thicker upper-cavity offset and an early internal transition to support the external step.
+No physical print, fit, bail-load, fatigue, acoustic, optical, RF, thermal or charging tests performed. Ports are untuned; no waterproofing or acoustic isolation claimed.
+SD package remains provisional24x18x3 mm in this orientation. Microphone/motor thickness assumed3 mm; amplifier/driver/antenna/connector packages remain provisional. Direct microphone wiring is assumed; tall headers do not fit. Confirm real parts before final fabrication.
+PETG is a fit-test starting point, not a verified printer profile. Preview supports beneath roofs, eye and downward carrier restraints, and ensure support removal access. Keep ports, screw pilots and band slots clear. No printer-specific G-code supplied.
+
+EDITABILITY / REGENERATION
+Native assemblies contain editable solid snapshots and hidden footprint definitions, not PartDesign feature-history trees. Sources in Recorder-Enclosures:
+ThemeVolumeProfiles.py;ThemeSilhouetteProfiles.py;ThemeEnvelopeGeometry.py;
+BuildOffsetThemeConcepts.FCMacro, reusing BuildWholeBodyAtlas.FCMacro checks/mounts.
+Existing Sleek_Round and Sleek_Square documents are required inputs. Loading the macro does not build. It exposes build(0)..build(5), run separately, followed by compare(). Existing completed verification files are resume checkpoints; invalidate a changed concept's checkpoint before intentional regeneration. UI events are serviced between operations, although an individual Boolean or mesh check can briefly block interaction. No regeneration is needed to view the completed outputs.

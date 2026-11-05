@@ -1,0 +1,82 @@
+[
+  {
+    "design": "01-Stepped-Square",
+    "body_width_mm": 49,
+    "body_length_mm": 49,
+    "upper_width_mm": 44,
+    "upper_length_mm": 46,
+    "thickness_mm": 20.8,
+    "closure_screws": "3 x M1.6x6 countersunk",
+    "carrier_screws": "3 x M2x14 countersunk, plastic-compatible thread form",
+    "optional_clip_mount": "2 flush M2 heat-set inserts, 3 mm deep; confirm real insert spec",
+    "issues": [],
+    "hood_extraction_checked": true,
+    "carrier_head_clearance_checked": true,
+    "parts": [
+      {
+        "part": "FlatRearBase",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "RoundedHood",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true
+      }
+    ]
+  },
+  {
+    "design": "02-Slim-Round",
+    "body_width_mm": 50,
+    "body_length_mm": 50,
+    "upper_width_mm": 50,
+    "upper_length_mm": 50,
+    "thickness_mm": 20.8,
+    "closure_screws": "3 x M1.6x6 countersunk",
+    "carrier_screws": "3 x M2x14 countersunk, plastic-compatible thread form",
+    "optional_clip_mount": "2 flush M2 heat-set inserts, 3 mm deep; confirm real insert spec",
+    "issues": [],
+    "hood_extraction_checked": true,
+    "carrier_head_clearance_checked": true,
+    "parts": [
+      {
+        "part": "FlatRearBase",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "RoundedHood",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true
+      }
+    ]
+  }
+]

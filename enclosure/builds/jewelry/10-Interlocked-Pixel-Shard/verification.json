@@ -1,0 +1,80 @@
+{
+  "id": 10,
+  "name": "Interlocked Pixel Shard",
+  "family": "Jewelry inspired",
+  "description": "A compact elongated eight-sided backing body carries three genuinely raised, interlocking rectilinear terraces and four blocks running down the sides. The staggered 22.0, 22.5 and 23.4 mm roof levels, dark valleys and stepped side skyline reinterpret the overlapping pixel shards in three dimensions. The closed 50 by 57 mm core contains the retained square-source electronics; side blocks increase maximum width to 52 mm. The source's extreme narrowness and perforated plate assembly cannot contain this battery and microphone pair, so they become a closed-backed broad shard with a flat removable rear rather than fictitious through-holes. A centered clear LED is retained between the terraces.",
+  "body_mm": [
+    52.0,
+    57.0,
+    23.4
+  ],
+  "with_bail_length_mm": 63.2,
+  "clip_thickness_mm": 35.4,
+  "outer_volume_mm3": 56718.7,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7546
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6256
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2796
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5678
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3682
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.120614758428182,
+      8.41521557000372
+    ],
+    [
+      -22.542131455613543,
+      15.784170372534815
+    ],
+    [
+      4.67802259485738,
+      -26.530384493975582
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/9bfeeddf831a89a41d804e2d24acaad8.jpg",
+  "reference_analysis": "The pendant is an elongated, irregular pointed assembly of overlapping orthogonal metal-like plates. Bright brushed-looking rectangles alternate with dark recessed areas; the edges are stair-stepped, and a rectangular upper bail joins a square-link chain. It is not a smooth gemstone or a simple rectangular dog tag. The image supplies no measured dimensions or certified material.",
+  "interpretation": "A compact elongated eight-sided backing body carries three genuinely raised, interlocking rectilinear terraces and four blocks running down the sides. The staggered 22.0, 22.5 and 23.4 mm roof levels, dark valleys and stepped side skyline reinterpret the overlapping pixel shards in three dimensions. The closed 50 by 57 mm core contains the retained square-source electronics; side blocks increase maximum width to 52 mm. The source's extreme narrowness and perforated plate assembly cannot contain this battery and microphone pair, so they become a closed-backed broad shard with a flat removable rear rather than fictitious through-holes. A centered clear LED is retained between the terraces.",
+  "finish_notes": "Dark charcoal backing and lighter silver-grey terrace tops are optional nonconductive surface finishes, not a metal enclosure specification. Rectilinear relief is actual fused geometry, with broad 4 mm or wider features and continuous structural backing; side blocks start above the lower closure zone. Core roof height is 21.6 mm and highest relief is 23.4 mm. Standard necklace eye substitutes for the photo's long rectangular bail. No brand text is reproduced. Source proportions are necessarily broadened for hardware; physical fit, printability, finish wear, RF and acoustics remain untested."
+}

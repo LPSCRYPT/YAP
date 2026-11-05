@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg
+
+OBSERVATIONS
+Two silver-coloured asymmetric geometric pieces are shown one above the other. The smaller upper pendant is attached to a fine chain; the larger lower piece is separately positioned. Both have broad triangular or quadrilateral sloping planes, clean sharp ridges, narrow perimeter bevels and a brushed-looking finish. The photograph does not establish that the two objects form one linked pendant, their dimensions, or their actual metal.
+
+ENCLOSURE INTERPRETATION
+The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.
+
+FINISH / LIMITS
+Silver-grey and pale silver surface colours are optional nonconductive finish previews, not metal construction or conductive paint instructions. The two raised folds are fused physical shell geometry. They do not move and are not separately printed decorative appliques. The recessed valley has a 21.4 mm outer floor with the cavity capped at 19.8 mm, providing 1.6 mm structural backing; actual ridges remain below 25.5 mm. A closed rear and thicker edge are necessary for the battery and retained electronics, unlike the original solid jewelry. No physical fit, strength, RF, thermal, acoustic or finish testing is claimed.
+
+VERIFIED BODY SIZE mm: [56.0, 50.0, 24.82]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

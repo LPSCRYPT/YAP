@@ -1,0 +1,80 @@
+{
+  "id": 17,
+  "name": "Triangular Truss",
+  "family": "Jewelry inspired",
+  "description": "An elongated, broadened triangular whole-body chassis, 57 x 58 mm, with an inclined structural roof rising from about 21 mm at the nose to 24.175 mm at the upper edge. Four sloping side pockets leave broad transverse ribs around an integral raised triangular center. The center has a three-facet crown terminating in a small triangular table at 25.2 mm, preserving the image's stacked dark triangular mass and load-bearing frame rather than merely engraving a triangle on a box. Open chassis windows become backed pockets, and the original 31 mm annotated span must be enlarged for the unchanged battery, motor and board stack. The nose is shortened but remains pointed in plan; the side contour is broadened around the electronics rather than preserving the photograph's narrow triangle. A standard rear-connected eye replaces routing a chain through the roof pockets.",
+  "body_mm": [
+    57.0,
+    58.0,
+    25.2
+  ],
+  "with_bail_length_mm": 64.2,
+  "clip_thickness_mm": 37.2,
+  "outer_volume_mm3": 58929.1,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7550
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 10322
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2652
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5534
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3538
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 364
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      26.227098830414068,
+      9.54588330542865
+    ],
+    [
+      -24.98386474117214,
+      17.493890425380506
+    ],
+    [
+      4.914785775430849,
+      -27.87313521551676
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/edc0c28a2098f856f647e175e734bd87.jpg",
+  "reference_analysis": "A downward-pointing triangular pendant whose glossy dark central triangle sits above a larger silver-coloured open triangular chassis. Broad transverse bridges divide the visible side openings, and the lower apex is an elongated structural point. The chain appears to pass behind the top-side openings rather than through a conventional top bail. An image annotation reads 31 mm across the upper span; that label is not an independently verified measurement. Materials and construction cannot be certified from the photo.",
+  "interpretation": "An elongated, broadened triangular whole-body chassis, 57 x 58 mm, with an inclined structural roof rising from about 21 mm at the nose to 24.175 mm at the upper edge. Four sloping side pockets leave broad transverse ribs around an integral raised triangular center. The center has a three-facet crown terminating in a small triangular table at 25.2 mm, preserving the image's stacked dark triangular mass and load-bearing frame rather than merely engraving a triangle on a box. Open chassis windows become backed pockets, and the original 31 mm annotated span must be enlarged for the unchanged battery, motor and board stack. The nose is shortened but remains pointed in plan; the side contour is broadened around the electronics rather than preserving the photograph's narrow triangle. A standard rear-connected eye replaces routing a chain through the roof pockets.",
+  "finish_notes": "Silver-grey chassis, darker backed pocket floors and a dark faceted center preview nonconductive finishing only. Four physical 0.9 mm-deep recesses have locally thickened backing retaining 1.5 mm nominal vertical roof below each floor. Broad 4 mm transverse ribs and a continuously supported triangular center replace suspended jewelry struts. The right lower flank is broadened locally to clear the retained motor seat, keeping the overall 57 mm width. The 25.2 mm peak preserves the layered crown; the surrounding inclined chassis is lower. No actual gemstone, metal or transparent opening is specified. See verification.json for completed CAD checks; physical strength, fatigue, acoustic, RF, coating and pointed-nose wear comfort remain untested."
+}

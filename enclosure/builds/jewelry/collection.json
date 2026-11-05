@@ -1,0 +1,1348 @@
+[
+  {
+    "id": 1,
+    "name": "Circuit Cabochon",
+    "family": "Jewelry inspired",
+    "description": "A clipped-square whole-body recorder shell with softened upper shoulder, corner-offset necklace eye and a recessed circuit-trace pattern around the centered status LED. The source's thin board is expanded in depth to fit the retained battery and two-level electronics. Sixteen larger routes and terminal pads replace the photo's sub-print-resolution trace density. The central patterned region does not represent an added electronic chip.",
+    "body_mm": [
+      49.4,
+      49.4,
+      23.0
+    ],
+    "with_bail_length_mm": 54.18,
+    "clip_thickness_mm": 35.0,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7544
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 12402
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2872
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5754
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25,
+    "report_recovery": "Geometry checks, all STL reimports and STEP exports completed before a missing description metadata key; report reconstructed without rebuilding geometry.",
+    "source_image": "/Users/bot/Desktop/jewelry/0876cc003f941c7c4312df17ecf063a7.jpg",
+    "reference_analysis": "Purple circuit-board jewelry beneath a glossy resin-like face. Squarish tile with diagonally clipped upper-right/lower-left corners, dense copper-coloured routed traces and pads surrounding a central chip-shaped feature, and a jump ring at the upper-left corner. The photo does not establish actual dimensions, material composition or electronics functionality.",
+    "interpretation": "A clipped-square whole-body recorder shell with softened upper shoulder, corner-offset necklace eye and a recessed circuit-trace pattern around the centered status LED. The source's thin board is expanded in depth to fit the retained battery and two-level electronics. Sixteen larger routes and terminal pads replace the photo's sub-print-resolution trace density. The central patterned region does not represent an added electronic chip.",
+    "finish_notes": "Purple body and copper-coloured groove floors preview optional nonconductive paint. Channels are physical 0.55 mm-wide, 0.3 mm-deep geometry; use calibrated printing or post-finishing. No functional printed circuitry, conductive coating or metal enclosure is specified. The central roof is thickened before engraving. A clear glossy finish is optional and unmodeled; do not fill acoustic ports or the light-guide opening. RF, paint/finish compatibility and wear resistance are untested."
+  },
+  {
+    "id": 2,
+    "name": "Oblique Graphite Shard",
+    "family": "Jewelry inspired",
+    "description": "An asymmetric seven-sided whole-body recorder, not an applied jewel on a rectangular case. Three intersecting roof planes form a broad oblique crown and two descending facets, while the footprint continues the clipped, uneven shard silhouette down to the flat removable rear. The hardware needs a 53 by 56 mm footprint and roughly 25.6 mm crown rather than the photograph's apparently thin pointed jewel. The point is deliberately truncated and the slopes stop above the retained electronics. The necklace eye is offset towards the high corner.",
+    "body_mm": [
+      53.0,
+      56.0,
+      25.9
+    ],
+    "with_bail_length_mm": 60.5,
+    "clip_thickness_mm": 37.9,
+    "outer_volume_mm3": 53572.0,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7548
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6234
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2748
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5546
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3634
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 338
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        22.133651576651715,
+        8.055990349520423
+      ],
+      [
+        -19.114755354396976,
+        13.38429579018317
+      ],
+      [
+        4.413532123794684,
+        -25.030384493975582
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/125351dfb4ba5d21ec92843c3574ccac.jpg",
+    "reference_analysis": "A dark blue-charcoal pendant on a fine pale chain. Its outline is an irregular angular shield or skewed diamond, with a high pointed corner, a slanting right edge and a clipped lower tip. Broad planar faces meet along a strong diagonal-looking ridge; the left and lower facets are darker than the large upper face. The image supplies neither dimensions nor certified materials.",
+    "interpretation": "An asymmetric seven-sided whole-body recorder, not an applied jewel on a rectangular case. Three intersecting roof planes form a broad oblique crown and two descending facets, while the footprint continues the clipped, uneven shard silhouette down to the flat removable rear. The hardware needs a 53 by 56 mm footprint and roughly 25.6 mm crown rather than the photograph's apparently thin pointed jewel. The point is deliberately truncated and the slopes stop above the retained electronics. The necklace eye is offset towards the high corner.",
+    "finish_notes": "Graphite-blue body with restrained blue-grey facet tones previews optional nonconductive paint or pigmented polymer, not stone, metal or a certified coating. Facets are actual intersecting planar geometry; colour only helps read their orientation. No fine engraved decoration is introduced. Physical printing, drop resistance, RF, acoustics and coating durability remain untested."
+  },
+  {
+    "id": 3,
+    "name": "Triangular Sail Crown",
+    "family": "Jewelry inspired",
+    "description": "A genuine triangular crown is lofted into the entire upper body, above a compact asymmetric twelve-sided hardware-covering lower volume. This is not a triangular badge on a flat box: the broad diagonal shoulder is the enclosure wall and roof. A thin pure triangle would require a much larger footprint to contain the fixed electronics, so the lower body fills out the cut-away corner. The retained arrangement requires 54 by 55 mm at the base, with a 20.6 mm shoulder and 24 mm crown. The 46 by 46 mm right-triangle crown and off-corner necklace eye preserve the sail direction. A second dangling chain is deliberately not represented as enclosure hardware.",
+    "body_mm": [
+      54.0,
+      55.0,
+      24.0
+    ],
+    "with_bail_length_mm": 58.7,
+    "clip_thickness_mm": 36.0,
+    "outer_volume_mm3": 58839.0,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7572
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 5916
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2724
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5606
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3610
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        24.5774481434043,
+        8.945459558420303
+      ],
+      [
+        -22.780516827834717,
+        15.951089607163006
+      ],
+      [
+        4.678789192505831,
+        -26.5347320852822
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/1a896e764638f970b01752269ed225fa.jpg",
+    "reference_analysis": "A very thin dark triangular plate worn on a fine dark chain. The triangle has a nearly vertical right edge, an oblique upper edge and a long descending diagonal. A second chain run reaches the lower point, giving an asymmetric suspended-sail composition. No measured size, metal specification or functional mechanism can be inferred from the photo.",
+    "interpretation": "A genuine triangular crown is lofted into the entire upper body, above a compact asymmetric twelve-sided hardware-covering lower volume. This is not a triangular badge on a flat box: the broad diagonal shoulder is the enclosure wall and roof. A thin pure triangle would require a much larger footprint to contain the fixed electronics, so the lower body fills out the cut-away corner. The retained arrangement requires 54 by 55 mm at the base, with a 20.6 mm shoulder and 24 mm crown. The 46 by 46 mm right-triangle crown and off-corner necklace eye preserve the sail direction. A second dangling chain is deliberately not represented as enclosure hardware.",
+    "finish_notes": "Matte graphite-grey optional nonconductive finish. The upper triangular face and broad inclined transition are actual solid geometry. A flat 19.2 mm cavity ceiling keeps the very steep triangular transition from thinning the roof or cutting retained hardware; this makes the diagonal shoulder more substantial than the photographed plate. The centered status light remains in the triangular crown near its diagonal. No metallic construction, printability, strength, acoustic or RF performance is certified."
+  },
+  {
+    "id": 4,
+    "name": "Cellular Silver Terrace",
+    "family": "Jewelry inspired",
+    "description": "A square terraced recorder body with a shallow waist running around all four sidewalls and a raised cellular roof island. The entire enclosure is stepped in depth, with a broad peripheral shoulder like the photographed frame. Nine irregular rounded pockets form real relief cells separated by wide connecting webs. They are backed, not holes through the electronics: the occupied centre cannot reproduce a transparent openwork jewel. The compact body is 52 by 52 mm, with its main roof at 21.8 mm and relief crest at 22.6 mm. Acoustic holes and the status guide remain on unengraved connecting lands.",
+    "body_mm": [
+      52.0,
+      52.0,
+      22.6
+    ],
+    "with_bail_length_mm": 58.2,
+    "clip_thickness_mm": 34.6,
+    "outer_volume_mm3": 57118.1,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7546
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 7604
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2796
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5678
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        24.120614758428186,
+        8.779185804269924
+      ],
+      [
+        -24.361695911422018,
+        17.058243120750355
+      ],
+      [
+        4.237205143086219,
+        -24.030384493975586
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/52a64e2916f96d82a5b3cb8089e6136f.jpg",
+    "reference_analysis": "A square silver-coloured pendant on a black cord. A broad brushed-looking outer square surrounds a smaller raised square panel of irregular, softly rounded open cells and interconnecting silver-coloured bridges. Darker overlapping shapes are visible below that openwork. The outer frame is substantial and slightly uneven rather than a thin wire outline. The photograph does not prove alloy, dimensions or fabrication method.",
+    "interpretation": "A square terraced recorder body with a shallow waist running around all four sidewalls and a raised cellular roof island. The entire enclosure is stepped in depth, with a broad peripheral shoulder like the photographed frame. Nine irregular rounded pockets form real relief cells separated by wide connecting webs. They are backed, not holes through the electronics: the occupied centre cannot reproduce a transparent openwork jewel. The compact body is 52 by 52 mm, with its main roof at 21.8 mm and relief crest at 22.6 mm. Acoustic holes and the status guide remain on unengraved connecting lands.",
+    "finish_notes": "Warm silver-grey raised surfaces and darker grey pocket floors represent optional nonconductive paint on a printable enclosure, not a specified metal body. The cellular island is fused into the roof; its recessed cells bottom at 20.4 mm above a cavity ceiling capped at 19 mm, retaining at least 1.4 mm backing. Cell bridges are deliberately much broader and fewer than tiny jewellery filigree. Brushed appearance, finish durability, RF behaviour, print strength and acoustics are not validated."
+  },
+  {
+    "id": 5,
+    "name": "Tapered Fracture Pendant",
+    "family": "Jewelry inspired",
+    "description": "A tapered whole-body wedge with an off-centre upper peak, slanted sidewalls and a truncated lower end. Seven descending recesses preserve the reference's broken-window rhythm. Fixed microphones, SD board and side motor require a broader, shorter proportion than the jewel: 54 by 58 mm, bottom width31 mm and inclined roof approximately21.5 to24.7 mm. Windows shift around the real status guide and acoustic ports. They are backed pockets, not exposed holes into the electronics.",
+    "body_mm": [
+      54.0,
+      58.0,
+      24.7
+    ],
+    "with_bail_length_mm": 62.5,
+    "clip_thickness_mm": 36.7,
+    "outer_volume_mm3": 57361.9,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7548
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6164
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2712
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5578
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3598
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 338
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        24.374590890074952,
+        8.871625556403421
+      ],
+      [
+        -24.453827097731644,
+        17.12275407190856
+      ],
+      [
+        4.766186085211613,
+        -27.030384493975586
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/56ed82d816d189900bc420e4f9267822.jpg",
+    "reference_analysis": "An elongated silver-coloured tapered pendant on a fine curved cable. Its upper outline rises to an off-centre pentagonal peak, its long sides narrow towards a blunt lower tip, and seven dark angular windows descend through the centre, ending in a small terminal window. Broad pale metal-looking margins and oblique bridges separate the irregular openings. No wording, brand or logo is copied. Dimensions, alloy and backing material cannot be established from the photograph.",
+    "interpretation": "A tapered whole-body wedge with an off-centre upper peak, slanted sidewalls and a truncated lower end. Seven descending recesses preserve the reference's broken-window rhythm. Fixed microphones, SD board and side motor require a broader, shorter proportion than the jewel: 54 by 58 mm, bottom width31 mm and inclined roof approximately21.5 to24.7 mm. Windows shift around the real status guide and acoustic ports. They are backed pockets, not exposed holes into the electronics.",
+    "finish_notes": "Silver-grey body and graphite pocket floors preview optional nonconductive finishes. Seven polygonal recesses are0.65 mm deep vertically and follow the inclined roof. The cavity ceiling sits2.2 mm below the roof before recessing, leaving approximately1.55 mm backing. The small terminal window and bridges need print-preview/physical validation. The reduced taper and truncated tip are hardware compromises. No physical print, material, strength, RF or acoustic validation is claimed."
+  },
+  {
+    "id": 6,
+    "name": "Interlocked Hex Shield",
+    "family": "Jewelry inspired",
+    "description": "The entire recorder becomes a pointed hexagonal shield, 53 by 58 mm before its rear necklace eye, rather than a rectangular case with a hexagon painted on it. Six broad border rails are defined by real recessed hexagonal and staggered joint channels across a low bevelled roof. A blind elongated recess below the centered LED recalls the original opening without exposing the battery or interrupting the LED and acoustic openings. The body remains full-depth at the perimeter until the upper shoulder, allowing the retained round carriers and vertically removable shell to fit. The reference's much thinner metal plate and separate bail are not reproduced literally.",
+    "body_mm": [
+      53.0,
+      58.0,
+      23.0
+    ],
+    "with_bail_length_mm": 64.2,
+    "clip_thickness_mm": 35.0,
+    "outer_volume_mm3": 52169.4,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7542
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6172
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2968
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5846
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3638
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        24.620614758428186,
+        8.961170921403026
+      ],
+      [
+        -21.61047464779729,
+        15.131817252677477
+      ],
+      [
+        4.316243979323913,
+        -24.478636008974156
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/6d9a380c5fd0cc06b5e14853b7e7ce06.jpg",
+    "reference_analysis": "Dark metal-looking hexagonal pendant on a ball chain, with a substantial central hexagonal plate, six overlapping-looking border strips, strong diagonal joints and a narrow elongated central opening. The photograph shows a tapered separate bail and a scratched satin surface; it does not establish dimensions, alloy or construction.",
+    "interpretation": "The entire recorder becomes a pointed hexagonal shield, 53 by 58 mm before its rear necklace eye, rather than a rectangular case with a hexagon painted on it. Six broad border rails are defined by real recessed hexagonal and staggered joint channels across a low bevelled roof. A blind elongated recess below the centered LED recalls the original opening without exposing the battery or interrupting the LED and acoustic openings. The body remains full-depth at the perimeter until the upper shoulder, allowing the retained round carriers and vertically removable shell to fit. The reference's much thinner metal plate and separate bail are not reproduced literally.",
+    "finish_notes": "Charcoal and darker channel floors are optional nonconductive finish previews, not a metal specification. Border channels are 1.0 mm wide and 0.4 mm deep; the blind central slot is 2.4 mm wide and 0.65 mm deep. The roof cavity ceiling is capped at 20.8 mm, leaving at least 1.55 mm backing beneath the deepest recess. No through-opening, chain or decorative bail is modeled. Hardware dimensions require the wider closed-back shield. Physical fit, print strength, finish wear, acoustics, thermal behavior and RF remain untested."
+  },
+  {
+    "id": 7,
+    "name": "Obsidian Cut",
+    "family": "Jewelry inspired",
+    "description": "An asymmetric eight-sided stone-like whole-body enclosure with five genuinely intersecting sloping roof planes and a corner-offset necklace eye. Its 52 by 56 mm footprint is deliberately neither a regular hexagon nor a rounded box. A broad slightly inclined crown meets smaller steep bevel facets around the perimeter; their unequal intersections recreate the reference's unequal cuts. Five physical diagonal scores occupy only the right-hand cut face. The unadorned large planes carry the design, not a face graphic. Retained hardware prevents reproducing the narrow solid pendants literally; the back stays flat and the concealed cavity remains closed.",
+    "body_mm": [
+      52.0,
+      56.0,
+      24.79
+    ],
+    "with_bail_length_mm": 59.0,
+    "clip_thickness_mm": 36.79,
+    "outer_volume_mm3": 54568.4,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7554
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6354
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2968
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5846
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3638
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 338
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.373172182709215,
+        8.507138954884956
+      ],
+      [
+        -20.83987812257236,
+        14.592239756796774
+      ],
+      [
+        4.198272919694571,
+        -23.809588883257238
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/7c09d5b671c04f452752a3dc13f62d4c.jpg",
+    "reference_analysis": "Four dark, irregularly faceted pendants on fine cords. Each has a different angular outline and several large flat cut faces rather than a smooth cabochon dome. Some planes show directional grain and one plane on each pendant has close parallel scores. The image looks wood-like, but neither species, material, scale nor surface treatment can be established from the photograph.",
+    "interpretation": "An asymmetric eight-sided stone-like whole-body enclosure with five genuinely intersecting sloping roof planes and a corner-offset necklace eye. Its 52 by 56 mm footprint is deliberately neither a regular hexagon nor a rounded box. A broad slightly inclined crown meets smaller steep bevel facets around the perimeter; their unequal intersections recreate the reference's unequal cuts. Five physical diagonal scores occupy only the right-hand cut face. The unadorned large planes carry the design, not a face graphic. Retained hardware prevents reproducing the narrow solid pendants literally; the back stays flat and the concealed cavity remains closed.",
+    "finish_notes": "Deep warm charcoal body with darker recessed scores is a nonconductive finish suggestion, not a specification for wood, stone or metal. Scores are 1.0 mm wide and 0.35 mm deep, with all cavity roof planes thickened to a 1.8 mm normal offset before engraving. No procedural grain, cord, conductive coating or separate decorative insert is modeled. The lowest outer roof vertex is 20.64 mm and the actual crown is below 25 mm; CAD integration must confirm the retained stack, closures and acoustic openings. No physical fit, print strength, RF, thermal or finish validation has occurred."
+  },
+  {
+    "id": 8,
+    "name": "Paired Silver Folds",
+    "family": "Jewelry inspired",
+    "description": "The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.",
+    "body_mm": [
+      56.0,
+      50.0,
+      24.82
+    ],
+    "with_bail_length_mm": 56.0,
+    "clip_thickness_mm": 36.82,
+    "outer_volume_mm3": 58673.8,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7534
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6104
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2824
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5706
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3662
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 338
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        25.621288080683875,
+        9.325386224928367
+      ],
+      [
+        -24.682192962891985,
+        17.28265757216361
+      ],
+      [
+        4.060878162377755,
+        -23.030384493975582
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+    "reference_analysis": "Two silver-coloured asymmetric geometric pieces are shown one above the other. The smaller upper pendant is attached to a fine chain; the larger lower piece is separately positioned. Both have broad triangular or quadrilateral sloping planes, clean sharp ridges, narrow perimeter bevels and a brushed-looking finish. The photograph does not establish that the two objects form one linked pendant, their dimensions, or their actual metal.",
+    "interpretation": "The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.",
+    "finish_notes": "Silver-grey and pale silver surface colours are optional nonconductive finish previews, not metal construction or conductive paint instructions. The two raised folds are fused physical shell geometry. They do not move and are not separately printed decorative appliques. The recessed valley has a 21.4 mm outer floor with the cavity capped at 19.8 mm, providing 1.6 mm structural backing; actual ridges remain below 25.5 mm. A closed rear and thicker edge are necessary for the battery and retained electronics, unlike the original solid jewelry. No physical fit, strength, RF, thermal, acoustic or finish testing is claimed."
+  },
+  {
+    "id": 9,
+    "name": "Nested Lariat Frames",
+    "family": "Jewelry inspired",
+    "description": "A single elongated, subtly sheared parallelogram recorder body carries three physically raised nested rectangular frame rims, progressively taller and slightly offset. The overall body is 53.03 by 58 mm before its eye, with a flat rear and a low bevel leading to the frame terraces. The open-frame jewellery is deliberately reinterpreted as a closed dark recessed field under a silver-coloured stepped frame structure: an actual through-hole would intersect the battery and stacked electronics. Three strong 1.3 mm-wide rails replace the finer numerous wires. The deepest central field stays low while the frame structure rises to 24 mm, creating a recessed rather than domed whole-body section. The two dangling open assemblies and their long connector are not modeled as two bulky recorder cases.",
+    "body_mm": [
+      53.03,
+      58.0,
+      24.0
+    ],
+    "with_bail_length_mm": 64.2,
+    "clip_thickness_mm": 36.0,
+    "outer_volume_mm3": 64297.1,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7530
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6012
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2796
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5678
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.949649755585668,
+        8.71695963213401
+      ],
+      [
+        -23.251709774758186,
+        16.28102246055007
+      ],
+      [
+        4.766186085211613,
+        -27.030384493975586
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/9b9a66d47413a4e030a6195f5246a811.jpg",
+    "reference_analysis": "A worn long lariat-style necklace has an angled upper assembly of nested open rectangular silver-coloured wire frames, with a long fine connector descending to a second vertically oriented assembly of overlapping rectangular frames. The repeated parallel outlines and large open centres dominate; the photo does not establish scale, alloy or how the individual frames are joined.",
+    "interpretation": "A single elongated, subtly sheared parallelogram recorder body carries three physically raised nested rectangular frame rims, progressively taller and slightly offset. The overall body is 53.03 by 58 mm before its eye, with a flat rear and a low bevel leading to the frame terraces. The open-frame jewellery is deliberately reinterpreted as a closed dark recessed field under a silver-coloured stepped frame structure: an actual through-hole would intersect the battery and stacked electronics. Three strong 1.3 mm-wide rails replace the finer numerous wires. The deepest central field stays low while the frame structure rises to 24 mm, creating a recessed rather than domed whole-body section. The two dangling open assemblies and their long connector are not modeled as two bulky recorder cases.",
+    "finish_notes": "Silver-grey rails and dark opaque well floors are optional nonconductive paint previews, not actual silver wire, transparent voids or a metal enclosure. Raised frames are fused shell geometry, not floating or separately glued wire. Rail heights above the 21.6 mm field are 0.8, 1.6 and 2.4 mm. The cavity ceiling is capped at 19.9 mm for 1.7 mm roof backing. The installed hardware forces a substantially wider proportion than the very slender open rectangles in the photograph; no claim of photo scale is made. Do not coat acoustic holes or the light guide. Physical fit, printing, strength, snagging, RF, thermal behavior, acoustics and wear remain untested."
+  },
+  {
+    "id": 10,
+    "name": "Interlocked Pixel Shard",
+    "family": "Jewelry inspired",
+    "description": "A compact elongated eight-sided backing body carries three genuinely raised, interlocking rectilinear terraces and four blocks running down the sides. The staggered 22.0, 22.5 and 23.4 mm roof levels, dark valleys and stepped side skyline reinterpret the overlapping pixel shards in three dimensions. The closed 50 by 57 mm core contains the retained square-source electronics; side blocks increase maximum width to 52 mm. The source's extreme narrowness and perforated plate assembly cannot contain this battery and microphone pair, so they become a closed-backed broad shard with a flat removable rear rather than fictitious through-holes. A centered clear LED is retained between the terraces.",
+    "body_mm": [
+      52.0,
+      57.0,
+      23.4
+    ],
+    "with_bail_length_mm": 63.2,
+    "clip_thickness_mm": 35.4,
+    "outer_volume_mm3": 56718.7,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7546
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6256
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2796
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5678
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.120614758428182,
+        8.41521557000372
+      ],
+      [
+        -22.542131455613543,
+        15.784170372534815
+      ],
+      [
+        4.67802259485738,
+        -26.530384493975582
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/9bfeeddf831a89a41d804e2d24acaad8.jpg",
+    "reference_analysis": "The pendant is an elongated, irregular pointed assembly of overlapping orthogonal metal-like plates. Bright brushed-looking rectangles alternate with dark recessed areas; the edges are stair-stepped, and a rectangular upper bail joins a square-link chain. It is not a smooth gemstone or a simple rectangular dog tag. The image supplies no measured dimensions or certified material.",
+    "interpretation": "A compact elongated eight-sided backing body carries three genuinely raised, interlocking rectilinear terraces and four blocks running down the sides. The staggered 22.0, 22.5 and 23.4 mm roof levels, dark valleys and stepped side skyline reinterpret the overlapping pixel shards in three dimensions. The closed 50 by 57 mm core contains the retained square-source electronics; side blocks increase maximum width to 52 mm. The source's extreme narrowness and perforated plate assembly cannot contain this battery and microphone pair, so they become a closed-backed broad shard with a flat removable rear rather than fictitious through-holes. A centered clear LED is retained between the terraces.",
+    "finish_notes": "Dark charcoal backing and lighter silver-grey terrace tops are optional nonconductive surface finishes, not a metal enclosure specification. Rectilinear relief is actual fused geometry, with broad 4 mm or wider features and continuous structural backing; side blocks start above the lower closure zone. Core roof height is 21.6 mm and highest relief is 23.4 mm. Standard necklace eye substitutes for the photo's long rectangular bail. No brand text is reproduced. Source proportions are necessarily broadened for hardware; physical fit, printability, finish wear, RF and acoustics remain untested."
+  },
+  {
+    "id": 11,
+    "name": "Dissolving Silver Square",
+    "family": "Jewelry inspired",
+    "description": "A deliberately planar 49.4 mm square recorder enclosure, with a narrow one-millimetre shoulder bevel rather than a rounded cabochon. Three 5 mm blind square recesses preserve the reference's corner-only negative-space rhythm while a physically connected, side-deep cluster of square blocks dissolves the upper-right silhouette. The full decorated envelope is 54.2 by 53.7 by 22 mm; the main body roof is 21.3 mm. The uninterrupted central face and asymmetric corner contrast are retained. Real through-holes in the broad plate would expose electronics, so the photographed voids become clearly documented backed recesses, not fictitious holes through the battery.",
+    "body_mm": [
+      54.2,
+      53.7,
+      22.0
+    ],
+    "with_bail_length_mm": 55.6,
+    "clip_thickness_mm": 34.0,
+    "outer_volume_mm3": 52220.5,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7530
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6032
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2872
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5754
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        22.82061475842818,
+        8.30602449972386
+      ],
+      [
+        -23.061695911422014,
+        16.147973321077732
+      ],
+      [
+        4.007980068165216,
+        -22.730384493975585
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/9c39175e20591a7e7df1aa1b3c615cc0.jpg",
+    "reference_analysis": "The photograph shows a large thin silver-coloured square pendant, with a quiet brushed-looking flat face, three square openings near its upper-right corner and small square elements extending beyond that corner toward the necklace. A matching square earring repeats the removed-pixel motif. Perspective makes the pendant look slightly skewed; the image does not establish thickness, dimensions or material certification.",
+    "interpretation": "A deliberately planar 49.4 mm square recorder enclosure, with a narrow one-millimetre shoulder bevel rather than a rounded cabochon. Three 5 mm blind square recesses preserve the reference's corner-only negative-space rhythm while a physically connected, side-deep cluster of square blocks dissolves the upper-right silhouette. The full decorated envelope is 54.2 by 53.7 by 22 mm; the main body roof is 21.3 mm. The uninterrupted central face and asymmetric corner contrast are retained. Real through-holes in the broad plate would expose electronics, so the photographed voids become clearly documented backed recesses, not fictitious holes through the battery.",
+    "finish_notes": "Silver-grey surfaces preview a brushed-looking nonconductive coating; recessed square floors use a muted warm dark tone to evoke the visible background in the source. This does not specify solid metal or an actually brushed manufacturing process. Recesses are physical 0.6 mm cuts with 1.5 mm backing; their 5 mm width is intentionally printable. Corner pixels extend down to z8, overlap by at least 1.5 mm and remain attached to the main sidewall. Main-body thickness is imposed by retained hardware rather than the source's sheet-jewelry proportions. Optional coating, corner snag resistance, physical fit, RF and acoustics require testing."
+  },
+  {
+    "id": 12,
+    "name": "Teal Oblique Frame",
+    "family": "Jewelry inspired",
+    "description": "The entire recorder body is an asymmetric six-sided wedge, 52.4 by 58 mm, with a long lower-left tip, a diagonal lower edge and a narrower upper end. The right flank is broadened locally to leave room for the retained motor and its seat, and the lower-right shoulder extends downward to preserve clearance around the SD-board corner. Five connected raised 2 mm frame segments follow the converging sides and top, but intentionally leave the diagonal lower edge unframed. The teal core has a distinct bevel beneath the frame, rather than a rectangular enclosure carrying a triangle graphic. A real 0.6 mm-deep triangular recess above the central face recalls the open space without exposing the internal microphone/amp region; its lower corners are set inward and above the microphone vents. Hardware requires a broader truncated upper end than the source's needle-like apex; the flat rear and standard necklace eye replace its thin open-backed jewelry construction.",
+    "body_mm": [
+      52.4,
+      58.0,
+      23.1
+    ],
+    "with_bail_length_mm": 63.34,
+    "clip_thickness_mm": 35.1,
+    "outer_volume_mm3": 53470.2,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7538
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6002
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2888
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5770
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3678
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        22.422777389270156,
+        8.161223539271564
+      ],
+      [
+        -20.16906454844801,
+        14.122531035461508
+      ],
+      [
+        -4.1394931500950214e-15,
+        -22.534351145038162
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/9f31eb6644936dd61ee05e769126de76.jpg",
+    "reference_analysis": "The reference is an elongated tapered pendant with two pale gold-coloured rails converging near its top. A blue-green stone-like insert with dark natural-looking patterning occupies the lower region; its bottom edge is strongly diagonal, with the left tip extending farther downward. An open triangular space remains above the insert, and a long narrow bail hangs from a fine chain. The image does not identify the stone, metal alloy or measured dimensions.",
+    "interpretation": "The entire recorder body is an asymmetric six-sided wedge, 52.4 by 58 mm, with a long lower-left tip, a diagonal lower edge and a narrower upper end. The right flank is broadened locally to leave room for the retained motor and its seat, and the lower-right shoulder extends downward to preserve clearance around the SD-board corner. Five connected raised 2 mm frame segments follow the converging sides and top, but intentionally leave the diagonal lower edge unframed. The teal core has a distinct bevel beneath the frame, rather than a rectangular enclosure carrying a triangle graphic. A real 0.6 mm-deep triangular recess above the central face recalls the open space without exposing the internal microphone/amp region; its lower corners are set inward and above the microphone vents. Hardware requires a broader truncated upper end than the source's needle-like apex; the flat rear and standard necklace eye replace its thin open-backed jewelry construction.",
+    "finish_notes": "The teal body and pale gold-coloured physical rail tops are optional nonconductive finishes, not specified gemstone or metal. No fake mineral texture or unsupported stone identification is added. The core roof is 22.3 mm and the raised frame reaches 23.1 mm; the triangular floor is 21.7 mm with at least 1.6 mm structural backing. The lower-left point is deliberately blunted by the finite six-sided envelope, not a knife-edge. Actual dimensions include retained hardware and depart substantially from the very slender photo. No physical fit, point impact, print strength, coating wear, RF or acoustic testing has been performed."
+  },
+  {
+    "id": 13,
+    "name": "Split Spindle Cabochon",
+    "family": "Jewelry inspired",
+    "description": "An oblique eight-sided spindle envelope, 51 by 58 mm, gives the entire enclosure unequal upper and lower pointed shoulders rather than applying a shield graphic to a box. A real oval bezel rises from the 21.5 mm backing shell to 22.2 mm, enclosing a solid domed 30.8 by 41.2 mm crown that reaches approximately 24.8 mm. Two physical 2.8 mm-wide longitudinal roof slots split the exposed ends visually. Their floors deliberately remain closed, because a through-slot toward the centre would compromise the electronics compartment. The central LED pierces the domed crown; it is not represented as a precious stone. An offset upper-right standard necklace eye replaces the source's two separate chain attachments.",
+    "body_mm": [
+      51.0,
+      58.0,
+      24.8
+    ],
+    "with_bail_length_mm": 61.5,
+    "clip_thickness_mm": 36.8,
+    "outer_volume_mm3": 51185.3,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7550
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 7992
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2572
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5454
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3450
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 462
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.620614758428182,
+        8.597200687136821
+      ],
+      [
+        -20.529224250227777,
+        14.374717573607061
+      ],
+      [
+        4.472670382706284,
+        -25.36577422658479
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/a02d3e13fc96881686eeb7dcb139ae1a.jpg",
+    "reference_analysis": "A dark silver-coloured elongated angular shield surrounds a transparent-to-smoky oval domed cabochon in a bright oval bezel. Narrow longitudinal slots separate unequal pointed upper and lower ends. Two chain connections attach at the upper shoulders; the metal-like backing has a visibly worn or brushed surface. Reflections and inclusions appear inside the stone-like centre, but its identity and the actual materials and dimensions cannot be established from the image.",
+    "interpretation": "An oblique eight-sided spindle envelope, 51 by 58 mm, gives the entire enclosure unequal upper and lower pointed shoulders rather than applying a shield graphic to a box. A real oval bezel rises from the 21.5 mm backing shell to 22.2 mm, enclosing a solid domed 30.8 by 41.2 mm crown that reaches approximately 24.8 mm. Two physical 2.8 mm-wide longitudinal roof slots split the exposed ends visually. Their floors deliberately remain closed, because a through-slot toward the centre would compromise the electronics compartment. The central LED pierces the domed crown; it is not represented as a precious stone. An offset upper-right standard necklace eye replaces the source's two separate chain attachments.",
+    "finish_notes": "A charcoal-silver shield, brighter bezel and near-black dome are optional nonconductive finishes on a single continuous printed enclosure, not a specified metal casting or transparent gemstone. The actual domed crown is modeled by 64-sided oval sections, not by painted shading. A clear gloss coating could evoke the reference but is unmodeled. Slot floors at z20.6 retain 1.4 mm backing over the clipped cavity ceiling at19.2. The core must be much broader and thicker than the source's open sheet-metal jewelry to hold the retained battery, boards and microphones. Point impact, snagging, print strength, physical fit, RF and acoustic behavior are untested."
+  },
+  {
+    "id": 14,
+    "name": "Overlapping Delta",
+    "family": "Jewelry inspired",
+    "description": "A broad clipped-delta whole-body enclosure tapers toward its lower point, rather than placing triangles on a square box. Its front is built as two physically overlapping triangular levels: a larger low open-outline relief and a smaller raised solid triangular roof with a recessed inset. The complete recorder occupies the closed backing below both triangles. A literal open lower triangle or narrow equilateral body cannot contain the battery, motor and two-level electronics at wearable dimensions, so the delta is truncated and broadened to a 57 x 54 mm nominal footprint. The raised triangle increases the front depth locally to 24 mm and the rear remains flat.",
+    "body_mm": [
+      57.0,
+      54.0,
+      24.0
+    ],
+    "with_bail_length_mm": 60.2,
+    "clip_thickness_mm": 36.0,
+    "outer_volume_mm3": 54347.0,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7542
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6044
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2644
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5526
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3526
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        26.08497575390268,
+        9.494154735976165
+      ],
+      [
+        -24.37906248187278,
+        17.070403324292826
+      ],
+      [
+        4.398783301557303,
+        -24.94673976655995
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/b23e306959d4e07d05c3da41e0515e32.jpg",
+    "reference_analysis": "Two overlapping downward-pointing triangular pendants: the lower/larger triangle is an open silver-coloured outline, while the upper triangle has a dark stone-like inset with a fine pale vein and a bright surrounding rim. A small bail joins the upper triangle to a bright chain; a separate dark chain is also visible. The photograph does not certify stone, metal, size or finish.",
+    "interpretation": "A broad clipped-delta whole-body enclosure tapers toward its lower point, rather than placing triangles on a square box. Its front is built as two physically overlapping triangular levels: a larger low open-outline relief and a smaller raised solid triangular roof with a recessed inset. The complete recorder occupies the closed backing below both triangles. A literal open lower triangle or narrow equilateral body cannot contain the battery, motor and two-level electronics at wearable dimensions, so the delta is truncated and broadened to a 57 x 54 mm nominal footprint. The raised triangle increases the front depth locally to 24 mm and the rear remains flat.",
+    "finish_notes": "Charcoal body/inset and pale silver-coloured raised rims represent optional nonconductive paint, not specified stone or metal construction. The larger frame is 1.45 mm wide; the smaller inset is recessed 0.4 mm into a physical 2.2 mm-high roof addition. No fake stone vein or unsupported wire-thin edges are modeled. The inset is integral shell material. The lower-right flank is broadened locally to clear the retained motor seat without increasing the overall 57 mm width. See verification.json for completed CAD checks; physical fit, acoustic response, RF, coating compatibility and strength remain untested."
+  },
+  {
+    "id": 15,
+    "name": "Nested Aperture",
+    "family": "Jewelry inspired",
+    "description": "The entire 49.6 mm square recorder becomes a broad, softly shouldered architectural frame: its central 28 x 26 mm clipped-corner square well sits 2.4 mm below the perimeter roof. An integral smaller raised square ring grows out of the right wall of that well and is offset downward to preserve the centered LED and speaker grille. Unlike a painted nested-square graphic, these are three distinct physical roof elevations. Both photographed through-holes become blind recesses with solid backing because the recorder battery and boards occupy the center. Small planar corner clips reinterpret the photographed rounded openings without curved Boolean pocket corners. The flat rear and unobstructed standard attachment eye replace the thin photographed sheet and folded bail.",
+    "body_mm": [
+      49.6,
+      49.6,
+      23.4
+    ],
+    "with_bail_length_mm": 55.8,
+    "clip_thickness_mm": 35.4,
+    "outer_volume_mm3": 55155.5,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7562
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6340
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2864
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5746
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        22.920614758428187,
+        8.342421523150481
+      ],
+      [
+        -23.16169591142202,
+        16.217994074898705
+      ],
+      [
+        4.025612766236061,
+        -22.830384493975583
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/cd147728b5232f9c6ee08ba3761f5fe8.jpg",
+    "reference_analysis": "A broad brushed silver-coloured square pendant with gently softened corners and a large rounded-square opening. A smaller hollow square sits offset toward the opening's right side, creating an asymmetric nested-frame composition. The top bail is a broad folded strip on a snake-like chain. No measured dimensions, metal grade or construction method can be established from the photo.",
+    "interpretation": "The entire 49.6 mm square recorder becomes a broad, softly shouldered architectural frame: its central 28 x 26 mm clipped-corner square well sits 2.4 mm below the perimeter roof. An integral smaller raised square ring grows out of the right wall of that well and is offset downward to preserve the centered LED and speaker grille. Unlike a painted nested-square graphic, these are three distinct physical roof elevations. Both photographed through-holes become blind recesses with solid backing because the recorder battery and boards occupy the center. Small planar corner clips reinterpret the photographed rounded openings without curved Boolean pocket corners. The flat rear and unobstructed standard attachment eye replace the thin photographed sheet and folded bail.",
+    "finish_notes": "Pale silver-grey previews optional nonconductive satin paint; the darker recessed floor is a tonal finish, not a transparent void. The well retains 1.5 mm of roof over a locally lowered 19.5 mm cavity ceiling, above the 18.7 mm hardware stack. The small ring has 1.5 mm axial walls, about 1.34 mm minimum across clipped corners, and rises 1.6 mm above the well. Brushed texture is not modeled as fragile microgrooves. No actual metal shell, removable inset or certified coating is specified. Straight pocket boundaries avoid the curved-corner tessellation failure mode. See verification.json for completed CAD checks; physical print, acoustic, RF and durability validation remains outstanding."
+  },
+  {
+    "id": 16,
+    "name": "Octagonal Signet",
+    "family": "Jewelry inspired",
+    "description": "A true regular-octagonal whole-body signet with eight continuous side panels, a broad single-facet shoulder and a second raised octagonal roof island. The body is 49.8 mm across flats and peaks at 23.4 mm. The round hardware source preserves the retained carrier arrangement within the octagon's 23.5 mm nominal base cavity apothem. The dark roof is an integral shell volume, not a cosmetic sticker or a separate fake gemstone. The apparent sheet-like source depth is expanded to enclose the retained two-level hardware. A standard rear-connected necklace eye replaces the photograph's oversized thick metal bail for compactness and shell withdrawal.",
+    "body_mm": [
+      49.8,
+      49.8,
+      23.4
+    ],
+    "with_bail_length_mm": 56.0,
+    "clip_thickness_mm": 35.4,
+    "outer_volume_mm3": 46793.3,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7554
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6058
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2896
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5778
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3590
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.02061475842818,
+        8.378818546577099
+      ],
+      [
+        -19.073824406676614,
+        13.355635632043304
+      ],
+      [
+        4.043245464306907,
+        -22.93038449397558
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/d5654c9e8d9ed1e136a89babfad47192.jpg",
+    "reference_analysis": "A compact eight-sided pendant with a broad bright beveled perimeter, brushed-looking vertical sides and a nearly black flat octagonal center with its own narrow sloping edge. A large rounded bail projects above one side. The photo strongly distinguishes the silver-coloured structural border from the dark inset but does not establish actual metal, stone, scale or assembly method.",
+    "interpretation": "A true regular-octagonal whole-body signet with eight continuous side panels, a broad single-facet shoulder and a second raised octagonal roof island. The body is 49.8 mm across flats and peaks at 23.4 mm. The round hardware source preserves the retained carrier arrangement within the octagon's 23.5 mm nominal base cavity apothem. The dark roof is an integral shell volume, not a cosmetic sticker or a separate fake gemstone. The apparent sheet-like source depth is expanded to enclose the retained two-level hardware. A standard rear-connected necklace eye replaces the photograph's oversized thick metal bail for compactness and shell withdrawal.",
+    "finish_notes": "Light satin grey perimeter and near-black raised octagon preview optional nonconductive finishing. Eight real sloping roof facets form the inset edge; the broad bright border is also physical sloped geometry. No engraved microtexture, conductive coating, actual gemstone or hardness claim is implied. The main roof follows the nominal 1.4 mm lofted shell and the integral octagonal island adds roof thickness. See verification.json for completed CAD checks; no physical fit, RF, thermal, acoustic, coating or fatigue validation has been performed."
+  },
+  {
+    "id": 17,
+    "name": "Triangular Truss",
+    "family": "Jewelry inspired",
+    "description": "An elongated, broadened triangular whole-body chassis, 57 x 58 mm, with an inclined structural roof rising from about 21 mm at the nose to 24.175 mm at the upper edge. Four sloping side pockets leave broad transverse ribs around an integral raised triangular center. The center has a three-facet crown terminating in a small triangular table at 25.2 mm, preserving the image's stacked dark triangular mass and load-bearing frame rather than merely engraving a triangle on a box. Open chassis windows become backed pockets, and the original 31 mm annotated span must be enlarged for the unchanged battery, motor and board stack. The nose is shortened but remains pointed in plan; the side contour is broadened around the electronics rather than preserving the photograph's narrow triangle. A standard rear-connected eye replaces routing a chain through the roof pockets.",
+    "body_mm": [
+      57.0,
+      58.0,
+      25.2
+    ],
+    "with_bail_length_mm": 64.2,
+    "clip_thickness_mm": 37.2,
+    "outer_volume_mm3": 58929.1,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7550
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 10322
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2652
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5534
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3538
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 364
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        26.227098830414068,
+        9.54588330542865
+      ],
+      [
+        -24.98386474117214,
+        17.493890425380506
+      ],
+      [
+        4.914785775430849,
+        -27.87313521551676
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0,
+    "source_image": "/Users/bot/Desktop/jewelry/edc0c28a2098f856f647e175e734bd87.jpg",
+    "reference_analysis": "A downward-pointing triangular pendant whose glossy dark central triangle sits above a larger silver-coloured open triangular chassis. Broad transverse bridges divide the visible side openings, and the lower apex is an elongated structural point. The chain appears to pass behind the top-side openings rather than through a conventional top bail. An image annotation reads 31 mm across the upper span; that label is not an independently verified measurement. Materials and construction cannot be certified from the photo.",
+    "interpretation": "An elongated, broadened triangular whole-body chassis, 57 x 58 mm, with an inclined structural roof rising from about 21 mm at the nose to 24.175 mm at the upper edge. Four sloping side pockets leave broad transverse ribs around an integral raised triangular center. The center has a three-facet crown terminating in a small triangular table at 25.2 mm, preserving the image's stacked dark triangular mass and load-bearing frame rather than merely engraving a triangle on a box. Open chassis windows become backed pockets, and the original 31 mm annotated span must be enlarged for the unchanged battery, motor and board stack. The nose is shortened but remains pointed in plan; the side contour is broadened around the electronics rather than preserving the photograph's narrow triangle. A standard rear-connected eye replaces routing a chain through the roof pockets.",
+    "finish_notes": "Silver-grey chassis, darker backed pocket floors and a dark faceted center preview nonconductive finishing only. Four physical 0.9 mm-deep recesses have locally thickened backing retaining 1.5 mm nominal vertical roof below each floor. Broad 4 mm transverse ribs and a continuously supported triangular center replace suspended jewelry struts. The right lower flank is broadened locally to clear the retained motor seat, keeping the overall 57 mm width. The 25.2 mm peak preserves the layered crown; the surrounding inclined chassis is lower. No actual gemstone, metal or transparent opening is specified. See verification.json for completed CAD checks; physical strength, fatigue, acoustic, RF, coating and pointed-nose wear comfort remain untested."
+  }
+]

@@ -1,0 +1,82 @@
+{
+  "id": "03",
+  "name": "Triangular Sail Crown",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/1a896e764638f970b01752269ed225fa.jpg",
+  "reference_analysis": "A very thin dark triangular plate worn on a fine dark chain. The triangle has a nearly vertical right edge, an oblique upper edge and a long descending diagonal. A second chain run reaches the lower point, giving an asymmetric suspended-sail composition. No measured size, metal specification or functional mechanism can be inferred from the photo.",
+  "interpretation": "A genuine triangular crown is lofted into the entire upper body, above a compact asymmetric twelve-sided hardware-covering lower volume. This is not a triangular badge on a flat box: the broad diagonal shoulder is the enclosure wall and roof. A thin pure triangle would require a much larger footprint to contain the fixed electronics, so the lower body fills out the cut-away corner. The retained arrangement requires 54 by 55 mm at the base, with a 20.6 mm shoulder and 24 mm crown. The 46 by 46 mm right-triangle crown and off-corner necklace eye preserve the sail direction. A second dangling chain is deliberately not represented as enclosure hardware.",
+  "finish_notes": "Matte graphite-grey optional nonconductive finish. The upper triangular face and broad inclined transition are actual solid geometry. A flat 19.2 mm cavity ceiling keeps the very steep triangular transition from thinning the roof or cutting retained hardware; this makes the diagonal shoulder more substantial than the photographed plate. The centered status light remains in the triangular crown near its diagonal. No metallic construction, printability, strength, acoustic or RF performance is certified.",
+  "footprint": [
+    [
+      -27,
+      10
+    ],
+    [
+      -26,
+      -7
+    ],
+    [
+      -20,
+      -18
+    ],
+    [
+      -10,
+      -26
+    ],
+    [
+      8,
+      -29
+    ],
+    [
+      23,
+      -27
+    ],
+    [
+      26,
+      -18
+    ],
+    [
+      27,
+      8
+    ],
+    [
+      23,
+      20
+    ],
+    [
+      14,
+      26
+    ],
+    [
+      -13,
+      26
+    ],
+    [
+      -23,
+      21
+    ]
+  ],
+  "kind": "profile_loft",
+  "shoulder": 20.6,
+  "top": 24.0,
+  "top_scale": 0.94,
+  "roof_steps": 1,
+  "custom_module": "geometry.py",
+  "eye_x": -17,
+  "eye_y": 25.7,
+  "color": [
+    0.19,
+    0.205,
+    0.215
+  ],
+  "accent_color": [
+    0.25,
+    0.265,
+    0.275
+  ],
+  "view_angle": 28,
+  "reference_provenance": {
+    "original_filename": "1a896e764638f970b01752269ed225fa.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

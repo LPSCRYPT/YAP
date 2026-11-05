@@ -1,0 +1,49 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, json
+OUT=output_dir('early-recorder-studies')
+d=new_document('Circular_Size_Comparison')
+d.Label='Circular cases — 300 / 500 / 1000 mAh'
+checks=[]
+for cap,diam,x in [(300,44,-66),(500,54,0),(1000,68,78)]:
+    source=document('Recorder_Circular_%dmAh'%cap)
+    group=d.addObject('App::Part','Case_%dmAh'%cap)
+    group.Label='%d mAh — diameter %d mm'%(cap,diam)
+    group.addProperty('App::PropertyString','SourceFile','Reference')
+    group.SourceFile=source.FileName
+    group.addProperty('App::PropertyString','Notes','Reference')
+    group.Notes='Same-scale geometry snapshot; edit the individual parametric document to change dimensions.'
+    for original in [source.Base,source.Lid]+source.ComponentEnvelopes.Group:
+        o=d.addObject('Part::Feature','C%d_%s'%(cap,original.Name))
+        o.Label=original.Label
+        o.Shape=original.Shape.copy()
+        group.addObject(o)
+        o.ViewObject.ShapeColor=original.ViewObject.ShapeColor
+        o.ViewObject.LineColor=(0.2,0.22,0.25)
+        o.ViewObject.Transparency=original.ViewObject.Transparency
+    group.Placement.Base=App.Vector(x,0,0)
+    note=d.addObject('App::Annotation','Label_%d'%cap)
+    note.LabelText=['%d mAh'%cap,'D %d mm / H %g mm'%(diam,float(source.Parameters.get('B2')))]
+    note.Position=App.Vector(x-16,-diam/2-8,0)
+    note.ViewObject.FontSize=14
+    # Confirm solids and battery containment in each source before comparison.
+    assert source.Base.Shape.isValid() and len(source.Base.Shape.Solids)==1
+    assert source.Lid.Shape.isValid() and len(source.Lid.Shape.Solids)==1
+    assert source.Base.Shape.common(source.Lid.Shape).Volume<0.001
+    envelope=Part.makeCylinder(diam/2,float(source.Parameters.get('B2'))+2,App.Vector(0,0,-0.5))
+    outside=[o.Name for o in source.ComponentEnvelopes.Group if o.Shape.cut(envelope).Volume>0.01]
+    assert not outside,outside
+    checks.append({'capacity_mAh':cap,'diameter_mm':diam,'valid_parts':True,'components_inside_envelope':True})
+d.recompute()
+App.setActiveDocument(d.Name)
+Gui.activeDocument().activeView().viewTop()
+Gui.activeDocument().activeView().fitAll()
+d.saveAs(OUT+'/Circular-Three-Size-Comparison.FCStd')
+Gui.activeDocument().activeView().saveImage(OUT+'/Circular-Three-Size-Comparison-Top.png',1600,850,'Current')
+Gui.activeDocument().activeView().viewAxonometric()
+Gui.activeDocument().activeView().fitAll()
+Gui.activeDocument().activeView().saveImage(OUT+'/Circular-Three-Size-Comparison-Isometric.png',1600,1000,'Current')
+# Leave the shared view active with a top view for direct diameter comparison.
+Gui.activeDocument().activeView().viewTop()
+Gui.activeDocument().activeView().fitAll()
+d.save()
+print(json.dumps({'checks':checks,'active_document':App.ActiveDocument.Name,'documents':list(App.listDocuments())}))

@@ -1,0 +1,55 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json
+OUT=output_dir('early-recorder-studies')
+stem=OUT+'/Recorder-Circular-Stacked24'
+source=document('Recorder_Circular_300mAh')
+source.saveCopy(stem+'.FCStd')
+d=App.openDocument(stem+'.FCStd')
+d.Label='Stacked recorder — 25 x 26 x 5 mm battery'
+p=d.Parameters
+for cell,value in [('B1','40'),('B2','18.2'),('B6','25'),('B7','26'),('B8','5'),('B17','0'),('B18','2'),('B19','10'),('B20','11'),('B21','-4')]:p.set(cell,value)
+p.set('A22','BoardHeight');p.set('B22','4.46');p.setAlias('B22','BoardHeight')
+p.set('A23','UpperGap');p.set('B23','0.7');p.setAlias('B23','UpperGap')
+p.set('A24','STACKED VARIANT: battery below XIAO; speaker, motor and button above XIAO.')
+p.set('A25','Battery envelope 25 x 26 x 5 mm. Capacity, chemistry, leads and protection not specified.')
+p.set('A28','Packaging concept only: no finalized mounts, amplifier/motor-driver PCB, wiring or antenna route.')
+p.set('A29','Validate battery chemistry and charging compatibility. Allow insulation and battery expansion.')
+boardz='Parameters.Floor+Parameters.BatteryThickness+Parameters.StackGap'
+upperz=boardz+'+Parameters.BoardHeight+Parameters.UpperGap'
+d.XIAO.setExpression('Placement.Base.y','-Parameters.Diameter/2+2.5')
+for o in [d.SpeakerEnvelope,d.ButtonBody,d.HapticEnvelope]:o.setExpression('Placement.Base.z',upperz)
+d.ButtonActuator.setExpression('Placement.Base.z',upperz+'+3.1')
+d.ButtonActuator.setExpression('Height','Parameters.Height+0.6-('+upperz+'+3.1)')
+d.HapticEnvelope.setExpression('Placement.Base.x',None)
+d.HapticEnvelope.Placement.Base=App.Vector(-10,-7,0)
+d.HapticEnvelope.setExpression('Placement.Base.z',upperz)
+# Move the LED and microphones inward to clear the smaller circular lid lip.
+for o in [d.LEDEnvelope,d.LEDOpening]:
+    v=o.Placement.Base;o.Placement.Base=App.Vector(-11,3,v.z)
+ports=[o for o in d.Objects if o.Name.startswith('MicrophonePort')]
+mics=[o for o in d.ComponentEnvelopes.Group if o.Name.startswith('MicrophoneKeepout')]
+for o,x in zip(ports,[-9,9]):
+    v=o.Placement.Base;o.Placement.Base=App.Vector(x,v.y,v.z)
+for o,x in zip(mics,[-11,7]):
+    v=o.Placement.Base;o.Placement.Base=App.Vector(x,v.y,v.z)
+d.recompute()
+components=d.ComponentEnvelopes.Group
+collisions=[]
+for i,a in enumerate(components):
+    for b in components[i+1:]+[d.Base,d.Lid]:
+        v=a.Shape.common(b.Shape).Volume
+        if v>0.01:collisions.append([a.Name,b.Name,round(v,5)])
+report={'document':d.Name,'case_diameter_mm':float(p.get('B1')),'case_height_mm':float(p.get('B2')),'battery_mm':[float(p.get(cell)) for cell in ['B6','B7','B8']],'interferences_mm3':collisions,'seam_overlap_mm3':d.Base.Shape.common(d.Lid.Shape).Volume}
+print(json.dumps(report))
+assert not collisions,collisions
+for o in [d.Base,d.Lid]:assert o.Shape.isValid() and len(o.Shape.Solids)==1
+assert report['seam_overlap_mm3']<0.001
+envelope=Part.makeCylinder(float(p.get('B1'))/2,float(p.get('B2'))+2,App.Vector(0,0,-0.5))
+assert all(o.Shape.cut(envelope).Volume<0.01 for o in components)
+App.setActiveDocument(d.Name)
+Gui.activeDocument().activeView().viewAxonometric();Gui.activeDocument().activeView().fitAll()
+d.save()
+Part.export([d.Base,d.Lid],stem+'-Case.step')
+Mesh.export([d.Base],stem+'-Base.stl');Mesh.export([d.Lid],stem+'-Lid.stl')
+Gui.activeDocument().activeView().saveImage(stem+'-Transparent.png',1200,1000,'Current')
+with open(stem+'-geometry-report.json','w') as f:json.dump(report,f,indent=2)

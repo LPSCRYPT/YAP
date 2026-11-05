@@ -1,0 +1,80 @@
+{
+  "id": 8,
+  "name": "Paired Silver Folds",
+  "family": "Jewelry inspired",
+  "description": "The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.",
+  "body_mm": [
+    56.0,
+    50.0,
+    24.82
+  ],
+  "with_bail_length_mm": 56.0,
+  "clip_thickness_mm": 36.82,
+  "outer_volume_mm3": 58673.8,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7534
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6104
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2824
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5706
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3662
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 338
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      25.621288080683875,
+      9.325386224928367
+    ],
+    [
+      -24.682192962891985,
+      17.28265757216361
+    ],
+    [
+      4.060878162377755,
+      -23.030384493975582
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+  "reference_analysis": "Two silver-coloured asymmetric geometric pieces are shown one above the other. The smaller upper pendant is attached to a fine chain; the larger lower piece is separately positioned. Both have broad triangular or quadrilateral sloping planes, clean sharp ridges, narrow perimeter bevels and a brushed-looking finish. The photograph does not establish that the two objects form one linked pendant, their dimensions, or their actual metal.",
+  "interpretation": "The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.",
+  "finish_notes": "Silver-grey and pale silver surface colours are optional nonconductive finish previews, not metal construction or conductive paint instructions. The two raised folds are fused physical shell geometry. They do not move and are not separately printed decorative appliques. The recessed valley has a 21.4 mm outer floor with the cavity capped at 19.8 mm, providing 1.6 mm structural backing; actual ridges remain below 25.5 mm. A closed rear and thicker edge are necessary for the battery and retained electronics, unlike the original solid jewelry. No physical fit, strength, RF, thermal, acoustic or finish testing is claimed."
+}

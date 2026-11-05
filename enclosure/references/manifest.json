@@ -1,0 +1,196 @@
+{
+  "assets": [
+    {
+      "original": "Recorder-Enclosures/respeaker_clip_20260724.stp",
+      "path": "references/external-enclosures/respeaker_clip_20260724.stp",
+      "bytes": 28337051,
+      "sha256": "b744ee5800899953b730bc129fa565552c760a5d38660519ed8889164da04c29",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "jewelry/0876cc003f941c7c4312df17ecf063a7.jpg",
+      "path": "references/jewelry/0876cc003f941c7c4312df17ecf063a7.jpg",
+      "bytes": 164948,
+      "sha256": "36c8634be580b7df10fe0c310ee7b45b50a1d0b19aa9b2d238b0565331fcb92d",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/125351dfb4ba5d21ec92843c3574ccac.jpg",
+      "path": "references/jewelry/125351dfb4ba5d21ec92843c3574ccac.jpg",
+      "bytes": 6891,
+      "sha256": "3cec6eb00b9b52113be4974410809e4c3d2969ae280dfb9a598bc8ad01114e04",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/1a896e764638f970b01752269ed225fa.jpg",
+      "path": "references/jewelry/1a896e764638f970b01752269ed225fa.jpg",
+      "bytes": 34384,
+      "sha256": "44c730dac64e73fac689ce175811e785e311f630e25734bd7c91ce1abd5e3d5c",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/52a64e2916f96d82a5b3cb8089e6136f.jpg",
+      "path": "references/jewelry/52a64e2916f96d82a5b3cb8089e6136f.jpg",
+      "bytes": 77405,
+      "sha256": "258cfca3bbc695b93bc349b96ee3bb9492b45d2e31fbbba972a54859305a3895",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/56ed82d816d189900bc420e4f9267822.jpg",
+      "path": "references/jewelry/56ed82d816d189900bc420e4f9267822.jpg",
+      "bytes": 35089,
+      "sha256": "6497f0b4e7552f4c6ad4b9a903e3124bba97c1eb4fdd1756831eab5946fdf7f5",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/6d9a380c5fd0cc06b5e14853b7e7ce06.jpg",
+      "path": "references/jewelry/6d9a380c5fd0cc06b5e14853b7e7ce06.jpg",
+      "bytes": 50826,
+      "sha256": "bf0d093e783b3355a186c2aef7bc52e82f47ce16fe3e31e8ae2fae2a51f4a5b7",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/7c09d5b671c04f452752a3dc13f62d4c.jpg",
+      "path": "references/jewelry/7c09d5b671c04f452752a3dc13f62d4c.jpg",
+      "bytes": 192240,
+      "sha256": "058dfb485b625a17bc67bc5840377a433311779a6b9b4d4f0eb105c3f028ec75",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+      "path": "references/jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+      "bytes": 50855,
+      "sha256": "b2f894d5a0ca6a7a992bbced3c5611454f1d6d742f28a43b2c7b26c7e5813b82",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/9b9a66d47413a4e030a6195f5246a811.jpg",
+      "path": "references/jewelry/9b9a66d47413a4e030a6195f5246a811.jpg",
+      "bytes": 17926,
+      "sha256": "2a321b14eb509a76fb10650558df621c459016340bffcd533a95312d09ad78a8",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/9bfeeddf831a89a41d804e2d24acaad8.jpg",
+      "path": "references/jewelry/9bfeeddf831a89a41d804e2d24acaad8.jpg",
+      "bytes": 44668,
+      "sha256": "64207c6889376aaf5fd5a6756104976d892f83b230f2df553fae6d19950b7c4b",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/9c39175e20591a7e7df1aa1b3c615cc0.jpg",
+      "path": "references/jewelry/9c39175e20591a7e7df1aa1b3c615cc0.jpg",
+      "bytes": 11951,
+      "sha256": "9a71bbe1343d3e2c27090aaf57a854078422d28938a840b350d8d1c6fea23d21",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/9f31eb6644936dd61ee05e769126de76.jpg",
+      "path": "references/jewelry/9f31eb6644936dd61ee05e769126de76.jpg",
+      "bytes": 41235,
+      "sha256": "f9171688ac3cd9e590f67996f393ddde0ef7fe53c4c89de428da3306418e952f",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/a02d3e13fc96881686eeb7dcb139ae1a.jpg",
+      "path": "references/jewelry/a02d3e13fc96881686eeb7dcb139ae1a.jpg",
+      "bytes": 116919,
+      "sha256": "6f9f09d4d054f6095dc8b89f9530f3d7669c2dc1a4783d331d3a4249d3a99dc1",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/b23e306959d4e07d05c3da41e0515e32.jpg",
+      "path": "references/jewelry/b23e306959d4e07d05c3da41e0515e32.jpg",
+      "bytes": 193851,
+      "sha256": "fe66d95b2daded34d60eaf9b5eaef6a0c89355e121de61e97545b5262646ba90",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/cd147728b5232f9c6ee08ba3761f5fe8.jpg",
+      "path": "references/jewelry/cd147728b5232f9c6ee08ba3761f5fe8.jpg",
+      "bytes": 210066,
+      "sha256": "bd7d6c9fb443949512992282b1ca665cb720fcd2ca167c1cb264fb8c392ce56d",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/d5654c9e8d9ed1e136a89babfad47192.jpg",
+      "path": "references/jewelry/d5654c9e8d9ed1e136a89babfad47192.jpg",
+      "bytes": 426019,
+      "sha256": "c081ea1bab47504c67f4c685925cde8c227e29fa489d9c393b04bc801445a26e",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "jewelry/edc0c28a2098f856f647e175e734bd87.jpg",
+      "path": "references/jewelry/edc0c28a2098f856f647e175e734bd87.jpg",
+      "bytes": 229691,
+      "sha256": "d402afef9190239cd7c079629e17f1ce4caca09bf5d92a9dc7206351370d6a81",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Design inspiration only; not required to generate solids."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/S3 Sense.jpg",
+      "path": "references/components/S3 Sense.jpg",
+      "bytes": 105830,
+      "sha256": "f3bfbfa6bc099d05f02e90672763b10abf2d96d9647ea56228e7db7c0987f83b",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/Seeed Studio XIAO-ESP32-S3-Sense.png",
+      "path": "references/components/Seeed Studio XIAO-ESP32-S3-Sense.png",
+      "bytes": 2974966,
+      "sha256": "178fad219c6b97d2b3456d6f5334628a42175f919f9d2aa23cef9c9c15cec622",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/Seeed Studio XIAO-ESP32-S3-Sense.step",
+      "path": "references/components/Seeed Studio XIAO-ESP32-S3-Sense.step",
+      "bytes": 5749825,
+      "sha256": "a37c6b41d5660cd3310fea05edde0238762fe00da4de623936b7ca66814cb698",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/XIAO-ESP32-S3-Board-Only.FCStd",
+      "path": "references/components/XIAO-ESP32-S3-Board-Only.FCStd",
+      "bytes": 277288,
+      "sha256": "7c02a13746398fde22387f4354fcbad557e793ac19c8c3f31a36ec0e63724067",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/XIAO-ESP32-S3-Board-Only.step",
+      "path": "references/components/XIAO-ESP32-S3-Board-Only.step",
+      "bytes": 2280171,
+      "sha256": "10e3eb6fdfde45b70715f496ef6bee98b72ea0257beec5d757b9330f4c87270b",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    },
+    {
+      "original": "XIAO-ESP32-S3-Sense-CAD/XIAO-ESP32-S3-Sense.FCStd",
+      "path": "references/components/XIAO-ESP32-S3-Sense.FCStd",
+      "bytes": 656956,
+      "sha256": "cb477dfd75a8728692942b9a48a734bfe1bf2013d3ad17c2034690d9d00aa5f5",
+      "redistribution_status": "Not independently established; no new license granted by this package.",
+      "purpose": "Component or external enclosure geometry reference."
+    }
+  ]
+}

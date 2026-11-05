@@ -1,0 +1,45 @@
+from enclosure_runtime import output_dir, artifact_path, document as get_document, new_document
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtGui
+import json
+
+ROOT = output_dir('jewelry')
+
+def compare():
+    with open(artifact_path('jewelry/collection.json'), encoding='utf-8') as stream:
+        reports = sorted(json.load(stream), key=lambda row: int(row['id']))
+    if [int(row['id']) for row in reports] != list(range(1, 18)):
+        raise ValueError('Comparison requires all 17 completed references')
+    document = new_document('Jewelry_Collection')
+    document.Label = '17 jewelry-inspired enclosures — equal scale'
+    for index, report in enumerate(reports):
+        source = get_document('Jewelry_%02d' % int(report['id']))
+        x, y = (index % 5) * 85, -(index // 5) * 105
+        group = document.addObject('App::DocumentObjectGroup', 'Design%02d' % int(report['id']))
+        group.Label = '%02d %s' % (int(report['id']), report['name'])
+        for name in ['RearBase', 'WholeBodyShell', 'LightGuide']:
+            original = source.getObject(name)
+            obj = document.addObject('Part::Feature', 'ViewPart')
+            obj.Label = group.Label + ' / ' + name
+            shape = original.Shape.copy()
+            shape.translate(App.Vector(x, y, 0))
+            obj.Shape = shape
+            obj.ViewObject.DisplayMode = 'Shaded'
+            obj.ViewObject.ShapeAppearance = original.ViewObject.ShapeAppearance
+            group.addObject(obj)
+        label = document.addObject('App::Annotation', 'Title%02d' % int(report['id']))
+        label.LabelText = [group.Label, ' x '.join('%g' % value for value in report['body_mm']) + ' mm']
+        label.Position = App.Vector(x - 30, y - 39, 0)
+        label.ViewObject.FontSize = 11
+        label.ViewObject.TextColor = (0.85, 0.85, 0.85)
+        group.addObject(label)
+        QtGui.QApplication.processEvents()
+    document.recompute()
+    App.setActiveDocument(document.Name)
+    Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(App.Vector(1, 0, 0), 25).Q)
+    Gui.activeDocument().activeView().fitAll()
+    document.saveAs(ROOT + '/Comparison.FCStd')
+    print('Created equal-scale comparison of all 17 enclosures')
+
+# Load with runpy, call compare(), then capture after the GUI settles.

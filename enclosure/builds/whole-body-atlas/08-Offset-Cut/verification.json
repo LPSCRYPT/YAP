@@ -1,0 +1,76 @@
+{
+  "id": 8,
+  "name": "Offset Cut",
+  "family": "cyberpunk",
+  "description": "Asymmetric eight-sided body with a long upper-left slash, shorter opposing lower-right cut, and unequal remaining corner clips; low shoulders lead into a substantial planar roof taper.",
+  "body_mm": [
+    55.35,
+    53.51,
+    22.1
+  ],
+  "with_bail_length_mm": 59.71,
+  "clip_thickness_mm": 34.1,
+  "outer_volume_mm3": 56388.5,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7554
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6004
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2968
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5844
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3638
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      26.451857784309528,
+      9.627688874531406
+    ],
+    [
+      -19.03665862512234,
+      13.329611871635548
+    ],
+    [
+      4.370734934778018,
+      -24.787669573974625
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 24.856
+}

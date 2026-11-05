@@ -1,0 +1,80 @@
+{
+  "id": 2,
+  "name": "Oblique Graphite Shard",
+  "family": "Jewelry inspired",
+  "description": "An asymmetric seven-sided whole-body recorder, not an applied jewel on a rectangular case. Three intersecting roof planes form a broad oblique crown and two descending facets, while the footprint continues the clipped, uneven shard silhouette down to the flat removable rear. The hardware needs a 53 by 56 mm footprint and roughly 25.6 mm crown rather than the photograph's apparently thin pointed jewel. The point is deliberately truncated and the slopes stop above the retained electronics. The necklace eye is offset towards the high corner.",
+  "body_mm": [
+    53.0,
+    56.0,
+    25.9
+  ],
+  "with_bail_length_mm": 60.5,
+  "clip_thickness_mm": 37.9,
+  "outer_volume_mm3": 53572.0,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7548
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6234
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2748
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5546
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3634
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 338
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      22.133651576651715,
+      8.055990349520423
+    ],
+    [
+      -19.114755354396976,
+      13.38429579018317
+    ],
+    [
+      4.413532123794684,
+      -25.030384493975582
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/125351dfb4ba5d21ec92843c3574ccac.jpg",
+  "reference_analysis": "A dark blue-charcoal pendant on a fine pale chain. Its outline is an irregular angular shield or skewed diamond, with a high pointed corner, a slanting right edge and a clipped lower tip. Broad planar faces meet along a strong diagonal-looking ridge; the left and lower facets are darker than the large upper face. The image supplies neither dimensions nor certified materials.",
+  "interpretation": "An asymmetric seven-sided whole-body recorder, not an applied jewel on a rectangular case. Three intersecting roof planes form a broad oblique crown and two descending facets, while the footprint continues the clipped, uneven shard silhouette down to the flat removable rear. The hardware needs a 53 by 56 mm footprint and roughly 25.6 mm crown rather than the photograph's apparently thin pointed jewel. The point is deliberately truncated and the slopes stop above the retained electronics. The necklace eye is offset towards the high corner.",
+  "finish_notes": "Graphite-blue body with restrained blue-grey facet tones previews optional nonconductive paint or pigmented polymer, not stone, metal or a certified coating. Facets are actual intersecting planar geometry; colour only helps read their orientation. No fine engraved decoration is introduced. Physical printing, drop resistance, RF, acoustics and coating durability remain untested."
+}

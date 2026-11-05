@@ -1,0 +1,122 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json, os
+OUT=output_dir('measured-and-fitted')
+source=document('Recorder_Internal_Layouts')
+reports=[]
+for key,width,length,height in [('Stacked',54,64,17),('Flat',74,70,10.8)]:
+ d=new_document('Recorder_Fitted_'+key);d.Label='300 mAh + SD — '+key+' fitted case'
+ p=d.addObject('Spreadsheet::Sheet','Parameters')
+ for i,(name,value) in enumerate([('Width',width),('Length',length),('Height',height),('Wall',1.4),('Floor',1.4),('Lid',1.4),('Radius',4),('LipGap',0.25),('LipThickness',0.8),('LipDepth',1),('Explode',0)],1):
+  p.set('A%d'%i,name);p.set('B%d'%i,str(value));p.setAlias('B%d'%i,name)
+ for i,text in enumerate(['FITTED PROTOTYPE: dimensions depend on unmeasured SD, amplifier, mic and battery envelopes.',
+ 'Components copied from packaging study; positions do not auto-pack when case size changes.',
+ 'M2 screws: 2.2 mm lid clearance, 1.6 mm pilot. Test screw engagement in chosen print material.',
+ 'Lid slip-fit gap 0.25 mm per side is a starting print tolerance, not a validated seal.',
+ 'Mic ports assume downward-facing microphone ports; module orientation is unconfirmed.',
+ 'Speaker collar is an acoustic guide; add a compressible gasket without loading diaphragm.',
+ 'Carrier platforms support upper modules; use insulating mounting tape, verify PCB underside clearance.',
+ 'No waterproofing. Wiring/antenna routing, acoustic tests and exact component retention remain unverified.',
+ 'Explode lifts only the lid. Reset to zero for fit checks and STEP/STL exports.'],15):p.set('A%d'%i,text)
+ def prop(o,k,v):
+  if isinstance(v,str):o.setExpression(k,v)
+  else:setattr(o,k,v)
+ def pos(o,x,y,z):
+  o.Placement.Base=App.Vector(*[v if isinstance(v,(float,int)) else 0 for v in (x,y,z)])
+  for a,v in zip('xyz',(x,y,z)):
+   if isinstance(v,str):o.setExpression('Placement.Base.'+a,v)
+ def box(n,w,l,h,x,y,z):
+  o=d.addObject('Part::Box',n)
+  for k,v in [('Length',w),('Width',l),('Height',h)]:prop(o,k,v)
+  pos(o,x,y,z);return o
+ def cyl(n,r,h,x,y,z):
+  o=d.addObject('Part::Cylinder',n);prop(o,'Radius',r);prop(o,'Height',h);pos(o,x,y,z);return o
+ def fuse(n,parts):
+  o=d.addObject('Part::MultiFuse',n);o.Shapes=parts;o.Refine=True;return o
+ def cut(n,a,b):
+  o=d.addObject('Part::Cut',n);o.Base=a;o.Tool=b;o.Refine=True;return o
+ def rounded(n,inset,z,h):
+  t='('+str(inset)+')';r='(Parameters.Radius-'+t+')';w='(Parameters.Width-2*'+t+')';l='(Parameters.Length-2*'+t+')'
+  shapes=[box(n+'WebX',w+'-2*'+r,l,h,t+'+'+r,t,z),box(n+'WebY',w,l+'-2*'+r,h,t,t+'+'+r,z)]
+  for x in ['Parameters.Radius','Parameters.Width-Parameters.Radius']:
+   for y in ['Parameters.Radius','Parameters.Length-Parameters.Radius']:shapes.append(cyl(n+'Corner',r,h,x,y,z))
+  return fuse(n,shapes)
+ components=[];byname={}
+ for original in source.getObject(key).Group:
+  if not hasattr(original,'Shape') or any(s in original.Name for s in ['Reservation','Access','Bounds']):continue
+  name=original.Name[len(key)+1:];o=d.addObject('Part::Feature',name);o.Shape=original.Shape.copy()
+  o.Placement.Base=o.Placement.Base+App.Vector(4,4,1.4)
+  o.Label=original.Label;o.ViewObject.ShapeColor=original.ViewObject.ShapeColor;components.append(o);byname[name]=o
+ d.recompute()
+ outer=rounded('Outer',0,0,'Parameters.Height-Parameters.Lid')
+ cavity=rounded('Cavity','Parameters.Wall','Parameters.Floor','Parameters.Height')
+ shell=cut('Shell',outer,cavity)
+ screwcenters=[(3,3),(width-3,3),(3,length-3),(width-3,length-3)]
+ bosses=[cyl('ScrewBoss',2.3,'Parameters.Height-Parameters.Lid-Parameters.Floor',x,y,'Parameters.Floor') for x,y in screwcenters]
+ shell=fuse('ShellWithBosses',[shell]+bosses)
+ holes=[]
+ bb=byname['XIAO'].Shape.BoundBox
+ usb=box('USBPlugAccess',12,bb.YMin+2,5.5,(bb.XMin+bb.XMax)/2-6,-1,bb.ZMin-0.3);holes.append(usb)
+ sd=byname['SD'].Shape.BoundBox
+ sdaccess=box('SDCardAccess',sd.XLength+0.6,sd.YMin+2,sd.ZLength+0.6,sd.XMin-0.3,-1,sd.ZMin-0.3);holes.append(sdaccess)
+ for x,y in screwcenters:holes.append(cyl('ScrewPilot',0.8,8,x,y,'Parameters.Height-Parameters.Lid-7'))
+ for name in ['MicLeft','MicRight']:
+  b=byname[name].Shape.BoundBox;holes.append(cyl('MicrophonePort',0.7,3,(b.XMin+b.XMax)/2,(b.YMin+b.YMax)/2,-0.1))
+ base=cut('Base',shell,fuse('BaseOpenings',holes));base.Label='BASE — USB, SD slot, underside microphone ports'
+ plate=rounded('LidPlate',0,'Parameters.Height-Parameters.Lid','Parameters.Lid')
+ lo=rounded('LipOuter','Parameters.Wall+Parameters.LipGap','Parameters.Height-Parameters.Lid-Parameters.LipDepth','Parameters.LipDepth+0.1')
+ li=rounded('LipInner','Parameters.Wall+Parameters.LipGap+Parameters.LipThickness','Parameters.Height-Parameters.Lid-Parameters.LipDepth-0.1','Parameters.LipDepth+0.3')
+ lip=cut('Lip',lo,li)
+ # Relieve the alignment lip around base screw bosses.
+ relief=fuse('BossRelief',[cyl('BossReliefTool',2.6,3,x,y,'Parameters.Height-Parameters.Lid-2') for x,y in screwcenters])
+ lip=cut('RelievedLip',lip,relief)
+ lidparts=[plate,lip]
+ sp=byname['Speaker'].Shape.BoundBox;sx=(sp.XMin+sp.XMax)/2;sy=(sp.YMin+sp.YMax)/2
+ collarouter=cyl('AcousticCollarOuter',5.8,'Parameters.Height-Parameters.Lid-%g+0.1'%(sp.ZMax+0.3),sx,sy,sp.ZMax+0.3)
+ collarinner=cyl('AcousticCollarInner',5.1,'Parameters.Height-%g'%(sp.ZMax+0.2),sx,sy,sp.ZMax+0.2)
+ lidparts.append(cut('SpeakerCollar',collarouter,collarinner))
+ lidholes=[usb,sdaccess]
+ for x,y in screwcenters:lidholes.append(cyl('ScrewClearance',1.1,4,x,y,'Parameters.Height-3'))
+ for x in [-3,0,3]:
+  for y in [-3,0,3]:lidholes.append(cyl('SpeakerGrille',0.7,4,sx+x,sy+y,'Parameters.Height-3'))
+ b=byname['Button'].Shape.BoundBox;bx=(b.XMin+b.XMax)/2;by=(b.YMin+b.YMax)/2
+ lidholes.append(cyl('ButtonOpening',2.9,5,bx,by,'Parameters.Height-4'))
+ actuator=cyl('ButtonActuator',2.5,'Parameters.Height+0.5-%g'%b.ZMax,bx,by,b.ZMax);actuator.Label='BUTTON CAP — verify switch actuation before printing';actuator.ViewObject.ShapeColor=(0.95,0.55,0.15)
+ led=byname['LED'].Shape.BoundBox;lx=(led.XMin+led.XMax)/2;ly=(led.YMin+led.YMax)/2
+ lidholes.append(cyl('LEDWindow',1.3,5,lx,ly,'Parameters.Height-4'))
+ light=cyl('LightGuide',1,'Parameters.Height-%g'%led.ZMax,lx,ly,led.ZMax);light.Label='LED LIGHT GUIDE — clear material';light.ViewObject.ShapeColor=(0.7,1.0,0.75)
+ lid=cut('Lid',fuse('LidBlank',lidparts),fuse('LidOpenings',lidholes));lid.setExpression('Placement.Base.z','Parameters.Explode');lid.Label='LID — four M2 screws, grille, button and LED'
+ # Removable, floor-supported platforms keep upper PCBs off battery and SD module.
+ carriers=[]
+ if key=='Stacked':
+  for name,x0,x1,y0,y1 in [('XIAO',3.2,26.4,5.6,30),('Amplifier',27.5,48.5,4.6,24)]:
+   b=byname[name].Shape.BoundBox;deckz=b.ZMin-0.8
+   deck=box(name+'CarrierDeck',x1-x0,y1-y0,0.6,x0,y0,deckz)
+   feet=[cyl(name+'CarrierFoot',0.65,deckz-1.4,x,y,1.4) for x in [x0+0.7,x1-0.7] for y in [y0+0.7,y1-0.7]]
+   carrier=fuse(name+'Carrier',[deck]+feet);carrier.Label=name+' removable support — 0.2 mm insulating tape allowance';carriers.append(carrier)
+ d.recompute()
+ printable=[base,lid]+carriers
+ collisions=[]
+ for a in printable:
+  assert a.Shape.isValid() and len(a.Shape.Solids)==1,(a.Name,'invalid geometry')
+  for b in components+[actuator,light]:
+   volume=a.Shape.common(b.Shape).Volume
+   if volume>0.001:collisions.append([a.Name,b.Name,round(volume,4)])
+ for i,a in enumerate(printable):
+  for b in printable[i+1:]:
+   volume=a.Shape.common(b.Shape).Volume
+   if volume>0.001:collisions.append([a.Name,b.Name,round(volume,4)])
+ for o in d.Objects:o.ViewObject.Visibility=False
+ group=d.addObject('App::DocumentObjectGroup','Components');group.Group=components+[actuator,light]
+ for o in components+[actuator,light]:o.ViewObject.Visibility=True
+ for o in printable:o.ViewObject.Visibility=True;o.ViewObject.ShapeColor=(0.72,0.77,0.82)
+ for o in carriers:o.ViewObject.ShapeColor=(0.92,0.85,0.65)
+ base.ViewObject.Transparency=70;lid.ViewObject.Transparency=75
+ d.recompute();App.setActiveDocument(d.Name);Gui.activeDocument().activeView().viewAxonometric();Gui.activeDocument().activeView().fitAll()
+ stem=OUT+'/Recorder-300mAh-Fitted-'+key
+ d.saveAs(stem+'.FCStd')
+ if not collisions:
+  Part.export(printable,stem+'.step')
+  for o in printable+[actuator,light]:Mesh.export([o],stem+'-'+o.Name+'.stl')
+ reports.append({'layout':key,'external_mm':[width,length,height],'parts':[(o.Name,len(o.Shape.Solids),o.Shape.isValid()) for o in printable],'intersections_mm3':collisions})
+with open(OUT+'/fitted-case-report.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

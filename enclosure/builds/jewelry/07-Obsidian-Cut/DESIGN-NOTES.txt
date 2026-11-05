@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/7c09d5b671c04f452752a3dc13f62d4c.jpg
+
+OBSERVATIONS
+Four dark, irregularly faceted pendants on fine cords. Each has a different angular outline and several large flat cut faces rather than a smooth cabochon dome. Some planes show directional grain and one plane on each pendant has close parallel scores. The image looks wood-like, but neither species, material, scale nor surface treatment can be established from the photograph.
+
+ENCLOSURE INTERPRETATION
+An asymmetric eight-sided stone-like whole-body enclosure with five genuinely intersecting sloping roof planes and a corner-offset necklace eye. Its 52 by 56 mm footprint is deliberately neither a regular hexagon nor a rounded box. A broad slightly inclined crown meets smaller steep bevel facets around the perimeter; their unequal intersections recreate the reference's unequal cuts. Five physical diagonal scores occupy only the right-hand cut face. The unadorned large planes carry the design, not a face graphic. Retained hardware prevents reproducing the narrow solid pendants literally; the back stays flat and the concealed cavity remains closed.
+
+FINISH / LIMITS
+Deep warm charcoal body with darker recessed scores is a nonconductive finish suggestion, not a specification for wood, stone or metal. Scores are 1.0 mm wide and 0.35 mm deep, with all cavity roof planes thickened to a 1.8 mm normal offset before engraving. No procedural grain, cord, conductive coating or separate decorative insert is modeled. The lowest outer roof vertex is 20.64 mm and the actual crown is below 25 mm; CAD integration must confirm the retained stack, closures and acoustic openings. No physical fit, print strength, RF, thermal or finish validation has occurred.
+
+VERIFIED BODY SIZE mm: [52.0, 56.0, 24.79]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

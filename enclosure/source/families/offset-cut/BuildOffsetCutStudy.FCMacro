@@ -1,0 +1,26 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, math, json, os, runpy
+from PySide import QtGui
+from whole_body_assembly import build_assembly
+from ThemeEnvelopeGeometry import make_envelope
+ROOT=output_dir('offset-cut')
+STYLES=runpy.run_path(source_path('OffsetCutProfiles.py'))['STYLES']
+def build(index):
+ style=STYLES[index]
+ return build_assembly(style,document('Sleek_Round'),ROOT,25.0,'OffsetStudy_%02d',None)
+def compare():
+ d=new_document('Offset_Cut_Comparison');d.Label='Offset Cut — original and four whole-body refinements'
+ entries=[('Original Offset Cut',document('Atlas_08'),0,-42.5)]
+ for i,s in enumerate(STYLES):entries.append((s['id']+' '+s['name'],document('OffsetStudy_%02d'%(i+1)),76+(i%2)*76,-(i//2)*85))
+ for title,source,x,y in entries:
+  for name in ['RearBase','WholeBodyShell','LightGuide']:
+   original=source.getObject(name);o=d.addObject('Part::Feature','ViewPart');o.Label=title+' / '+name
+   shape=original.Shape.copy();shape.translate(App.Vector(x,y,0));o.Shape=shape
+   o.ViewObject.ShapeColor=(.30,.36,.41) if name!='LightGuide' else original.ViewObject.ShapeColor;o.ViewObject.DisplayMode='Shaded'
+  label=d.addObject('App::Annotation','Title');label.LabelText=[title];label.Position=App.Vector(x-24,y-36,0);label.ViewObject.FontSize=13;label.ViewObject.TextColor=(.85,.85,.85)
+ d.recompute();d.saveAs(ROOT+'/Comparison.FCStd');Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(App.Vector(1,0,0),22).Q);Gui.activeDocument().activeView().fitAll()
+ reports=[]
+ for s in STYLES:
+  with open(ROOT+'/'+s['id']+'-'+s['name'].replace(' ','-')+'/verification.json') as f:reports.append(json.load(f))
+ with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+ print('Four variants verified and comparison saved')

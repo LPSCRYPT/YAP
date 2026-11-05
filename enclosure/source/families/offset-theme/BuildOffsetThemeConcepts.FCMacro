@@ -1,0 +1,29 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, math, json, os, runpy
+from PySide import QtGui
+from whole_body_assembly import build_assembly
+from ThemeEnvelopeGeometry import make_envelope
+ROOT=output_dir('offset-theme')
+STYLES=[]
+for filename in ['ThemeVolumeProfiles.py','ThemeSilhouetteProfiles.py']:
+ STYLES.extend(runpy.run_path(source_path(filename))['STYLES'])
+STYLES.sort(key=lambda style:style['id'])
+for style in STYLES:
+ style.update(points=[[x/25,y/25] for x,y in style['footprint']],ruled=True,family='Offset theme',color=(.40,.46,.50))
+def build(index):
+ style=STYLES[index]
+ return build_assembly(style,document(style['source']),ROOT,25.0,'Theme_%02d',make_envelope)
+def compare():
+ d=new_document('Offset_Theme_Concepts');d.Label='Six distinct Offset-theme architectures'
+ for i,s in enumerate(STYLES):
+  src=document('Theme_%02d'%(i+1));x=(i%3)*80;y=-(i//3)*115
+  for n in ['RearBase','WholeBodyShell','LightGuide']:
+   source=src.getObject(n);o=d.addObject('Part::Feature','ViewPart');o.Label=s['id']+' '+s['name']+' / '+n;shape=source.Shape.copy();shape.translate(App.Vector(x,y,0));o.Shape=shape;o.ViewObject.ShapeColor=source.ViewObject.ShapeColor;o.ViewObject.DisplayMode='Shaded'
+   material=o.ViewObject.ShapeAppearance[0];material.SpecularColor=(0.0,0.0,0.0);material.Shininess=0.0;o.ViewObject.ShapeAppearance=[material]
+  label=d.addObject('App::Annotation','Title%02d'%(i+1));label.LabelText=[s['id']+' '+s['name']];label.Position=App.Vector(x-25,y-38,0);label.ViewObject.FontSize=14;label.ViewObject.TextColor=(.85,.85,.85)
+ d.recompute();Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(App.Vector(1,0,0),42).Q);Gui.activeDocument().activeView().fitAll();d.saveAs(ROOT+'/Comparison.FCStd')
+ reports=[]
+ for s in STYLES:
+  with open(ROOT+'/'+s['id']+'-'+s['name'].replace(' ','-')+'/verification.json') as f:reports.append(json.load(f))
+ with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+ print('Six complete concepts saved; angled comparison active')

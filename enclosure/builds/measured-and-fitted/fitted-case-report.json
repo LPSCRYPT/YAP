@@ -1,0 +1,54 @@
+[
+  {
+    "layout": "Stacked",
+    "external_mm": [
+      54,
+      64,
+      17
+    ],
+    "parts": [
+      [
+        "Base",
+        1,
+        true
+      ],
+      [
+        "Lid",
+        1,
+        true
+      ],
+      [
+        "XIAOCarrier",
+        1,
+        true
+      ],
+      [
+        "AmplifierCarrier",
+        1,
+        true
+      ]
+    ],
+    "intersections_mm3": []
+  },
+  {
+    "layout": "Flat",
+    "external_mm": [
+      74,
+      70,
+      10.8
+    ],
+    "parts": [
+      [
+        "Base",
+        1,
+        true
+      ],
+      [
+        "Lid",
+        1,
+        true
+      ]
+    ],
+    "intersections_mm3": []
+  }
+]

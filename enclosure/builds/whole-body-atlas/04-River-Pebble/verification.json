@@ -1,0 +1,76 @@
+{
+  "id": 4,
+  "name": "River Pebble",
+  "family": "minimal",
+  "description": "Asymmetric rounded-triangular pebble with unequal flowing arcs and a deeper inward roof roll.",
+  "body_mm": [
+    53.78,
+    53.81,
+    22.8
+  ],
+  "with_bail_length_mm": 59.8,
+  "clip_thickness_mm": 34.8,
+  "outer_volume_mm3": 50277.4,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7918
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 10924
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2980
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5858
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3654
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      24.144892019685592,
+      8.788022004737124
+    ],
+    [
+      -20.038014309911226,
+      14.03076867055387
+    ],
+    [
+      4.1140205746547664,
+      -23.331770090572835
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

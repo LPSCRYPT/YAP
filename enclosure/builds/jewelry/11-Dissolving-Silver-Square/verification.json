@@ -1,0 +1,80 @@
+{
+  "id": 11,
+  "name": "Dissolving Silver Square",
+  "family": "Jewelry inspired",
+  "description": "A deliberately planar 49.4 mm square recorder enclosure, with a narrow one-millimetre shoulder bevel rather than a rounded cabochon. Three 5 mm blind square recesses preserve the reference's corner-only negative-space rhythm while a physically connected, side-deep cluster of square blocks dissolves the upper-right silhouette. The full decorated envelope is 54.2 by 53.7 by 22 mm; the main body roof is 21.3 mm. The uninterrupted central face and asymmetric corner contrast are retained. Real through-holes in the broad plate would expose electronics, so the photographed voids become clearly documented backed recesses, not fictitious holes through the battery.",
+  "body_mm": [
+    54.2,
+    53.7,
+    22.0
+  ],
+  "with_bail_length_mm": 55.6,
+  "clip_thickness_mm": 34.0,
+  "outer_volume_mm3": 52220.5,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7530
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6032
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2872
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5754
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3682
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      22.82061475842818,
+      8.30602449972386
+    ],
+    [
+      -23.061695911422014,
+      16.147973321077732
+    ],
+    [
+      4.007980068165216,
+      -22.730384493975585
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/9c39175e20591a7e7df1aa1b3c615cc0.jpg",
+  "reference_analysis": "The photograph shows a large thin silver-coloured square pendant, with a quiet brushed-looking flat face, three square openings near its upper-right corner and small square elements extending beyond that corner toward the necklace. A matching square earring repeats the removed-pixel motif. Perspective makes the pendant look slightly skewed; the image does not establish thickness, dimensions or material certification.",
+  "interpretation": "A deliberately planar 49.4 mm square recorder enclosure, with a narrow one-millimetre shoulder bevel rather than a rounded cabochon. Three 5 mm blind square recesses preserve the reference's corner-only negative-space rhythm while a physically connected, side-deep cluster of square blocks dissolves the upper-right silhouette. The full decorated envelope is 54.2 by 53.7 by 22 mm; the main body roof is 21.3 mm. The uninterrupted central face and asymmetric corner contrast are retained. Real through-holes in the broad plate would expose electronics, so the photographed voids become clearly documented backed recesses, not fictitious holes through the battery.",
+  "finish_notes": "Silver-grey surfaces preview a brushed-looking nonconductive coating; recessed square floors use a muted warm dark tone to evoke the visible background in the source. This does not specify solid metal or an actually brushed manufacturing process. Recesses are physical 0.6 mm cuts with 1.5 mm backing; their 5 mm width is intentionally printable. Corner pixels extend down to z8, overlap by at least 1.5 mm and remain attached to the main sidewall. Main-body thickness is imposed by retained hardware rather than the source's sheet-jewelry proportions. Optional coating, corner snag resistance, physical fit, RF and acoustics require testing."
+}

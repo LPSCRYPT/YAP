@@ -1,0 +1,20 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, math, json, os, runpy
+from whole_body_assembly import build_assembly
+ROOT=output_dir('whole-body-atlas')
+SRC=document('Sleek_Round');V=App.Vector
+STYLES=[]
+for family in ['Minimal','Cyber','Parametric']:
+ STYLES.extend(runpy.run_path(source_path('WholeBody'+family+'.py'))['STYLES'])
+with open(artifact_path('whole-body-atlas/fit-scales.json'),encoding='utf-8') as stream:FIT_SCALES=json.load(stream)
+def moved(shape,x=0,y=0,z=0):
+ shape=shape.copy();shape.translate(V(x,y,z));return shape
+reports=[build_assembly(style,SRC,ROOT,FIT_SCALES[style['id']],'Atlas_%02d') for style in STYLES]
+with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+v=new_document('Whole_Body_Atlas');v.Label='12 WHOLE-BODY FORMS — equal scale'
+for i,style in enumerate(STYLES):
+ n=int(style['id']);source=document('Atlas_%02d'%n);col=i%4;row=i//4
+ for part in ['RearBase','WholeBodyShell','LightGuide']:
+  original=source.getObject(part);o=v.addObject('Part::Feature','Form%02d_%s'%(n,part));o.Label='%02d %s / %s'%(n,style['name'],part);o.Shape=moved(original.Shape,x=col*76,y=-row*85);o.ViewObject.ShapeColor=original.ViewObject.ShapeColor;o.ViewObject.DisplayMode='Shaded'
+ label=v.addObject('App::Annotation','Name%02d'%n);label.LabelText=['%02d  %s'%(n,style['name'])];label.Position=V(col*76-23,-row*85-37,0);label.ViewObject.FontSize=13;label.ViewObject.TextColor=(0.85,0.85,0.85)
+v.recompute();v.saveAs(ROOT+'/Whole-Body-Atlas.FCStd');Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(V(1,0,0),22).Q);Gui.activeDocument().activeView().fitAll()

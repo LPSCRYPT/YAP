@@ -1,0 +1,51 @@
+TWELVE WHOLE-BODY ENCLOSURE FORMS — REFINED REVISION 2
+
+Open Whole-Body-Atlas.FCStd for the equal-scale 4-column comparison, or Comparison.png without FreeCAD.
+Top row: minimal 01-04. Middle: cyberpunk 05-08. Bottom: parametric 09-12.
+Every design has a different enclosure outline, matching rear base and whole-body shell. These are not face inserts or colour swaps. Minimal/parametric forms have progressively rounded shoulder sections; cyberpunk forms have planar chamfers. Small section facets are intentional CAD approximations.
+
+BODY WIDTH x LENGTH x THICKNESS, mm (excludes necklace eye and optional clip)
+01 Quiet Oval         50.09 x 53.39 x 21.30
+02 Cushion Square     50.00 x 51.75 x 21.30
+03 Soft Hexagon       56.01 x 50.00 x 22.10
+04 River Pebble       53.78 x 53.81 x 22.80
+05 Clipped Slab       51.72 x 48.11 x 21.30
+06 Blunt Shield       51.44 x 51.94 x 22.80
+07 Reverse Keystone   56.24 x 52.22 x 22.50
+08 Offset Cut         55.35 x 53.51 x 22.10
+09 Soft Diamond       55.43 x 55.48 x 21.30
+10 Soft Delta         54.77 x 54.82 x 22.60
+11 Soft Pentagon      52.15 x 52.14 x 22.20
+12 Biconvex Lens       50.13 x 57.41 x 23.00
+
+Size is constrained by the current retained two-level electronics layout. These are compact fit-tested CAD alternatives, NOT proven global minima. More expressive outlines can be wider than the earlier 54 mm round body. 05 is the strongest compact faceted candidate; 02 is the compact restrained square candidate. A substantial further reduction needs a changed component arrangement or smaller/custom electronics, not simply a smaller outer scale. Do not shrink these STLs in the slicer.
+
+REFINEMENT
+Reduced height, removed the first pass's side bulge, trimmed carrier perimeter to each footprint, and reduced 05/08 footprints against sampled functional component/mount geometry. Removed obsolete original-bail material. Moved the conflicting closure position on the compact faceted body so the hood can lift past electronics. The other earlier pendant projects remain separate and unchanged.
+
+FILES PER DESIGN
+01-RearBase.stl; 02-WholeBodyShell.stl; 03-LowerCarrier.stl;
+04-UpperCarrier.stl; 05-TopRetainer.stl; 06-LightGuide.stl;
+07-ClipReceiverAdapter.stl and 08-SlideOnClip.stl (optional).
+Assembly.FCStd; Necklace-Assembly.step; Optional-Clip.step; verification.json.
+Use ALL parts from the same design folder. Closure positions and trimmed carriers can differ between designs. STL parts are separately bed-normalized, in millimeters. STEP/native files retain assembly positions. 96 checked STL exports total.
+
+MOUNTING AND ASSEMBLY
+Flat rear in necklace mode, with a 3.6 mm bore in the integrated rear eye. Use a breakaway cord; bail strength has not been physically tested.
+Retained 24.5 x 24.5 x 5 mm protected battery; unchanged board/component locations from Sleek_Round. The stack is independently held by three M2 x 14 mm countersunk carrier screws into plastic pilots. Their engagement with the rear base is intentional, not a collision error. Head envelope approximately diameter4 x 1.2 mm. Confirm real screw geometry and thread suitability.
+Three M1.6 x 6 mm countersunk hood screws use 1.3 mm plastic pilots; use an appropriate plastic-compatible thread. Do not overtighten.
+XIAO/amplifier/driver require thin insulating retaining bands (up to3 mm wide, about0.15 mm thick). Driver band runs along Y; XIAO/amplifier bands along X. Thick cable ties do not fit. Insulate all exposed conductors. Battery has support/stops and nominal0.4 mm upper clearance; do not compress the pouch.
+Microphone/speaker rims, motor and connector use nominal0.3 mm soft insulating pads; SD bridge nominal0.5 mm pad. Pad the speaker's rigid rim only, not its diaphragm. Antenna uses removable insulating adhesive. These nonprinted restraints are required; material and preload need physical testing.
+Install lower components and carrier, upper components and carrier, pads/bands and top retainer. Secure carrier screws. Fit centered LED and matching light guide. Lower hood and secure rear closure screws. SD remains internal. Button opening/envelope is provisional pending the real actuator.
+Optional rear receiver uses two M2 x 8 mm countersunk screws into flush M2 inserts at x=+-14,y=-15. Assumed inserts about3.2 mm OD x3 mm long; follow actual insert manufacturer guidance. Clip slides off tool-free, but removing the receiver for a completely flat rear requires removing its two screws, without dismantling electronics. Clip increases thickness by12 mm. Existing dovetail/latch geometry is unchanged; minimum flank allowance about0.305 mm, floor0.35 mm, mouth0.4 mm per side. Physical latch/fatigue testing remains necessary.
+
+PRINT AND SAFETY LIMITS
+PETG is a fit-test starting material, not a validated printer profile. Inspect supports under front roof, base eye and downward carrier restraints. Keep supports out of small ports, screw pilots and band slots. Print guide in translucent material or use matching optical rod. Preview every layer; no G-code supplied.
+Direct-solder mic wiring is assumed; headers do not fit. Microphone/motor thicknesses remain assumed3 mm. SD remains a provisional24 x18 x3 mm rotated envelope. Amplifier/driver/antenna/connector packages remain provisional. Verify actual parts before final printing. Acoustic ports are untuned; no acoustic isolation or waterproofing is claimed. No physical fit, thermal/charging, RF, acoustic, optical, structural, adhesive or fatigue validation has been performed.
+
+VERIFICATION
+Each revision2 assembly passed valid single-solid checks, component/hardware/wire-reservation interference checks, component containment, detailed shell/base Boolean checks, eight sampled hood-extraction positions and seven clip-release positions. Each STL was checked closed/manifold/self-intersection-free before export and reimported closed/manifold. Sampling is not a continuous-motion or tolerance-stack proof. Geometry checks do not establish printability on every machine or guaranteed material wall thickness under all manufacturing tolerances.
+
+EDITABILITY / REGENERATION
+Native FCStd files contain editable solid snapshots and a hidden EditableFootprint object with the profile definition. They are not PartDesign feature-history models. Regeneratable profile code is in Recorder-Enclosures/WholeBodyMinimal.py, WholeBodyCyber.py, WholeBodyParametric.py; shared builder is BuildWholeBodyAtlas.FCMacro. fit-scales.json records the current fit scales. Refit and recheck after profile/component changes. Existing revision2 outputs are resume checkpoints; invalidate a changed design's verification.json before intentional regeneration. The builder requires the existing Sleek_Round source document.
+The full Boolean/mesh build runs on FreeCAD's main thread and blocks interaction while active. Do not rerun it just to view these files. The final comparison is already saved and requires no regeneration.

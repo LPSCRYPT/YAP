@@ -1,0 +1,76 @@
+{
+  "id": 2,
+  "name": "Split Level",
+  "family": "Offset theme",
+  "description": "Two rounded volumes separated by a shallow recessed waist: a broad lower body and a smaller upper body offset right and down, with a rounded upper shoulder.",
+  "body_mm": [
+    50.0,
+    50.0,
+    21.8
+  ],
+  "with_bail_length_mm": 56.2,
+  "clip_thickness_mm": 33.8,
+  "outer_volume_mm3": 50078.1,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7610
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6640
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2844
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5726
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3682
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.12061475842819,
+      8.415215570003722
+    ],
+    [
+      -23.361695911422014,
+      16.358035582540644
+    ],
+    [
+      4.060878162377755,
+      -23.030384493975582
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

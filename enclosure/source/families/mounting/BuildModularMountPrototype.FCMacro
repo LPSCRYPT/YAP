@@ -1,0 +1,108 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json, math
+OUT=output_dir('mounting')
+d=new_document('Modular_Mount_Prototype');d.Label='Modular mount — receiver / flush insert / clip insert'
+def feature(name,shape):
+ o=d.addObject('Part::Feature',name);o.Shape=shape;return o
+def box(name,w,l,h,x,y,z):
+ o=d.addObject('Part::Box',name);o.Length=w;o.Width=l;o.Height=h;o.Placement.Base=App.Vector(x,y,z);return o
+def cyl(name,r,h,x,y,z):
+ o=d.addObject('Part::Cylinder',name);o.Radius=r;o.Height=h;o.Placement.Base=App.Vector(x,y,z);return o
+def cut(name,a,b):
+ o=d.addObject('Part::Cut',name);o.Base=a;o.Tool=b;o.Refine=True;return o
+def fuse(name,parts):
+ o=d.addObject('Part::MultiFuse',name);o.Shapes=parts;o.Refine=True;return o
+def xz_prism(name,points,y,length):
+ vertices=[App.Vector(x,y,z) for x,z in points];vertices.append(vertices[0])
+ return feature(name,Part.Face(Part.makePolygon(vertices)).extrude(App.Vector(0,length,0)))
+def xy_prism(name,points,z,height):
+ vertices=[App.Vector(x,y,z) for x,y in points];vertices.append(vertices[0])
+ return feature(name,Part.Face(Part.makePolygon(vertices)).extrude(App.Vector(0,0,height)))
+block=box('ReceiverBlock',34,38,5,-17,0,0)
+channel=xz_prism('DovetailChannel',[(-12,1.4),(12,1.4),(10,4.4),(10,5.5),(-10,5.5),(-10,4.4)],-1,33.3)
+receiver=cut('ReceiverChannel',block,channel)
+pocket=box('LatchPocket',1.6,4.6,0.9,9.8,4.7,4.3)
+receiver=cut('Receiver',receiver,pocket);receiver.Label='RECEIVER — recessed dovetail, closed floor, end stop'
+profile=[(-11.6,1.7),(11.6,1.7),(9.6,4.1),(9.6,5),(-9.6,5),(-9.6,4.1)]
+blank=xz_prism('InsertBlank',profile,4,28)
+flexcut=box('LatchFlexureClearance',5.4,18,2.1,6.8,4,3.2)
+body=cut('InsertBody',blank,flexcut)
+beam=box('LatchBeam',1,17.5,1.5,8.1,5,3.5)
+hookpoints=[(9.0,5),(10.8,5),(10.8,7.3),(9.0,9)]
+hook=xy_prism('LatchHook',hookpoints,4.4,0.6)
+flat=fuse('FlushInsert',[body,beam,hook]);flat.Label='FLUSH INSERT — press latch inward, slide toward open end'
+root=box('ClipRoot',10,5,6,-5,26,5)
+leaf=box('ClipSpringLeaf',10,22,1.5,-5,8,10.5)
+nose=cyl('ClipRoundedNose',2.6,10,-5,10,8.1);nose.Placement.Rotation=App.Rotation(App.Vector(0,0,1),App.Vector(1,0,0))
+clip=fuse('ClipInsert',[flat,root,leaf,nose]);clip.Label='CLIP INSERT — same dovetail and replaceable release latch'
+d.recompute()
+for o in [receiver,flat,clip]:assert o.Shape.isValid() and len(o.Shape.Solids)==1,(o.Name,'invalid/non-single-solid')
+for o in [flat,clip]:assert receiver.Shape.common(o.Shape).Volume<0.001,(o.Name,'seated interference')
+assert abs(flat.Shape.BoundBox.ZMax-receiver.Shape.BoundBox.ZMax)<0.001
+# The hook must mechanically obstruct withdrawal when not released.
+locked=flat.Shape.copy();locked.translate(App.Vector(0,-0.8,0))
+locked_overlap=locked.common(receiver.Shape).Volume
+assert locked_overlap>0.01,'Latch does not retain the insert'
+# Kinematic proxy: tip moves 0.95 mm inward; root stays fixed. No force/fatigue claim.
+travel=0.95
+freebeam=xy_prism('ReleasedBeamProxy',[(8.1-travel,5),(9.1-travel,5),(9.1,22.5),(8.1,22.5)],3.5,1.5)
+freehook=hook.Shape.copy();freehook.translate(App.Vector(-travel,0,0))
+released=body.Shape.fuse(freebeam.Shape).fuse(freehook).removeSplitter()
+assert released.isValid() and len(released.Solids)==1
+samples=[0,0.1,0.25,0.5,0.8,1,1.5,2,3,4,6,8,10,14,18,22,26,30,34]
+withdrawal=[]
+for distance in samples:
+ moving=released.copy();moving.translate(App.Vector(0,-distance,0));volume=moving.common(receiver.Shape).Volume
+ withdrawal.append({'withdrawal_mm':distance,'overlap_mm3':round(volume,6)})
+assert max(r['overlap_mm3'] for r in withdrawal)<0.001,withdrawal
+# Additional clip geometry is outside the receiver throughout the same path.
+clipupper=root.Shape.fuse(leaf.Shape).fuse(nose.Shape)
+for distance in samples:
+ moving=clipupper.copy();moving.translate(App.Vector(0,-distance,0));assert moving.common(receiver.Shape).Volume<0.001
+stop=flat.Shape.copy();stop.translate(App.Vector(0,1,0));assert stop.common(receiver.Shape).Volume>0.01
+notes=d.addObject('Spreadsheet::Sheet','PrototypeNotes')
+texts=['STANDALONE FIT COUPON — no changes to pendant cases.',
+ 'Receiver 34 x 38 x 5 mm. Continuous protective floor: 1.4 mm. Pocket depth: 3.6 mm.',
+ 'Inserts slide in from y=0 edge toward positive y. Seated insert y=4..32; end wall y=32.3.',
+ 'Flush insert face z=5 exactly matches receiver rear face. Small latch access recess remains visible.',
+ 'Dovetail nominal horizontal side clearances vary with height (~0.2–0.6 mm); floor clearance 0.3 mm.',
+ 'Latch: 17.5 mm long x 1 mm wide flexure, 1.5 mm high. Press exposed right-hand tab inward ~0.95 mm.',
+ 'Latch retracts horizontally, not into the electronics cavity. Slide insert toward open edge while held inward.',
+ 'Both inserts carry their own latch. The receiver contains no flexible latch.',
+ 'Hook has an insertion ramp and a retaining shoulder; geometry checks do not prove automatic snap-in force.',
+ 'Geometry checks: valid single solids, flush face, seated clearance, locked retention and sampled released sliding path.',
+ 'Released shape is a kinematic proxy, NOT FEM. Actual elastic deflection, strength, wear and clip grip are untested.',
+ 'Print fit-test in PETG without scaling. Receiver and flush insert have normalized bed-level STL exports.',
+ 'Clip insert exported on its side. Inspect slicer supports and layer orientation before printing.',
+ 'Do not glue inserts into receiver. Deburr, test sliding and latch first; adjust CAD clearance if needed.',
+ 'Case integration needs approximately 3.6 mm pocket depth plus protective floor; this coupon is not installed in a case.',
+ 'Profile dimensions live in the generator macro; native boxes/cylinders and boolean features remain editable.']
+for i,text in enumerate(texts,1):notes.set('A%d'%i,text)
+for o in d.Objects:o.ViewObject.Visibility=False
+colors={'Receiver':(0.65,0.73,0.8),'FlushInsert':(0.25,0.75,0.58),'ClipInsert':(0.25,0.35,0.5)}
+for o in [receiver,flat,clip]:o.ViewObject.ShapeColor=colors[o.Name]
+# Presentation: three equal-scale stations, not three different mechanisms.
+for title,offset,objects in [('1 / FLAT MODE',0,[receiver,flat]),('2 / CLIP MODE',52,[receiver,clip]),('3 / SWAP PARTS',104,[receiver])]:
+ group=d.addObject('App::Part','Station');group.Label=title
+ for original in objects:
+  obj=feature('View_'+original.Name,original.Shape.copy());obj.Label=original.Label;obj.ViewObject.ShapeColor=colors[original.Name];group.addObject(obj)
+ group.Placement.Base=App.Vector(offset,0,0)
+ caption=d.addObject('App::Annotation','Caption');caption.LabelText=[title];caption.Position=App.Vector(offset-17,-8,0);caption.ViewObject.FontSize=14;caption.ViewObject.TextColor=(0.95,0.95,0.95)
+for original,offset in [(flat,App.Vector(104,-42,0)),(clip,App.Vector(142,-42,0))]:
+ obj=feature('Loose_'+original.Name,original.Shape.copy());obj.Placement.Base=obj.Placement.Base+offset;obj.ViewObject.ShapeColor=colors[original.Name];obj.Label='REMOVED / '+original.Label
+# Direction arrows on the open receiver and release tab annotation.
+arrow=xy_prism('SlideArrow',[(-2,8),(2,8),(2,17),(4,17),(0,22),(-4,17),(-2,17)],1.45,0.1)
+arrow.Placement.Base=App.Vector(104,0,0);arrow.ViewObject.ShapeColor=(0.95,0.65,0.15)
+label=d.addObject('App::Annotation','ReleaseLabel');label.LabelText=['Side latch: press inward','then slide toward open edge'];label.Position=App.Vector(94,-55,0);label.ViewObject.FontSize=13;label.ViewObject.TextColor=(0.95,0.95,0.95)
+d.recompute()
+Part.export([receiver,flat,clip],OUT+'/Modular-Mount-Prototype.step')
+for original in [receiver,flat,clip]:
+ shape=original.Shape.copy()
+ if original==clip:shape.rotate(App.Vector(),App.Vector(0,1,0),90)
+ bb=shape.BoundBox;shape.translate(App.Vector(-bb.XMin,-bb.YMin,-bb.ZMin))
+ temp=feature('PrintOrientation',shape);Mesh.export([temp],OUT+'/Modular-Mount-'+original.Name+'.stl');d.removeObject(temp.Name)
+d.recompute();d.saveAs(OUT+'/Modular-Mount-Prototype.FCStd')
+report={'receiver_mm':[34,38,5],'recess_depth_mm':3.6,'floor_mm':1.4,'flush_error_mm':flat.Shape.BoundBox.ZMax-receiver.Shape.BoundBox.ZMax,'locked_withdrawal_overlap_mm3':locked_overlap,'release_tip_displacement_mm':travel,'released_path_checks':withdrawal,'valid_single_solids':True,'mechanical_testing':'not performed'}
+with open(OUT+'/modular-mount-checks.json','w') as f:json.dump(report,f,indent=2)
+App.setActiveDocument(d.Name);Gui.activeDocument().activeView().viewAxonometric();Gui.updateGui()
+print(json.dumps(report))

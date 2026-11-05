@@ -1,0 +1,50 @@
+CONTINUOUS SMOOTH PEBBLE SHELL
+
+This is a separate design, not an overwrite of Pendant-Sleek or the earlier hollow cases.
+It replaces the cylinder/filleted-front construction with ONE degree-five C2 B-spline meridian revolved through 360 degrees. The meridian has knot multiplicities [6,3,6]: its two mathematical spans join with continuous tangent and curvature. There is no cylindrical side section, planar front plate, stepped shoulder or separate front cap. The rear is intentionally flat and removable.
+
+SIZE / TRADEOFF
+Conservative FreeCAD body bounding envelope: approximately 54.13 mm wide x 54.13 mm long x 25 mm thick, excluding necklace eyelet and optional clip.
+Flat rear profile diameter: 51 mm.
+With the optional external clip module: 37 mm overall thickness.
+Previous low-profile round case: 50 mm diameter x 20.8 mm thick.
+This is a smoother, somewhat larger shape around the existing component layout. It is NOT a demonstrated minimum-size solution or an Omi-size replica.
+Minimum distance between the unperforated outer/inner revolved profiles: approximately 1.522 mm. Rear plate remains 1.4 mm thick. Openings and screw holes are intentionally excluded from that wall-distance statement.
+
+PRINT FILES
+01-FlatRearBase.stl
+02-SmoothHood.stl
+03-LowerCarrier.stl
+04-UpperCarrier.stl
+05-TopRetainer.stl
+06-LightGuide.stl — diameter 1.6 mm x 6.5 mm long, clear/translucent material
+07-ClipReceiverAdapter.stl — optional
+08-SlideOnClip.stl — optional
+
+Use this complete set rather than mixing bases/hoods with older designs: rear closure screw positions and the necklace eyelet were relocated. Carrier reliefs follow the new closure posts. The carrier screw positions and external clip interface remain unchanged.
+Import STL parts as separate objects in millimeters at 100% scale; Auto Arrange. Files are normalized to Z=0. STEP and FreeCAD assemblies are installed geometry, not print layouts. PETG is a reasonable fit-test starting material, not a validated printer profile. Hood is supplied open end down and may require removable support beneath the convex roof. Lower carrier also needs support around its downward restraints. Keep tiny holes, strap slots, dovetail and latch gaps free of fused support. Clip parts are side-oriented; consider a brim.
+
+ASSEMBLY / HARDWARE
+Battery, XIAO, amplifier, SD holder, driver, motor, speaker, microphone boards, antenna and connector retain their positions from the low-profile round model.
+Hood: three M1.6 x 6 mm countersunk screws from the rear; 1.3 mm plastic pilots. Select a plastic-compatible thread form and verify actual print fit.
+Internal carriers: three M2 x 14 mm countersunk screws; 1.6 mm plastic pilots. Head envelope approximately diameter 4 mm x 1.2 mm deep. Raised heads/longer screws are not interchangeable.
+Board retention: thin insulating bands, up to 3 mm wide and approximately 0.15 mm thick, through the existing slots. Driver band runs along Y; XIAO/amplifier bands run along X. Secure the overlap and avoid loading chips, solder joints or connectors. Thick cable ties do not fit.
+Use nominal 0.3 mm soft insulating pads at microphone/speaker rims and motor/connector restraints; nominal 0.5 mm SD-holder retaining pad. Pad the rigid speaker rim, never the diaphragm. Actual foam preload, inlet locations and acoustic sealing need physical verification.
+Battery sits on a flat pad with rounded stops and 0.4 mm top clearance. No pouch compression. Stop using a swollen pack; do not force the carrier over it.
+Antenna uses removable insulating adhesive; RF keepout remains unvalidated.
+Install electronics and lower carrier, then upper carrier, rim pads and top retainer. Tighten carrier screws lightly. Fit LED/light guide, lower the hood over the retained assembly, then fit the separate rear closure screws. The hood is not the component clamp.
+SD access remains INTERNAL, with service slack to lift the holder after opening the enclosure. Button remains the requested internal placeholder and small actuator opening; its actual switch/actuator is not yet defined.
+Use a breakaway necklace cord; eyelet strength has not been load-tested.
+
+OPTIONAL CLIP
+Clip hardware and dovetail are copied unchanged from the low-profile set: minimum approximately 0.305 mm flank clearance, 0.35 mm floor clearance and 0.4 mm per side at the mouth. The clip slides off tool-free; returning to a completely flat necklace back requires removing the external receiver adapter with two screws.
+Adapter: two M2 x 8 mm countersunk screws into flush M2 heat-set inserts at x=+-14, y=-15 mm. CAD assumes approximately 3.2 mm OD x 3 mm insert length; verify the actual insert manufacturer's pilot recommendation. No longer screws: carrier fasteners occupy the same posts from above.
+
+CHECKS PERFORMED
+Outer/inner envelopes and final shell/rear plate passed detailed FreeCAD boolean checks. All eight printable parts are valid single solids. STL meshes checked closed, without detected non-manifold geometry/self-intersections, then reimported. No modeled interference above 0.001 mm3 between printed parts, component envelopes, existing carrier screw heads or motor/speaker wire reservations. Hood removal sampled vertically over the retained components and screws. The new rear plate clears the copied clip along its withdrawal path; the unchanged adapter/latch geometry retains its previous checked fit.
+
+LIMITS
+No physical print, clip load/fatigue test, optical test, acoustic/RF test, charging/thermal test or waterproofing validation. The larger front cavity needs acoustic evaluation; dedicated acoustic ducts and isolation seals are not modeled. Tall mic headers do not fit: direct wires assumed.
+The inherited CAD includes two microphone boards; that count is not a requirement to use two. Mic and motor thicknesses remain assumed 3 mm. SD is a provisional 18 x 24 x 3 mm package before rotation; eight pins do not identify its size or ejection mechanism. Amplifier, driver, antenna and connector envelopes remain provisional. Confirm actual parts before committing to a final print.
+
+Smooth-Pebble.FCStd contains the installed assembly, hidden carriers/component/hardware references, and a hidden ContinuousMeridian object for inspecting the real profile. Necklace-Assembly.step excludes the optional clip, which has its own STEP. Exterior.png is the actual FreeCAD view. verification.json records dimensions and geometry checks.

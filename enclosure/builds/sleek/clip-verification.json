@@ -1,0 +1,12 @@
+{
+  "parts_valid": true,
+  "closed_meshes": true,
+  "installed_collisions": false,
+  "latch_retention_checked": true,
+  "released_slide_checked": true,
+  "flank_clearance_min_mm": 0.305,
+  "floor_clearance_mm": 0.35,
+  "necklace_thickness_mm": 20.8,
+  "clip_mode_thickness_mm": 32.8,
+  "mode_change": "Slide clip out tool-free; remove receiver adapter with two M2x8 countersunk screws for completely flat necklace mode."
+}

@@ -1,0 +1,68 @@
+{
+  "reference": "omi-lf-capture.webp, appearance only; photo provides no reliable scale",
+  "body_envelope_mm": [
+    54.131103515625,
+    54.131103515625,
+    24.65
+  ],
+  "face_diameter_mm": 41,
+  "face_perimeter_radial_gap_mm": 0.3,
+  "face_flange_radial_clearance_mm": 0.3,
+  "rear_diameter_mm": 51,
+  "bail_hole_diameter_mm": 3.2,
+  "bail_y_max_mm": 33.2,
+  "face_pad_working_thickness_mm": 0.5,
+  "clip_mode_thickness_mm": 36.65,
+  "face_captured_and_rear_insertion_checked": true,
+  "hood_removal_checked": true,
+  "hidden_seam_vents_checked": 8,
+  "issues": [],
+  "parts": [
+    {
+      "part": "FlatRearBase",
+      "closed_reimported_mesh": true,
+      "facets": 10110
+    },
+    {
+      "part": "RoundedBody",
+      "closed_reimported_mesh": true,
+      "facets": 33918
+    },
+    {
+      "part": "InsetFace",
+      "closed_reimported_mesh": true,
+      "facets": 3840
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3852
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 7662
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 6368
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 416
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1960
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 464
+    }
+  ],
+  "status": "CAD-checked mechanical fit prototype; acoustic performance, bail strength and physical fit untested"
+}

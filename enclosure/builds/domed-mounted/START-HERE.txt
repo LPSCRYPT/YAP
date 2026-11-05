@@ -1,0 +1,59 @@
+DOMED PENDANT WITH REMOVABLE INTERNAL MOUNTING
+
+Separate round side-button design. Existing flat-top models and their export files are unchanged.
+56 mm body diameter; 6 mm dome rise; 30 mm overall thickness with flush insert, 37 mm with clothing clip. Necklace eyelet remains outside the nominal circular body footprint.
+
+PRINTED PARTS
+01-Base.stl: integrated necklace eyelet, rear dovetail receiver, battery support/rounded locators, motor cradle, connector stops and three carrier screw posts.
+02-DomedLid.stl: spherical front, existing lid interface, central LED opening, microphone ports, speaker grille and recessed lid screw seats.
+03-LowerCarrier.stl: supports XIAO/amplifier/driver, board locating fences, retaining-band slots, downward motor/connector restraints. Also prevents battery lift without clamping it.
+04-UpperCarrier.stl: supports SD holder, microphone boards and speaker; circular locating seats and lead exits.
+05-TopRetainer.stl: retains microphone/speaker rims and SD-holder body independently of lid; central LED locating opening.
+06-FlushInsert.stl: removable flat necklace back.
+07-ClipInsert.stl: interchangeable clothing clip.
+08-LightGuide.stl: longer light guide for dome, clear/translucent material suggested.
+Install ONE rear insert at a time. Import STLs as separate millimeter objects, scale 100%, Auto Arrange. CAD assemblies are not print layouts.
+
+MOUNTING METHOD / EXTRA NON-PRINTED PARTS
+Three carrier screws: nominal M2 x 16 mm under-head length, heads no larger than approximately 3.6 mm diameter x 1.5 mm high. Select a plastic-compatible thread form for the modeled 1.6 mm pilot; verify your print before forcing screws. No threaded inserts or nuts are modeled. In CAD the screw tips stop at Z=2.7, above the original protective floor. Do not substitute longer screws.
+Three separate lid screws remain required. Verify screw length against the existing pilot depth and new recessed seats.
+Three thin insulating retaining bands: 3 mm wide, approximately 0.15 mm material thickness, threaded through lower-carrier slots around the XIAO, amplifier and motor-driver board. Insulating polyester film/tape with a secure overlapping adhesive closure is the intended prototype method. Avoid pressure on fragile components, solder joints and antenna connections; adjust band routing against the real boards. Ordinary thick cable ties DO NOT fit the available stack clearance. Bands are hardware, not rigid printed loops.
+Motor pad: 6 x 2 x 0.3 mm nominal working thickness.
+Battery-connector pad: 4 x 4 x 0.3 mm nominal working thickness.
+SD retaining pad: 14 x 3 x 0.5 mm nominal working thickness.
+Microphone rim pads: two rings, OD 13.8 mm / ID 12 mm / 0.3 mm nominal working thickness.
+Speaker rim pad: OD 9.8 mm / ID 8 mm / 0.3 mm nominal working thickness. Notch the edge nearest the central LED to clear its socket, as shown in CAD. Apply only to the actual rigid speaker rim, never its moving diaphragm.
+Use soft electrically insulating pads; these dimensions are modeled working gaps, not a validated foam grade/preload specification. Do not overtighten to compensate for a wrong component thickness.
+Antenna: removable insulating adhesive on the lower-level wall/floor area; no pressure clamp. RF behavior remains untested.
+Battery: supported on a raised flat pad with rounded side stops and 0.4 mm top clearance below the removable lower carrier. No compression strap, screw tip or sharp snap hook bears on the pouch. This clearance is not a guarantee of safe accommodation of a swollen battery; stop use if a pack swells. Add no foam that compresses the pack.
+
+ASSEMBLY ORDER
+1. Deburr and test dovetail fit before installing electronics. Check carrier pilot fit on a print sample.
+2. Fit antenna, motor and connector at the bottom level. Route motor leads through the open side of its cradle.
+3. Place the battery on its support pad, within the rounded locators. Route its leads without crossing a screw post or trapping them under a carrier.
+4. Thread the insulating board bands through the lower shelf and secure XIAO/amplifier/driver to it. Place the shelf on the three base posts. Fit motor/connector pads beneath its downward restraints.
+5. Route wiring through the open carrier channels; check all solder joints and insulation. Fit the upper carrier on the lower shelf's three standoffs.
+6. Fit SD holder, microphones and speaker into their seats. The SD/card-facing edge stays open. Use direct wires rather than tall microphone headers; pass mic leads through the seat notches and speaker leads through the reserved side opening.
+7. Position the soft rim/SD pads and install the top retainer. Secure the whole carrier stack with the three M2x16 screws, lightly snug only. The lid is NOT the carrier clamp.
+8. Install LED/light guide and lid using the separate lid screws. Button remains the previously requested placeholder, awaiting the actual switch/actuator.
+9. Slide in flush or clip insert from the USB/SD edge until latched. Push the side latch inward and slide back out to change modes.
+For service: remove lid and carrier screws, then lift out top retainer, upper carrier and lower carrier in that order. Disconnect wiring as needed; do not pull on leads.
+
+DOVETAIL PRINT ALLOWANCE — NEW DOMED VERSION ONLY
+Minimum perpendicular flank clearance approximately 0.305 mm per side, increasing along the slope; mouth clearance 0.4 mm per side; floor clearance 0.35 mm. The latch retains the module, not a force-fit in the dovetail. Flush outer surface is retained. Do not scale the complete STL to tune the joint. Real fit still depends on printer calibration, material, layer orientation and support cleanup.
+
+PRINTING
+PETG is a reasonable starting material, not a validated recipe. Inspect every layer in the slicer. Base recess requires removable support. Dome is oriented upright on its rim; the inside roof may need support. Lower carrier has downward restraints and upper standoffs, so its supplied orientation also needs carefully placed support. Upper carrier and retainer must retain unobstructed holes, wire notches and thin walls. Rear inserts are exported on their sides; use a brim if needed. All STL minimum Z values are normalized to the build plate. No printer-specific G-code/profile is included.
+
+WHAT WAS CHECKED
+Eight printable CAD parts are valid single solids. All exported STLs were reimported and checked closed, without detected non-manifold geometry or self-intersections. No modeled collisions above 0.001 mm3 between printed parts, component envelopes, motor/speaker wire reservations or hardware (except intentional screw/pilot engagement). Carriers were sampled lifting vertically clear of the base. The loosened rear insert was checked for latch retention and released withdrawal clearance.
+The release motion is a kinematic proxy, not a flexure stress/fatigue analysis. No physical print, retention load test, foam compression test, sound/RF test or charging/thermal test has been performed.
+
+STILL PROVISIONAL
+SD holder 18 x 24 x 3 mm: eight pins does not establish the actual package or card ejection mechanism. Mic and motor thicknesses remain assumed 3 mm. Amplifier, driver, connector and antenna envelopes also need confirmation. Microphone pads/headers and acoustic inlet orientation must be checked against the actual boards. The dome ports open into the front cavity; dedicated acoustic isolation ducts/seals are not yet modeled. Button is intentionally unfinished. This is a CAD-checked mechanical fit prototype, not a validated finished wearable.
+
+VIEWING
+Domed-Mounted-Pendant.FCStd: installed geometry; toggle carrier, component and RequiredHardware objects to inspect inside.
+Inspection-Exploded.FCStd: assembled exterior on the left, separated mounting layers on the right. Exploded separations are for inspection only, not assembly clearances.
+Domed-Mounted-Flush-Assembly.step: installed printed parts with flush insert; hardware/component references remain in the native FreeCAD file.
+verification.json: numerical geometry and mesh checks.

@@ -1,0 +1,40 @@
+OFFSET CUT — FOUR WHOLE-BODY REFINEMENTS
+
+Open Comparison.FCStd or Comparison.png. Original Offset Cut is on the left; four NEW designs are on the right, in a2x2 grid. All five are equal scale and the same body colour so the shape differences, not colours, drive the comparison. The original is a reference, not a fifth new variation. Earlier assemblies and exports are unchanged.
+
+BODY SIZE, mm: width x length x thickness, excluding necklace eye and optional clip
+Original Offset Cut  55.35 x 53.51 x 22.10
+01 Offset Compact    50.00 x 50.00 x 21.30
+02 Offset Slash      56.15 x 54.07 x 22.60
+03 Offset Taper      54.03 x 52.03 x 21.80
+04 Offset Soft       50.00 x 50.00 x 21.80
+
+01: Tight square footprint with unequal diagonal cuts and a narrow roof chamfer. Strongest compact option.
+02: Dominant diagonal cut and a much broader/deeper roof bevel. More pronounced facets, slightly larger than the original: a styling tradeoff, not a size improvement.
+03: Wider upper shoulders and narrower lower outline, with unequal diagonal corner cuts. More directional silhouette, smaller than the original.
+04: Compact outline with physically softened corners and a rounded shoulder transition. Corner/shoulder curves are sampled CAD approximations, not material softness.
+Each changes the full shell AND its matching rear outline. None uses a decorative face insert. These are compact fits around the existing component arrangement, not proven absolute minimum dimensions.
+
+EACH VARIANT FOLDER
+01-RearBase.stl;02-WholeBodyShell.stl;03-LowerCarrier.stl;
+04-UpperCarrier.stl;05-TopRetainer.stl;06-LightGuide.stl;
+07-ClipReceiverAdapter.stl;08-SlideOnClip.stl.
+Assembly.FCStd;Necklace-Assembly.step;Optional-Clip.step;verification.json.
+Use all parts from ONE folder: closure locations, carrier outlines and light-guide length can differ. STL units are mm; all STL parts are bed-normalized. Do not shrink them in the slicer. Native/STEP exports use assembled positions.
+
+ASSEMBLY / HARDWARE
+The retained component layout comes from Sleek_Round; 24.5x24.5x5 mm protected battery, two retained microphone modules, XIAO, SD and supporting electronics. Battery support and locating stops remain, with nominal0.4 mm upper clearance. Never compress the pouch.
+Three M2x14 mm countersunk carrier screws into plastic pilots independently retain the stack. Head envelope about diameter4 x1.2 mm. Three M1.6x6 mm countersunk screws close the hood using1.3 mm plastic pilots. Confirm actual screw dimensions/thread suitability; do not overtighten or substitute longer screws.
+XIAO/amplifier/driver require thin insulating retaining bands: up to3 mm wide, about0.15 mm thick. Driver band runs along Y, others along X. Thick cable ties do not fit. Nominal0.3 mm insulating pads restrain microphone/speaker rims, motor and connector; nominal0.5 mm pad at SD bridge. Pad only the speaker's rigid rim, not its diaphragm. Antenna requires insulating removable adhesive. These are extra nonprinted restraints; select and verify real materials/preload.
+Install lower components/carrier, upper components/carrier, pads/bands and top retainer. Secure carrier screws. Install centered LED/light guide, lower hood over the stack and fasten rear closure screws. SD access is internal; leave wiring service slack. Button opening and switch envelope remain provisional pending the actual actuator.
+Necklace eye has3.6 mm bore. Use a breakaway cord; printed bail strength is untested. Body length including eye is56.2,60.27,58.23,56.2 mm respectively.
+Optional clip adds12 mm thickness. Receiver uses two M2x8 mm countersunk screws into flush M2 inserts at x=+-14,y=-15, assumed about3.2 mm OD x3 mm long; follow actual insert manufacturer's pilot requirements. Clip slides off tool-free. Removing receiver for a completely flat necklace back needs its two screws removed, without electronics disassembly. Dovetail/latch geometry unchanged: about0.305 mm minimum flank allowance,0.35 mm floor and0.4 mm mouth per side. Print tolerance and latch fatigue need physical testing.
+
+PRINT / VALIDATION LIMITS
+PETG is a fit-test starting point, not a verified printer profile. Preview roof, eye, downward carrier restraints and support removal. Keep ports/pilots/slots clear. Print the guide translucent or use an appropriate optical rod. No G-code supplied.
+All four passed single-solid validity, detailed shell/base Boolean checks, component containment, component/hardware/wire-reservation interference checks, eight sampled hood-extraction positions and seven clip-release positions. Carrier screw engagement with base pilots is intentional. All32 STL files were checked closed/manifold/self-intersection-free before export, then reimported closed/manifold. These are sampled CAD checks, not continuous-motion, tolerance-stack, strength or physical-fit proof.
+Actual SD geometry is still provisional24x18x3 mm in this orientation; microphone/motor thickness assumed3 mm. Amplifier, driver, antenna and connector envelopes remain provisional. Direct microphone wiring is assumed; tall headers do not fit. Ports are untuned, with no claimed acoustic isolation or waterproofing. No physical print, RF, thermal/charging, acoustic, optical, fatigue or strength tests performed.
+
+EDITING / REGENERATION
+FCStd files are editable solid snapshots with a hidden footprint/profile definition, not PartDesign feature-history models. Source profiles: Recorder-Enclosures/OffsetCutProfiles.py. Builder: BuildOffsetCutStudy.FCMacro, reusing the verified BuildWholeBodyAtlas.FCMacro geometry/checks. Existing Sleek_Round and Atlas_08 documents are inputs. Loading the study macro does not start a build. It exposes build(0)..build(3), run separately, then compare(). Completed per-design verification files are resume checkpoints; invalidate the corresponding checkpoint before intentionally rebuilding changed geometry.
+UI events are serviced between CAD operations. A single Boolean/mesh operation can still briefly block interaction. Do not regenerate merely to view these already-saved designs.

@@ -1,0 +1,82 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json
+OUT=output_dir('mounting')
+reports=[]
+for key in ['PuckFace','PuckSide','Capsule']:
+ d=document('Measured_'+key)
+ assert not d.getObject('WearableBase'),'Attachments already exist; edit native objects instead of duplicating.'
+ def box(name,w,l,h,x,y,z):
+  o=d.addObject('Part::Box',name);o.Length=w;o.Width=l;o.Height=h;o.Placement.Base=App.Vector(x,y,z);return o
+ def cyl(name,r,h,x,y,z):
+  o=d.addObject('Part::Cylinder',name);o.Radius=r;o.Height=h;o.Placement.Base=App.Vector(x,y,z);return o
+ def fuse(name,parts):
+  o=d.addObject('Part::MultiFuse',name);o.Shapes=parts;o.Refine=True;return o
+ def cut(name,a,b):
+  o=d.addObject('Part::Cut',name);o.Base=a;o.Tool=b;o.Refine=True;return o
+ length=float(d.Parameters.get('B2'))
+ loop=cyl('NecklaceEyeOuter',4.2,3.2,0,length/2+2,3)
+ loop.setExpression('Placement.Base.y','Parameters.Length/2+2')
+ bore=cyl('NecklaceEyeBore',2.2,3.6,0,length/2+2,2.8)
+ bore.setExpression('Placement.Base.y','Parameters.Length/2+2')
+ necklacebase=cut('NecklaceBase',fuse('BaseAndEye',[d.Base,loop]),bore)
+ necklacebase.Label='Base with integral necklace eyelet — 4.4 mm opening'
+ d.recompute()
+ assert necklacebase.Shape.isValid() and len(necklacebase.Shape.Solids)==1
+ print(key+': necklace eyelet valid and fused')
+ # Rear docking pad: 24 x 10 mm rounded pad, 2 mm external projection.
+ pad=fuse('ClipDockPad',[box('DockWebX',18,10,2.2,-9,-4,-2),box('DockWebY',24,4,2.2,-12,-1,-2)]+[cyl('DockCorner',3,2.2,x,y,-2) for x in [-9,9] for y in [-1,3]])
+ pilots=fuse('ClipBlindPilots',[cyl('ClipPilot',0.8,3, x,1,-2.1) for x in [-7,7]])
+ wearable=cut('WearableBase',fuse('BaseWithDock',[necklacebase,pad]),pilots)
+ wearable.Label='BASE — necklace eye + removable clip dock'
+ # Separate PETG-style flexure concept. A round-ended nose leaves 0.7 mm to the rear shell.
+ shoe=box('ClipShoe',24,10,2,-12,-4,-4)
+ root=box('ClipRoot',12,4,5,-6,4,-7)
+ leaf=box('ClipLeaf',12,19.2,1.6,-6,6,-7)
+ tip=cyl('ClipRoundedNose',2.4,12,-6,23,-3.1)
+ tip.Placement.Rotation=App.Rotation(App.Vector(0,0,1),App.Vector(1,0,0))
+ clipholes=fuse('ClipClearanceHoles',[cyl('ClipClearance',1.1,3,x,1,-4.5) for x in [-7,7]])
+ clip=cut('ClothingClip',fuse('ClipBlank',[shoe,root,leaf,tip]),clipholes)
+ clip.Label='REMOVABLE CLOTHING CLIP — 2 x M2, prototype flexure'
+ clip.ViewObject.ShapeColor=(0.25,0.3,0.36)
+ clip.addProperty('App::PropertyString','Mounting','Design');clip.Mounting='Two M2 x 4 mm screws through 2 mm shoe; 14 mm spacing. Check actual screw length. Longer screws risk battery puncture.'
+ clip.addProperty('App::PropertyString','Validation','Design');clip.Validation='Geometry checked only. PETG prototype; grip, fatigue, print orientation and skin-contact comfort untested.'
+ sheet=d.addObject('Spreadsheet::Sheet','WearableMountNotes')
+ for row,text in enumerate(['Integral necklace eye: 4.4 mm bore, 8.4 mm outside diameter, 3.2 mm thick. Adds 6.2 mm to case length.',
+ 'Use a breakaway necklace cord; eyelet is not a safety-release mechanism. Eyelet strength is untested.',
+ 'Rear docking pad: 24 x 10 mm, projects 2 mm. Two blind 1.6 mm pilot holes, 14 mm center spacing.',
+ 'Clip uses 2.2 mm clearance holes. M2 x 4 mm screws with 2 mm clip shoe leave about 2 mm nominal engagement.',
+ 'Blind pilots stop at z=0.9 mm; 0.5 mm of the 1.4 mm floor remains. Never substitute longer screws without checking.',
+ 'Clip extends 7 mm behind original shell, giving 27.4 mm nominal assembled thickness.',
+ 'Rounded clip nose leaves 0.7 mm nominal fabric gap. Validate grip and fatigue with actual fabric and print material.',
+ 'Clip STL is exported on its side for printing. STEP and FCStd retain assembly coordinates.',
+ 'Attachment load, antenna detuning from metal screws, clothing rubbing and microphone noise require physical tests.'],1):sheet.set('A%d'%row,text)
+ d.recompute()
+ for o in [wearable,clip]:assert o.Shape.isValid() and len(o.Shape.Solids)==1,(key,o.Name)
+ issues=[]
+ for a in [wearable,clip]:
+  for b in list(d.Components.Group)+list(d.WireReservations.Group)+[d.Lid]:
+   v=a.Shape.common(b.Shape).Volume
+   if v>0.001:issues.append([a.Name,b.Name,round(v,5)])
+ v=wearable.Shape.common(clip.Shape).Volume
+ if v>0.001:issues.append(['WearableBase','ClothingClip',round(v,5)])
+ assert not issues,issues
+ # Assert blind drill tools never reach the battery; verify screw axes match clip holes.
+ assert pilots.Shape.common(d.Battery.Shape).Volume<0.001
+ assert wearable.Shape.common(bore.Shape).Volume<0.001
+ for o in d.Objects:
+  if o.Name not in [v.Name for v in d.Components.Group]+['Lid','WearableBase','ClothingClip']:o.ViewObject.Visibility=False
+ wearable.ViewObject.Visibility=True;wearable.ViewObject.ShapeColor=(0.72,0.78,0.82);wearable.ViewObject.Transparency=65
+ clip.ViewObject.Visibility=True;d.Lid.ViewObject.Visibility=True
+ d.recompute();d.save()
+ Part.export([wearable,d.Lid,clip],OUT+'/Measured-'+key+'-Wearable.step')
+ Mesh.export([wearable],OUT+'/Measured-'+key+'-WearableBase.stl')
+ # Orient the detachable spring clip on its side, then normalize to the print bed.
+ printshape=clip.Shape.copy();printshape.rotate(App.Vector(),App.Vector(0,1,0),90)
+ bb=printshape.BoundBox;printshape.translate(App.Vector(-bb.XMin,-bb.YMin,-bb.ZMin))
+ printobj=d.addObject('Part::Feature','ClipPrintOrientation');printobj.Shape=printshape
+ Mesh.export([printobj],OUT+'/Measured-'+key+'-ClothingClip.stl')
+ d.removeObject(printobj.Name);d.recompute();d.save()
+ bb=wearable.Shape.BoundBox
+ reports.append({'design':key,'base_bounds_mm':[round(bb.XLength,2),round(bb.YLength,2),round(bb.ZLength,2)],'necklace_bore_mm':4.4,'clip_hole_pitch_mm':14,'rear_pad_projection_mm':2,'clip_projection_mm':7,'total_thickness_with_clip_mm':27.4,'collisions_mm3':issues,'valid_single_solids':True})
+with open(OUT+'/wearable-mount-report.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

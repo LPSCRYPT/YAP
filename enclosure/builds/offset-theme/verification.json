@@ -1,0 +1,458 @@
+[
+  {
+    "id": 1,
+    "name": "Offset Wedge",
+    "family": "Offset theme",
+    "description": "A sheared four-sided body with one uninterrupted inclined roof; the full side elevation rises across the enclosure rather than using a bevel or an inset face.",
+    "body_mm": [
+      50.0,
+      53.0,
+      26.96
+    ],
+    "with_bail_length_mm": 57.2,
+    "clip_thickness_mm": 38.96,
+    "outer_volume_mm3": 58310.0,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7538
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6068
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 3036
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5914
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3610
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 340
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.120614758428182,
+        8.41521557000372
+      ],
+      [
+        -23.361695911422014,
+        16.358035582540644
+      ],
+      [
+        7.980927232249555,
+        -21.92741735691611
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  },
+  {
+    "id": 2,
+    "name": "Split Level",
+    "family": "Offset theme",
+    "description": "Two rounded volumes separated by a shallow recessed waist: a broad lower body and a smaller upper body offset right and down, with a rounded upper shoulder.",
+    "body_mm": [
+      50.0,
+      50.0,
+      21.8
+    ],
+    "with_bail_length_mm": 56.2,
+    "clip_thickness_mm": 33.8,
+    "outer_volume_mm3": 50078.1,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7610
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6640
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2844
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5726
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3682
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.12061475842819,
+        8.415215570003722
+      ],
+      [
+        -23.361695911422014,
+        16.358035582540644
+      ],
+      [
+        4.060878162377755,
+        -23.030384493975582
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  },
+  {
+    "id": 3,
+    "name": "Diagonal Capsule",
+    "family": "Offset theme",
+    "description": "Elongated stadium body with circular ends, short straight flanks, and one full-height upper-right diagonal slice; an inset shifted roof continues the cut. The square carrier must be outline-trimmed.",
+    "body_mm": [
+      49.6,
+      57.6,
+      22.6
+    ],
+    "with_bail_length_mm": 63.8,
+    "clip_thickness_mm": 34.6,
+    "outer_volume_mm3": 50745.3,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7692
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6678
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2724
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5598
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3610
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        22.390864080516007,
+        8.149608044808106
+      ],
+      [
+        -20.338150169997643,
+        14.240926062273434
+      ],
+      [
+        4.632389294508546,
+        -26.271585187338086
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  },
+  {
+    "id": 4,
+    "name": "Folded Shell",
+    "family": "Offset theme",
+    "description": "An asymmetric six-sided body with two broad opposing roof planes meeting along the off-centre diagonal x + 0.4*y = 2; a real ridge spanning the shell, not a perimeter bevel.",
+    "body_mm": [
+      50.0,
+      56.0,
+      26.4
+    ],
+    "with_bail_length_mm": 59.61,
+    "clip_thickness_mm": 38.4,
+    "outer_volume_mm3": 59321.8,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7546
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6138
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2948
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5826
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3618
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 340
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.120614758428182,
+        8.41521557000372
+      ],
+      [
+        -21.389309399482467,
+        14.976955678617418
+      ],
+      [
+        4.273036073630683,
+        -24.23359179895239
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  },
+  {
+    "id": 5,
+    "name": "Asymmetric Shield",
+    "family": "Offset theme",
+    "description": "Broad upper shoulders taper through unequal lower diagonals to a tip offset 4 mm right; the dominant upper-right diagonal and shifted inset roof form a directional shield, not a clipped box.",
+    "body_mm": [
+      52.0,
+      54.5,
+      23.4
+    ],
+    "with_bail_length_mm": 60.7,
+    "clip_thickness_mm": 35.4,
+    "outer_volume_mm3": 53849.3,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7562
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6032
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2968
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5846
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3638
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        24.120614758428182,
+        8.779185804269922
+      ],
+      [
+        -22.07948375921668,
+        15.460220967982371
+      ],
+      [
+        4.681528297665438,
+        -26.550266322575904
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  },
+  {
+    "id": 6,
+    "name": "Soft Hard Hybrid",
+    "family": "Offset theme",
+    "description": "A continuous half-round left body meets a flat right flank and two long diagonal facets; its shallow shifted roof bevel keeps the soft-versus-planar contrast visible throughout the body.",
+    "body_mm": [
+      50.0,
+      50.0,
+      22.2
+    ],
+    "with_bail_length_mm": 56.2,
+    "clip_thickness_mm": 34.2,
+    "outer_volume_mm3": 44862.6,
+    "issues": [],
+    "component_containment_checked": true,
+    "shell_extraction_samples": 8,
+    "clip_release_samples": 7,
+    "parts": [
+      {
+        "part": "RearBase",
+        "closed_reimported_mesh": true,
+        "facets": 7634
+      },
+      {
+        "part": "WholeBodyShell",
+        "closed_reimported_mesh": true,
+        "facets": 6326
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 2896
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 5754
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 3578
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 312
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1332
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 376
+      }
+    ],
+    "closure_centres_mm": [
+      [
+        23.120614758428182,
+        8.41521557000372
+      ],
+      [
+        -18.801514456800245,
+        13.164962152410363
+      ],
+      [
+        4.060878162377755,
+        -23.030384493975582
+      ]
+    ],
+    "revision": 2,
+    "profile_scale_mm": 25.0
+  }
+]

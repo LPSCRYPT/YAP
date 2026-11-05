@@ -1,0 +1,80 @@
+{
+  "id": "15",
+  "name": "Nested Aperture",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/cd147728b5232f9c6ee08ba3761f5fe8.jpg",
+  "reference_analysis": "A broad brushed silver-coloured square pendant with gently softened corners and a large rounded-square opening. A smaller hollow square sits offset toward the opening's right side, creating an asymmetric nested-frame composition. The top bail is a broad folded strip on a snake-like chain. No measured dimensions, metal grade or construction method can be established from the photo.",
+  "interpretation": "The entire 49.6 mm square recorder becomes a broad, softly shouldered architectural frame: its central 28 x 26 mm clipped-corner square well sits 2.4 mm below the perimeter roof. An integral smaller raised square ring grows out of the right wall of that well and is offset downward to preserve the centered LED and speaker grille. Unlike a painted nested-square graphic, these are three distinct physical roof elevations. Both photographed through-holes become blind recesses with solid backing because the recorder battery and boards occupy the center. Small planar corner clips reinterpret the photographed rounded openings without curved Boolean pocket corners. The flat rear and unobstructed standard attachment eye replace the thin photographed sheet and folded bail.",
+  "finish_notes": "Pale silver-grey previews optional nonconductive satin paint; the darker recessed floor is a tonal finish, not a transparent void. The well retains 1.5 mm of roof over a locally lowered 19.5 mm cavity ceiling, above the 18.7 mm hardware stack. The small ring has 1.5 mm axial walls, about 1.34 mm minimum across clipped corners, and rises 1.6 mm above the well. Brushed texture is not modeled as fragile microgrooves. No actual metal shell, removable inset or certified coating is specified. Straight pocket boundaries avoid the curved-corner tessellation failure mode. See verification.json for completed CAD checks; physical print, acoustic, RF and durability validation remains outstanding.",
+  "footprint": [
+    [
+      -24.8,
+      -21.8
+    ],
+    [
+      -23.92,
+      -23.92
+    ],
+    [
+      -21.8,
+      -24.8
+    ],
+    [
+      21.8,
+      -24.8
+    ],
+    [
+      23.92,
+      -23.92
+    ],
+    [
+      24.8,
+      -21.8
+    ],
+    [
+      24.8,
+      21.8
+    ],
+    [
+      23.92,
+      23.92
+    ],
+    [
+      21.8,
+      24.8
+    ],
+    [
+      -21.8,
+      24.8
+    ],
+    [
+      -23.92,
+      23.92
+    ],
+    [
+      -24.8,
+      21.8
+    ]
+  ],
+  "kind": "profile_loft",
+  "shoulder": 21.6,
+  "top": 23.4,
+  "top_scale": 0.96,
+  "roof_steps": 5,
+  "custom_module": "geometry.py",
+  "color": [
+    0.69,
+    0.71,
+    0.72
+  ],
+  "accent_color": [
+    0.38,
+    0.4,
+    0.42
+  ],
+  "view_angle": 25,
+  "reference_provenance": {
+    "original_filename": "cd147728b5232f9c6ee08ba3761f5fe8.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

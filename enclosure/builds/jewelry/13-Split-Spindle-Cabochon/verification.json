@@ -1,0 +1,80 @@
+{
+  "id": 13,
+  "name": "Split Spindle Cabochon",
+  "family": "Jewelry inspired",
+  "description": "An oblique eight-sided spindle envelope, 51 by 58 mm, gives the entire enclosure unequal upper and lower pointed shoulders rather than applying a shield graphic to a box. A real oval bezel rises from the 21.5 mm backing shell to 22.2 mm, enclosing a solid domed 30.8 by 41.2 mm crown that reaches approximately 24.8 mm. Two physical 2.8 mm-wide longitudinal roof slots split the exposed ends visually. Their floors deliberately remain closed, because a through-slot toward the centre would compromise the electronics compartment. The central LED pierces the domed crown; it is not represented as a precious stone. An offset upper-right standard necklace eye replaces the source's two separate chain attachments.",
+  "body_mm": [
+    51.0,
+    58.0,
+    24.8
+  ],
+  "with_bail_length_mm": 61.5,
+  "clip_thickness_mm": 36.8,
+  "outer_volume_mm3": 51185.3,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7550
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 7992
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2572
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5454
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3450
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 462
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.620614758428182,
+      8.597200687136821
+    ],
+    [
+      -20.529224250227777,
+      14.374717573607061
+    ],
+    [
+      4.472670382706284,
+      -25.36577422658479
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/a02d3e13fc96881686eeb7dcb139ae1a.jpg",
+  "reference_analysis": "A dark silver-coloured elongated angular shield surrounds a transparent-to-smoky oval domed cabochon in a bright oval bezel. Narrow longitudinal slots separate unequal pointed upper and lower ends. Two chain connections attach at the upper shoulders; the metal-like backing has a visibly worn or brushed surface. Reflections and inclusions appear inside the stone-like centre, but its identity and the actual materials and dimensions cannot be established from the image.",
+  "interpretation": "An oblique eight-sided spindle envelope, 51 by 58 mm, gives the entire enclosure unequal upper and lower pointed shoulders rather than applying a shield graphic to a box. A real oval bezel rises from the 21.5 mm backing shell to 22.2 mm, enclosing a solid domed 30.8 by 41.2 mm crown that reaches approximately 24.8 mm. Two physical 2.8 mm-wide longitudinal roof slots split the exposed ends visually. Their floors deliberately remain closed, because a through-slot toward the centre would compromise the electronics compartment. The central LED pierces the domed crown; it is not represented as a precious stone. An offset upper-right standard necklace eye replaces the source's two separate chain attachments.",
+  "finish_notes": "A charcoal-silver shield, brighter bezel and near-black dome are optional nonconductive finishes on a single continuous printed enclosure, not a specified metal casting or transparent gemstone. The actual domed crown is modeled by 64-sided oval sections, not by painted shading. A clear gloss coating could evoke the reference but is unmodeled. Slot floors at z20.6 retain 1.4 mm backing over the clipped cavity ceiling at19.2. The core must be much broader and thicker than the source's open sheet-metal jewelry to hold the retained battery, boards and microphones. Point impact, snagging, print strength, physical fit, RF and acoustic behavior are untested."
+}

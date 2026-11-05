@@ -1,0 +1,62 @@
+LOW-PROFILE PENDANT COMPARISON
+
+These supersede the tall curved-body studies as the preferred direction. Previous models/exports remain untouched. They are CAD-checked fit prototypes, NOT physically validated finished devices or a proven global minimum.
+
+02-Slim-Round: 50 mm diameter x 20.8 mm thick.
+01-Stepped-Square: 49 x 49 mm lower body, 44 x 46 mm upper body, 20.8 mm total thickness.
+Dimensions exclude the necklace eyelet and optional clothing clip. The square is slightly narrower but occupies MORE plan area than the round model; it is not a footprint win. Shrinking its battery tier further would require moving the adjacent motor/antenna/connector above the battery, increasing thickness.
+
+CHANGES
+Two internal mounting levels instead of a tall stack. SD envelope rotated into a wider/shorter footprint. Soft front-edge radii rather than a tall domed tower. No front screw heads. Small central LED light-guide opening, discreet acoustic holes, small edge actuator hole. Flat rear surface without a permanently recessed dovetail pocket.
+SD access is INTERNAL: remove hood/retainer and lift the holder as necessary, with wiring service slack. Its exact insertion/eject mechanism is unknown, so no speculative external card slot is cut. The button body remains the agreed placeholder; its actuator is not included.
+
+PRINT FILES IN EACH DESIGN FOLDER
+01-FlatRearBase.stl
+02-RoundedHood.stl
+03-LowerCarrier.stl
+04-UpperCarrier.stl
+05-TopRetainer.stl
+06-LightGuide.stl — new size: diameter 1.6 mm x 2.3 mm long, clear/translucent material
+07-ClipReceiverAdapter.stl — OPTIONAL external adapter
+08-SlideOnClip.stl — OPTIONAL clip mating with that adapter
+
+Use the files from ONE design folder. Import separate STL objects in millimeters, 100% scale, then Auto Arrange. CAD STEP/FCStd files contain assembled positions, not print layouts. Start with the necklace-mode parts 01–06 if evaluating overall size.
+
+OPTIONAL CLIP / FLAT-BACK TRADEOFF
+The clip receiver is external and removable, so necklace mode does NOT pay the previous 3.6 mm thickness penalty. The clip itself still slides/latches tool-free. However, returning to the completely flat back requires removing the receiver adapter with TWO screws. This is a deliberate slimness tradeoff, not a claim of tool-free removal of the entire module.
+With complete clip module installed, total thickness is 32.8 mm.
+Adapter mounting: two M2 x 8 mm countersunk screws into flush M2 heat-set inserts in the rear posts at x=+-14 mm, y=-15 mm. CAD assumes inserts approximately 3.2 mm OD and 3 mm long. Confirm your actual insert dimensions and required printed pilot before installing or heating. Do not fit longer screws: carrier fasteners occupy the same posts from above, with axial separation.
+Dovetail clearances: minimum approximately 0.305 mm per sloping flank, 0.35 mm at the floor, 0.4 mm per side at the mouth. The latch, not friction in the rails, provides retention. Physical fit still depends on printing and cleanup.
+
+HARDWARE AND RETENTION
+Hood: three M1.6 x 6 mm countersunk screws. Plastic pilot diameter 1.3 mm; use a plastic-compatible thread form, verify actual fit, and do not overtighten. No metal nuts/inserts are modeled for these closure screws.
+Carrier stack: three M2 x 14 mm COUNTERSUNK screws. Head envelope approximately diameter 4 mm x 1.2 mm deep. Plastic pilot diameter 1.6 mm. Do not substitute raised heads or longer screws: head clearance and rear-insert separation are intentional.
+XIAO, amplifier and motor-driver board: thin insulating retaining bands, up to 3 mm wide and about 0.15 mm thick, through the carrier slots. Driver band runs in the Y direction; the other two run across X. Use a secure insulating adhesive overlap, avoid fragile chips/pads and provide electrical insulation where needed. Ordinary thick cable ties will not fit this stack.
+Microphone and speaker rims: nominal 0.3 mm soft insulating pads beneath the retainer, keeping acoustic centers open. Pad only the speaker's rigid rim, never its moving diaphragm. Actual preload and acoustic sealing require physical validation.
+SD retaining bridge: nominal 0.5 mm soft pad above the holder body, NOT its card/eject mechanism.
+Motor: fixed cradle and lower-carrier restraint, with nominal 0.3 mm soft pad. Its modeled 4 mm lead-exit allowance points toward the USB edge.
+Battery connector: lower-carrier restraint with nominal 0.3 mm soft pad.
+Antenna: removable insulating adhesive; RF performance/keepout not validated.
+Battery: flat raised support, rounded locating stops, 0.4 mm top clearance under the lower carrier. No rigid compression of the pouch. Do not add padding that compresses it; stop use if the pack swells.
+Use a breakaway necklace cord. Eyelet/clip strength is not load-tested.
+
+ASSEMBLY
+1. Fit and deburr mechanical parts before installing electronics; verify all screw/insert fits on a print sample.
+2. Install battery, motor, antenna and connector on the base. Keep leads away from the posts and pouch.
+3. Secure XIAO/amplifier/driver to the lower carrier using the insulating bands, then place the carrier on the base posts with its motor/connector pads.
+4. Route wires through carrier openings and fit the upper carrier, SD holder, microphone boards and speaker. Leave service slack for internal SD access. Direct-soldered microphone wires are assumed; tall headers do not fit.
+5. Add rim/SD pads, top retainer, then the three countersunk M2 carrier screws. The hood does not clamp the electronics.
+6. Fit LED/light guide, slide the hood over the retained assembly, and secure its three rear closure screws.
+7. Fit the optional clip module only if needed. Remove both adapter screws for a fully flat necklace back.
+
+PRINTING
+PETG is a reasonable fit-test starting point, not a validated printer profile. All mesh minimum Z values are normalized to the bed. Base can be printed flat-back down. Hood is supplied open-end down; its roof may need removable internal support. Lower carrier has downward restraints and upper posts, requiring careful support placement. Upper carrier/retainer require open tiny slots and holes. Clip parts are side-oriented; consider a brim. Inspect every layer and support access before slicing. No G-code is supplied.
+
+VERIFICATION PERFORMED
+All printable solids valid and connected. Exported meshes checked closed, without detected non-manifold geometry or self-intersections; STL files reimported. No modeled overlaps above 0.001 mm3 among printed parts/components or the motor/speaker lead reservations. Countersunk carrier-head clearances checked. Hood removal sampled vertically over the retained assembly. Optional adapter seating, latch retention and released sliding path checked. These are geometric/kinematic checks, not force, fatigue, optical, RF, acoustic, charging or thermal tests.
+
+UNRESOLVED INPUTS
+The CAD still contains the two microphone boards inherited from the earlier layout; that count is not a requirement to use two microphones. Their thickness and the motor thickness remain assumed 3 mm. SD holder is a provisional 18 x 24 x 3 mm envelope before rotation; eight pins do not identify its package. Amplifier 18 x 18 x 3, driver 8 x 8 x 3, antenna 8 x 16 x 1 and connector 6 x 8 x 4 remain provisional. Actual SD model, pad/header locations, connector exits and switch must be confirmed. The current amplifier/SD breakout footprints are significant size drivers. Dedicated acoustic ducts/seals are not modeled. No physical print has been tested.
+
+Comparison.FCStd is the visible side-by-side view: round left, stepped square right.
+Each Assembly.FCStd includes hidden component/hardware references and the optional clip module. Toggle visibility to inspect. verification.json and clip-verification.json contain check results.

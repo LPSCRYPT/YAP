@@ -1,0 +1,25 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, json
+OUT=output_dir('measured-and-fitted')
+d=new_document('Recorder_Fitted_Comparison');d.Label='Actual case fits — closed and lid removed'
+for key,x,w,l,h in [('Stacked',0,54,64,17),('Flat',95,74,70,10.8)]:
+ src=document('Recorder_Fitted_'+key)
+ for opened,y in [(False,100),(True,0)]:
+  group=d.addObject('App::Part',key+('Open' if opened else 'Closed'));group.Label=key+(' — lid removed' if opened else ' — assembled')
+  objects=[src.Base,src.Lid]+list(src.Components.Group)
+  if key=='Stacked':objects += [src.XIAOCarrier,src.AmplifierCarrier]
+  for original in objects:
+   if opened and original.Name=='Lid':continue
+   obj=d.addObject('Part::Feature',group.Name+'_'+original.Name);obj.Shape=original.Shape.copy();obj.Label=original.Label
+   obj.ViewObject.ShapeColor=original.ViewObject.ShapeColor
+   obj.ViewObject.Transparency=55 if opened and original.Name=='Base' else 0
+   group.addObject(obj)
+  group.Placement.Base=App.Vector(x,y,0)
+  note=d.addObject('App::Annotation',group.Name+'Label');note.LabelText=[key+(' / lid removed' if opened else ' / closed'),'%g x %g x %g mm'%(w,l,h)]
+  note.Position=App.Vector(x,y-10,0);note.ViewObject.FontSize=15;note.ViewObject.TextColor=(0.95,0.95,0.95)
+notes=d.addObject('Spreadsheet::Sheet','FitNotes');notes.set('A1','Comparison snapshots. Edit individual fitted cases, then rebuild this view.')
+notes.set('A2','Exact fit depends on assumed battery, SD reader, amplifier, microphone and antenna dimensions.')
+notes.set('A3','Fastener purchase, retention details, acoustics, wiring and RF performance require physical validation.')
+d.recompute();App.setActiveDocument(d.Name);Gui.activeDocument().activeView().viewAxonometric();Gui.activeDocument().activeView().fitAll()
+d.saveAs(OUT+'/Recorder-300mAh-Fitted-Comparison.FCStd')
+print(d.FileName)

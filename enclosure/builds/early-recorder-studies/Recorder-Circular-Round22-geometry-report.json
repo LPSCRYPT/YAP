@@ -1,0 +1,9 @@
+{
+  "document": "Recorder_Circular_Round22",
+  "case_diameter_mm": 43,
+  "case_height_mm": 16.5,
+  "battery_diameter_mm": 22,
+  "battery_thickness_mm": 7.7,
+  "interferences_mm3": [],
+  "seam_overlap_mm3": 0.0
+}

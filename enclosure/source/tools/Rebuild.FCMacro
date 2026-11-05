@@ -1,0 +1,28 @@
+"""Environment-driven GUI launcher; run in a dedicated FreeCAD process."""
+import os
+from pathlib import Path
+import runpy
+import traceback
+import FreeCAD as App
+from PySide import QtGui
+
+quit_after = os.environ.get('YAP_BUILD_QUIT') == '1'
+try:
+    builder = runpy.run_path(str(Path(__file__).resolve().with_name('build.py')))['build']
+    builder(
+        os.environ.get('YAP_BUILD_FAMILY'),
+        design=os.environ.get('YAP_BUILD_DESIGN'),
+        output=os.environ['YAP_BUILD_OUTPUT'],
+        macro=os.environ.get('YAP_BUILD_MACRO'),
+    )
+except Exception:
+    print('YAP_BUILD_FAILED\n' + traceback.format_exc(), flush=True)
+    if quit_after:
+        QtGui.QApplication.exit(1)
+    else:
+        raise
+else:
+    if quit_after:
+        for name in list(App.listDocuments()):
+            App.closeDocument(name)
+        QtGui.QApplication.exit(0)

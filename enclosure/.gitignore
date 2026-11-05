@@ -1,0 +1,11 @@
+# FreeCAD autosaves and transient rebuild state
+*.FCBak
+*.FCStd1
+*.FCStd2
+__pycache__/
+*.py[cod]
+.DS_Store
+progress.json
+# Isolated regeneration outputs; curated builds/ is versioned.
+rebuild-output/
+smoke-output/

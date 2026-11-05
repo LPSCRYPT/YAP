@@ -1,0 +1,28 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, json
+OUT=output_dir('measured-and-fitted')
+d=new_document('Measured_Design_Comparison');d.Label='300 mAh — round / side-button / capsule'
+for key,x,title,size in [('PuckFace',0,'A: round / front button','D56 x 20.4 mm'),('PuckSide',90,'B: round / side button','D56 x 20.4 mm'),('Capsule',180,'C: capsule / offset button','50 x 64 x 20.4 mm')]:
+ src=document('Measured_'+key)
+ for opened,y in [(False,100),(True,0)]:
+  group=d.addObject('App::Part',key+('Open' if opened else 'Closed'));group.Label=title+(' / lid off' if opened else ' / closed')
+  group.addProperty('App::PropertyString','SourceFile','Reference');group.SourceFile=src.FileName
+  for original in [src.Base,src.Lid]+list(src.Components.Group):
+   if opened and original.Name=='Lid':continue
+   obj=d.addObject('Part::Feature',group.Name+'_'+original.Name);obj.Label=original.Label;obj.Shape=original.Shape.copy();obj.ViewObject.ShapeColor=original.ViewObject.ShapeColor
+   obj.ViewObject.Transparency=65 if opened and original.Name=='Base' else 0
+   group.addObject(obj)
+  group.Placement.Base=App.Vector(x,y,0)
+  caption=d.addObject('App::Annotation',group.Name+'Caption');caption.LabelText=[title,size,'LID OFF / internals' if opened else 'CLOSED / button opening provisional'];caption.Position=App.Vector(x-28,y-42,0);caption.ViewObject.FontSize=13;caption.ViewObject.TextColor=(0.95,0.95,0.95)
+notes=d.addObject('Spreadsheet::Sheet','ReadMe')
+for i,t in enumerate(['Same-scale snapshots. Three editable source documents remain open.',
+ 'Measured pack 24.5 square x 5; two diameter-14 mic PCBs; speaker diameter-10 x 3; motor diameter-10 plus 4 mm wire exit.',
+ 'Microphone and motor thickness ASSUMED 3 mm; microphone headers omitted for direct solder wiring.',
+ 'SD, amplifier, driver, antenna, connector and button remain procurement envelopes.',
+ 'Button openings await separate inserts. No caps or actual switches are supplied by this model.',
+ 'Shape/placement concepts only: component retention, carrier plates, detailed wiring and acoustic seals still require design.',
+ 'Comparison snapshots do not auto-update after edits in source documents.'],1):notes.set('A%d'%i,t)
+d.recompute();App.setActiveDocument(d.Name)
+Gui.activeDocument().activeView().viewAxonometric();Gui.updateGui()
+d.saveAs(OUT+'/Measured-Design-Comparison.FCStd')
+print(json.dumps({'comparison':d.FileName,'source_documents':['Measured_PuckFace','Measured_PuckSide','Measured_Capsule']}))

@@ -1,0 +1,191 @@
+[
+  {
+    "name": "Orbit",
+    "description": "Continuous charcoal dome with a narrow concentric accent ring; no large circular face plate.",
+    "body_envelope_mm": [
+      54.131103515625,
+      54.131103515625,
+      25
+    ],
+    "inlay_side_clearance_mm": 0.25,
+    "inlay_floor_gap_mm": 0.15,
+    "inlay_retention": "Thin adhesive layer; no friction-fit retention claimed",
+    "hood_extraction_checked": true,
+    "inlay_insertion_checked": true,
+    "rim_vents_checked": 8,
+    "issues": [],
+    "parts": [
+      {
+        "part": "FlatRearBase",
+        "closed_reimported_mesh": true,
+        "facets": 10110
+      },
+      {
+        "part": "DomeShell",
+        "closed_reimported_mesh": true,
+        "facets": 45216
+      },
+      {
+        "part": "AccentInlay",
+        "closed_reimported_mesh": true,
+        "facets": 1054
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 3852
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 7662
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 5108
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 416
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1960
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 464
+      }
+    ]
+  },
+  {
+    "name": "Meridian",
+    "description": "Continuous light dome with a long rounded vertical spine; central indicator through the spine.",
+    "body_envelope_mm": [
+      54.131103515625,
+      54.131103515625,
+      25
+    ],
+    "inlay_side_clearance_mm": 0.25,
+    "inlay_floor_gap_mm": 0.15,
+    "inlay_retention": "Thin adhesive layer; no friction-fit retention claimed",
+    "hood_extraction_checked": true,
+    "inlay_insertion_checked": true,
+    "rim_vents_checked": 8,
+    "issues": [],
+    "parts": [
+      {
+        "part": "FlatRearBase",
+        "closed_reimported_mesh": true,
+        "facets": 10110
+      },
+      {
+        "part": "DomeShell",
+        "closed_reimported_mesh": true,
+        "facets": 42542
+      },
+      {
+        "part": "AccentInlay",
+        "closed_reimported_mesh": true,
+        "facets": 5272
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 3852
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 7662
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 5108
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 416
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1960
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 464
+      }
+    ]
+  },
+  {
+    "name": "Crescent",
+    "description": "Continuous sage dome with an offset crescent inlay and rounded tips; central indicator stays fixed.",
+    "body_envelope_mm": [
+      54.131103515625,
+      54.131103515625,
+      25
+    ],
+    "inlay_side_clearance_mm": 0.25,
+    "inlay_floor_gap_mm": 0.15,
+    "inlay_retention": "Thin adhesive layer; no friction-fit retention claimed",
+    "hood_extraction_checked": true,
+    "inlay_insertion_checked": true,
+    "rim_vents_checked": 8,
+    "issues": [],
+    "parts": [
+      {
+        "part": "FlatRearBase",
+        "closed_reimported_mesh": true,
+        "facets": 10110
+      },
+      {
+        "part": "DomeShell",
+        "closed_reimported_mesh": true,
+        "facets": 45706
+      },
+      {
+        "part": "AccentInlay",
+        "closed_reimported_mesh": true,
+        "facets": 6316
+      },
+      {
+        "part": "LowerCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 3852
+      },
+      {
+        "part": "UpperCarrier",
+        "closed_reimported_mesh": true,
+        "facets": 7662
+      },
+      {
+        "part": "TopRetainer",
+        "closed_reimported_mesh": true,
+        "facets": 5108
+      },
+      {
+        "part": "LightGuide",
+        "closed_reimported_mesh": true,
+        "facets": 416
+      },
+      {
+        "part": "ClipReceiverAdapter",
+        "closed_reimported_mesh": true,
+        "facets": 1960
+      },
+      {
+        "part": "SlideOnClip",
+        "closed_reimported_mesh": true,
+        "facets": 464
+      }
+    ]
+  }
+]

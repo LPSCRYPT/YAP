@@ -1,0 +1,188 @@
+[
+  {
+    "design": "01-Compact-44",
+    "nominal_diameter_mm": 44,
+    "actual_body_width_mm": 44.0,
+    "body_thickness_mm": 39.6,
+    "clip_thickness_mm": 46.6,
+    "closure_screws": "3 x M2x8 countersunk, plastic-compatible thread form",
+    "carrier_screws": "3 x M2x25 countersunk, plastic-compatible thread form",
+    "collision_issues": [],
+    "mesh_checks": [
+      {
+        "part": "RearBase",
+        "facets": 7106,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "CurvedHood",
+        "facets": 36164,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LogicCarrier",
+        "facets": 2824,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AmpCarrier",
+        "facets": 2640,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "SDCarrier",
+        "facets": 2580,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AcousticCarrier",
+        "facets": 5674,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "TopRetainer",
+        "facets": 3208,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "FlushInsert",
+        "facets": 142,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "ClipInsert",
+        "facets": 458,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LightGuide",
+        "facets": 312,
+        "closed_reimported_mesh": true
+      }
+    ]
+  },
+  {
+    "design": "02-Balanced-46",
+    "nominal_diameter_mm": 46,
+    "actual_body_width_mm": 46.0,
+    "body_thickness_mm": 37.6,
+    "clip_thickness_mm": 44.6,
+    "closure_screws": "3 x M2x8 countersunk, plastic-compatible thread form",
+    "carrier_screws": "3 x M2x25 countersunk, plastic-compatible thread form",
+    "collision_issues": [],
+    "mesh_checks": [
+      {
+        "part": "RearBase",
+        "facets": 6868,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "CurvedHood",
+        "facets": 39176,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LogicCarrier",
+        "facets": 2708,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AmpCarrier",
+        "facets": 2408,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "SDCarrier",
+        "facets": 2352,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AcousticCarrier",
+        "facets": 5442,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "TopRetainer",
+        "facets": 3032,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "FlushInsert",
+        "facets": 136,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "ClipInsert",
+        "facets": 452,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LightGuide",
+        "facets": 312,
+        "closed_reimported_mesh": true
+      }
+    ]
+  },
+  {
+    "design": "03-Low-48",
+    "nominal_diameter_mm": 48,
+    "actual_body_width_mm": 48.0,
+    "body_thickness_mm": 36.1,
+    "clip_thickness_mm": 43.1,
+    "closure_screws": "3 x M2x8 countersunk, plastic-compatible thread form",
+    "carrier_screws": "3 x M2x25 countersunk, plastic-compatible thread form",
+    "collision_issues": [],
+    "mesh_checks": [
+      {
+        "part": "RearBase",
+        "facets": 6874,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "CurvedHood",
+        "facets": 39528,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LogicCarrier",
+        "facets": 2568,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AmpCarrier",
+        "facets": 2408,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "SDCarrier",
+        "facets": 2352,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "AcousticCarrier",
+        "facets": 5442,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "TopRetainer",
+        "facets": 3032,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "FlushInsert",
+        "facets": 136,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "ClipInsert",
+        "facets": 452,
+        "closed_reimported_mesh": true
+      },
+      {
+        "part": "LightGuide",
+        "facets": 312,
+        "closed_reimported_mesh": true
+      }
+    ]
+  }
+]

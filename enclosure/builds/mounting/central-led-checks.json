@@ -1,0 +1,32 @@
+[
+  {
+    "design": "PuckFace",
+    "central_LED_xy_mm": [
+      0,
+      0
+    ],
+    "LED_port_diameter_mm": 2.6,
+    "lightguide_diameter_mm": 2,
+    "interferences": []
+  },
+  {
+    "design": "PuckSide",
+    "central_LED_xy_mm": [
+      0,
+      0
+    ],
+    "LED_port_diameter_mm": 2.6,
+    "lightguide_diameter_mm": 2,
+    "interferences": []
+  },
+  {
+    "design": "Capsule",
+    "central_LED_xy_mm": [
+      0,
+      0
+    ],
+    "LED_port_diameter_mm": 2.6,
+    "lightguide_diameter_mm": 2,
+    "interferences": []
+  }
+]

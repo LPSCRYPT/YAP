@@ -1,0 +1,80 @@
+{
+  "id": 9,
+  "name": "Nested Lariat Frames",
+  "family": "Jewelry inspired",
+  "description": "A single elongated, subtly sheared parallelogram recorder body carries three physically raised nested rectangular frame rims, progressively taller and slightly offset. The overall body is 53.03 by 58 mm before its eye, with a flat rear and a low bevel leading to the frame terraces. The open-frame jewellery is deliberately reinterpreted as a closed dark recessed field under a silver-coloured stepped frame structure: an actual through-hole would intersect the battery and stacked electronics. Three strong 1.3 mm-wide rails replace the finer numerous wires. The deepest central field stays low while the frame structure rises to 24 mm, creating a recessed rather than domed whole-body section. The two dangling open assemblies and their long connector are not modeled as two bulky recorder cases.",
+  "body_mm": [
+    53.03,
+    58.0,
+    24.0
+  ],
+  "with_bail_length_mm": 64.2,
+  "clip_thickness_mm": 36.0,
+  "outer_volume_mm3": 64297.1,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7530
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6012
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2796
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5678
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3682
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.949649755585668,
+      8.71695963213401
+    ],
+    [
+      -23.251709774758186,
+      16.28102246055007
+    ],
+    [
+      4.766186085211613,
+      -27.030384493975586
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/9b9a66d47413a4e030a6195f5246a811.jpg",
+  "reference_analysis": "A worn long lariat-style necklace has an angled upper assembly of nested open rectangular silver-coloured wire frames, with a long fine connector descending to a second vertically oriented assembly of overlapping rectangular frames. The repeated parallel outlines and large open centres dominate; the photo does not establish scale, alloy or how the individual frames are joined.",
+  "interpretation": "A single elongated, subtly sheared parallelogram recorder body carries three physically raised nested rectangular frame rims, progressively taller and slightly offset. The overall body is 53.03 by 58 mm before its eye, with a flat rear and a low bevel leading to the frame terraces. The open-frame jewellery is deliberately reinterpreted as a closed dark recessed field under a silver-coloured stepped frame structure: an actual through-hole would intersect the battery and stacked electronics. Three strong 1.3 mm-wide rails replace the finer numerous wires. The deepest central field stays low while the frame structure rises to 24 mm, creating a recessed rather than domed whole-body section. The two dangling open assemblies and their long connector are not modeled as two bulky recorder cases.",
+  "finish_notes": "Silver-grey rails and dark opaque well floors are optional nonconductive paint previews, not actual silver wire, transparent voids or a metal enclosure. Raised frames are fused shell geometry, not floating or separately glued wire. Rail heights above the 21.6 mm field are 0.8, 1.6 and 2.4 mm. The cavity ceiling is capped at 19.9 mm for 1.7 mm roof backing. The installed hardware forces a substantially wider proportion than the very slender open rectangles in the photograph; no claim of photo scale is made. Do not coat acoustic holes or the light guide. Physical fit, printing, strength, snagging, RF, thermal behavior, acoustics and wear remain untested."
+}

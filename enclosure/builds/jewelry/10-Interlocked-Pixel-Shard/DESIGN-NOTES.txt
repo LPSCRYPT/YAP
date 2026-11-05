@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/9bfeeddf831a89a41d804e2d24acaad8.jpg
+
+OBSERVATIONS
+The pendant is an elongated, irregular pointed assembly of overlapping orthogonal metal-like plates. Bright brushed-looking rectangles alternate with dark recessed areas; the edges are stair-stepped, and a rectangular upper bail joins a square-link chain. It is not a smooth gemstone or a simple rectangular dog tag. The image supplies no measured dimensions or certified material.
+
+ENCLOSURE INTERPRETATION
+A compact elongated eight-sided backing body carries three genuinely raised, interlocking rectilinear terraces and four blocks running down the sides. The staggered 22.0, 22.5 and 23.4 mm roof levels, dark valleys and stepped side skyline reinterpret the overlapping pixel shards in three dimensions. The closed 50 by 57 mm core contains the retained square-source electronics; side blocks increase maximum width to 52 mm. The source's extreme narrowness and perforated plate assembly cannot contain this battery and microphone pair, so they become a closed-backed broad shard with a flat removable rear rather than fictitious through-holes. A centered clear LED is retained between the terraces.
+
+FINISH / LIMITS
+Dark charcoal backing and lighter silver-grey terrace tops are optional nonconductive surface finishes, not a metal enclosure specification. Rectilinear relief is actual fused geometry, with broad 4 mm or wider features and continuous structural backing; side blocks start above the lower closure zone. Core roof height is 21.6 mm and highest relief is 23.4 mm. Standard necklace eye substitutes for the photo's long rectangular bail. No brand text is reproduced. Source proportions are necessarily broadened for hardware; physical fit, printability, finish wear, RF and acoustics remain untested.
+
+VERIFIED BODY SIZE mm: [52.0, 57.0, 23.4]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

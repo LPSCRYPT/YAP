@@ -1,0 +1,49 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json
+OUT=output_dir('early-recorder-studies')
+path=OUT+'/Recorder-Circular-Round22.FCStd'
+source=document('Recorder_Circular_300mAh')
+source.saveCopy(path)
+d=App.openDocument(path)
+d.Label='Circular recorder — round battery D22 x 7.7 mm'
+p=d.Parameters
+for cell,value in [('B1','43'),('B2','16.5'),('B6','22'),('B7','22'),('B8','7.7'),('B17','0'),('B19','12')]:p.set(cell,value)
+p.set('A22','BatteryDiameter');p.set('B22','22');p.setAlias('B22','BatteryDiameter')
+p.set('A23','BatteryOffsetX');p.set('B23','-2');p.setAlias('B23','BatteryOffsetX')
+p.set('B6','=BatteryDiameter');p.set('B7','=BatteryDiameter')
+p.set('A25','Round battery: diameter 22 mm x thickness 7.7 mm. Capacity, chemistry and voltage unspecified.')
+p.set('A29','Battery envelope excludes terminals/holder/protection. Verify chemistry and charger compatibility before wiring.')
+members=[o for o in d.ComponentEnvelopes.Group if o.Name!='BatteryEnvelope']
+d.removeObject('BatteryEnvelope')
+battery=d.addObject('Part::Cylinder','BatteryEnvelope')
+battery.Label='ROUND BATTERY — D22 x 7.7 mm; electrical specifications unknown'
+battery.setExpression('Radius','Parameters.BatteryDiameter/2')
+battery.setExpression('Height','Parameters.BatteryThickness')
+battery.setExpression('Placement.Base.x','Parameters.BatteryOffsetX')
+battery.setExpression('Placement.Base.z','Parameters.Floor')
+d.ComponentEnvelopes.Group=[battery]+members
+battery.ViewObject.ShapeColor=(0.3,0.65,0.95)
+battery.ViewObject.Visibility=True
+d.HapticEnvelope.setExpression('Placement.Base.x','Parameters.BatteryOffsetX+Parameters.BatteryDiameter/2+Parameters.MotorDiameter/2+0.5')
+d.recompute()
+components=d.ComponentEnvelopes.Group
+collisions=[]
+for i,a in enumerate(components):
+    for b in components[i+1:]+[d.Base,d.Lid]:
+        v=a.Shape.common(b.Shape).Volume
+        if v>0.01:collisions.append([a.Name,b.Name,v])
+report={'document':d.Name,'case_diameter_mm':43,'case_height_mm':16.5,'battery_diameter_mm':22,'battery_thickness_mm':7.7,'interferences_mm3':collisions,'seam_overlap_mm3':d.Base.Shape.common(d.Lid.Shape).Volume}
+for o in [d.Base,d.Lid]:assert o.Shape.isValid() and len(o.Shape.Solids)==1
+print(json.dumps(report))
+assert not collisions,collisions
+assert report['seam_overlap_mm3']<0.001
+envelope=Part.makeCylinder(21.5,18,App.Vector(0,0,-0.5))
+assert all(o.Shape.cut(envelope).Volume<0.01 for o in components)
+App.setActiveDocument(d.Name)
+Gui.activeDocument().activeView().viewAxonometric();Gui.activeDocument().activeView().fitAll()
+d.save()
+stem=OUT+'/Recorder-Circular-Round22'
+Part.export([d.Base,d.Lid],stem+'-Case.step')
+Mesh.export([d.Base],stem+'-Base.stl');Mesh.export([d.Lid],stem+'-Lid.stl')
+Gui.activeDocument().activeView().saveImage(stem+'-Transparent.png',1200,1000,'Current')
+with open(stem+'-geometry-report.json','w') as f:json.dump(report,f,indent=2)

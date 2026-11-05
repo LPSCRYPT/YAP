@@ -1,0 +1,80 @@
+{
+  "id": 16,
+  "name": "Octagonal Signet",
+  "family": "Jewelry inspired",
+  "description": "A true regular-octagonal whole-body signet with eight continuous side panels, a broad single-facet shoulder and a second raised octagonal roof island. The body is 49.8 mm across flats and peaks at 23.4 mm. The round hardware source preserves the retained carrier arrangement within the octagon's 23.5 mm nominal base cavity apothem. The dark roof is an integral shell volume, not a cosmetic sticker or a separate fake gemstone. The apparent sheet-like source depth is expanded to enclose the retained two-level hardware. A standard rear-connected necklace eye replaces the photograph's oversized thick metal bail for compactness and shell withdrawal.",
+  "body_mm": [
+    49.8,
+    49.8,
+    23.4
+  ],
+  "with_bail_length_mm": 56.0,
+  "clip_thickness_mm": 35.4,
+  "outer_volume_mm3": 46793.3,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7554
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6058
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2896
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5778
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3590
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.02061475842818,
+      8.378818546577099
+    ],
+    [
+      -19.073824406676614,
+      13.355635632043304
+    ],
+    [
+      4.043245464306907,
+      -22.93038449397558
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/d5654c9e8d9ed1e136a89babfad47192.jpg",
+  "reference_analysis": "A compact eight-sided pendant with a broad bright beveled perimeter, brushed-looking vertical sides and a nearly black flat octagonal center with its own narrow sloping edge. A large rounded bail projects above one side. The photo strongly distinguishes the silver-coloured structural border from the dark inset but does not establish actual metal, stone, scale or assembly method.",
+  "interpretation": "A true regular-octagonal whole-body signet with eight continuous side panels, a broad single-facet shoulder and a second raised octagonal roof island. The body is 49.8 mm across flats and peaks at 23.4 mm. The round hardware source preserves the retained carrier arrangement within the octagon's 23.5 mm nominal base cavity apothem. The dark roof is an integral shell volume, not a cosmetic sticker or a separate fake gemstone. The apparent sheet-like source depth is expanded to enclose the retained two-level hardware. A standard rear-connected necklace eye replaces the photograph's oversized thick metal bail for compactness and shell withdrawal.",
+  "finish_notes": "Light satin grey perimeter and near-black raised octagon preview optional nonconductive finishing. Eight real sloping roof facets form the inset edge; the broad bright border is also physical sloped geometry. No engraved microtexture, conductive coating, actual gemstone or hardness claim is implied. The main roof follows the nominal 1.4 mm lofted shell and the integral octagonal island adds roof thickness. See verification.json for completed CAD checks; no physical fit, RF, thermal, acoustic, coating or fatigue validation has been performed."
+}

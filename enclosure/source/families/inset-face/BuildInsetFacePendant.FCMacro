@@ -1,0 +1,96 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart, math, ast, os, json
+ROOT=output_dir('inset-face');os.makedirs(ROOT,exist_ok=True)
+src=document('Smooth_Pebble');V=App.Vector;TOP=25.0
+# Reuse only the established smooth-envelope factory; do not execute its document/export code.
+from smooth_envelope import envelope
+
+
+
+outer,_=envelope();inner,_=envelope(1.6)
+def box(x,y,z,w,l,h):return Part.makeBox(w,l,h,V(x,y,z))
+def cyl(x,y,z,r,h):return Part.makeCylinder(r,h,V(x,y,z))
+def moved(s,x=0,y=0,z=0):
+ s=s.copy();s.translate(V(x,y,z));return s
+hood=outer.cut(inner).common(box(-40,-40,1.4,80,80,40))
+closure=[(23.8*math.cos(math.radians(a)),23.8*math.sin(math.radians(a))) for a in [20,145,280]]
+for x,y in closure:hood=hood.fuse(cyl(x,y,1.4,1.6,5.4).common(outer)).cut(cyl(x,y,1.3,0.65,5.2))
+hood=hood.cut(box(-6,-40,7.9,12,21,5.2)).cut(Part.makeCylinder(1.5,20,V(18,-5,13),V(1,0,0)))
+# The face is inserted from behind. Its flange catches the integral front ledge.
+hood=hood.cut(cyl(0,0,21.8,20.8,12)).cut(cyl(0,0,18.8,21.9,3.0)).removeSplitter()
+face=moved(outer,z=-0.35).common(cyl(0,0,21.8,20.5,5)).fuse(cyl(0,0,21.0,21.6,0.8))
+face=face.cut(cyl(0,0,20,1.1,8))
+# Conceal the acoustic passages in the 0.3 mm radial perimeter seam, not the visible face.
+vent_angles=[0,40,70,110,140,180,250,290]
+for angle in vent_angles:
+ slot=box(20.15,-2,20.9,1.6,4,1.2);slot.rotate(V(),V(0,0,1),angle);face=face.cut(slot)
+face=face.removeSplitter()
+# A short rounded bail replaces the old rear-facing eyelet. Its hole runs left-right.
+bail=Part.makeCylinder(3.2,6,V(0,24,13),V(0,1,0)).fuse(Part.makeSphere(3.2,V(0,30,13)))
+bail=bail.cut(Part.makeCylinder(1.6,8,V(-4,29.8,13),V(1,0,0)))
+hood=hood.fuse(bail).removeSplitter()
+old_eye=cyl(0,27.9,-0.1,4.5,3)
+base=src.FlatRearBase.Shape.cut(old_eye).fuse(outer.common(cyl(0,27.9,0,4.5,1.4))).removeSplitter()
+# Retainer posts support soft pads; hood closure captures the face without front screws or glue.
+retainer=src.TopRetainer.Shape.copy();pad_positions=[(-18,-9),(18,-9),(0,20)]
+for x,y in pad_positions:retainer=retainer.fuse(cyl(x,y,18.7,1.2,1.8))
+retainer=retainer.removeSplitter()
+d=new_document('Inset_Face_Pendant');d.Label='Photo-inspired pendant — inset face and rounded bail'
+def obj(name,s,color):
+ o=d.addObject('Part::Feature',name);o.Shape=s;o.ViewObject.ShapeColor=color;o.ViewObject.DisplayMode='Shaded';return o
+white=(0.9,0.89,0.85);silver=(0.55,0.57,0.59)
+printed=[obj('FlatRearBase',base,white),obj('RoundedBody',hood,white),obj('InsetFace',face,silver)]
+for name in ['LowerCarrier','UpperCarrier']:printed.append(obj(name,src.getObject(name).Shape.copy(),(0.24,0.62,0.55)))
+printed.append(obj('TopRetainer',retainer,(0.24,0.62,0.55)))
+printed.append(obj('LightGuide',cyl(0,0,18.5,0.8,6.15),(0.03,0.2,1.0)))
+for name in ['ClipReceiverAdapter','SlideOnClip']:printed.append(obj(name,src.getObject(name).Shape.copy(),(0.25,0.35,0.5)))
+refs=d.addObject('App::DocumentObjectGroup','ComponentReferences')
+for original in src.ComponentReferences.Group:refs.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+hardware=d.addObject('App::DocumentObjectGroup','RequiredHardware')
+for original in src.RequiredHardware.Group:hardware.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+for i,(x,y) in enumerate(pad_positions):hardware.addObject(obj('FacePad'+str(i+1),cyl(x,y,20.5,1.2,0.5),(0.35,0.35,0.35)))
+issues=[]
+for o in printed:
+ if not o.Shape.isValid() or len(o.Shape.Solids)!=1:issues.append([o.Name,'invalid/disconnected',len(o.Shape.Solids)])
+ for comp in refs.Group:
+  volume=o.Shape.common(comp.Shape).Volume
+  if volume>0.001:issues.append([o.Name,comp.Name,volume])
+ for wire in [box(16.05,-13.5,1.9,3,4,3),box(5,3,14.4,4,3,3)]:
+  volume=o.Shape.common(wire).Volume
+  if volume>0.001:issues.append([o.Name,'wire reservation',volume])
+for i,a in enumerate(printed):
+ for b in printed[i+1:]:
+  volume=a.Shape.common(b.Shape).Volume
+  if volume>0.001:issues.append([a.Name,b.Name,volume])
+for h in hardware.Group:
+ for o in printed[1:]:
+  volume=h.Shape.common(o.Shape).Volume
+  if volume>0.001:issues.append([h.Name,o.Name,volume])
+print('INSET FACE ISSUES',json.dumps(issues));assert not issues,issues
+for s in [hood,face,base]:s.check(True)
+# A face cannot push out through the front ledge, but can withdraw to the rear for service.
+assert moved(face,z=0.3).common(hood).Volume>0.01,'face flange not captured'
+for dz in [0.1,0.3,1,2,4,8,12,18,24,30]:
+ assert moved(face,z=-dz).common(hood).Volume<0.001,('face rear insertion',dz)
+ moving=moved(hood,z=dz)
+ for other in [printed[0],printed[3],printed[4],printed[5]]+list(refs.Group)+list(hardware.Group):
+  assert moving.common(other.Shape).Volume<0.001,('hood removal',dz,other.Name)
+# Verify all eight hidden passages are open to the front along the seam.
+for angle in vent_angles:
+ a=math.radians(angle);probe=cyl(20.65*math.cos(a),20.65*math.sin(a),20.9,0.1,5)
+ assert probe.common(face).Volume<0.001 and probe.common(hood).Volume<0.001,('blocked seam vent',angle)
+checks=[]
+for i,o in enumerate(printed,1):
+ s=o.Shape.copy()
+ if o.Name in ['ClipReceiverAdapter','SlideOnClip']:s.rotate(V(),V(0,1,0),90)
+ bb=s.BoundBox;s.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
+ mesh=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.04,AngularDeflection=0.12,Relative=False)
+ assert mesh.isSolid() and not mesh.hasNonManifolds() and not mesh.hasSelfIntersections(),o.Name
+ filename=ROOT+'/%02d-%s.stl'%(i,o.Name);mesh.write(filename)
+ imported=Mesh.Mesh(filename);assert imported.isSolid() and not imported.hasNonManifolds(),filename
+ checks.append({'part':o.Name,'closed_reimported_mesh':True,'facets':imported.CountFacets})
+for o in printed+list(refs.Group)+list(hardware.Group):o.ViewObject.Visibility=o.Name in ['FlatRearBase','RoundedBody','InsetFace','LightGuide']
+d.recompute();d.saveAs(ROOT+'/Inset-Face-Pendant.FCStd');Part.export(printed[:7],ROOT+'/Necklace-Assembly.step');Part.export(printed[7:],ROOT+'/Optional-Clip.step')
+report={'reference':'omi-lf-capture.webp, appearance only; photo provides no reliable scale','body_envelope_mm':[outer.BoundBox.XLength,outer.BoundBox.YLength,24.65],'face_diameter_mm':41,'face_perimeter_radial_gap_mm':0.3,'face_flange_radial_clearance_mm':0.3,'rear_diameter_mm':51,'bail_hole_diameter_mm':3.2,'bail_y_max_mm':33.2,'face_pad_working_thickness_mm':0.5,'clip_mode_thickness_mm':36.65,'face_captured_and_rear_insertion_checked':True,'hood_removal_checked':True,'hidden_seam_vents_checked':8,'issues':issues,'parts':checks,'status':'CAD-checked mechanical fit prototype; acoustic performance, bail strength and physical fit untested'}
+with open(ROOT+'/verification.json','w') as f:json.dump(report,f,indent=2)
+print(json.dumps(report));Gui.activeDocument().activeView().viewAxonometric()

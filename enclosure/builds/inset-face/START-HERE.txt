@@ -1,0 +1,62 @@
+PHOTO-INSPIRED INSET-FACE PENDANT
+
+Separate variation based on the supplied omi-lf-capture.webp image: light rounded body, contrasting circular inset face, blue central indicator and short rounded necklace bail. The photograph supplies visual proportions, NOT a dependable physical scale. Existing designs remain unchanged.
+
+DIMENSIONS
+Body bounding envelope approximately 54.13 x 54.13 x 24.65 mm, excluding the bail and optional clip. Rear diameter 51 mm. Visible face diameter 41 mm. Bail reaches Y=33.2 mm from the body center and has a 3.2 mm transverse hole. Overall thickness with external clothing-clip module is 36.65 mm.
+This retains the existing component layout; it does not claim the production Omi's dimensions or a proven minimum size.
+
+PRINT PARTS
+01-FlatRearBase.stl
+02-RoundedBody.stl — includes necklace bail and front retaining ledge
+03-InsetFace.stl — separate contrasting face with rear flange and concealed vent slots
+04-LowerCarrier.stl
+05-UpperCarrier.stl
+06-TopRetainer.stl — now includes three face-support posts
+07-LightGuide.stl — diameter 1.6 mm x 6.15 mm long
+08-ClipReceiverAdapter.stl — optional
+09-SlideOnClip.stl — optional
+
+Use the complete matching set, not an older rear plate, retainer or light guide. Import STL files separately in millimeters at 100% scale, then Auto Arrange. Meshes have minimum Z normalized to the bed. STEP/FreeCAD files contain assembled positions, not print layouts.
+White/light nonconductive filament for the body and grey/silver-coloured nonconductive filament for the face reproduce the intended contrast. CAD colour is not a specification for a metal face. An actual metal face could alter antenna performance and needs RF evaluation. The light guide should be clear/translucent; the rendered blue indicator requires an appropriate LED in the real device.
+
+INSET FACE FIT / RETENTION
+The face perimeter is diameter 41 mm in a diameter 41.6 mm opening: 0.3 mm radial clearance. Its flange is diameter 43.2 mm in a diameter 43.8 mm rear pocket: also 0.3 mm radial clearance. Do not scale the whole model to tune these fits.
+Insert the face from inside the hood. Its flange catches the integral front ledge and prevents it passing out through the front. Three support posts on the internal retainer and three soft insulating pads capture it from behind when the hood is installed. No front screws or glue are required by this design.
+Additional pads: three diameter 2.4 mm discs, nominal 0.5 mm WORKING thickness, at x/y (-18,-9), (18,-9), (0,20). Actual material/preload and print tolerances need testing. Do not force the hood down against pads that are too thick. These pads are hardware references, NOT rigid STL parts.
+Hold the face when opening the hood: with the hood removed it can withdraw rearward for service. The independently screwed internal carriers remain retained.
+
+ACOUSTIC OPENINGS
+The visible face has only the central LED opening. Eight hidden flange slots connect the internal front cavity to the narrow perimeter seam. Their geometric passages were checked clear. Keep paint, glue, pads and support residue out of this seam.
+This is an acoustic DESIGN PROPOSAL, not a validated replacement for direct ports. Sound pressure, microphone response, speaker-to-mic coupling, dust ingress and seam obstruction have NOT been tested. There are no separate isolation ducts, tuned chambers or waterproof acoustic membranes. Do an audio bench test with the actual parts before committing to this vent arrangement.
+
+HARDWARE / ASSEMBLY
+Hood closure: three M1.6 x 6 mm countersunk screws from the rear into 1.3 mm plastic pilots; choose a plastic-compatible thread form and verify actual fit.
+Carrier stack: three M2 x 14 mm countersunk screws, approximately diameter 4 mm x 1.2 mm deep head envelope, into 1.6 mm plastic pilots. Do not use raised heads or longer screws.
+XIAO/amplifier/driver retention uses the existing thin insulating bands through carrier slots: up to 3 mm wide, approximately 0.15 mm thick, with a secure adhesive overlap. Driver band runs along Y; other two along X. Avoid pressure on chips/pads and provide insulation as needed. Thick cable ties do not fit.
+Existing pads remain needed: nominal 0.3 mm soft insulating rim pads at microphones/speaker and motor/connector restraints, nominal 0.5 mm SD-holder retaining pad. Pad only the rigid speaker rim, not its diaphragm. The three new face pads are additional to these.
+Battery has a raised flat support, rounded locators and 0.4 mm top clearance. Never compress the pouch to close the case. Stop use if it swells. Antenna uses removable insulating adhesive; RF keepout/performance are unvalidated.
+Fit the bottom components and lower carrier, route wiring, then fit upper carrier, components, pads and top retainer. Tighten the three carrier screws lightly. Fit the three face-support pads, insert the face into the hood from the rear, fit the light guide, and lower the hood/face assembly over the retained electronics. Secure the separate rear closure screws.
+SD access remains INTERNAL. Leave wire service slack to lift the holder after opening. Button remains the requested placeholder and small side actuator opening; actual switch/actuator is not included.
+The necklace load is carried by the new hood-mounted bail and the rear closure screws. Use a breakaway cord. Deburr the transverse hole. Printed bail strength and layer-direction sensitivity are untested; do not treat it as a validated load-bearing product.
+
+OPTIONAL CLIP
+Unchanged interface from the smooth/low-profile sets: approximately 0.305 mm minimum flank clearance, 0.35 mm floor clearance and 0.4 mm per side at the mouth. The clip slides off tool-free. Completely flat necklace mode requires removing the receiver adapter with its two screws.
+Adapter mounts with two M2 x 8 mm countersunk screws into flush M2 heat-set inserts at x=+-14, y=-15 mm. Assumed insert envelope approximately 3.2 mm OD x 3 mm length; confirm the real manufacturer's pilot recommendation. Longer screws can interfere with carrier fasteners entering the posts from above.
+
+PRINTING
+PETG is a reasonable fit-test starting point, not a validated profile. Body is supplied open end down; inner ledge/roof/bail may require removable support. Check access to remove that support. Face is supplied flange down, convex surface up; inspect the eight small vent-slot bridges. Lower carrier has downward restraints needing careful support. Keep screw pilots, band slots, face clearance, vent seam and dovetail free of fused support. Optional clip parts are side-oriented; consider a brim. No printer-specific G-code is supplied.
+
+CHECKS PERFORMED
+Nine printable parts valid single solids; body, face and rear plate passed detailed FreeCAD boolean checks. STL meshes checked closed, without detected non-manifold geometry/self-intersections, then reimported. No modeled interference above 0.001 mm3 among parts, component envelopes, existing carrier hardware, face pads or motor/speaker wire reservations. The face flange resists forward escape and its rear insertion path clears the hood. Hood removal over the retained assembly was sampled. All eight seam vents checked open through the printed face/body.
+No physical print, optical test, acoustic test, RF test, charging/thermal test, bail-load test or clip-fatigue test has been performed.
+
+PROVISIONAL COMPONENTS
+Inherited CAD still contains two microphone boards; this is not a requirement to use two. Mic and motor thicknesses assumed 3 mm. SD is an assumed 18 x 24 x 3 mm envelope before rotation; eight pins do not identify the exact package or eject mechanism. Amplifier, driver, antenna and connector remain provisional envelopes. Direct mic wiring is assumed; tall pin headers do not fit. Confirm actual parts before final fabrication.
+
+FILES FOR INSPECTION
+Inset-Face-Pendant.FCStd: installed model with hidden carriers, components and hardware/pad references.
+Necklace-Assembly.step: printed necklace-mode parts in assembly positions.
+Optional-Clip.step: optional adapter and clip.
+Exterior.png: actual inspected FreeCAD view.
+verification.json: geometric checks and dimensions.

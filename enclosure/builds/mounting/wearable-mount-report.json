@@ -1,0 +1,47 @@
+[
+  {
+    "design": "PuckFace",
+    "base_bounds_mm": [
+      55.96,
+      62.18,
+      21.0
+    ],
+    "necklace_bore_mm": 4.4,
+    "clip_hole_pitch_mm": 14,
+    "rear_pad_projection_mm": 2,
+    "clip_projection_mm": 7,
+    "total_thickness_with_clip_mm": 27.4,
+    "collisions_mm3": [],
+    "valid_single_solids": true
+  },
+  {
+    "design": "PuckSide",
+    "base_bounds_mm": [
+      55.96,
+      62.18,
+      21.0
+    ],
+    "necklace_bore_mm": 4.4,
+    "clip_hole_pitch_mm": 14,
+    "rear_pad_projection_mm": 2,
+    "clip_projection_mm": 7,
+    "total_thickness_with_clip_mm": 27.4,
+    "collisions_mm3": [],
+    "valid_single_solids": true
+  },
+  {
+    "design": "Capsule",
+    "base_bounds_mm": [
+      50.0,
+      70.17,
+      21.0
+    ],
+    "necklace_bore_mm": 4.4,
+    "clip_hole_pitch_mm": 14,
+    "rear_pad_projection_mm": 2,
+    "clip_projection_mm": 7,
+    "total_thickness_with_clip_mm": 27.4,
+    "collisions_mm3": [],
+    "valid_single_solids": true
+  }
+]

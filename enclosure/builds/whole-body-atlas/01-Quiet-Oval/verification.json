@@ -1,0 +1,76 @@
+{
+  "id": 1,
+  "name": "Quiet Oval",
+  "family": "minimal",
+  "description": "Slightly upright oval body with a low, broad, softly tapered shoulder.",
+  "body_mm": [
+    50.09,
+    53.39,
+    21.3
+  ],
+  "with_bail_length_mm": 59.55,
+  "clip_thickness_mm": 33.3,
+  "outer_volume_mm3": 44161.8,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7888
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 9898
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3060
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5940
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3722
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      21.776291284746925,
+      7.925921840358399
+    ],
+    [
+      -19.26633004414313,
+      13.490429530545226
+    ],
+    [
+      4.269498140253444,
+      -24.213527181711033
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

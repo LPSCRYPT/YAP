@@ -1,0 +1,41 @@
+[
+  {
+    "design": "PuckFace",
+    "shape": "round",
+    "external_mm": [
+      56,
+      56,
+      20.4
+    ],
+    "button": "face",
+    "collisions_mm3": [],
+    "outside_mm3": [],
+    "valid_shells": true
+  },
+  {
+    "design": "PuckSide",
+    "shape": "round",
+    "external_mm": [
+      56,
+      56,
+      20.4
+    ],
+    "button": "side",
+    "collisions_mm3": [],
+    "outside_mm3": [],
+    "valid_shells": true
+  },
+  {
+    "design": "Capsule",
+    "shape": "capsule",
+    "external_mm": [
+      50,
+      64,
+      20.4
+    ],
+    "button": "offset",
+    "collisions_mm3": [],
+    "outside_mm3": [],
+    "valid_shells": true
+  }
+]

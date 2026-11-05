@@ -1,0 +1,80 @@
+{
+  "id": 7,
+  "name": "Obsidian Cut",
+  "family": "Jewelry inspired",
+  "description": "An asymmetric eight-sided stone-like whole-body enclosure with five genuinely intersecting sloping roof planes and a corner-offset necklace eye. Its 52 by 56 mm footprint is deliberately neither a regular hexagon nor a rounded box. A broad slightly inclined crown meets smaller steep bevel facets around the perimeter; their unequal intersections recreate the reference's unequal cuts. Five physical diagonal scores occupy only the right-hand cut face. The unadorned large planes carry the design, not a face graphic. Retained hardware prevents reproducing the narrow solid pendants literally; the back stays flat and the concealed cavity remains closed.",
+  "body_mm": [
+    52.0,
+    56.0,
+    24.79
+  ],
+  "with_bail_length_mm": 59.0,
+  "clip_thickness_mm": 36.79,
+  "outer_volume_mm3": 54568.4,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7554
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6354
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2968
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5846
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3638
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 338
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.373172182709215,
+      8.507138954884956
+    ],
+    [
+      -20.83987812257236,
+      14.592239756796774
+    ],
+    [
+      4.198272919694571,
+      -23.809588883257238
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/7c09d5b671c04f452752a3dc13f62d4c.jpg",
+  "reference_analysis": "Four dark, irregularly faceted pendants on fine cords. Each has a different angular outline and several large flat cut faces rather than a smooth cabochon dome. Some planes show directional grain and one plane on each pendant has close parallel scores. The image looks wood-like, but neither species, material, scale nor surface treatment can be established from the photograph.",
+  "interpretation": "An asymmetric eight-sided stone-like whole-body enclosure with five genuinely intersecting sloping roof planes and a corner-offset necklace eye. Its 52 by 56 mm footprint is deliberately neither a regular hexagon nor a rounded box. A broad slightly inclined crown meets smaller steep bevel facets around the perimeter; their unequal intersections recreate the reference's unequal cuts. Five physical diagonal scores occupy only the right-hand cut face. The unadorned large planes carry the design, not a face graphic. Retained hardware prevents reproducing the narrow solid pendants literally; the back stays flat and the concealed cavity remains closed.",
+  "finish_notes": "Deep warm charcoal body with darker recessed scores is a nonconductive finish suggestion, not a specification for wood, stone or metal. Scores are 1.0 mm wide and 0.35 mm deep, with all cavity roof planes thickened to a 1.8 mm normal offset before engraving. No procedural grain, cord, conductive coating or separate decorative insert is modeled. The lowest outer roof vertex is 20.64 mm and the actual crown is below 25 mm; CAD integration must confirm the retained stack, closures and acoustic openings. No physical fit, print strength, RF, thermal or finish validation has occurred."
+}

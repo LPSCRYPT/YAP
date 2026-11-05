@@ -1,0 +1,76 @@
+{
+  "id": 5,
+  "name": "Clipped Slab",
+  "family": "cyberpunk",
+  "description": "Wide clipped rectangular body with eight planar sides and a short, decisive roof chamfer; no face ornament.",
+  "body_mm": [
+    51.72,
+    48.11,
+    21.3
+  ],
+  "with_bail_length_mm": 54.31,
+  "clip_thickness_mm": 33.3,
+  "outer_volume_mm3": 50512.9,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7554
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 5948
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3020
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5892
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3614
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.97869061647818,
+      8.727529641076352
+    ],
+    [
+      -23.827553651819567,
+      16.68423268410035
+    ],
+    [
+      8.070908483327914,
+      -22.174638812428178
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 24.054
+}

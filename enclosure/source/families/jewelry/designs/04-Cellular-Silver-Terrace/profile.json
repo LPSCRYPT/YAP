@@ -1,0 +1,102 @@
+{
+  "id": "04",
+  "name": "Cellular Silver Terrace",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/52a64e2916f96d82a5b3cb8089e6136f.jpg",
+  "reference_analysis": "A square silver-coloured pendant on a black cord. A broad brushed-looking outer square surrounds a smaller raised square panel of irregular, softly rounded open cells and interconnecting silver-coloured bridges. Darker overlapping shapes are visible below that openwork. The outer frame is substantial and slightly uneven rather than a thin wire outline. The photograph does not prove alloy, dimensions or fabrication method.",
+  "interpretation": "A square terraced recorder body with a shallow waist running around all four sidewalls and a raised cellular roof island. The entire enclosure is stepped in depth, with a broad peripheral shoulder like the photographed frame. Nine irregular rounded pockets form real relief cells separated by wide connecting webs. They are backed, not holes through the electronics: the occupied centre cannot reproduce a transparent openwork jewel. The compact body is 52 by 52 mm, with its main roof at 21.8 mm and relief crest at 22.6 mm. Acoustic holes and the status guide remain on unengraved connecting lands.",
+  "finish_notes": "Warm silver-grey raised surfaces and darker grey pocket floors represent optional nonconductive paint on a printable enclosure, not a specified metal body. The cellular island is fused into the roof; its recessed cells bottom at 20.4 mm above a cavity ceiling capped at 19 mm, retaining at least 1.4 mm backing. Cell bridges are deliberately much broader and fewer than tiny jewellery filigree. Brushed appearance, finish durability, RF behaviour, print strength and acoustics are not validated.",
+  "footprint": [
+    [
+      -26,
+      -24.5
+    ],
+    [
+      -24.5,
+      -26
+    ],
+    [
+      24.5,
+      -26
+    ],
+    [
+      26,
+      -24.5
+    ],
+    [
+      26,
+      24.5
+    ],
+    [
+      24.5,
+      26
+    ],
+    [
+      -24.5,
+      26
+    ],
+    [
+      -26,
+      24.5
+    ]
+  ],
+  "kind": "split_level",
+  "upper_footprint": [
+    [
+      -25.4,
+      -23.6
+    ],
+    [
+      -23.6,
+      -25.4
+    ],
+    [
+      23.6,
+      -25.4
+    ],
+    [
+      25.4,
+      -23.6
+    ],
+    [
+      25.4,
+      23.6
+    ],
+    [
+      23.6,
+      25.4
+    ],
+    [
+      -23.6,
+      25.4
+    ],
+    [
+      -25.4,
+      23.6
+    ]
+  ],
+  "upper_center": [
+    0,
+    0
+  ],
+  "lower_height": 8.8,
+  "seam_height": 0.7,
+  "seam_inset": 0.6,
+  "upper_height": 21.8,
+  "custom_module": "geometry.py",
+  "color": [
+    0.53,
+    0.52,
+    0.47
+  ],
+  "accent_color": [
+    0.76,
+    0.75,
+    0.67
+  ],
+  "view_angle": 23,
+  "reference_provenance": {
+    "original_filename": "52a64e2916f96d82a5b3cb8089e6136f.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

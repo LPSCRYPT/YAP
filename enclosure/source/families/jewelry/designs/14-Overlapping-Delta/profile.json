@@ -1,0 +1,62 @@
+{
+  "id": "14",
+  "name": "Overlapping Delta",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/b23e306959d4e07d05c3da41e0515e32.jpg",
+  "reference_analysis": "Two overlapping downward-pointing triangular pendants: the lower/larger triangle is an open silver-coloured outline, while the upper triangle has a dark stone-like inset with a fine pale vein and a bright surrounding rim. A small bail joins the upper triangle to a bright chain; a separate dark chain is also visible. The photograph does not certify stone, metal, size or finish.",
+  "interpretation": "A broad clipped-delta whole-body enclosure tapers toward its lower point, rather than placing triangles on a square box. Its front is built as two physically overlapping triangular levels: a larger low open-outline relief and a smaller raised solid triangular roof with a recessed inset. The complete recorder occupies the closed backing below both triangles. A literal open lower triangle or narrow equilateral body cannot contain the battery, motor and two-level electronics at wearable dimensions, so the delta is truncated and broadened to a 57 x 54 mm nominal footprint. The raised triangle increases the front depth locally to 24 mm and the rear remains flat.",
+  "finish_notes": "Charcoal body/inset and pale silver-coloured raised rims represent optional nonconductive paint, not specified stone or metal construction. The larger frame is 1.45 mm wide; the smaller inset is recessed 0.4 mm into a physical 2.2 mm-high roof addition. No fake stone vein or unsupported wire-thin edges are modeled. The inset is integral shell material. The lower-right flank is broadened locally to clear the retained motor seat without increasing the overall 57 mm width. See verification.json for completed CAD checks; physical fit, acoustic response, RF, coating compatibility and strength remain untested.",
+  "footprint": [
+    [
+      -28,
+      5
+    ],
+    [
+      -18,
+      -20
+    ],
+    [
+      0,
+      -29
+    ],
+    [
+      20.5,
+      -20
+    ],
+    [
+      29,
+      5
+    ],
+    [
+      25,
+      25
+    ],
+    [
+      -25,
+      25
+    ]
+  ],
+  "kind": "profile_loft",
+  "shoulder": 20.2,
+  "top": 22.2,
+  "top_scale": 0.96,
+  "roof_steps": 1,
+  "custom_module": "geometry.py",
+  "color": [
+    0.19,
+    0.205,
+    0.21
+  ],
+  "accent_color": [
+    0.76,
+    0.78,
+    0.79
+  ],
+  "eye_x": 0.0,
+  "eye_y": 27.2,
+  "view_angle": 26,
+  "reference_provenance": {
+    "original_filename": "b23e306959d4e07d05c3da41e0515e32.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

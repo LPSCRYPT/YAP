@@ -1,0 +1,98 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, os, json
+OUT=output_dir('early-recorder-studies')
+# Reuse the normalized original XIAO geometry from the existing rectangular concept.
+source=document('Recorder_300mAh').XIAO.Shape.copy()
+source.Placement=App.Placement()
+reports=[]
+for capacity,diameter,height,bw,bl,bt in globals().get('CIRCULAR_CASE_SPECS', [(300,44,14.8,20,30,6),(500,54,13.6,29,36,4.75)]):
+    d=new_document('Recorder_Circular_%dmAh'%capacity)
+    d.Label='Circular recorder %d mAh'%capacity
+    p=d.addObject('Spreadsheet::Sheet','Parameters')
+    rows=[('Diameter',diameter),('Height',height),('Wall',1.4),('Floor',1.4),('Lid',1.4),('BatteryWidth',bw),('BatteryLength',bl),('BatteryThickness',bt),('StackGap',0.8),('SpeakerDiameter',15),('SpeakerThickness',3),('MotorDiameter',10),('MotorThickness',3),('LipClearance',0.25),('LipThickness',0.8),('LipDepth',1),('Explode',0),('SpeakerY',11),('MicY',13 if capacity==300 else 16),('ButtonX',12),('ButtonY',2)]
+    for row,(alias,value) in enumerate(rows,1):
+        p.set('A%d'%row,alias);p.set('B%d'%row,str(value));p.setAlias('B%d'%row,alias)
+    p.set('A24','CIRCULAR VARIATION: same BOM assumptions as rectangular cases.')
+    p.set('A25','%d mAh battery envelope: %g x %g x %g mm; provisional, verify purchased pack.'%(capacity,bw,bl,bt))
+    p.set('A26','Speaker 15x3; coin motor 10x3; button 6x6x3.1 mm assumed.')
+    p.set('A27','Microphones: two 4x3x1.5 mm keepouts. No driver boards allocated.')
+    p.set('A28','Packaging concept: mounts, lid retention, wire routing and antenna clearance not finalized.')
+    p.set('A29','Battery swelling, protection circuit and lead exit must be checked against purchased cell.')
+    p.set('A30','Explode lifts lid for inspection. Reset to 0 before exporting.')
+    def setval(o,prop,v):
+        if isinstance(v,str):o.setExpression(prop,v)
+        else:setattr(o,prop,v)
+    def pos(o,x,y,z):
+        o.Placement.Base=App.Vector(*[v if isinstance(v,(int,float)) else 0 for v in (x,y,z)])
+        for axis,v in zip('xyz',(x,y,z)):
+            if isinstance(v,str):o.setExpression('Placement.Base.'+axis,v)
+    def box(name,w,l,h,x,y,z):
+        o=d.addObject('Part::Box',name)
+        for prop,value in [('Length',w),('Width',l),('Height',h)]:setval(o,prop,value)
+        pos(o,x,y,z);return o
+    def cylinder(name,r,h,x,y,z):
+        o=d.addObject('Part::Cylinder',name);setval(o,'Radius',r);setval(o,'Height',h);pos(o,x,y,z);return o
+    def cut(name,a,b):
+        o=d.addObject('Part::Cut',name);o.Base=a;o.Tool=b;o.Refine=True;return o
+    def fuse(name,objects):
+        o=d.addObject('Part::MultiFuse',name);o.Shapes=objects;o.Refine=True;return o
+    r='Parameters.Diameter/2'
+    z='Parameters.Floor+Parameters.BatteryThickness+Parameters.StackGap'
+    outer=cylinder('Outer',r,'Parameters.Height-Parameters.Lid',0,0,0)
+    cavity=cylinder('Cavity',r+'-Parameters.Wall','Parameters.Height',0,0,'Parameters.Floor')
+    shell=cut('Shell',outer,cavity)
+    usb=box('USBAccess',10.5,7,5.5,-5.25,'-Parameters.Diameter/2-1',z+'-0.3')
+    base=cut('Base',shell,usb);base.Label='BASE — circular, USB-C access'
+    plate=cylinder('LidPlate',r,'Parameters.Lid',0,0,'Parameters.Height-Parameters.Lid')
+    lipouter=cylinder('LipOuter',r+'-Parameters.Wall-Parameters.LipClearance','Parameters.LipDepth+0.1',0,0,'Parameters.Height-Parameters.Lid-Parameters.LipDepth')
+    lipinner=cylinder('LipInner',r+'-Parameters.Wall-Parameters.LipClearance-Parameters.LipThickness','Parameters.LipDepth+0.3',0,0,'Parameters.Height-Parameters.Lid-Parameters.LipDepth-0.1')
+    blank=fuse('LidBlank',[plate,cut('LocatingLip',lipouter,lipinner)])
+    holes=[usb]
+    for x,y in [(x,y) for x in [-4,-2,0,2,4] for y in [-4,-2,0,2,4] if x*x+y*y<=20]:
+        holes.append(cylinder('SpeakerVent',0.65,4,x,'Parameters.SpeakerY+(%s)'%y,'Parameters.Height-3'))
+    holes.append(cylinder('ButtonOpening',3.35,5,'Parameters.ButtonX','Parameters.ButtonY','Parameters.Height-4'))
+    holes.append(cylinder('LEDOpening',1.2,5,-13,2,'Parameters.Height-4'))
+    for x in [-11,11]:holes.append(cylinder('MicrophonePort',0.6,5,x,'Parameters.MicY','Parameters.Height-4'))
+    lid=cut('Lid',blank,fuse('LidOpenings',holes));lid.Label='LID — speaker grille, button, LED, microphone ports'
+    lid.setExpression('Placement.Base.z','Parameters.Explode')
+    battery=box('BatteryEnvelope','Parameters.BatteryWidth','Parameters.BatteryLength','Parameters.BatteryThickness','-Parameters.BatteryWidth/2','-Parameters.BatteryLength/2','Parameters.Floor')
+    battery.Label='BATTERY — reference dimensions, not selected part'
+    board=d.addObject('Part::Feature','XIAO');board.Shape=source.copy();pos(board,-8.89,'-Parameters.Diameter/2+2',z)
+    board.Label='XIAO ESP32-S3 — original board geometry'
+    speaker=cylinder('SpeakerEnvelope','Parameters.SpeakerDiameter/2','Parameters.SpeakerThickness',0,'Parameters.SpeakerY',z)
+    motor=cylinder('HapticEnvelope','Parameters.MotorDiameter/2','Parameters.MotorThickness','Parameters.BatteryWidth/2+Parameters.MotorDiameter/2+0.5',0,'Parameters.Floor')
+    button=box('ButtonBody',6,6,3.1,'Parameters.ButtonX-3','Parameters.ButtonY-3',z)
+    actuator=cylinder('ButtonActuator',2.8,'Parameters.Height+0.6-('+z+'+3.1)','Parameters.ButtonX','Parameters.ButtonY',z+'+3.1')
+    led=cylinder('LEDEnvelope',1,2,-13,2,'Parameters.Height-2.5')
+    mics=[box('MicrophoneKeepout',4,3,1.5,x-2,'Parameters.MicY-1.5','Parameters.Height-Parameters.Lid-1.8') for x in [-11,11]]
+    components=[battery,board,speaker,motor,button,actuator,led]+mics
+    group=d.addObject('App::DocumentObjectGroup','ComponentEnvelopes');group.Group=components;group.Label='COMPONENTS — assumed envelopes except XIAO'
+    d.recompute()
+    for o in d.Objects:o.ViewObject.Visibility=False
+    colors=[(0.3,0.65,0.95),(0.1,0.55,0.32),(0.22,0.22,0.25),(0.7,0.7,0.72),(0.95,0.55,0.15),(0.95,0.55,0.15),(0.2,0.9,0.35),(0.85,0.35,0.65),(0.85,0.35,0.65)]
+    for o,color in zip(components,colors):o.ViewObject.Visibility=True;o.ViewObject.ShapeColor=color
+    group.ViewObject.Visibility=True
+    for o in [base,lid]:o.ViewObject.Visibility=True;o.ViewObject.ShapeColor=(0.78,0.8,0.84)
+    base.ViewObject.Transparency=65;lid.ViewObject.Transparency=75
+    d.recompute()
+    collisions=[]
+    for i,a in enumerate(components):
+        for b in components[i+1:]+[base,lid]:
+            v=a.Shape.common(b.Shape).Volume
+            if v>0.01:collisions.append([a.Name,b.Name,round(v,5)])
+    assert base.Shape.isValid() and len(base.Shape.Solids)==1
+    assert lid.Shape.isValid() and len(lid.Shape.Solids)==1
+    report={'capacity_mAh':capacity,'diameter_mm':diameter,'height_mm':height,'interferences_mm3':collisions,'seam_overlap_mm3':base.Shape.common(lid.Shape).Volume,'valid_single_solid_parts':True}
+    reports.append(report)
+    App.setActiveDocument(d.Name);Gui.activeDocument().activeView().viewAxonometric();Gui.activeDocument().activeView().fitAll()
+    stem=OUT+'/Recorder-Circular-%dmAh'%capacity
+    d.saveAs(stem+'.FCStd')
+    Part.export([base,lid],stem+'-Case.step')
+    Mesh.export([base],stem+'-Base.stl');Mesh.export([lid],stem+'-Lid.stl')
+    Gui.activeDocument().activeView().saveImage(stem+'-Transparent.png',1200,1000,'Current')
+    base.ViewObject.Transparency=0;lid.ViewObject.Transparency=0
+    Gui.activeDocument().activeView().saveImage(stem+'-Exterior.png',1200,1000,'Current')
+    base.ViewObject.Transparency=65;lid.ViewObject.Transparency=75
+    d.save()
+with open(OUT+'/circular-geometry-report-'+ '-'.join(str(r['capacity_mAh']) for r in reports)+'.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

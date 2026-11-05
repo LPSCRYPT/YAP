@@ -1,0 +1,73 @@
+{
+  "id": "17",
+  "name": "Triangular Truss",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/edc0c28a2098f856f647e175e734bd87.jpg",
+  "reference_analysis": "A downward-pointing triangular pendant whose glossy dark central triangle sits above a larger silver-coloured open triangular chassis. Broad transverse bridges divide the visible side openings, and the lower apex is an elongated structural point. The chain appears to pass behind the top-side openings rather than through a conventional top bail. An image annotation reads 31 mm across the upper span; that label is not an independently verified measurement. Materials and construction cannot be certified from the photo.",
+  "interpretation": "An elongated, broadened triangular whole-body chassis, 57 x 58 mm, with an inclined structural roof rising from about 21 mm at the nose to 24.175 mm at the upper edge. Four sloping side pockets leave broad transverse ribs around an integral raised triangular center. The center has a three-facet crown terminating in a small triangular table at 25.2 mm, preserving the image's stacked dark triangular mass and load-bearing frame rather than merely engraving a triangle on a box. Open chassis windows become backed pockets, and the original 31 mm annotated span must be enlarged for the unchanged battery, motor and board stack. The nose is shortened but remains pointed in plan; the side contour is broadened around the electronics rather than preserving the photograph's narrow triangle. A standard rear-connected eye replaces routing a chain through the roof pockets.",
+  "finish_notes": "Silver-grey chassis, darker backed pocket floors and a dark faceted center preview nonconductive finishing only. Four physical 0.9 mm-deep recesses have locally thickened backing retaining 1.5 mm nominal vertical roof below each floor. Broad 4 mm transverse ribs and a continuously supported triangular center replace suspended jewelry struts. The right lower flank is broadened locally to clear the retained motor seat, keeping the overall 57 mm width. The 25.2 mm peak preserves the layered crown; the surrounding inclined chassis is lower. No actual gemstone, metal or transparent opening is specified. See verification.json for completed CAD checks; physical strength, fatigue, acoustic, RF, coating and pointed-nose wear comfort remain untested.",
+  "footprint": [
+    [
+      -28.5,
+      8
+    ],
+    [
+      -21,
+      -16
+    ],
+    [
+      -10,
+      -27
+    ],
+    [
+      0,
+      -33
+    ],
+    [
+      10,
+      -27
+    ],
+    [
+      22.5,
+      -16
+    ],
+    [
+      28.5,
+      8
+    ],
+    [
+      25.5,
+      25
+    ],
+    [
+      -25.5,
+      25
+    ]
+  ],
+  "kind": "roof_planes",
+  "roof_planes": [
+    [
+      22.8,
+      0.0,
+      0.055
+    ]
+  ],
+  "custom_module": "geometry.py",
+  "color": [
+    0.55,
+    0.57,
+    0.58
+  ],
+  "accent_color": [
+    0.09,
+    0.1,
+    0.105
+  ],
+  "eye_x": 0.0,
+  "eye_y": 27.2,
+  "view_angle": 29,
+  "reference_provenance": {
+    "original_filename": "edc0c28a2098f856f647e175e734bd87.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

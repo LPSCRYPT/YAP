@@ -1,0 +1,37 @@
+JEWELRY-INSPIRED RECORDER ENCLOSURES
+
+Each numbered folder corresponds to one reference image, studied and built separately. DESIGN-NOTES.txt records the reference filename, visual observations, the physical enclosure interpretation and deliberate deviations. Exterior.png is the inspected CAD view. Earlier pendant projects are not overwritten.
+
+COLLECTION COMPLETE: 17 reference-specific enclosures, 136 checked STL parts.
+Open Comparison.FCStd for the equal-scale native collection. Comparison-Front.png shows silhouettes and necklace eyes; Comparison-Angled.png shows roof levels and body depth. Labels give body dimensions excluding the eye and optional clip. Each individual Assembly.FCStd contains the complete retained-component assembly; the comparison contains exterior parts only. collection.json maps every design to its original reference and verification record.
+The two additional parallel reviews covered designs10-13 and14-17; CAD integration remained serial in the existing FreeCAD instance. Integration corrections include robust planar pocket/channel geometry and local motor-seat clearance corrections on designs12,14,17. Reference proportions are deliberately broadened where unchanged hardware prevents a thin, narrow or truly open jewelry shape.
+
+FILES IN EACH COMPLETED FOLDER
+Assembly.FCStd; Necklace-Assembly.step; Optional-Clip.step; verification.json;
+01-RearBase.stl;02-WholeBodyShell.stl;03-LowerCarrier.stl;
+04-UpperCarrier.stl;05-TopRetainer.stl;06-LightGuide.stl;
+07-ClipReceiverAdapter.stl;08-SlideOnClip.stl.
+Use all parts from ONE folder. Closure positions, eyelets, carrier outlines and optical-guide tops can differ. STLs are in millimeters and bed-normalized; do not shrink them in the slicer. STEP/native files use assembly coordinates. Native colours can illustrate nonconductive paint or finish; STL has no colour information. Read each design's finish notes before fabrication.
+
+SIZE / INTERPRETATION
+Photos do not establish exact physical dimensions or material composition. Enclosures are interpretations around the current recorder components, not replicas of thin jewelry or claims of absolute minimum size. Thickness necessarily exceeds many jewelry references. Dimensions in verification.json exclude the necklace eye/clip unless separately labelled. These remain CAD fit prototypes.
+
+COMPONENT RETENTION AND HARDWARE
+Protected wrapped battery24.5x24.5x5 mm, supported with locating stops and nominal0.4 mm upper clearance. Never compress or continue using a swollen pouch.
+Retained two-level electronics stack from Sleek_Round or Sleek_Square. Three M2x14 mm countersunk carrier screws engage plastic pilots, with assumed head envelope diameter4 x1.2 mm. Three M1.6x6 mm countersunk hood screws use1.3 mm plastic pilots. Confirm actual dimensions and plastic-compatible thread; do not overtighten or use longer screws.
+XIAO/amplifier/driver use thin insulating retaining bands, up to3 mm wide and about0.15 mm thick; driver band alongY, the other two alongX. Ordinary thick cable ties do not fit. Nominal0.3 mm insulating pads at microphone/speaker rigid rims, motor and connector; nominal0.5 mm pad at SD bridge. Never pad a speaker diaphragm. Antenna uses removable insulating adhesive. Bands, pads, adhesive and fasteners are additional nonprinted hardware; material/preload need physical testing.
+Install lower components/carrier, upper components/carrier, bands/pads and retainer. Secure carrier screws. Install LED and design-matched guide, lower hood over the independently retained stack, then secure rear closure screws. SD is internal; leave wire service slack. Button remains a provisional switch/actuator envelope.
+Eye bore is nominal3.6 mm unless the design notes specify otherwise; use a breakaway cord. Printed eye strength and snagging are untested.
+Optional clip adds12 mm thickness. Receiver uses two M2x8 mm countersunk screws and flush inserts at x=+-14,y=-15, assumed approximately3.2 mm OD x3 mm long. Follow actual insert manufacturer's pilot guidance. Clip slides off tool-free; removing the receiver for a flat necklace back requires two screws, without electronics disassembly. Existing latch/dovetail allowances are approximately0.305 mm minimum flank,0.35 mm floor,0.4 mm per-side mouth. Real print fit and fatigue remain untested.
+
+PRINTING / FINISHES
+PETG is a fit-test starting material, not a validated profile. Inspect roofs, fine surface treatments, eyes, carrier restraints and support-removal access in layer preview. Keep acoustic/USB/button openings, screw pilots, guide hole and band slots clear. Optical guide should be translucent or a suitable rod, not metallic. No G-code supplied.
+Metallic-looking CAD colours do not specify metal construction. Use nonconductive finishes unless electrical isolation and RF performance are separately validated. Keep paint, clear coats and glue out of ports and moving/retaining interfaces. Fine decoration may need calibrated printing or post-finishing.
+
+VERIFICATION / LIMITS
+Completed exports have passed valid-single-solid checks, detailed shell/base Boolean checks, component containment/interference including hardware and wire reservations, eight sampled shell-extraction positions and seven clip-release positions. Base/carrier-screw penetration is intentional thread engagement. Exported meshes were checked closed/manifold/self-intersection-free, then reimported closed/manifold. These are sampled geometric checks, not continuous-motion, tolerance-stack, manufacturing-wall-thickness or strength proof.
+No physical print, fit, RF, acoustic, optical, thermal/charging, eye-load, fatigue or finish-durability validation. Ports are untuned; no acoustic isolation/waterproofing claimed.
+SD remains provisional24x18x3 mm in this orientation. Microphone/motor thickness assumed3 mm; amplifier/driver/antenna/connector packages remain provisional. Direct microphone wiring is assumed; tall headers do not fit. Confirm actual parts before final fabrication.
+
+EDITABILITY
+Native files are editable solid snapshots with hidden profile definitions, not PartDesign feature-history trees. Per-image JSON profiles and the BuildJewelryStudies.FCMacro/JewelryEnvelopeGeometry.py scripts live in Recorder-Enclosures and reuse the existing verified build logic. Sleek_Round/Sleek_Square source documents must remain available. Completed verification files are resume checkpoints; intentionally invalidate a changed design's checkpoint before regeneration. Loading the macro does not build. UI is serviced between operations; a single Boolean/mesh operation can still briefly block. No regeneration is required to inspect finished exports.

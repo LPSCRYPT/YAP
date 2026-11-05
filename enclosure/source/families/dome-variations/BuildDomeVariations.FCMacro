@@ -1,0 +1,116 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart, math, ast, os, json
+ROOT=output_dir('dome-variations');os.makedirs(ROOT,exist_ok=True)
+base_src=document('Inset_Face_Pendant');mount_src=document('Smooth_Pebble');V=App.Vector;TOP=25.0
+from smooth_envelope import envelope
+
+
+
+outer,_=envelope();inner,_=envelope(1.6)
+def cyl(x,y,z,r,h):return Part.makeCylinder(r,h,V(x,y,z))
+def box(x,y,z,w,l,h):return Part.makeBox(w,l,h,V(x,y,z))
+def moved(s,z=0,x=0):
+ s=s.copy();s.translate(V(x,0,z));return s
+def capsule(w,l,z,h):
+ r=w/2;a=(l-w)/2
+ return box(-r,-a,z,w,2*a,h).fuse(cyl(0,-a,z,r,h)).fuse(cyl(0,a,z,r,h)).removeSplitter()
+def crescent(ro,ri,z,h,rounding=0):
+ s=cyl(0,0,z,ro,h).cut(cyl(5,2,z-0.1,ri,h+0.2))
+ if rounding:
+  vertical=[e for e in s.Edges if e.BoundBox.ZLength>h-1e-5 and e.BoundBox.XLength<1e-5 and e.BoundBox.YLength<1e-5]
+  s=s.makeFillet(rounding,vertical)
+ return s
+closure=[(23.8*math.cos(math.radians(a)),23.8*math.sin(math.radians(a))) for a in [20,145,280]]
+common=outer.cut(inner).common(box(-40,-40,1.4,80,80,40))
+for x,y in closure:common=common.fuse(cyl(x,y,1.4,1.6,5.4).common(outer)).cut(cyl(x,y,1.3,0.65,5.2))
+common=common.cut(box(-6,-40,7.9,12,21,5.2)).cut(Part.makeCylinder(1.5,20,V(18,-5,13),V(1,0,0)))
+bail=Part.makeCylinder(3.2,6,V(0,24,13),V(0,1,0)).fuse(Part.makeSphere(3.2,V(0,30,13)))
+bail=bail.cut(Part.makeCylinder(1.6,8,V(-4,29.8,13),V(1,0,0)))
+common=common.fuse(bail)
+vent_angles=[0,40,70,110,140,180,250,290]
+for angle in vent_angles:
+ a=math.radians(angle);direction=V(math.cos(a),math.sin(a),0)
+ common=common.cut(Part.makeCylinder(0.55,10,V(22*direction.x,22*direction.y,20),direction))
+common=common.removeSplitter()
+variants=[('01-Orbit','Orbit',(0.19,0.22,0.25),(0.72,0.52,0.29)),('02-Meridian','Meridian',(0.86,0.84,0.77),(0.25,0.38,0.46)),('03-Crescent','Crescent',(0.34,0.43,0.38),(0.84,0.81,0.71))]
+reports=[]
+for folder,name,body_color,inlay_color in variants:
+ out=ROOT+'/'+folder;os.makedirs(out,exist_ok=True)
+ if name=='Orbit':
+  backing=cyl(0,0,21,11,7).cut(cyl(0,0,20.9,7,7.2))
+  pocket=cyl(0,0,23,10,6).cut(cyl(0,0,22.9,8,6.2))
+  inlay=cyl(0,0,23.15,9.75,5).cut(cyl(0,0,23,8.25,5.2))
+  description='Continuous charcoal dome with a narrow concentric accent ring; no large circular face plate.'
+ elif name=='Meridian':
+  backing=capsule(14,34,21,7);pocket=capsule(12,32,22.4,6);inlay=capsule(11.5,31.5,22.55,5)
+  description='Continuous light dome with a long rounded vertical spine; central indicator through the spine.'
+ else:
+  backing=crescent(19.2,16.5,21,7)
+  pocket=crescent(18.2,17.5,22.4,6,0.8)
+  inlay=crescent(17.95,17.75,22.55,5,0.55)
+  description='Continuous sage dome with an offset crescent inlay and rounded tips; central indicator stays fixed.'
+ hood=common.fuse(backing.common(outer)).cut(pocket).cut(cyl(0,0,17,1.1,15)).removeSplitter()
+ inlay=inlay.common(moved(outer,z=-0.05)).cut(cyl(0,0,17,1.1,15)).removeSplitter()
+ led_top=24.95 if name=='Meridian' else 25
+ d=new_document('Dome_'+name);d.Label=name+' — distinct rounded pendant'
+ def obj(n,s,color):
+  o=d.addObject('Part::Feature',n);o.Shape=s;o.ViewObject.ShapeColor=color;o.ViewObject.DisplayMode='Shaded';return o
+ printed=[obj('FlatRearBase',base_src.FlatRearBase.Shape.copy(),body_color),obj('DomeShell',hood,body_color),obj('AccentInlay',inlay,inlay_color)]
+ for n in ['LowerCarrier','UpperCarrier','TopRetainer']:printed.append(obj(n,mount_src.getObject(n).Shape.copy(),(0.24,0.62,0.55)))
+ printed.append(obj('LightGuide',cyl(0,0,18.5,0.8,led_top-18.5),(0.04,0.25,1.0)))
+ for n in ['ClipReceiverAdapter','SlideOnClip']:printed.append(obj(n,mount_src.getObject(n).Shape.copy(),body_color))
+ refs=d.addObject('App::DocumentObjectGroup','ComponentReferences')
+ for original in mount_src.ComponentReferences.Group:refs.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+ hardware=d.addObject('App::DocumentObjectGroup','RequiredHardware')
+ for original in mount_src.RequiredHardware.Group:hardware.addObject(obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor))
+ issues=[]
+ for o in printed:
+  if not o.Shape.isValid() or len(o.Shape.Solids)!=1:issues.append([o.Name,'invalid/disconnected',len(o.Shape.Solids)])
+  for comp in refs.Group:
+   v=o.Shape.common(comp.Shape).Volume
+   if v>0.001:issues.append([o.Name,comp.Name,v])
+  for wire in [box(16.05,-13.5,1.9,3,4,3),box(5,3,14.4,4,3,3)]:
+   v=o.Shape.common(wire).Volume
+   if v>0.001:issues.append([o.Name,'wire reservation',v])
+ for i,a in enumerate(printed):
+  for b in printed[i+1:]:
+   v=a.Shape.common(b.Shape).Volume
+   if v>0.001:issues.append([a.Name,b.Name,v])
+ for h in hardware.Group:
+  for o in printed[1:]:
+   v=h.Shape.common(o.Shape).Volume
+   if v>0.001:issues.append([h.Name,o.Name,v])
+ print(name,'ISSUES',json.dumps(issues));assert not issues,issues
+ hood.check(True);inlay.check(True)
+ # Inlays lower into their recess from outside; 0.15 mm floor allowance is for a thin adhesive layer.
+ for dz in [0.1,0.3,1,2,5]:assert moved(inlay,z=dz).common(hood).Volume<0.001,(name,'inlay insertion',dz)
+ for dz in [0.2,1,2,4,6,8,12,16,20,24,30]:
+  moving=moved(hood,z=dz)
+  for other in [printed[0]]+printed[3:6]+list(refs.Group)+list(hardware.Group):assert moving.common(other.Shape).Volume<0.001,(name,'hood removal',dz,other.Name)
+ for angle in vent_angles:
+  a=math.radians(angle);direction=V(math.cos(a),math.sin(a),0)
+  probe=Part.makeCylinder(0.2,10,V(22*direction.x,22*direction.y,20),direction)
+  assert probe.common(hood).Volume<0.001 and probe.common(inlay).Volume<0.001,(name,'blocked rim port',angle)
+ checks=[]
+ for i,o in enumerate(printed,1):
+  s=o.Shape.copy()
+  if o.Name in ['ClipReceiverAdapter','SlideOnClip']:s.rotate(V(),V(0,1,0),90)
+  bb=s.BoundBox;s.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
+  mesh=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.04,AngularDeflection=0.12,Relative=False)
+  assert mesh.isSolid() and not mesh.hasNonManifolds() and not mesh.hasSelfIntersections(),(name,o.Name)
+  path=out+'/%02d-%s.stl'%(i,o.Name);mesh.write(path)
+  imported=Mesh.Mesh(path);assert imported.isSolid() and not imported.hasNonManifolds(),path
+  checks.append({'part':o.Name,'closed_reimported_mesh':True,'facets':imported.CountFacets})
+ for o in printed+list(refs.Group)+list(hardware.Group):o.ViewObject.Visibility=o.Name in ['FlatRearBase','DomeShell','AccentInlay','LightGuide']
+ d.recompute();d.saveAs(out+'/Assembly.FCStd');Part.export(printed[:7],out+'/Necklace-Assembly.step');Part.export(printed[7:],out+'/Optional-Clip.step')
+ reports.append({'name':name,'description':description,'body_envelope_mm':[outer.BoundBox.XLength,outer.BoundBox.YLength,25],'inlay_side_clearance_mm':0.25,'inlay_floor_gap_mm':0.15,'inlay_retention':'Thin adhesive layer; no friction-fit retention claimed','hood_extraction_checked':True,'inlay_insertion_checked':True,'rim_vents_checked':8,'issues':issues,'parts':checks})
+with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+# One shared inspection window; all original documents stay untouched.
+v=new_document('Dome_Variation_Comparison');v.Label='Orbit / Meridian / Crescent — front variations'
+for i,(_,name,_,_) in enumerate(variants):
+ source=document('Dome_'+name)
+ for n in ['FlatRearBase','DomeShell','AccentInlay','LightGuide']:
+  original=source.getObject(n);o=v.addObject('Part::Feature',name+'_'+n);o.Label=name+' — '+n;o.Shape=moved(original.Shape,x=i*70);o.ViewObject.ShapeColor=original.ViewObject.ShapeColor;o.ViewObject.DisplayMode='Shaded'
+v.recompute();v.saveAs(ROOT+'/Comparison.FCStd')
+Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(V(1,0,0),15).Q)
+print(json.dumps(reports))

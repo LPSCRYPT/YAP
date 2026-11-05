@@ -1,0 +1,10 @@
+# Keep editable CAD and manufacturing exports in Git LFS.
+*.FCStd filter=lfs diff=lfs merge=lfs -text
+*.step filter=lfs diff=lfs merge=lfs -text
+*.stp filter=lfs diff=lfs merge=lfs -text
+*.stl filter=lfs diff=lfs merge=lfs -text
+# Preview/reference images remain directly browsable on GitHub.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary

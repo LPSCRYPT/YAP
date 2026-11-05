@@ -1,0 +1,12 @@
+{
+  "battery_mm": [
+    25,
+    26,
+    5
+  ],
+  "case_diameter_mm": 40,
+  "case_height_mm": 18.2,
+  "interferences_mm3": [],
+  "valid_single_solid_parts": true,
+  "seam_overlap_mm3": 0.0
+}

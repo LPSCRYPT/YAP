@@ -1,0 +1,76 @@
+{
+  "id": 5,
+  "name": "Asymmetric Shield",
+  "family": "Offset theme",
+  "description": "Broad upper shoulders taper through unequal lower diagonals to a tip offset 4 mm right; the dominant upper-right diagonal and shifted inset roof form a directional shield, not a clipped box.",
+  "body_mm": [
+    52.0,
+    54.5,
+    23.4
+  ],
+  "with_bail_length_mm": 60.7,
+  "clip_thickness_mm": 35.4,
+  "outer_volume_mm3": 53849.3,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7562
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6032
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2968
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5846
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3638
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      24.120614758428182,
+      8.779185804269922
+    ],
+    [
+      -22.07948375921668,
+      15.460220967982371
+    ],
+    [
+      4.681528297665438,
+      -26.550266322575904
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

@@ -1,0 +1,425 @@
+[
+  {
+    "design": "PuckFace",
+    "folder": "/Users/bot/Downloads/Pendant-Slicer-Set/01-Round-Front-Button",
+    "flush_thickness_mm": 24,
+    "clip_thickness_mm": 31,
+    "valid_single_solids": true,
+    "battery_floor_preserved_mm": 1.4,
+    "locked_withdrawal_overlap_mm3": 0.23999999999999977,
+    "released_path": [
+      {
+        "withdrawal_mm": 0,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.25,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 2,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 3,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 4,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 6,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 12,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 16,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 20,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 24,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 28,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 32,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 36,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 40,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 48,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 56,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 64,
+        "overlap_mm3": 0.0
+      }
+    ],
+    "meshes": [
+      {
+        "file": "01-Base.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 3286,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "02-Lid.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 6526,
+        "bed_z_mm": -0.0
+      },
+      {
+        "file": "03-FlushInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 120,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "04-ClipInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 452,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "05-CentralLightGuide.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 332,
+        "bed_z_mm": 0.0
+      }
+    ],
+    "status": "Printable geometric fit-test; physical function not validated"
+  },
+  {
+    "design": "PuckSide",
+    "folder": "/Users/bot/Downloads/Pendant-Slicer-Set/02-Round-Side-Button",
+    "flush_thickness_mm": 24,
+    "clip_thickness_mm": 31,
+    "valid_single_solids": true,
+    "battery_floor_preserved_mm": 1.4,
+    "locked_withdrawal_overlap_mm3": 0.23999999999999977,
+    "released_path": [
+      {
+        "withdrawal_mm": 0,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.25,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 2,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 3,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 4,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 6,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 12,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 16,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 20,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 24,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 28,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 32,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 36,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 40,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 48,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 56,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 64,
+        "overlap_mm3": 0.0
+      }
+    ],
+    "meshes": [
+      {
+        "file": "01-Base.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 3770,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "02-Lid.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 6186,
+        "bed_z_mm": -0.0
+      },
+      {
+        "file": "03-FlushInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 120,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "04-ClipInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 452,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "05-CentralLightGuide.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 332,
+        "bed_z_mm": 0.0
+      }
+    ],
+    "status": "Printable geometric fit-test; physical function not validated"
+  },
+  {
+    "design": "Capsule",
+    "folder": "/Users/bot/Downloads/Pendant-Slicer-Set/03-Capsule-Offset-Button",
+    "flush_thickness_mm": 24,
+    "clip_thickness_mm": 31,
+    "valid_single_solids": true,
+    "battery_floor_preserved_mm": 1.4,
+    "locked_withdrawal_overlap_mm3": 0.23999999999999974,
+    "released_path": [
+      {
+        "withdrawal_mm": 0,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.25,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 0.8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 1.5,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 2,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 3,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 4,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 6,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 8,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 12,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 16,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 20,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 24,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 28,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 32,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 36,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 40,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 48,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 56,
+        "overlap_mm3": 0.0
+      },
+      {
+        "withdrawal_mm": 64,
+        "overlap_mm3": 0.0
+      }
+    ],
+    "meshes": [
+      {
+        "file": "01-Base.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 3136,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "02-Lid.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 6636,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "03-FlushInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 96,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "04-ClipInsert.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 428,
+        "bed_z_mm": 0.0
+      },
+      {
+        "file": "05-CentralLightGuide.stl",
+        "closed_mesh": true,
+        "nonmanifold_edges": 0,
+        "facets": 332,
+        "bed_z_mm": 0.0
+      }
+    ],
+    "status": "Printable geometric fit-test; physical function not validated"
+  }
+]

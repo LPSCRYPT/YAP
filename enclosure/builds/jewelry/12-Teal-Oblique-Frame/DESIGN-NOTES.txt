@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/9f31eb6644936dd61ee05e769126de76.jpg
+
+OBSERVATIONS
+The reference is an elongated tapered pendant with two pale gold-coloured rails converging near its top. A blue-green stone-like insert with dark natural-looking patterning occupies the lower region; its bottom edge is strongly diagonal, with the left tip extending farther downward. An open triangular space remains above the insert, and a long narrow bail hangs from a fine chain. The image does not identify the stone, metal alloy or measured dimensions.
+
+ENCLOSURE INTERPRETATION
+The entire recorder body is an asymmetric six-sided wedge, 52.4 by 58 mm, with a long lower-left tip, a diagonal lower edge and a narrower upper end. The right flank is broadened locally to leave room for the retained motor and its seat, and the lower-right shoulder extends downward to preserve clearance around the SD-board corner. Five connected raised 2 mm frame segments follow the converging sides and top, but intentionally leave the diagonal lower edge unframed. The teal core has a distinct bevel beneath the frame, rather than a rectangular enclosure carrying a triangle graphic. A real 0.6 mm-deep triangular recess above the central face recalls the open space without exposing the internal microphone/amp region; its lower corners are set inward and above the microphone vents. Hardware requires a broader truncated upper end than the source's needle-like apex; the flat rear and standard necklace eye replace its thin open-backed jewelry construction.
+
+FINISH / LIMITS
+The teal body and pale gold-coloured physical rail tops are optional nonconductive finishes, not specified gemstone or metal. No fake mineral texture or unsupported stone identification is added. The core roof is 22.3 mm and the raised frame reaches 23.1 mm; the triangular floor is 21.7 mm with at least 1.6 mm structural backing. The lower-left point is deliberately blunted by the finite six-sided envelope, not a knife-edge. Actual dimensions include retained hardware and depart substantially from the very slender photo. No physical fit, point impact, print strength, coating wear, RF or acoustic testing has been performed.
+
+VERIFIED BODY SIZE mm: [52.4, 58.0, 23.1]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

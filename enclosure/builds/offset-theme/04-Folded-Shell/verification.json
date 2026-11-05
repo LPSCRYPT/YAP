@@ -1,0 +1,76 @@
+{
+  "id": 4,
+  "name": "Folded Shell",
+  "family": "Offset theme",
+  "description": "An asymmetric six-sided body with two broad opposing roof planes meeting along the off-centre diagonal x + 0.4*y = 2; a real ridge spanning the shell, not a perimeter bevel.",
+  "body_mm": [
+    50.0,
+    56.0,
+    26.4
+  ],
+  "with_bail_length_mm": 59.61,
+  "clip_thickness_mm": 38.4,
+  "outer_volume_mm3": 59321.8,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7546
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6138
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2948
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5826
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3618
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 340
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.120614758428182,
+      8.41521557000372
+    ],
+    [
+      -21.389309399482467,
+      14.976955678617418
+    ],
+    [
+      4.273036073630683,
+      -24.23359179895239
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

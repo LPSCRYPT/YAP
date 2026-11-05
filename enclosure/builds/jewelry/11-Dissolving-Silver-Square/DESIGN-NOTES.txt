@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/9c39175e20591a7e7df1aa1b3c615cc0.jpg
+
+OBSERVATIONS
+The photograph shows a large thin silver-coloured square pendant, with a quiet brushed-looking flat face, three square openings near its upper-right corner and small square elements extending beyond that corner toward the necklace. A matching square earring repeats the removed-pixel motif. Perspective makes the pendant look slightly skewed; the image does not establish thickness, dimensions or material certification.
+
+ENCLOSURE INTERPRETATION
+A deliberately planar 49.4 mm square recorder enclosure, with a narrow one-millimetre shoulder bevel rather than a rounded cabochon. Three 5 mm blind square recesses preserve the reference's corner-only negative-space rhythm while a physically connected, side-deep cluster of square blocks dissolves the upper-right silhouette. The full decorated envelope is 54.2 by 53.7 by 22 mm; the main body roof is 21.3 mm. The uninterrupted central face and asymmetric corner contrast are retained. Real through-holes in the broad plate would expose electronics, so the photographed voids become clearly documented backed recesses, not fictitious holes through the battery.
+
+FINISH / LIMITS
+Silver-grey surfaces preview a brushed-looking nonconductive coating; recessed square floors use a muted warm dark tone to evoke the visible background in the source. This does not specify solid metal or an actually brushed manufacturing process. Recesses are physical 0.6 mm cuts with 1.5 mm backing; their 5 mm width is intentionally printable. Corner pixels extend down to z8, overlap by at least 1.5 mm and remain attached to the main sidewall. Main-body thickness is imposed by retained hardware rather than the source's sheet-jewelry proportions. Optional coating, corner snag resistance, physical fit, RF and acoustics require testing.
+
+VERIFIED BODY SIZE mm: [54.2, 53.7, 22.0]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

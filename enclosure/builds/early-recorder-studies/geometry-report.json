@@ -1,0 +1,38 @@
+[
+  {
+    "capacity_mAh": 300,
+    "external_mm": [
+      26,
+      46,
+      14.8
+    ],
+    "battery_mm": [
+      20,
+      30,
+      6
+    ],
+    "base_valid": true,
+    "lid_valid": true,
+    "base_solids": 1,
+    "lid_solids": 1,
+    "interferences_mm3": []
+  },
+  {
+    "capacity_mAh": 500,
+    "external_mm": [
+      34,
+      51,
+      13.6
+    ],
+    "battery_mm": [
+      29,
+      36,
+      4.75
+    ],
+    "base_valid": true,
+    "lid_valid": true,
+    "base_solids": 1,
+    "lid_solids": 1,
+    "interferences_mm3": []
+  }
+]

@@ -1,0 +1,49 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart
+from PySide import QtGui
+import json,os,runpy,math,glob
+from enclosure_runtime import load_profile
+from whole_body_assembly import build_assembly
+ROOT=output_dir('jewelry')
+def build_file(path):
+ style=load_profile(path)
+ style.update(points=[[x/25,y/25] for x,y in style['footprint']],ruled=True,family='Jewelry inspired',description=style['interpretation'])
+ geometry=runpy.run_path(style['custom_module'])
+ Gui.getMainWindow().statusBar().showMessage('Building '+style['id']+' '+style['name'])
+ try:
+  report=build_assembly(style,document(style['source']),ROOT,25.0,'Jewelry_%02d',geometry['make_envelope'])
+  finish(style,report)
+  return report
+ finally:
+  Gui.getMainWindow().statusBar().clearMessage();QtGui.QApplication.processEvents()
+def finish(style,report):
+ d=document('Jewelry_%02d'%int(style['id']));App.setActiveDocument(d.Name)
+ face_color=runpy.run_path(style['custom_module']).get('face_color') if style.get('custom_module') else None
+ for name in ['RearBase','WholeBodyShell','LightGuide']:
+  obj=d.getObject(name);materials=[]
+  for face in obj.Shape.Faces:
+   m=obj.ViewObject.ShapeAppearance[0]
+   color=style['color'] if name!='LightGuide' else [.08,.55,.92]
+   if name=='WholeBodyShell' and style.get('treatment')=='circuit_channels' and face.BoundBox.ZLength<1e-5 and abs(face.BoundBox.ZMin-(style['top']-.3))<1e-5:color=style['accent_color']
+   if face_color:
+    custom=face_color(style,name,face)
+    if custom is not None:color=custom
+   m.DiffuseColor=tuple(float(c) for c in color);m.SpecularColor=(0.0,0.0,0.0);m.Shininess=0.0;materials.append(m)
+  obj.ViewObject.ShapeAppearance=materials
+ for key in ['source_image','reference_analysis','interpretation','finish_notes']:report[key]=style.get(key,'')
+ out=ROOT+'/'+style['id']+'-'+style['name'].replace(' ','-')
+ with open(out+'/verification.json','w',encoding='utf-8') as f:json.dump(report,f,indent=2)
+ completed=[]
+ for path in sorted(glob.glob(ROOT+'/*/verification.json')):
+  with open(path,encoding='utf-8') as f:completed.append(json.load(f))
+ with open(ROOT+'/collection.json','w',encoding='utf-8') as f:json.dump(completed,f,indent=2)
+ notes='REFERENCE: '+report['source_image']+'\n\nOBSERVATIONS\n'+report['reference_analysis']+'\n\nENCLOSURE INTERPRETATION\n'+report['interpretation']+'\n\nFINISH / LIMITS\n'+report['finish_notes']+'\n\nVERIFIED BODY SIZE mm: '+str(report['body_mm'])+'\nCAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.\n'
+ with open(out+'/DESIGN-NOTES.txt','w',encoding='utf-8') as f:f.write(notes)
+ Gui.activeDocument().activeView().setCameraOrientation(App.Rotation(App.Vector(1,0,0),style.get('view_angle',25)).Q);Gui.activeDocument().activeView().fitAll();d.save()
+ print(json.dumps({'id':style['id'],'name':style['name'],'body_mm':report['body_mm'],'issues':report['issues'],'mesh_parts':len(report['parts'])}))
+
+def save_view(index):
+ d=document('Jewelry_%02d'%index);App.setActiveDocument(d.Name)
+ directory=os.path.dirname(d.FileName)
+ Gui.activeDocument().activeView().saveImage(directory+'/Exterior.png',1000,1000,'Current')
+ print('Saved '+directory+'/Exterior.png')

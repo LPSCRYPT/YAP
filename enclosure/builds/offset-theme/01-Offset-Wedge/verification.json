@@ -1,0 +1,76 @@
+{
+  "id": 1,
+  "name": "Offset Wedge",
+  "family": "Offset theme",
+  "description": "A sheared four-sided body with one uninterrupted inclined roof; the full side elevation rises across the enclosure rather than using a bevel or an inset face.",
+  "body_mm": [
+    50.0,
+    53.0,
+    26.96
+  ],
+  "with_bail_length_mm": 57.2,
+  "clip_thickness_mm": 38.96,
+  "outer_volume_mm3": 58310.0,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7538
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6068
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3036
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5914
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3610
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 340
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.120614758428182,
+      8.41521557000372
+    ],
+    [
+      -23.361695911422014,
+      16.358035582540644
+    ],
+    [
+      7.980927232249555,
+      -21.92741735691611
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

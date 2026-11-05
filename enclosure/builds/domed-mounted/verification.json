@@ -1,0 +1,80 @@
+{
+  "body_diameter_mm": 56,
+  "dome_rise_mm": 6,
+  "flush_total_thickness_mm": 30,
+  "clip_total_thickness_mm": 37,
+  "carrier_mounts_xy_mm": [
+    [
+      -12,
+      -17
+    ],
+    [
+      12,
+      -17
+    ],
+    [
+      0,
+      22
+    ]
+  ],
+  "carrier_screws": "3 x M2x16, plastic-compatible thread form; verify physical pilot fit",
+  "battery_top_clearance_mm": 0.4,
+  "issues": [],
+  "carrier_vertical_extraction_clear": true,
+  "parts": [
+    {
+      "part": "Base",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 9128
+    },
+    {
+      "part": "DomedLid",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 11792
+    },
+    {
+      "part": "LowerCarrier",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 3138
+    },
+    {
+      "part": "UpperCarrier",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 5840
+    },
+    {
+      "part": "TopRetainer",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 3290
+    },
+    {
+      "part": "FlushInsert",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 120
+    },
+    {
+      "part": "ClipInsert",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 452
+    },
+    {
+      "part": "LightGuide",
+      "single_valid_solid": true,
+      "closed_reimported_mesh": true,
+      "facets": 332
+    }
+  ],
+  "status": "CAD-checked mounting prototype; physical tolerances, SD envelope, foam preload, RF and acoustics unverified",
+  "dovetail_minimum_flank_clearance_mm": 0.30508510792387494,
+  "dovetail_floor_clearance_mm": 0.35,
+  "dovetail_mouth_clearance_per_side_mm": 0.4,
+  "latch_retention_checked": true,
+  "released_dovetail_path_checked": true
+}

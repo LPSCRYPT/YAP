@@ -1,0 +1,10 @@
+[
+  {
+    "capacity_mAh": 1000,
+    "diameter_mm": 68,
+    "height_mm": 14.8,
+    "interferences_mm3": [],
+    "seam_overlap_mm3": 0.0,
+    "valid_single_solid_parts": true
+  }
+]

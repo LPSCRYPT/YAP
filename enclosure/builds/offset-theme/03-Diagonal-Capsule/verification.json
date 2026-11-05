@@ -1,0 +1,76 @@
+{
+  "id": 3,
+  "name": "Diagonal Capsule",
+  "family": "Offset theme",
+  "description": "Elongated stadium body with circular ends, short straight flanks, and one full-height upper-right diagonal slice; an inset shifted roof continues the cut. The square carrier must be outline-trimmed.",
+  "body_mm": [
+    49.6,
+    57.6,
+    22.6
+  ],
+  "with_bail_length_mm": 63.8,
+  "clip_thickness_mm": 34.6,
+  "outer_volume_mm3": 50745.3,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7692
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6678
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2724
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5598
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3610
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      22.390864080516007,
+      8.149608044808106
+    ],
+    [
+      -20.338150169997643,
+      14.240926062273434
+    ],
+    [
+      4.632389294508546,
+      -26.271585187338086
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

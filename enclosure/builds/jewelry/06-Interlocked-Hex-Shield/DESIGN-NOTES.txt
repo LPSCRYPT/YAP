@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/6d9a380c5fd0cc06b5e14853b7e7ce06.jpg
+
+OBSERVATIONS
+Dark metal-looking hexagonal pendant on a ball chain, with a substantial central hexagonal plate, six overlapping-looking border strips, strong diagonal joints and a narrow elongated central opening. The photograph shows a tapered separate bail and a scratched satin surface; it does not establish dimensions, alloy or construction.
+
+ENCLOSURE INTERPRETATION
+The entire recorder becomes a pointed hexagonal shield, 53 by 58 mm before its rear necklace eye, rather than a rectangular case with a hexagon painted on it. Six broad border rails are defined by real recessed hexagonal and staggered joint channels across a low bevelled roof. A blind elongated recess below the centered LED recalls the original opening without exposing the battery or interrupting the LED and acoustic openings. The body remains full-depth at the perimeter until the upper shoulder, allowing the retained round carriers and vertically removable shell to fit. The reference's much thinner metal plate and separate bail are not reproduced literally.
+
+FINISH / LIMITS
+Charcoal and darker channel floors are optional nonconductive finish previews, not a metal specification. Border channels are 1.0 mm wide and 0.4 mm deep; the blind central slot is 2.4 mm wide and 0.65 mm deep. The roof cavity ceiling is capped at 20.8 mm, leaving at least 1.55 mm backing beneath the deepest recess. No through-opening, chain or decorative bail is modeled. Hardware dimensions require the wider closed-back shield. Physical fit, print strength, finish wear, acoustics, thermal behavior and RF remain untested.
+
+VERIFIED BODY SIZE mm: [53.0, 58.0, 23.0]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

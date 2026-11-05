@@ -1,0 +1,66 @@
+ORBIT / MERIDIAN / CRESCENT — DISTINCT ROUNDED PENDANTS
+
+Three separate front geometries, keeping the rounded dome, centered indicator, flat rear, integrated necklace bail and existing internal mounting layout. The large circular face plate from the photograph is removed: each body has a continuous front with a smaller recessed inlay. These are not just colour swaps.
+
+01-Orbit
+Charcoal body with a narrow concentric accent ring. Inlay outer diameter 19.5 mm, inner diameter 16.5 mm; 1.5 mm ring width. The accent is decorative, not an illuminated light ring.
+
+02-Meridian
+Light body with a rounded vertical spine. Inlay is 11.5 mm wide x 31.5 mm long, with the indicator passing through its center. The rest of the dome is uninterrupted.
+
+03-Crescent
+Sage body with an asymmetric curved crescent. Its offset inner arc and rounded tips create a different silhouette on the front while the LED remains centered. The inlay is genuinely recessed geometry, not a painted graphic.
+
+All share approximately 54.13 x 54.13 x 25 mm body envelope, excluding necklace bail and optional clip. Rear profile diameter 51 mm. With external clip module, overall thickness is 37 mm. Dimensions are unchanged by colour choices. These retain the current component packing; no claim of minimum size or Omi production dimensions is made.
+
+PRINT SET IN EACH FOLDER
+01-FlatRearBase.stl
+02-DomeShell.stl
+03-AccentInlay.stl
+04-LowerCarrier.stl
+05-UpperCarrier.stl
+06-TopRetainer.stl
+07-LightGuide.stl
+08-ClipReceiverAdapter.stl — optional
+09-SlideOnClip.stl — optional
+
+Keep each shell/inlay pair together. Use the TopRetainer in the selected folder: the extra face-support posts and three face pads from the previous large-disc design are no longer needed.
+Orbit and Crescent light guides: diameter 1.6 mm x 6.5 mm length. Meridian: diameter 1.6 mm x 6.45 mm length, ending at its slightly recessed spine surface. Print clear/translucent or use a suitable optical rod; the actual LED determines the emitted colour.
+
+INLAY FIT AND RETENTION
+Nominal side clearance 0.25 mm, floor allowance 0.15 mm. Inlays sit approximately 0.05 mm below the original curved surface. They follow the dome curvature rather than forming raised badges.
+A thin, material-compatible adhesive layer is REQUIRED to retain each inlay; no snap/press-fit retention is claimed. Confirm adhesive compatibility with the print material and heat conditions. Apply sparingly, keep it out of the LED opening, and do not use it to force a badly fitting part. Dry-fit first. The ring and crescent tips are delicate until bonded.
+The recesses have internal backing material: nominal floor thickness is at least 1.4 mm away from deliberate holes. The added backing was checked against the existing internal components and hardware.
+Use nonconductive coloured filament for accents. Metallic-looking CAD colours do not specify actual metal; metal inserts or metal-filled materials require RF evaluation.
+
+ACOUSTIC PORTS
+Eight 1.1 mm diameter openings around the outer rim replace the previous face seam vents. Their passages were checked geometrically clear. They feed a shared front cavity; no individual microphone isolation ducts, tuned speaker chamber or waterproof membranes are provided. Microphone response, speaker level, feedback/coupling and dust/water performance require physical testing. Keep adhesive and support debris out of these holes.
+
+ASSEMBLY / HARDWARE
+Same retained component stack as the smooth pebble design. No extra screws in the visible front.
+- Hood closure: three M1.6 x 6 mm countersunk screws into 1.3 mm plastic pilots; select suitable plastic-compatible thread form and verify real fit.
+- Carrier stack: three M2 x 14 mm countersunk screws, head envelope approximately diameter 4 mm x 1.2 mm deep, into 1.6 mm plastic pilots. Do not substitute taller heads/longer screws.
+- XIAO, amplifier and driver: thin insulating retaining bands through carrier slots, up to 3 mm wide and approximately 0.15 mm thick. Driver band runs along Y; the other two along X. Secure the overlap without loading fragile chips, pads or connectors. Ordinary thick cable ties do not fit.
+- Nominal 0.3 mm soft insulating pads at microphone/speaker rims and motor/connector restraints; nominal 0.5 mm pad at the SD retaining bridge. Pad only the speaker's rigid rim, never the moving diaphragm. Material/preload need physical verification.
+- Battery: raised support, rounded locating stops and 0.4 mm top clearance, without pouch compression. Stop use if a pack swells.
+- Antenna: removable insulating adhesive; RF keepout remains unvalidated.
+
+Dry-fit and bond the accent inlay before fitting electronics. Install lower components and carrier, then upper carrier, components, pads and top retainer. Secure the three carrier screws. Install the LED/light guide, lower the hood over the independently retained stack, then secure the rear closure screws.
+SD access remains INTERNAL; leave wiring service slack to lift the holder after opening. Button remains the agreed placeholder and small side actuator opening, awaiting the actual switch/actuator.
+The rounded necklace bail has a 3.2 mm transverse hole. Use a breakaway cord. Printed bail strength and layer-direction sensitivity are untested.
+
+OPTIONAL CLIP
+Same removable external receiver and sliding clip. The clip slides out tool-free; returning to a completely flat necklace back requires removing the receiver with two screws.
+Adapter: two M2 x 8 mm countersunk screws into flush M2 heat-set inserts at x=+-14, y=-15 mm. Assumed inserts approximately 3.2 mm OD x 3 mm long; follow the actual manufacturer's pilot guidance. Longer screws can interfere with carrier screws from above.
+Dovetail allowances remain approximately 0.305 mm minimum flank clearance, 0.35 mm floor clearance and 0.4 mm per side at the mouth. Fit still depends on print calibration and cleanup.
+
+PRINTING
+Import STL files from ONE folder as separate millimeter objects at 100% scale; Auto Arrange. Every STL is bed-normalized. STEP/native files show assembled positions, not print layouts.
+PETG is a reasonable fit-test starting material, not a validated profile. Bodies are supplied open end down; roofs, bail and internal backing may require removable support. Verify support removal access. Inlays are supplied backing-side down; inspect narrow ring/crescent features in layer preview and consider a brim. Lower carrier has downward restraints needing careful support. Optional clip parts are side-oriented. Keep tiny holes and slots unobstructed. No printer-specific G-code is included.
+
+VERIFICATION / LIMITS
+The generator checks valid single solids, component/hardware/wire-reservation overlaps, detailed body/inlay boolean validity, inlay insertion and hood removal paths, rim-port openings and closed STL meshes. Exported STLs are reimported. See verification.json for completed results.
+No physical print, adhesive durability, acoustic response, optical performance, RF, thermal/charging, bail load or clip-fatigue test has been performed.
+The inherited CAD still contains two microphone boards; this is not a requirement to use two. Mic and motor thicknesses remain assumed 3 mm. SD is a provisional 18 x 24 x 3 mm envelope before rotation; eight pins do not identify its actual package/eject mechanism. Amplifier, driver, antenna and connector remain provisional. Direct mic wiring is assumed; tall headers do not fit. Confirm actual parts before final fabrication.
+
+Comparison.FCStd shows Orbit, Meridian and Crescent side by side, left to right. Each folder contains its own Assembly.FCStd with hidden component/hardware references, Necklace-Assembly.step and Optional-Clip.step. Earlier designs are not overwritten.

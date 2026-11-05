@@ -1,0 +1,10 @@
+SUPERSEDED DESIGN STUDIES — NOT THE PREFERRED PENDANT DIRECTION
+
+These three curved-body studies reduce diameter by adding stacked electronics levels. The user rejected their tall, bulky appearance. Retained only for comparison; use ../Pendant-Sleek/ for the subsequent low-profile designs.
+
+44 mm body: 39.6 mm necklace thickness.
+46 mm body: 37.6 mm necklace thickness.
+48 mm body: 36.1 mm necklace thickness.
+Eyelet excluded; clip adds 7 mm.
+
+The bodies use controlled curved/sloped profiles, NOT mathematically hemispherical shells. Geometry/mesh and sampled hood-removal/dovetail paths were checked in FreeCAD. No physical prints were tested. Component envelopes, wiring, pads/bands, acoustics and fastener fits remain provisional. Do not treat these experimental exports as production-ready wearables.

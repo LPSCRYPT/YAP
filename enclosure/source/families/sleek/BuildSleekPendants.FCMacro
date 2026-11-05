@@ -1,0 +1,158 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart, math, os, json
+ROOT=output_dir('sleek');os.makedirs(ROOT,exist_ok=True)
+source=document('Domed_Mounted_Pendant');V=App.Vector
+mounts=[(-14,-15),(14,-15),(18,4)]
+def box(x,y,z,w,l,h):return Part.makeBox(w,l,h,V(x,y,z))
+def cyl(x,y,z,r,h):return Part.makeCylinder(r,h,V(x,y,z))
+def fuse(parts):
+ s=parts[0]
+ for p in parts[1:]:s=s.fuse(p)
+ return s.removeSplitter()
+def moved(s,x=0,y=0,z=0):
+ s=s.copy();s.translate(V(x,y,z));return s
+# Rounded rectangles keep their straight sides and exact nominal bounds.
+def rr(w,l,r,z,h):
+ parts=[box(-w/2+r,-l/2,z,w-2*r,l,h),box(-w/2,-l/2+r,z,w,l-2*r,h)]
+ for x in [-w/2+r,w/2-r]:
+  for y in [-l/2+r,l/2-r]:parts.append(cyl(x,y,z,r,h))
+ return fuse(parts)
+def top_round(s,z,r):
+ edges=[e for e in s.Edges if abs(e.BoundBox.ZMin-z)<1e-6 and abs(e.BoundBox.ZMax-z)<1e-6]
+ return s.makeFillet(r,edges)
+components={'Battery':source.Battery.Shape.copy(),'XIAO':moved(source.XIAO.Shape,y=3.5),'Amplifier':box(-9,2.4,8.2,18,18,3),'SDHolder':box(-12,-20,14.2,24,18,3),'MotorDriver':box(-20,0,8.2,8,8,3),'BatteryConnector':box(12.8,6,1.9,6,8,4),'Antenna':box(-20.8,-5,1.9,8,16,1),'ButtonSpace':box(16.5,-8,10,3,6,6),'Motor':cyl(17.55,-4.5,1.9,5,3),'Speaker':cyl(0,4.5,14.4,5,3),'MicLeft':cyl(-7.3,14.3,14.4,7,3),'MicRight':cyl(7.3,14.3,14.4,7,3),'LED':cyl(0,0,17.5,0.8,1)}
+components['MotorDriver']=box(-19.3,0,8.2,8,8,3)
+wires=[box(16.05,-13.5,1.9,3,4,3),box(5,3,14.4,4,3,3)]
+reports=[]
+for key,square in [('01-Stepped-Square',True),('02-Slim-Round',False)]:
+ out=ROOT+'/'+key;os.makedirs(out,exist_ok=True)
+ d=new_document('Sleek_Square' if square else 'Sleek_Round');d.Label=key+' — low-profile pendant'
+ def obj(name,s,color=(0.66,0.75,0.82)):
+  o=d.addObject('Part::Feature',name);o.Shape=s;o.ViewObject.ShapeColor=color;return o
+ if square:
+  bottom=rr(49,49,8,0,7.3)
+  upper=top_round(rr(44,46,8,7.3,13.5),20.8,3)
+  a=rr(49,49,8,7.3,0.1).Faces
+  aw=[f.OuterWire for f in a if abs(f.BoundBox.ZMin-7.3)<1e-6 and f.BoundBox.ZLength<1e-6][0]
+  bw=[f.OuterWire for f in rr(44,46,8,9.3,0.1).Faces if abs(f.BoundBox.ZMin-9.3)<1e-6 and f.BoundBox.ZLength<1e-6][0]
+  outside=fuse([bottom,upper,Part.makeLoft([aw,bw],True,True)])
+  cavity=fuse([rr(46.2,46.2,6.6,1.4,5.9),top_round(rr(41.2,43.2,6.6,7.2,12.2),19.4,1.6)])
+  baseblank=rr(49,49,8,0,1.4)
+  floorlimit=rr(45.8,45.8,6.4,1.4,7)
+  carrier_outline=lambda z,h:rr(40.6,42.6,6.3,z,h)
+  closure=[(-19.5,-18.5),(19.5,-18.5),(0,22.2)]
+  eyeY=26.5
+ else:
+  outside=top_round(cyl(0,0,0,25,20.8),20.8,3)
+  cavity=top_round(cyl(0,0,1.4,23.6,18),19.4,1.6)
+  baseblank=cyl(0,0,0,25,1.4);floorlimit=cyl(0,0,1.4,23.4,7)
+  carrier_outline=lambda z,h:cyl(0,0,z,23.2,h)
+  closure=[(23*math.cos(math.radians(a)),23*math.sin(math.radians(a))) for a in [20,145,280]]
+  eyeY=27
+ hood=outside.cut(cavity).cut(box(-40,-40,-0.1,80,80,1.5))
+ basebits=[baseblank,box(-12.25,-12.25,1.4,24.5,24.5,0.5)]
+ for x,y in mounts:basebits.append(cyl(x,y,1.4,1.9,5.9))
+ for sign in [-1,1]:
+  for a in [-10.5,10.5]:
+   basebits.append(cyl(a,sign*13.25,1.4,0.6,3.8))
+   if a<0:basebits.append(cyl(sign*13.25,a,1.4,0.6,3.8))
+ motor=cyl(17.55,-4.5,1.4,5.8,3.8).cut(cyl(17.55,-4.5,1.9,5.3,3.5)).cut(box(-12.65,-12.65,1.9,25.3,25.3,6)).cut(box(15.8,-14,1.8,3.5,5.2,4))
+ basebits.append(motor.common(floorlimit))
+ base=fuse(basebits)
+ for x,y in mounts:base=base.cut(cyl(x,y,3.9,0.8,3.5))
+ # Optional clip fasteners use flush M2 heat-set inserts outside the battery footprint.
+ for x in [-14,14]:base=base.cut(cyl(x,-15,-0.1,1.6,3.3))
+ base=base.fuse(cyl(0,eyeY,0,4.2,2.5).cut(cyl(0,eyeY,-0.1,2.2,2.7)))
+ hood=hood.cut(cyl(0,eyeY,1.4,4.4,1.3))
+ for x,y in closure:
+  boss_r=3 if square and x!=0 else 1.6
+  hood=hood.fuse(cyl(x,y,1.4,boss_r,5.4).common(outside)).cut(cyl(x,y,1.3,0.65,5.2))
+  base=base.cut(cyl(x,y,1.4,boss_r+0.25,1.3)).cut(cyl(x,y,-0.1,0.9,1.6)).cut(Part.makeCone(1.6,0.9,0.7,V(x,y,0)))
+ # Small side button actuator hole; internal switch volume remains a placeholder.
+ # SD access is internal: its exact mouth/eject mechanism is unknown, and no speculative exterior slot is cut.
+ hood=hood.cut(box(-6,-35,7.9,12,16,5.2))
+ hood=hood.cut(Part.makeCylinder(1.5,15,V(18,-5,13),V(1,0,0)))
+ for x in [-7.3,7.3]:hood=hood.cut(cyl(x,14.3,17,0.6,8))
+ for x in [-2,0,2]:
+  for y in [2.5,4.5,6.5]:hood=hood.cut(cyl(x,y,17,0.45,8))
+ hood=hood.cut(cyl(0,0,17,1.1,8)).removeSplitter()
+ # Two-level carrier rather than the rejected tall stack.
+ lowerbits=[carrier_outline(7.3,0.9),box(15,-5.5,5.2,5,2,2.2),box(14,8,6.2,3,4,1.2)]
+ for x,y in mounts:lowerbits.append(cyl(x,y,8.2,1.9,5))
+ for name in ['XIAO','Amplifier','MotorDriver']:
+  bb=components[name].BoundBox
+  for x in [bb.XMin-0.9,bb.XMax+0.3]:lowerbits.append(box(x,bb.YMin+1,8.2,0.6,bb.YLength-2,0.8))
+ lower=fuse(lowerbits)
+ for name in ['XIAO','Amplifier','MotorDriver']:
+  bb=components[name].BoundBox;y=(bb.YMin+bb.YMax)/2
+  if name=='MotorDriver':
+   for yy in [-1.7,9]:lower=lower.cut(box(-16.8,yy,7.2,3,0.7,2))
+  else:
+   for x in [bb.XMin-1.7,bb.XMax+1]:lower=lower.cut(box(x,y-1.5,7.2,0.7,3,2))
+ upperbits=[carrier_outline(13.2,1)]
+ for x,y in mounts:upperbits.append(cyl(x,y,14.2,1.9,3.5))
+ acoustic=[(-7.3,14.3,7),(7.3,14.3,7),(0,4.5,5)]
+ for x,y,r in acoustic:
+  upperbits.append(cyl(x,y,14.2,r,0.2))
+  seat=cyl(x,y,14.2,r+0.9,3.5).cut(cyl(x,y,14.2,r+0.3,3.6))
+  for ox,oy,rrr in acoustic:
+   if (ox,oy)!=(x,y):seat=seat.cut(cyl(ox,oy,14.2,rrr+0.3,3.6))
+  seat=seat.cut(box(x-8 if r==7 else 4.8,y-1.7,14.2,16 if r==7 else 4.5,3.4,3.6))
+  upperbits.append(seat)
+ for x in [-12.9,12.3]:upperbits.append(box(x,-19,14.2,0.6,16,2))
+ upper=fuse(upperbits).common(carrier_outline(13.2,4.5)).cut(cyl(0,0,17.4,1.85,1))
+ retainer=carrier_outline(17.7,1)
+ for x,y,r in [(-7.3,14.3,6),(7.3,14.3,6),(0,4.5,4)]:retainer=retainer.cut(cyl(x,y,17.6,r,1.3))
+ for y,l in [(-25,17),(-5,3.3)]:retainer=retainer.cut(box(-12.3,y,17.6,24.6,l,1.3))
+ retainer=retainer.fuse(cyl(0,0,17.5,1.7,1.2)).cut(cyl(0,0,17,0.95,2))
+ carriers=[]
+ for s in [lower,upper,retainer]:
+  for x,y in mounts:s=s.cut(cyl(x,y,7,1.1,13)).cut(Part.makeCone(1.1,2.1,1.2,V(x,y,17.5)))
+  for x,y in closure:s=s.cut(cyl(x,y,7,3.3 if square and x!=0 else 1.9,13))
+  s=s.cut(box(16.2,-8.3,9.7,3.6,6.6,6.6)).cut(box(10,-1,7,2,7,12))
+  carriers.append(s.removeSplitter())
+ printed=[obj('FlatRearBase',base.removeSplitter()),obj('RoundedHood',hood)]
+ for name,s in zip(['LowerCarrier','UpperCarrier','TopRetainer'],carriers):printed.append(obj(name,s,(0.24,0.62,0.55)))
+ printed.append(obj('LightGuide',cyl(0,0,18.5,0.8,2.3),(0.3,0.95,0.55)))
+ refs=d.addObject('App::DocumentObjectGroup','ComponentReferences')
+ for name,s in components.items():refs.addObject(obj(name,s,(0.7,0.45,0.25)))
+ hardware=d.addObject('App::DocumentObjectGroup','RequiredHardware')
+ for i,(x,y) in enumerate(mounts):
+  screw=fuse([cyl(x,y,4.7,1,12.8),Part.makeCone(1,2,1.2,V(x,y,17.5))])
+  o=obj('CarrierScrew'+str(i+1),screw,(0.6,0.6,0.6));hardware.addObject(o);o.ViewObject.Visibility=False
+  for target in printed[1:]:assert screw.common(target.Shape).Volume<0.001,('carrier fastener',target.Name)
+  for name,s in components.items():assert screw.common(s).Volume<0.001,('carrier fastener',name)
+ problems=[]
+ for o in printed:
+  if not o.Shape.isValid() or len(o.Shape.Solids)!=1:problems.append([o.Name,'invalid',len(o.Shape.Solids)])
+  for name,s in components.items():
+   v=o.Shape.common(s).Volume
+   if v>0.001:problems.append([o.Name,name,v])
+  for s in wires:
+   v=o.Shape.common(s).Volume
+   if v>0.001:problems.append([o.Name,'wire allowance',v])
+ for i,a in enumerate(printed):
+  for b in printed[i+1:]:
+   v=a.Shape.common(b.Shape).Volume
+   if v>0.001:problems.append([a.Name,b.Name,v])
+ for i,(an,a) in enumerate(components.items()):
+  for bn,b in list(components.items())[i+1:]:
+   v=a.common(b).Volume
+   if v>0.001:problems.append([an,bn,v])
+ print(key,'ISSUES',json.dumps(problems));assert not problems,problems
+ for dz in [0.2,1,2,4,6,8,12,16,20,24]:
+  moving=moved(hood,z=dz)
+  for other in [printed[0]]+printed[2:5]+list(refs.Group):assert moving.common(other.Shape).Volume<0.001,(key,'hood extraction',dz,other.Name)
+ checks=[]
+ for i,o in enumerate(printed,1):
+  s=o.Shape.copy();bb=s.BoundBox;s.translate(V(-bb.XMin,-bb.YMin,-bb.ZMin))
+  m=MeshPart.meshFromShape(Shape=s,LinearDeflection=0.05,AngularDeflection=0.15,Relative=False)
+  assert m.isSolid() and not m.hasNonManifolds() and not m.hasSelfIntersections(),o.Name
+  path=out+'/%02d-%s.stl'%(i,o.Name);m.write(path);m=Mesh.Mesh(path)
+  assert m.isSolid() and not m.hasNonManifolds(),path
+  checks.append({'part':o.Name,'closed_reimported_mesh':True})
+ for o in printed+list(refs.Group):o.ViewObject.Visibility=o.Name in ['FlatRearBase','RoundedHood','LightGuide']
+ d.recompute();d.saveAs(out+'/Assembly.FCStd');Part.export(printed,out+'/Assembly.step')
+ reports.append({'design':key,'body_width_mm':49 if square else 50,'body_length_mm':49 if square else 50,'upper_width_mm':44 if square else 50,'upper_length_mm':46 if square else 50,'thickness_mm':20.8,'closure_screws':'3 x M1.6x6 countersunk','carrier_screws':'3 x M2x14 countersunk, plastic-compatible thread form','optional_clip_mount':'2 flush M2 heat-set inserts, 3 mm deep; confirm real insert spec','issues':problems,'hood_extraction_checked':True,'carrier_head_clearance_checked':True,'parts':checks})
+with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

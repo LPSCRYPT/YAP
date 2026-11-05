@@ -1,0 +1,55 @@
+PENDANT ENCLOSURES — INTEGRATED REMOVABLE CLIP / FLUSH BACK
+
+These are complete enclosure-shell print sets, NOT the standalone rectangular mount coupon.
+The recessed receiver is built into each case base. Use either the flush insert or the clip insert in the same case; changing inserts does not require opening the electronics enclosure.
+
+STATUS
+Slicer-loadable, geometrically checked FIT-TEST assemblies. They have NOT been physically printed or mechanically validated. SD-holder dimensions, microphone/motor thickness, amplifier and antenna envelopes remain provisional. Internal PCB retention, wiring and acoustic seals are not finalized. The small button remains an intentional placeholder; no functioning button insert is included. Do not treat these files as production-ready or validated complete electronics housings.
+
+CHOOSE ONE DESIGN FOLDER
+01-Round-Front-Button: round 56 mm body, front button opening.
+02-Round-Side-Button: round 56 mm body, side button opening.
+03-Capsule-Offset-Button: 50 x 64 mm body, offset front button opening.
+Eyelet adds approximately 6.2 mm beyond the body length.
+Body thickness is 24 mm in flush mode, or 31 mm with clip installed.
+
+PRINT FILES INSIDE EACH FOLDER
+01-Base.stl                One case base with integrated receiver and necklace eyelet.
+02-Lid.stl                 One matching lid.
+03-FlushInsert.stl         Necklace-mode insert, flush with case rear face.
+04-ClipInsert.stl          Alternative insert with clothing clip.
+05-CentralLightGuide.stl   Small central LED light guide; clear/translucent material.
+
+Print ONE base and lid. Print both inserts to test swapping, but install only ONE insert at a time. The clip and flush insert share the same interface. Do not print an additional receiver coupon for these enclosures.
+
+IMPORT INTO YOUR SLICER
+Import the .stl files from ONE design folder as separate objects, not as overlapping parts of a single assembly. Units are millimeters; scale 100%. Each mesh is placed at Z=0 in its intended starting print orientation. Use Auto Arrange to separate objects on the build plate. Check the selected printer, nozzle, material, bed size and layer preview before slicing.
+Assembly.FCStd and Assembly-Alternatives.step are CAD references, not the print layout. The STEP intentionally contains both alternative inserts in their installed positions; do NOT import that STEP as one printable object.
+
+STARTING FDM PRINT APPROACH — NOT A VERIFIED PRINTER PROFILE
+PETG is the suggested starting material for fit and flexure testing. A 0.4 mm nozzle with approximately 0.16–0.20 mm layers is a reasonable starting point; verify thin latch walls in your slicer. Use at least 3 perimeters where geometry permits. Small flexures should slice as solid walls, not sparse infill.
+Base: cavity upward. The recessed channel faces the bed and requires removable support under its roof/overhangs. Inspect support access carefully; clean support material out of the rails and latch recess before assembly. Do not use unremovable solid support in the sliding interface.
+Lid: outside face down, locating lip upward. Inspect screw holes and surface finish.
+Both inserts: supplied on their sides. Use a brim if needed. Inspect supports around the clip arch and tiny latch, and avoid fusing support into flexure gaps. These are suggestions, not a claim that all parts are support-free.
+Light guide: clear/translucent material; optical performance untested.
+No printer-specific G-code or prevalidated slicer profile is supplied.
+
+ASSEMBLY / SWAPPING
+1. Before installing electronics, clean the rails and test the insert by hand. Do not force a tight or jammed insert.
+2. Slide the insert in from the USB/SD edge, toward the closed end of the recessed track.
+3. Check that its side latch engages the recess and resists withdrawal.
+4. To remove, press the exposed latch sideways inward (toward the insert center), then slide it back out toward the USB/SD edge.
+5. Insert the other module. The flush insert leaves a flat rear face apart from small running clearances and latch access.
+6. Fit the light guide in the lid; use a suitable clear adhesive only if needed and keep it out of optical/slide surfaces.
+7. Lid uses three M2-size screw positions with 1.6 mm pilot holes and 2.2 mm clearance holes. Select screw type/length against actual print and pilot depth; do not force unsuitable machine screws into plastic or allow tips to contact electronics.
+8. Use a breakaway necklace cord. Eyelet strength, clip grip, latch fatigue and impact resistance are untested.
+
+GEOMETRY CHECKS PERFORMED
+- All supplied parts valid single CAD solids.
+- STL meshes closed, no detected non-manifold geometry or self-intersections.
+- Meshes normalized to Z=0, millimeter dimensions.
+- No modeled seated insert/base or electronics-shell intersections above 0.001 mm3.
+- Original 1.4 mm protective floor under the battery preserved.
+- Engaged latch obstructs withdrawal; released kinematic proxy clears sampled withdrawal positions.
+These checks are not a substitute for physical fit, force, fatigue, RF or acoustic testing.
+See verification.json for numerical results.

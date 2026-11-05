@@ -1,0 +1,93 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, MeshPart, json, os
+ROOT=output_dir('integrated-slicer')
+proto=document('Modular_Mount_Prototype')
+reports=[]
+def xz(points,y,length):
+ v=[App.Vector(x,y,z) for x,z in points];v.append(v[0]);return Part.Face(Part.makePolygon(v)).extrude(App.Vector(0,length,0))
+def mapped(shape):
+ s=Part.makeCompound(shape.Solids);s=s.mirror(App.Vector(0,0,0),App.Vector(0,0,1));s.translate(App.Vector(0,-19,1.4));return s
+profile=[(-11.6,1.7),(11.6,1.7),(9.6,4.1),(9.6,5),(-9.6,5),(-9.6,4.1)]
+tail=xz(profile,-22,26.1)
+channel=xz([(-12,1.4),(12,1.4),(10,4.4),(10,5.5),(-10,5.5),(-10,4.4)],-22,54.3)
+freehook=proto.LatchHook.Shape.copy();freehook.translate(App.Vector(-0.95,0,0))
+released_proto=proto.InsertBody.Shape.fuse(proto.ReleasedBeamProxy.Shape).fuse(freehook).fuse(tail).removeSplitter()
+for key,folder in [('PuckFace','01-Round-Front-Button'),('PuckSide','02-Round-Side-Button'),('Capsule','03-Capsule-Offset-Button')]:
+ src=document('Measured_'+key);dest=ROOT+'/'+folder;os.makedirs(dest,exist_ok=True)
+ d=new_document('Integrated_'+key);d.Label=folder+' — integrated modular back'
+ def obj(name,shape,color):
+  o=d.addObject('Part::Feature',name);o.Shape=shape;o.ViewObject.ShapeColor=color;return o
+ W=float(src.Parameters.get('B1'));L=float(src.Parameters.get('B2'))
+ # Reuse the exact existing outline, preserving the original electronics floor at z=0..1.4.
+ footprint=src.FitBoundary.Shape.copy();footprint.translate(App.Vector(0,0,-4))
+ extension=footprint.common(Part.makeBox(W+2,L+2,3.8,App.Vector(-W/2-1,-L/2-1,-3.6)))
+ base=src.NecklaceBase.Shape.fuse(extension).removeSplitter()
+ base=base.cut(mapped(channel)).cut(mapped(proto.LatchPocket.Shape)).removeSplitter()
+ # Extend the insertion end to the case perimeter, so necklace mode does not leave an open trough.
+ trim=src.FitBoundary.Shape.copy();trim.translate(App.Vector(0,0,-11))
+ flush=mapped(proto.FlushInsert.Shape.fuse(tail).removeSplitter()).common(trim).removeSplitter()
+ clip=mapped(proto.ClipInsert.Shape.fuse(tail).removeSplitter()).common(trim).removeSplitter()
+ released=mapped(released_proto).common(trim).removeSplitter()
+ upperclip=clip.cut(flush).removeSplitter()
+ baseobj=obj('Base',base,(0.7,0.77,0.82));lidobj=obj('Lid',src.Lid.Shape.copy(),(0.7,0.77,0.82))
+ flatobj=obj('FlushInsert',flush,(0.25,0.75,0.58));clipobj=obj('ClipInsert',clip,(0.25,0.35,0.5))
+ guide=obj('CentralLightGuide',src.CentralLightGuide.Shape.copy(),(0.3,0.95,0.55))
+ group=d.addObject('App::DocumentObjectGroup','ComponentReferences')
+ for original in src.Components.Group:
+  if original.Name=='CentralLightGuide':continue
+  o=obj(original.Name,original.Shape.copy(),original.ViewObject.ShapeColor);o.Label=original.Label;group.addObject(o);o.ViewObject.Visibility=False
+ objects=[baseobj,lidobj,flatobj,clipobj,guide]
+ for o in objects:assert o.Shape.isValid() and len(o.Shape.Solids)==1,(key,o.Name,'invalid geometry')
+ for a in [baseobj,flatobj,clipobj]:
+  for b in list(group.Group)+[lidobj,guide]:assert a.Shape.common(b.Shape).Volume<0.001,(key,a.Name,b.Name,'collision')
+ for insert in [flush,clip]:assert base.common(insert).Volume<0.001,(key,'seated fit')
+ assert abs(flush.BoundBox.ZMin+3.6)<0.001
+ # Verify the protective wall is continuous beneath the battery.
+ floorprobe=Part.makeBox(24.5,24.5,1.4,App.Vector(-12.25,-12.25,0))
+ assert floorprobe.cut(base).Volume<0.001,(key,'battery floor breached')
+ # Locked withdrawal must collide with detent shoulder; released proxy must slide out.
+ locked=flush.copy();locked.translate(App.Vector(0,-0.8,0));retention=base.common(locked).Volume
+ assert retention>0.01,(key,'latch retention')
+ path=[]
+ for distance in [0,0.1,0.25,0.5,0.8,1,1.5,2,3,4,6,8,12,16,20,24,28,32,36,40,48,56,64]:
+  moving=released.copy();moving.translate(App.Vector(0,-distance,0));v=base.common(moving).Volume
+  movingclip=upperclip.copy();movingclip.translate(App.Vector(0,-distance,0));v+=base.common(movingclip).Volume
+  assert v<0.001,(key,'withdrawal',distance,v)
+  path.append({'withdrawal_mm':distance,'overlap_mm3':round(v,6)})
+ # Print coordinates are independent of assembly coordinates. Export each as a closed manifold mesh.
+ meshchecks=[]
+ for index,o in enumerate(objects,1):
+  shape=o.Shape.copy()
+  if o in [flatobj,clipobj]:shape.rotate(App.Vector(),App.Vector(0,1,0),90)
+  if o==lidobj:shape.rotate(App.Vector(),App.Vector(1,0,0),180)
+  bb=shape.BoundBox;shape.translate(App.Vector(-bb.XMin,-bb.YMin,-bb.ZMin))
+  mesh=MeshPart.meshFromShape(Shape=shape,LinearDeflection=0.05,AngularDeflection=0.15,Relative=False)
+  assert mesh.isSolid(),(key,o.Name,'mesh not closed')
+  assert not mesh.hasNonManifolds(),(key,o.Name,'nonmanifold')
+  assert not mesh.hasSelfIntersections(),(key,o.Name,'self-intersection')
+  filename='%02d-%s.stl'%(index,o.Name);mesh.write(dest+'/'+filename)
+  meshchecks.append({'file':filename,'closed_mesh':True,'nonmanifold_edges':0,'facets':mesh.CountFacets,'bed_z_mm':round(mesh.BoundBox.ZMin,6)})
+ notes=d.addObject('Spreadsheet::Sheet','AssemblyNotes')
+ texts=['INTEGRATED MODULAR BACK: actual case, not the standalone rectangular receiver coupon.',
+ 'Necklace mode: base + lid + flush insert + light guide. Clip mode: replace flush insert with clip insert.',
+ 'No screws or opening case needed to swap inserts. Press side latch inward ~0.95 mm and slide toward USB/SD edge.',
+ 'Body thickness with flush insert 24 mm; with clip 31 mm. Existing internal component positions retained.',
+ 'Integrated recess depth 3.6 mm. Original 1.4 mm battery floor preserved.',
+ 'Extended insert follows case perimeter so the rear face is flush apart from running clearance and latch-access slot.',
+ 'Fit-test status: SD, amplifier, antenna, microphone thickness and motor thickness remain provisional.',
+ 'Button interface remains an empty placeholder per request. No button insert is included.',
+ 'Component retention, wiring, acoustic seals and actual latch/clip mechanical performance still need physical validation.',
+ 'Three M2 lid screws required; validate pilot fit and screw engagement. Breakaway necklace cord recommended.',
+ 'Print at 100% mm. PETG starting point. STL orientations: base cavity up; lid outside face down; inserts on side.',
+ 'Base requires removable support beneath rear recessed channel. Inspect support placement and clean rails before fitting.',
+ 'Use brim for side-printed inserts. Keep supports out of flexure slots where possible; inspect slicer layer preview.',
+ 'Clear/translucent light-guide material optional. No printer-specific G-code is supplied.']
+ for i,text in enumerate(texts,1):notes.set('A%d'%i,text)
+ clipobj.ViewObject.Visibility=False
+ d.recompute();d.saveAs(dest+'/Assembly.FCStd')
+ Part.export([baseobj,lidobj,flatobj,clipobj,guide],dest+'/Assembly-Alternatives.step')
+ report={'design':key,'folder':dest,'flush_thickness_mm':24,'clip_thickness_mm':31,'valid_single_solids':True,'battery_floor_preserved_mm':1.4,'locked_withdrawal_overlap_mm3':retention,'released_path':path,'meshes':meshchecks,'status':'Printable geometric fit-test; physical function not validated'}
+ reports.append(report)
+os.makedirs(ROOT,exist_ok=True)
+with open(ROOT+'/verification.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

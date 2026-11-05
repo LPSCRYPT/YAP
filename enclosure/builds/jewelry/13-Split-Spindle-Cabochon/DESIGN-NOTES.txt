@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/a02d3e13fc96881686eeb7dcb139ae1a.jpg
+
+OBSERVATIONS
+A dark silver-coloured elongated angular shield surrounds a transparent-to-smoky oval domed cabochon in a bright oval bezel. Narrow longitudinal slots separate unequal pointed upper and lower ends. Two chain connections attach at the upper shoulders; the metal-like backing has a visibly worn or brushed surface. Reflections and inclusions appear inside the stone-like centre, but its identity and the actual materials and dimensions cannot be established from the image.
+
+ENCLOSURE INTERPRETATION
+An oblique eight-sided spindle envelope, 51 by 58 mm, gives the entire enclosure unequal upper and lower pointed shoulders rather than applying a shield graphic to a box. A real oval bezel rises from the 21.5 mm backing shell to 22.2 mm, enclosing a solid domed 30.8 by 41.2 mm crown that reaches approximately 24.8 mm. Two physical 2.8 mm-wide longitudinal roof slots split the exposed ends visually. Their floors deliberately remain closed, because a through-slot toward the centre would compromise the electronics compartment. The central LED pierces the domed crown; it is not represented as a precious stone. An offset upper-right standard necklace eye replaces the source's two separate chain attachments.
+
+FINISH / LIMITS
+A charcoal-silver shield, brighter bezel and near-black dome are optional nonconductive finishes on a single continuous printed enclosure, not a specified metal casting or transparent gemstone. The actual domed crown is modeled by 64-sided oval sections, not by painted shading. A clear gloss coating could evoke the reference but is unmodeled. Slot floors at z20.6 retain 1.4 mm backing over the clipped cavity ceiling at19.2. The core must be much broader and thicker than the source's open sheet-metal jewelry to hold the retained battery, boards and microphones. Point impact, snagging, print strength, physical fit, RF and acoustic behavior are untested.
+
+VERIFIED BODY SIZE mm: [51.0, 58.0, 24.8]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

@@ -1,0 +1,114 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, Mesh, json, os
+OUT=output_dir('measured-and-fitted')
+source=document('Recorder_300mAh').XIAO.Shape.copy();source.Placement=App.Placement()
+reports=[]
+for key,shape,W,L,button in [('PuckFace','round',56,56,'face'),('PuckSide','round',56,56,'side'),('Capsule','capsule',50,64,'offset')]:
+ d=new_document('Measured_'+key);d.Label=key+' — measured 300 mAh pack'
+ p=d.addObject('Spreadsheet::Sheet','Parameters')
+ values=[('Width',W),('Length',L),('Height',20.4),('Wall',1.4),('Floor',1.4),('Lid',1.4),('Radius',15),('LipGap',0.25),('LipThickness',0.8),('LipDepth',1),('Explode',0),('BatteryWidth',24.5),('BatteryLength',24.5),('BatteryThickness',5),('MicDiameter',14),('MicThickness',3),('MotorDiameter',10),('MotorThickness',3),('MotorWireExit',4),('SpeakerDiameter',10),('SpeakerThickness',3),('SpeakerWireExit',4),('SDWidth',18),('SDLength',24),('SDThickness',3)]
+ for i,(name,value) in enumerate(values,1):p.set('A%d'%i,name);p.set('B%d'%i,str(value));p.setAlias('B%d'%i,name)
+ notes=['MEASURED: complete battery 24.5 x 24.5 x 5; mic PCB diameter 14; speaker diameter 10 x 3; motor diameter 10 and 4 mm wire exit.',
+ 'ASSUMED: motor and mic thickness 3 mm. Mic headers OMITTED: direct-soldered wires required for this layout.',
+ 'ASSUMED: SD holder including seated card 18 x 24 x 3. Eight pins do NOT define package dimensions.',
+ 'ASSUMED: amplifier 18 x 18 x 3; driver 8 x 8 x 3; antenna 8 x 16 x 1; battery connector 6 x 8 x 4.',
+ 'ASSUMED: speaker lead exit 4 mm. Wire allowances are orange translucent reservations, not physical parts.',
+ 'Button is a 6 mm installation placeholder only; opening awaits a separately designed insert/cap.',
+ 'Three M2 screw positions: 2.2 clearance / 1.6 pilot. Validate material, screw length and tolerances before printing.',
+ 'Mic acoustic ports assume top-facing inlet at PCB center; confirm actual microphone inlet before fabrication.',
+ 'Packaging concepts: carrier/PCB retention, strain relief, wiring harness and acoustic seals NOT finalized.',
+ 'Antenna placement is provisional; RF keepout and battery charging/current compatibility not verified.',
+ 'Source positions fixed; spreadsheet edits do not auto-pack components. Recheck interferences after edits.',
+ 'Explode moves lid only. Reset to 0 before assembled STEP export. Existing designs are preserved.']
+ for i,t in enumerate(notes,28):p.set('A%d'%i,t)
+ def prop(o,k,v):
+  if isinstance(v,str):o.setExpression(k,v)
+  else:setattr(o,k,v)
+ def pos(o,x,y,z):
+  o.Placement.Base=App.Vector(*[a if isinstance(a,(int,float)) else 0 for a in (x,y,z)])
+  for axis,value in zip('xyz',(x,y,z)):
+   if isinstance(value,str):o.setExpression('Placement.Base.'+axis,value)
+ def box(n,w,l,h,x,y,z):
+  o=d.addObject('Part::Box',n)
+  for k,v in [('Length',w),('Width',l),('Height',h)]:prop(o,k,v)
+  pos(o,x,y,z);return o
+ def cyl(n,r,h,x,y,z):
+  o=d.addObject('Part::Cylinder',n);prop(o,'Radius',r);prop(o,'Height',h);pos(o,x,y,z);return o
+ def fuse(n,parts):
+  o=d.addObject('Part::MultiFuse',n);o.Shapes=parts;o.Refine=True;return o
+ def cut(n,a,b):
+  o=d.addObject('Part::Cut',n);o.Base=a;o.Tool=b;o.Refine=True;return o
+ def profile(n,inset,z,h):
+  t='('+str(inset)+')'
+  if shape=='round':return cyl(n,'Parameters.Width/2-'+t,h,0,0,z)
+  r='(Parameters.Radius-'+t+')';w='(Parameters.Width-2*'+t+')';l='(Parameters.Length-2*'+t+')'
+  x='(-Parameters.Width/2+'+t+')';y='(-Parameters.Length/2+'+t+')'
+  pieces=[box(n+'WebX',w+'-2*'+r,l,h,x+'+'+r,y,z),box(n+'WebY',w,l+'-2*'+r,h,x,y+'+'+r,z)]
+  for cx in ['-Parameters.Width/2+Parameters.Radius','Parameters.Width/2-Parameters.Radius']:
+   for cy in ['-Parameters.Length/2+Parameters.Radius','Parameters.Length/2-Parameters.Radius']:pieces.append(cyl(n+'Corner',r,h,cx,cy,z))
+  return fuse(n,pieces)
+ battery=box('Battery','Parameters.BatteryWidth','Parameters.BatteryLength','Parameters.BatteryThickness','-Parameters.BatteryWidth/2','-Parameters.BatteryLength/2',1.9)
+ board=d.addObject('Part::Feature','XIAO');board.Shape=source.copy();pos(board,-8.89,-24,8.2)
+ sd=box('SDHolder','Parameters.SDWidth','Parameters.SDLength','Parameters.SDThickness','-Parameters.SDWidth/2',-24,14.2)
+ amp=box('Amplifier',18,18,3,-9,1,8.2)
+ mics=[cyl('MicLeft' if x<0 else 'MicRight','Parameters.MicDiameter/2','Parameters.MicThickness',x,16,14.4) for x in [-9,9]]
+ speaker=cyl('Speaker','Parameters.SpeakerDiameter/2','Parameters.SpeakerThickness',0,6,14.4)
+ motor=cyl('Motor','Parameters.MotorDiameter/2','Parameters.MotorThickness',18,-5,1.9)
+ driver=box('MotorDriver',8,8,3,13,0,8.2)
+ antenna=box('Antenna',8,16,1,-22,-5,1.9)
+ connector=box('BatteryConnector',6,8,4,14,8,1.9)
+ if button=='side':switch=box('ButtonSpace',3,6,6,22,-8,10)
+ else:switch=box('ButtonSpace',6,6,3,15,-11 if button=='face' else -3,14.2)
+ led=cyl('LED',0.8,1,-18,-8,17.5)
+ components=[battery,board,sd,amp]+mics+[speaker,motor,driver,antenna,connector,switch,led]
+ names=['Battery — measured pack','XIAO — actual geometry','SD — provisional 8-pin holder envelope','Amplifier — provisional breakout','Mic L — measured diameter, assumed thickness','Mic R — same board assumed','Speaker — measured body','Motor — measured diameter, assumed thickness','Driver — provisional circuitry','Antenna — provisional envelope','Battery connector — provisional envelope','BUTTON SPACE — insert to be designed','LED — provisional mounting']
+ colors=[(0.25,0.6,0.95),(0.12,0.5,0.28),(0.25,0.3,0.36),(0.55,0.35,0.8),(0.8,0.3,0.6),(0.8,0.3,0.6),(0.25,0.25,0.28),(0.65,0.65,0.7),(0.65,0.4,0.2),(0.95,0.8,0.2),(0.85,0.85,0.85),(1.0,0.55,0.15),(0.2,0.9,0.3)]
+ for o,label,color in zip(components,names,colors):o.Label=label;o.ViewObject.ShapeColor=color
+ wiremotor=box('MotorWireAllowance',3,'Parameters.MotorWireExit','Parameters.MotorThickness',16.5,0,1.9)
+ wirespeaker=box('SpeakerWireAllowance','Parameters.SpeakerWireExit',3,'Parameters.SpeakerThickness',5,4.5,14.4)
+ wires=[wiremotor,wirespeaker]
+ for o in wires:o.Label=o.Name+' — space, not material';o.ViewObject.ShapeColor=(1.0,0.55,0.1);o.ViewObject.Transparency=70
+ shell=cut('Shell',profile('Outer',0,0,'Parameters.Height-Parameters.Lid'),profile('Cavity','Parameters.Wall','Parameters.Floor','Parameters.Height'))
+ sc=[(-23,-10),(23,10),(0,25.5)] if shape=='round' else [(-W/2+2.5,-12),(W/2-2.5,12),(0,L/2-2.5)]
+ shell=fuse('ShellBosses',[shell]+[cyl('ScrewBoss',2.2,'Parameters.Height-Parameters.Lid-Parameters.Floor',x,y,'Parameters.Floor') for x,y in sc])
+ usb=box('USBOpening',12,12,5.2,-6,-L/2-1,7.9)
+ sdslot=box('SDOpening',19,12,3.6,-9.5,-L/2-1,13.9)
+ baseholes=[usb,sdslot]+[cyl('Pilot',0.8,7,x,y,'Parameters.Height-Parameters.Lid-6') for x,y in sc]
+ if button=='side':
+  bh=cyl('SideButtonOpening',3.3,10,22,-5,13);bh.Placement.Rotation=App.Rotation(App.Vector(0,0,1),App.Vector(1,0,0));baseholes.append(bh)
+ base=cut('Base',shell,fuse('BaseCuts',baseholes));base.Label='BASE — stacked USB / SD slots, M2 pilot bosses'
+ plate=profile('LidPlate',0,'Parameters.Height-Parameters.Lid','Parameters.Lid')
+ lip=cut('Lip',profile('LipOuter','Parameters.Wall+Parameters.LipGap','Parameters.Height-Parameters.Lid-Parameters.LipDepth','Parameters.LipDepth+0.1'),profile('LipInner','Parameters.Wall+Parameters.LipGap+Parameters.LipThickness','Parameters.Height-Parameters.Lid-Parameters.LipDepth-0.1','Parameters.LipDepth+0.3'))
+ lip=cut('LipRelieved',lip,fuse('BossClearance',[cyl('BossRelief',2.5,3,x,y,'Parameters.Height-Parameters.Lid-2') for x,y in sc]))
+ lidholes=[usb,sdslot]+[cyl('ScrewClearance',1.1,4,x,y,'Parameters.Height-3') for x,y in sc]
+ for x in [-9,9]:lidholes.append(cyl('MicPort',0.8,5,x,16,'Parameters.Height-4'))
+ for x in [-2.5,0,2.5]:
+  for y in [-2.5,0,2.5]:lidholes.append(cyl('SpeakerVent',0.6,5,x,6+y,'Parameters.Height-4'))
+ lidholes.append(cyl('LEDPort',1.1,5,-18,-8,'Parameters.Height-4'))
+ if button!='side':lidholes.append(cyl('ButtonInsertOpening',3.3,5,18,-8 if button=='face' else 0,'Parameters.Height-4'))
+ lid=cut('Lid',fuse('LidBlank',[plate,lip]),fuse('LidCuts',lidholes));lid.setExpression('Placement.Base.z','Parameters.Explode');lid.Label='LID — microphone ports, grille, provisional button interface'
+ d.recompute()
+ problems=[]
+ for o in [base,lid]:assert o.Shape.isValid() and len(o.Shape.Solids)==1,(o.Name,'invalid')
+ for i,a in enumerate(components+wires+[base,lid]):
+  for b in (components+wires+[base,lid])[i+1:]:
+   volume=a.Shape.common(b.Shape).Volume
+   if volume>0.001:problems.append([a.Name,b.Name,round(volume,4)])
+ boundary=profile('FitBoundary',0,0,'Parameters.Height');d.recompute()
+ outside=[]
+ for o in components+wires:
+  volume=o.Shape.cut(boundary.Shape).Volume
+  if volume>0.001:outside.append([o.Name,round(volume,4)])
+ for o in d.Objects:o.ViewObject.Visibility=False
+ grp=d.addObject('App::DocumentObjectGroup','Components');grp.Group=components
+ wg=d.addObject('App::DocumentObjectGroup','WireReservations');wg.Group=wires
+ for o in components+[base,lid]:o.ViewObject.Visibility=True
+ for o in [base,lid]:o.ViewObject.ShapeColor=(0.72,0.78,0.82);o.ViewObject.Transparency=65
+ report={'design':key,'shape':shape,'external_mm':[W,L,20.4],'button':button,'collisions_mm3':problems,'outside_mm3':outside,'valid_shells':True}
+ reports.append(report)
+ d.recompute();d.saveAs(OUT+'/Measured-'+key+'.FCStd')
+ if not problems and not outside:
+  Part.export([base,lid],OUT+'/Measured-'+key+'.step')
+  for o in [base,lid]:Mesh.export([o],OUT+'/Measured-'+key+'-'+o.Name+'.stl')
+with open(OUT+'/measured-variants-report.json','w') as f:json.dump(reports,f,indent=2)
+print(json.dumps(reports))

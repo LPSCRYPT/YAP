@@ -1,0 +1,38 @@
+[
+  {
+    "layout": "Stacked",
+    "internal_mm": [
+      46.0,
+      56.0,
+      13.5
+    ],
+    "component_volume_mm3": 7900.5,
+    "bounding_volume_mm3": 34776.0,
+    "reserved_tile_collisions": [],
+    "external_access_clear": true
+  },
+  {
+    "layout": "Flat",
+    "internal_mm": [
+      66.0,
+      62.0,
+      7.2
+    ],
+    "component_volume_mm3": 7900.5,
+    "bounding_volume_mm3": 29462.4,
+    "reserved_tile_collisions": [],
+    "external_access_clear": true
+  },
+  {
+    "layout": "Overlap",
+    "internal_mm": [
+      54.0,
+      60.0,
+      13.5
+    ],
+    "component_volume_mm3": 7900.5,
+    "bounding_volume_mm3": 43740.0,
+    "reserved_tile_collisions": [],
+    "external_access_clear": true
+  }
+]

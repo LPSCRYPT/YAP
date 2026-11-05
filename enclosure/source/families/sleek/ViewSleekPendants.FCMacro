@@ -1,0 +1,12 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui
+v=new_document('Sleek_Pendant_Comparison');v.Label='Low-profile pendants — round and stepped square'
+for i,name in enumerate(['Sleek_Round','Sleek_Square']):
+ src=document(name)
+ for part in ['FlatRearBase','RoundedHood','LightGuide']:
+  original=src.getObject(part);o=v.addObject('Part::Feature',name+'_'+part)
+  s=original.Shape.copy();s.translate(App.Vector(i*70,0,0));o.Shape=s
+  o.ViewObject.ShapeColor=(0.74,0.76,0.77) if part!='LightGuide' else (0.2,0.9,0.4)
+  o.ViewObject.DisplayMode='Shaded'
+v.recompute();v.saveAs(output_dir('sleek') + '/Comparison.FCStd')
+Gui.activeDocument().activeView().viewAxonometric()

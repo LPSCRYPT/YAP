@@ -1,0 +1,13 @@
+REFERENCE: /Users/bot/Desktop/jewelry/0876cc003f941c7c4312df17ecf063a7.jpg
+
+OBSERVATIONS
+Purple circuit-board jewelry beneath a glossy resin-like face. Squarish tile with diagonally clipped upper-right/lower-left corners, dense copper-coloured routed traces and pads surrounding a central chip-shaped feature, and a jump ring at the upper-left corner. The photo does not establish actual dimensions, material composition or electronics functionality.
+
+ENCLOSURE INTERPRETATION
+A clipped-square whole-body recorder shell with softened upper shoulder, corner-offset necklace eye and a recessed circuit-trace pattern around the centered status LED. The source's thin board is expanded in depth to fit the retained battery and two-level electronics. Sixteen larger routes and terminal pads replace the photo's sub-print-resolution trace density. The central patterned region does not represent an added electronic chip.
+
+FINISH / LIMITS
+Purple body and copper-coloured groove floors preview optional nonconductive paint. Channels are physical 0.55 mm-wide, 0.3 mm-deep geometry; use calibrated printing or post-finishing. No functional printed circuitry, conductive coating or metal enclosure is specified. The central roof is thickened before engraving. A clear glossy finish is optional and unmodeled; do not fill acoustic ports or the light-guide opening. RF, paint/finish compatibility and wear resistance are untested.
+
+VERIFIED BODY SIZE mm: [49.4, 49.4, 23.0]
+CAD-checked fit prototype; no physical print, strength, acoustic, RF or thermal tests. See collection START-HERE.txt for shared hardware and component assumptions.

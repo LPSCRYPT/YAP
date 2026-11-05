@@ -1,0 +1,61 @@
+{
+  "outer_width_mm": 54.131103515625,
+  "outer_length_mm": 54.131103515625,
+  "body_thickness_mm": 25.0,
+  "rear_diameter_mm": 51.0,
+  "clip_mode_thickness_mm": 37.0,
+  "single_continuous_meridian": true,
+  "meridian_degree": 5,
+  "meridian_multiplicities": [
+    6,
+    3,
+    6
+  ],
+  "minimum_unperforated_wall_mm": 1.5219903087950133,
+  "issues": [],
+  "hood_removal_checked": true,
+  "clip_interface_unchanged": true,
+  "parts": [
+    {
+      "part": "FlatRearBase",
+      "closed_reimported_mesh": true,
+      "facets": 11422
+    },
+    {
+      "part": "SmoothHood",
+      "closed_reimported_mesh": true,
+      "facets": 33568
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3852
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 7662
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 5108
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 416
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1960
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 464
+    }
+  ],
+  "status": "CAD-checked fit prototype, not physically printed or acoustically validated"
+}

@@ -1,0 +1,76 @@
+{
+  "id": 9,
+  "name": "Soft Diamond",
+  "family": "superellipse",
+  "description": "Exponent-1.55 soft diamond with four tapered tips and bowed flanks; high shoulder and shallow, narrow roof taper.",
+  "body_mm": [
+    55.43,
+    55.48,
+    21.3
+  ],
+  "with_bail_length_mm": 61.6,
+  "clip_thickness_mm": 33.3,
+  "outer_volume_mm3": 43502.5,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7912
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 10366
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3038
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5938
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3722
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      22.573785953523334,
+      8.216186161778996
+    ],
+    [
+      -18.97112335596292,
+      13.283723582151518
+    ],
+    [
+      4.3231101292516225,
+      -24.51757588022995
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

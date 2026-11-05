@@ -1,0 +1,76 @@
+{
+  "id": 10,
+  "name": "Soft Delta",
+  "family": "rounded-triangle",
+  "description": "Three-fold support-function body with a softly triangular whole outline; low shoulder and deep, inward-sloping roof.",
+  "body_mm": [
+    54.77,
+    54.82,
+    22.6
+  ],
+  "with_bail_length_mm": 61.0,
+  "clip_thickness_mm": 34.6,
+  "outer_volume_mm3": 50989.6,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7908
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 11070
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3026
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5892
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3666
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      21.789860530201818,
+      7.930860641805431
+    ],
+    [
+      -18.853104829669444,
+      13.201086120392427
+    ],
+    [
+      4.02660347542324,
+      -22.836003084977357
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

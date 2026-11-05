@@ -1,0 +1,26 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui
+src=document('Domed_Mounted_Pendant')
+view=new_document('Domed_Mounting_Inspection');view.Label='Domed pendant — assembled and exploded mounting'
+def copy(o,x,z,prefix):
+ n=view.addObject('Part::Feature',prefix+o.Name);n.Label=prefix+' — '+o.Label
+ s=o.Shape.copy();s.translate(App.Vector(x,0,z));n.Shape=s;n.ViewObject.ShapeColor=o.ViewObject.ShapeColor
+ return n
+for name in ['Base','DomedLid','FlushInsert','LightGuide']:copy(src.getObject(name),-70,0,'Assembled')
+levels={'Base':0,'FlushInsert':0,'LowerCarrier':24,'UpperCarrier':48,'TopRetainer':66,'DomedLid':90,'LightGuide':90}
+for name,z in levels.items():copy(src.getObject(name),20,z,'Exploded')
+for o in src.ComponentReferences.Group:
+ if o.Name in ['Battery','Motor','Antenna','BatteryConnector']:z=10
+ elif o.Name in ['XIAO','Amplifier','MotorDriver']:z=24
+ elif o.Name in ['SDHolder','MicLeft','MicRight','Speaker']:z=48
+ elif o.Name=='LED':z=66
+ else:continue
+ copy(o,20,z,'Component')
+for o in src.RequiredHardware.Group:
+ if o.Name.startswith('CarrierScrew'):z=66
+ elif 'Band' in o.Name:z=24
+ elif o.Name in ['MotorPad','ConnectorPad']:z=10
+ else:z=48
+ copy(o,20,z,'Hardware')
+view.recompute();view.saveAs(output_dir('domed-mounted') + '/Inspection-Exploded.FCStd')
+Gui.activeDocument().activeView().viewAxonometric()

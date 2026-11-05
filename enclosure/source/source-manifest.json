@@ -1,0 +1,839 @@
+{
+  "schema_version": 1,
+  "original_source_collection": "Recorder-Enclosures",
+  "originals_preserved": true,
+  "entrypoint": "tools/build.py",
+  "gui_macro_entrypoint": "tools/Rebuild.FCMacro",
+  "source_resolution": "Paths are relative to this manifest; packaged document paths are relative to enclosure/.",
+  "output_policy": "Required new or empty directory outside enclosure; original CAD copied into output/.inputs before loading.",
+  "verification_status": "Migration not executed or verified by source worker. Historical validation files describe original builds only.",
+  "sources": {
+    "JewelryCustom08.py": {
+      "path": "families/jewelry/designs/08-Paired-Silver-Folds/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "OffsetCutProfiles.py": {
+      "path": "families/offset-cut/OffsetCutProfiles.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "JewelryEnvelopeGeometry.py": {
+      "path": "families/jewelry/JewelryEnvelopeGeometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "ViewSleekPendants.FCMacro": {
+      "path": "families/sleek/ViewSleekPendants.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "name"
+      ],
+      "invoke": {
+        "macro": "ViewSleekPendants.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom09.py": {
+      "path": "families/jewelry/designs/09-Nested-Lariat-Frames/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "BuildWholeBodyAtlas.FCMacro": {
+      "path": "families/whole-body-atlas/BuildWholeBodyAtlas.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Sleek_Round'",
+        "'Atlas_%02d' % n"
+      ],
+      "invoke": {
+        "macro": "BuildWholeBodyAtlas.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildCircularCases.FCMacro": {
+      "path": "families/early-recorder-studies/BuildCircularCases.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_300mAh'"
+      ],
+      "invoke": {
+        "macro": "BuildCircularCases.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildOffsetThemeConcepts.FCMacro": {
+      "path": "families/offset-theme/BuildOffsetThemeConcepts.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [
+        "BuildWholeBodyAtlas.FCMacro",
+        "ThemeEnvelopeGeometry.py",
+        "ThemeSilhouetteProfiles.py",
+        "ThemeVolumeProfiles.py"
+      ],
+      "document_dependencies": [
+        "style['source']",
+        "'Theme_%02d' % (i + 1)"
+      ],
+      "invoke": {
+        "macro": "BuildOffsetThemeConcepts.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom12.py": {
+      "path": "families/jewelry/designs/12-Teal-Oblique-Frame/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "JewelryCustom02.py": {
+      "path": "families/jewelry/designs/02-Oblique-Graphite-Shard/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "CompareCircularCases.FCMacro": {
+      "path": "families/early-recorder-studies/CompareCircularCases.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_Circular_%dmAh' % cap"
+      ],
+      "invoke": {
+        "macro": "CompareCircularCases.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom16.py": {
+      "path": "families/jewelry/designs/16-Octagonal-Signet/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "JewelryCustom06.py": {
+      "path": "families/jewelry/designs/06-Interlocked-Hex-Shield/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "ViewDomedMounted.FCMacro": {
+      "path": "families/domed-mounted/ViewDomedMounted.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Domed_Mounted_Pendant'"
+      ],
+      "invoke": {
+        "macro": "ViewDomedMounted.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildSmoothPebble.FCMacro": {
+      "path": "families/smooth-pebble/BuildSmoothPebble.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Sleek_Round'"
+      ],
+      "invoke": {
+        "macro": "BuildSmoothPebble.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "AddWearableMounts.FCMacro": {
+      "path": "families/mounting/AddWearableMounts.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Measured_' + key"
+      ],
+      "invoke": {
+        "macro": "AddWearableMounts.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom17.py": {
+      "path": "families/jewelry/designs/17-Triangular-Truss/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "JewelryCustom07.py": {
+      "path": "families/jewelry/designs/07-Obsidian-Cut/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "WholeBodyParametric.py": {
+      "path": "families/whole-body-atlas/WholeBodyParametric.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "BuildSleekPendants.FCMacro": {
+      "path": "families/sleek/BuildSleekPendants.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Domed_Mounted_Pendant'"
+      ],
+      "invoke": {
+        "macro": "BuildSleekPendants.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom13.py": {
+      "path": "families/jewelry/designs/13-Split-Spindle-Cabochon/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "ThemeEnvelopeGeometry.py": {
+      "path": "shared/ThemeEnvelopeGeometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "JewelryCustom03.py": {
+      "path": "families/jewelry/designs/03-Triangular-Sail-Crown/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "ViewFittedCases.FCMacro": {
+      "path": "families/measured-and-fitted/ViewFittedCases.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_Fitted_' + key"
+      ],
+      "invoke": {
+        "macro": "ViewFittedCases.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildStacked24Case.FCMacro": {
+      "path": "families/early-recorder-studies/BuildStacked24Case.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_Circular_300mAh'"
+      ],
+      "invoke": {
+        "macro": "BuildStacked24Case.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom14.py": {
+      "path": "families/jewelry/designs/14-Overlapping-Delta/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "JewelryCustom04.py": {
+      "path": "families/jewelry/designs/04-Cellular-Silver-Terrace/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "BuildPackagingStudy.FCMacro": {
+      "path": "families/measured-and-fitted/BuildPackagingStudy.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_300mAh'"
+      ],
+      "invoke": {
+        "macro": "BuildPackagingStudy.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "CenterLEDAndViewMounts.FCMacro": {
+      "path": "families/mounting/CenterLEDAndViewMounts.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Measured_' + key",
+        "'Measured_' + key"
+      ],
+      "invoke": {
+        "macro": "CenterLEDAndViewMounts.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "AddSleekClip.FCMacro": {
+      "path": "families/sleek/AddSleekClip.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Modular_Mount_Prototype'",
+        "docname"
+      ],
+      "invoke": {
+        "macro": "AddSleekClip.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "ThemeSilhouetteProfiles.py": {
+      "path": "families/offset-theme/ThemeSilhouetteProfiles.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "BuildRecorderCases.FCMacro": {
+      "path": "families/early-recorder-studies/BuildRecorderCases.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'XIAO_ESP32_S3_Board_Only'"
+      ],
+      "invoke": {
+        "macro": "BuildRecorderCases.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom10.py": {
+      "path": "families/jewelry/designs/10-Interlocked-Pixel-Shard/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "WholeBodyMinimal.py": {
+      "path": "families/whole-body-atlas/WholeBodyMinimal.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "BuildIntegratedSlicerSets.FCMacro": {
+      "path": "families/integrated-slicer/BuildIntegratedSlicerSets.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Modular_Mount_Prototype'",
+        "'Measured_' + key"
+      ],
+      "invoke": {
+        "macro": "BuildIntegratedSlicerSets.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "ViewMeasuredVariants.FCMacro": {
+      "path": "families/measured-and-fitted/ViewMeasuredVariants.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Measured_' + key"
+      ],
+      "invoke": {
+        "macro": "ViewMeasuredVariants.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildMeasuredVariants.FCMacro": {
+      "path": "families/measured-and-fitted/BuildMeasuredVariants.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_300mAh'"
+      ],
+      "invoke": {
+        "macro": "BuildMeasuredVariants.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom11.py": {
+      "path": "families/jewelry/designs/11-Dissolving-Silver-Square/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "BuildModularMountPrototype.FCMacro": {
+      "path": "families/mounting/BuildModularMountPrototype.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "macro": "BuildModularMountPrototype.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "JewelryCustom15.py": {
+      "path": "families/jewelry/designs/15-Nested-Aperture/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "JewelryCustom05.py": {
+      "path": "families/jewelry/designs/05-Tapered-Fracture-Pendant/geometry.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [
+        "ThemeEnvelopeGeometry.py"
+      ],
+      "document_dependencies": []
+    },
+    "BuildDomedMounted.FCMacro": {
+      "path": "families/domed-mounted/BuildDomedMounted.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Integrated_PuckSide'",
+        "'Modular_Mount_Prototype'",
+        "'Measured_PuckSide'"
+      ],
+      "invoke": {
+        "macro": "BuildDomedMounted.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "ThemeVolumeProfiles.py": {
+      "path": "families/offset-theme/ThemeVolumeProfiles.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "CompareJewelryStudies.FCMacro": {
+      "path": "families/jewelry/CompareJewelryStudies.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Jewelry_%02d' % int(report['id'])"
+      ],
+      "invoke": {
+        "macro": "CompareJewelryStudies.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildOffsetCutStudy.FCMacro": {
+      "path": "families/offset-cut/BuildOffsetCutStudy.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [
+        "BuildWholeBodyAtlas.FCMacro",
+        "OffsetCutProfiles.py"
+      ],
+      "document_dependencies": [
+        "'Sleek_Round'",
+        "'Atlas_08'",
+        "'OffsetStudy_%02d' % (i + 1)"
+      ],
+      "invoke": {
+        "macro": "BuildOffsetCutStudy.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildRoundBatteryCase.FCMacro": {
+      "path": "families/early-recorder-studies/BuildRoundBatteryCase.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_Circular_300mAh'"
+      ],
+      "invoke": {
+        "macro": "BuildRoundBatteryCase.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildFittedCases.FCMacro": {
+      "path": "families/measured-and-fitted/BuildFittedCases.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Recorder_Internal_Layouts'"
+      ],
+      "invoke": {
+        "macro": "BuildFittedCases.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildInsetFacePendant.FCMacro": {
+      "path": "families/inset-face/BuildInsetFacePendant.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [
+        "BuildSmoothPebble.FCMacro"
+      ],
+      "document_dependencies": [
+        "'Smooth_Pebble'"
+      ],
+      "invoke": {
+        "macro": "BuildInsetFacePendant.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildCompactBodies.FCMacro": {
+      "path": "families/compact-bodies/BuildCompactBodies.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [],
+      "document_dependencies": [
+        "'Domed_Mounted_Pendant'",
+        "'Modular_Mount_Prototype'"
+      ],
+      "invoke": {
+        "macro": "BuildCompactBodies.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "WholeBodyCyber.py": {
+      "path": "families/whole-body-atlas/WholeBodyCyber.py",
+      "kind": "geometry-or-profile-module",
+      "source_dependencies": [],
+      "document_dependencies": []
+    },
+    "BuildJewelryStudies.FCMacro": {
+      "path": "families/jewelry/BuildJewelryStudies.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [
+        "BuildOffsetThemeConcepts.FCMacro",
+        "JewelryEnvelopeGeometry.py"
+      ],
+      "document_dependencies": [
+        "style['source']",
+        "'Jewelry_%02d' % int(style['id'])",
+        "'Jewelry_%02d' % index"
+      ],
+      "invoke": {
+        "macro": "BuildJewelryStudies.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "BuildDomeVariations.FCMacro": {
+      "path": "families/dome-variations/BuildDomeVariations.FCMacro",
+      "kind": "macro",
+      "source_dependencies": [
+        "BuildSmoothPebble.FCMacro"
+      ],
+      "document_dependencies": [
+        "'Inset_Face_Pendant'",
+        "'Smooth_Pebble'",
+        "'Dome_' + name"
+      ],
+      "invoke": {
+        "macro": "BuildDomeVariations.FCMacro",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-03.json": {
+      "path": "families/jewelry/designs/03-Triangular-Sail-Crown/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "03",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-15.json": {
+      "path": "families/jewelry/designs/15-Nested-Aperture/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "15",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-14.json": {
+      "path": "families/jewelry/designs/14-Overlapping-Delta/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "14",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-02.json": {
+      "path": "families/jewelry/designs/02-Oblique-Graphite-Shard/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "02",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-05.json": {
+      "path": "families/jewelry/designs/05-Tapered-Fracture-Pendant/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "05",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-13.json": {
+      "path": "families/jewelry/designs/13-Split-Spindle-Cabochon/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "13",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-09.json": {
+      "path": "families/jewelry/designs/09-Nested-Lariat-Frames/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "09",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-08.json": {
+      "path": "families/jewelry/designs/08-Paired-Silver-Folds/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "08",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-12.json": {
+      "path": "families/jewelry/designs/12-Teal-Oblique-Frame/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "12",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-04.json": {
+      "path": "families/jewelry/designs/04-Cellular-Silver-Terrace/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "04",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-11.json": {
+      "path": "families/jewelry/designs/11-Dissolving-Silver-Square/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "11",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-07.json": {
+      "path": "families/jewelry/designs/07-Obsidian-Cut/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "07",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-06.json": {
+      "path": "families/jewelry/designs/06-Interlocked-Hex-Shield/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "06",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-10.json": {
+      "path": "families/jewelry/designs/10-Interlocked-Pixel-Shard/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "10",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-17.json": {
+      "path": "families/jewelry/designs/17-Triangular-Truss/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "17",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-01.json": {
+      "path": "families/jewelry/designs/01-Circuit-Cabochon/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "01",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    },
+    "Jewelry-16.json": {
+      "path": "families/jewelry/designs/16-Octagonal-Signet/profile.json",
+      "kind": "profile",
+      "source_dependencies": [],
+      "document_dependencies": [],
+      "invoke": {
+        "family": "jewelry",
+        "design": "16",
+        "output": "REQUIRED isolated directory outside enclosure"
+      }
+    }
+  },
+  "documents": {
+    "XIAO_ESP32_S3_Board_Only": "references/components/XIAO-ESP32-S3-Board-Only.FCStd",
+    "Modular_Mount_Prototype": "builds/mounting/Modular-Mount-Prototype.FCStd",
+    "Recorder_Internal_Layouts": "builds/measured-and-fitted/Recorder-300mAh-Internal-Layouts.FCStd",
+    "Domed_Mounted_Pendant": "builds/domed-mounted/Domed-Mounted-Pendant.FCStd",
+    "Smooth_Pebble": "builds/smooth-pebble/Smooth-Pebble.FCStd",
+    "Inset_Face_Pendant": "builds/inset-face/Inset-Face-Pendant.FCStd",
+    "Sleek_Square": "builds/sleek/01-Stepped-Square/Assembly.FCStd",
+    "Sleek_Round": "builds/sleek/02-Slim-Round/Assembly.FCStd",
+    "Recorder_300mAh": "builds/early-recorder-studies/Recorder-300mAh.FCStd",
+    "Recorder_Circular_300mAh": "builds/early-recorder-studies/Recorder-Circular-300mAh.FCStd",
+    "Recorder_500mAh": "builds/early-recorder-studies/Recorder-500mAh.FCStd",
+    "Recorder_Circular_500mAh": "builds/early-recorder-studies/Recorder-Circular-500mAh.FCStd",
+    "Recorder_Circular_1000mAh": "builds/early-recorder-studies/Recorder-Circular-1000mAh.FCStd",
+    "Measured_PuckFace": "builds/measured-and-fitted/Measured-PuckFace.FCStd",
+    "Integrated_PuckFace": "builds/integrated-slicer/01-Round-Front-Button/Assembly.FCStd",
+    "Measured_PuckSide": "builds/measured-and-fitted/Measured-PuckSide.FCStd",
+    "Integrated_PuckSide": "builds/integrated-slicer/02-Round-Side-Button/Assembly.FCStd",
+    "Measured_Capsule": "builds/measured-and-fitted/Measured-Capsule.FCStd",
+    "Integrated_Capsule": "builds/integrated-slicer/03-Capsule-Offset-Button/Assembly.FCStd",
+    "Recorder_Fitted_Stacked": "builds/measured-and-fitted/Recorder-300mAh-Fitted-Stacked.FCStd",
+    "Recorder_Fitted_Flat": "builds/measured-and-fitted/Recorder-300mAh-Fitted-Flat.FCStd",
+    "Dome_Orbit": "builds/dome-variations/01-Orbit/Assembly.FCStd",
+    "Dome_Meridian": "builds/dome-variations/02-Meridian/Assembly.FCStd",
+    "Dome_Crescent": "builds/dome-variations/03-Crescent/Assembly.FCStd",
+    "Jewelry_03": "builds/jewelry/03-Triangular-Sail-Crown/Assembly.FCStd",
+    "Jewelry_15": "builds/jewelry/15-Nested-Aperture/Assembly.FCStd",
+    "Jewelry_14": "builds/jewelry/14-Overlapping-Delta/Assembly.FCStd",
+    "Jewelry_02": "builds/jewelry/02-Oblique-Graphite-Shard/Assembly.FCStd",
+    "Jewelry_05": "builds/jewelry/05-Tapered-Fracture-Pendant/Assembly.FCStd",
+    "Jewelry_13": "builds/jewelry/13-Split-Spindle-Cabochon/Assembly.FCStd",
+    "Jewelry_09": "builds/jewelry/09-Nested-Lariat-Frames/Assembly.FCStd",
+    "Jewelry_08": "builds/jewelry/08-Paired-Silver-Folds/Assembly.FCStd",
+    "Jewelry_12": "builds/jewelry/12-Teal-Oblique-Frame/Assembly.FCStd",
+    "Jewelry_04": "builds/jewelry/04-Cellular-Silver-Terrace/Assembly.FCStd",
+    "Jewelry_11": "builds/jewelry/11-Dissolving-Silver-Square/Assembly.FCStd",
+    "Jewelry_07": "builds/jewelry/07-Obsidian-Cut/Assembly.FCStd",
+    "Jewelry_06": "builds/jewelry/06-Interlocked-Hex-Shield/Assembly.FCStd",
+    "Jewelry_10": "builds/jewelry/10-Interlocked-Pixel-Shard/Assembly.FCStd",
+    "Jewelry_17": "builds/jewelry/17-Triangular-Truss/Assembly.FCStd",
+    "Jewelry_01": "builds/jewelry/01-Circuit-Cabochon/Assembly.FCStd",
+    "Jewelry_16": "builds/jewelry/16-Octagonal-Signet/Assembly.FCStd",
+    "Atlas_01": "builds/whole-body-atlas/01-Quiet-Oval/Assembly.FCStd",
+    "Atlas_02": "builds/whole-body-atlas/02-Cushion-Square/Assembly.FCStd",
+    "Atlas_03": "builds/whole-body-atlas/03-Soft-Hexagon/Assembly.FCStd",
+    "Atlas_04": "builds/whole-body-atlas/04-River-Pebble/Assembly.FCStd",
+    "Atlas_05": "builds/whole-body-atlas/05-Clipped-Slab/Assembly.FCStd",
+    "Atlas_06": "builds/whole-body-atlas/06-Blunt-Shield/Assembly.FCStd",
+    "Atlas_07": "builds/whole-body-atlas/07-Reverse-Keystone/Assembly.FCStd",
+    "Atlas_08": "builds/whole-body-atlas/08-Offset-Cut/Assembly.FCStd",
+    "Atlas_09": "builds/whole-body-atlas/09-Soft-Diamond/Assembly.FCStd",
+    "Atlas_10": "builds/whole-body-atlas/10-Soft-Delta/Assembly.FCStd",
+    "Atlas_11": "builds/whole-body-atlas/11-Soft-Pentagon/Assembly.FCStd",
+    "Atlas_12": "builds/whole-body-atlas/12-Biconvex-Lens/Assembly.FCStd",
+    "Theme_01": "builds/offset-theme/01-Offset-Wedge/Assembly.FCStd",
+    "Theme_02": "builds/offset-theme/02-Split-Level/Assembly.FCStd",
+    "Theme_03": "builds/offset-theme/03-Diagonal-Capsule/Assembly.FCStd",
+    "Theme_04": "builds/offset-theme/04-Folded-Shell/Assembly.FCStd",
+    "Theme_05": "builds/offset-theme/05-Asymmetric-Shield/Assembly.FCStd",
+    "Theme_06": "builds/offset-theme/06-Soft-Hard-Hybrid/Assembly.FCStd",
+    "OffsetStudy_01": "builds/offset-cut/01-Offset-Compact/Assembly.FCStd",
+    "OffsetStudy_02": "builds/offset-cut/02-Offset-Slash/Assembly.FCStd",
+    "OffsetStudy_03": "builds/offset-cut/03-Offset-Taper/Assembly.FCStd",
+    "OffsetStudy_04": "builds/offset-cut/04-Offset-Soft/Assembly.FCStd"
+  },
+  "dependency_metadata": {
+    "source_dependencies": "Original source linkage retained for provenance; shared replacements below are the current implementation.",
+    "whole_body_assembly": {
+      "path": "shared/whole_body_assembly.py",
+      "callers": ["BuildWholeBodyAtlas.FCMacro", "BuildOffsetCutStudy.FCMacro", "BuildOffsetThemeConcepts.FCMacro", "BuildJewelryStudies.FCMacro"],
+      "dependencies": ["shared/ThemeEnvelopeGeometry.py", "shared/enclosure_runtime.py"]
+    },
+    "smooth_envelope": {
+      "path": "shared/smooth_envelope.py",
+      "callers": ["BuildSmoothPebble.FCMacro", "BuildInsetFacePendant.FCMacro", "BuildDomeVariations.FCMacro"]
+    },
+    "macro_prerequisites": {
+      "AddWearableMounts.FCMacro": ["BuildMeasuredVariants.FCMacro"],
+      "CenterLEDAndViewMounts.FCMacro": ["BuildMeasuredVariants.FCMacro", "AddWearableMounts.FCMacro"],
+      "AddSleekClip.FCMacro": ["BuildSleekPendants.FCMacro"]
+    }
+  },
+  "tools": ["tools/build.py", "tools/Rebuild.FCMacro", "tools/verify_package.py"],
+  "additional_shared_sources": [
+    "shared/enclosure_runtime.py",
+    "shared/whole_body_assembly.py",
+    "shared/smooth_envelope.py"
+  ],
+  "additional_design_sources": [
+    "families/jewelry/designs/01-Circuit-Cabochon/geometry.py"
+  ],
+  "artifact_dependencies": [
+    "builds/whole-body-atlas/fit-scales.json",
+    "builds/jewelry/collection.json"
+  ],
+  "external_component_inputs": [
+    "references/components/XIAO-ESP32-S3-Board-Only.FCStd"
+  ],
+  "reference_policy": "Jewelry image provenance preserved by original filename; redistribution rights unknown; no licensing or affiliation inferred."
+}

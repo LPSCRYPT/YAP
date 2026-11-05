@@ -1,0 +1,76 @@
+{
+  "id": 7,
+  "name": "Reverse Keystone",
+  "family": "cyberpunk",
+  "description": "Clipped keystone body whose long flanks splay toward a broad upper edge; a shallow lateral inset and taller roof bevel retain its architectural silhouette.",
+  "body_mm": [
+    56.24,
+    52.22,
+    22.5
+  ],
+  "with_bail_length_mm": 58.42,
+  "clip_thickness_mm": 34.5,
+  "outer_volume_mm3": 56869.6,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7554
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 5966
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2968
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5846
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3638
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      24.943898562007604,
+      9.078836603126295
+    ],
+    [
+      -25.68758374543651,
+      17.986639776947847
+    ],
+    [
+      4.256673512745245,
+      -24.140795104880414
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

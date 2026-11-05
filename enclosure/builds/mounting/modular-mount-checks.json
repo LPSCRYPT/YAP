@@ -1,0 +1,92 @@
+{
+  "receiver_mm": [
+    34,
+    38,
+    5
+  ],
+  "recess_depth_mm": 3.6,
+  "floor_mm": 1.4,
+  "flush_error_mm": 0.0,
+  "locked_withdrawal_overlap_mm3": 0.23999999999999994,
+  "release_tip_displacement_mm": 0.95,
+  "released_path_checks": [
+    {
+      "withdrawal_mm": 0,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 0.1,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 0.25,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 0.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 0.8,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 1,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 1.5,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 2,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 3,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 4,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 6,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 8,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 10,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 14,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 18,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 22,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 26,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 30,
+      "overlap_mm3": 0.0
+    },
+    {
+      "withdrawal_mm": 34,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "valid_single_solids": true,
+  "mechanical_testing": "not performed"
+}

@@ -1,0 +1,58 @@
+{
+  "id": "08",
+  "name": "Paired Silver Folds",
+  "source": "Sleek_Square",
+  "source_image": "references/jewelry/881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+  "reference_analysis": "Two silver-coloured asymmetric geometric pieces are shown one above the other. The smaller upper pendant is attached to a fine chain; the larger lower piece is separately positioned. Both have broad triangular or quadrilateral sloping planes, clean sharp ridges, narrow perimeter bevels and a brushed-looking finish. The photograph does not establish that the two objects form one linked pendant, their dimensions, or their actual metal.",
+  "interpretation": "The two related faceted objects are interpreted as unequal adjacent raised slabs on one continuous closed recorder body, not falsely represented as two separately suspended enclosures. The entire footprint is a 56 by 50 mm skewed six-sided slab with an offset upper-right necklace eye. A genuine 1.4 mm diagonal valley separates the smaller lower fold from the larger upper fold; each has its own pair of intersecting roof planes and a narrow steep edge bevel. The valley is carried by a continuous structural roof and passes below the centered LED and all top acoustic ports. Together the two unequal masses and wide skew outline distinguish this body from a single faceted stone.",
+  "finish_notes": "Silver-grey and pale silver surface colours are optional nonconductive finish previews, not metal construction or conductive paint instructions. The two raised folds are fused physical shell geometry. They do not move and are not separately printed decorative appliques. The recessed valley has a 21.4 mm outer floor with the cavity capped at 19.8 mm, providing 1.6 mm structural backing; actual ridges remain below 25.5 mm. A closed rear and thicker edge are necessary for the battery and retained electronics, unlike the original solid jewelry. No physical fit, strength, RF, thermal, acoustic or finish testing is claimed.",
+  "footprint": [
+    [
+      -28,
+      -16
+    ],
+    [
+      -15,
+      -25
+    ],
+    [
+      25,
+      -25
+    ],
+    [
+      28,
+      17
+    ],
+    [
+      12,
+      25
+    ],
+    [
+      -26,
+      25
+    ]
+  ],
+  "kind": "profile_loft",
+  "shoulder": 20.1,
+  "top": 21.4,
+  "top_scale": 0.96,
+  "roof_steps": 1,
+  "custom_module": "geometry.py",
+  "eye_x": 12.0,
+  "eye_y": 27.0,
+  "color": [
+    0.67,
+    0.69,
+    0.71
+  ],
+  "accent_color": [
+    0.82,
+    0.83,
+    0.84
+  ],
+  "view_angle": 28,
+  "reference_provenance": {
+    "original_filename": "881a1aaa0f9269634d08c7b59e9d3c37.jpg",
+    "redistribution_status": "Unknown; local reference supplied for visual study, no license or affiliation asserted."
+  }
+}

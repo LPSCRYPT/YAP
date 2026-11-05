@@ -1,0 +1,80 @@
+{
+  "id": 6,
+  "name": "Interlocked Hex Shield",
+  "family": "Jewelry inspired",
+  "description": "The entire recorder becomes a pointed hexagonal shield, 53 by 58 mm before its rear necklace eye, rather than a rectangular case with a hexagon painted on it. Six broad border rails are defined by real recessed hexagonal and staggered joint channels across a low bevelled roof. A blind elongated recess below the centered LED recalls the original opening without exposing the battery or interrupting the LED and acoustic openings. The body remains full-depth at the perimeter until the upper shoulder, allowing the retained round carriers and vertically removable shell to fit. The reference's much thinner metal plate and separate bail are not reproduced literally.",
+  "body_mm": [
+    53.0,
+    58.0,
+    23.0
+  ],
+  "with_bail_length_mm": 64.2,
+  "clip_thickness_mm": 35.0,
+  "outer_volume_mm3": 52169.4,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7542
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 6172
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2968
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5846
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3638
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      24.620614758428186,
+      8.961170921403026
+    ],
+    [
+      -21.61047464779729,
+      15.131817252677477
+    ],
+    [
+      4.316243979323913,
+      -24.478636008974156
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/6d9a380c5fd0cc06b5e14853b7e7ce06.jpg",
+  "reference_analysis": "Dark metal-looking hexagonal pendant on a ball chain, with a substantial central hexagonal plate, six overlapping-looking border strips, strong diagonal joints and a narrow elongated central opening. The photograph shows a tapered separate bail and a scratched satin surface; it does not establish dimensions, alloy or construction.",
+  "interpretation": "The entire recorder becomes a pointed hexagonal shield, 53 by 58 mm before its rear necklace eye, rather than a rectangular case with a hexagon painted on it. Six broad border rails are defined by real recessed hexagonal and staggered joint channels across a low bevelled roof. A blind elongated recess below the centered LED recalls the original opening without exposing the battery or interrupting the LED and acoustic openings. The body remains full-depth at the perimeter until the upper shoulder, allowing the retained round carriers and vertically removable shell to fit. The reference's much thinner metal plate and separate bail are not reproduced literally.",
+  "finish_notes": "Charcoal and darker channel floors are optional nonconductive finish previews, not a metal specification. Border channels are 1.0 mm wide and 0.4 mm deep; the blind central slot is 2.4 mm wide and 0.65 mm deep. The roof cavity ceiling is capped at 20.8 mm, leaving at least 1.55 mm backing beneath the deepest recess. No through-opening, chain or decorative bail is modeled. Hardware dimensions require the wider closed-back shield. Physical fit, print strength, finish wear, acoustics, thermal behavior and RF remain untested."
+}

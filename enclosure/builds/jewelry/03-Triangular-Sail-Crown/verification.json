@@ -1,0 +1,80 @@
+{
+  "id": 3,
+  "name": "Triangular Sail Crown",
+  "family": "Jewelry inspired",
+  "description": "A genuine triangular crown is lofted into the entire upper body, above a compact asymmetric twelve-sided hardware-covering lower volume. This is not a triangular badge on a flat box: the broad diagonal shoulder is the enclosure wall and roof. A thin pure triangle would require a much larger footprint to contain the fixed electronics, so the lower body fills out the cut-away corner. The retained arrangement requires 54 by 55 mm at the base, with a 20.6 mm shoulder and 24 mm crown. The 46 by 46 mm right-triangle crown and off-corner necklace eye preserve the sail direction. A second dangling chain is deliberately not represented as enclosure hardware.",
+  "body_mm": [
+    54.0,
+    55.0,
+    24.0
+  ],
+  "with_bail_length_mm": 58.7,
+  "clip_thickness_mm": 36.0,
+  "outer_volume_mm3": 58839.0,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7572
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 5916
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2724
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5606
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3610
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      24.5774481434043,
+      8.945459558420303
+    ],
+    [
+      -22.780516827834717,
+      15.951089607163006
+    ],
+    [
+      4.678789192505831,
+      -26.5347320852822
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0,
+  "source_image": "/Users/bot/Desktop/jewelry/1a896e764638f970b01752269ed225fa.jpg",
+  "reference_analysis": "A very thin dark triangular plate worn on a fine dark chain. The triangle has a nearly vertical right edge, an oblique upper edge and a long descending diagonal. A second chain run reaches the lower point, giving an asymmetric suspended-sail composition. No measured size, metal specification or functional mechanism can be inferred from the photo.",
+  "interpretation": "A genuine triangular crown is lofted into the entire upper body, above a compact asymmetric twelve-sided hardware-covering lower volume. This is not a triangular badge on a flat box: the broad diagonal shoulder is the enclosure wall and roof. A thin pure triangle would require a much larger footprint to contain the fixed electronics, so the lower body fills out the cut-away corner. The retained arrangement requires 54 by 55 mm at the base, with a 20.6 mm shoulder and 24 mm crown. The 46 by 46 mm right-triangle crown and off-corner necklace eye preserve the sail direction. A second dangling chain is deliberately not represented as enclosure hardware.",
+  "finish_notes": "Matte graphite-grey optional nonconductive finish. The upper triangular face and broad inclined transition are actual solid geometry. A flat 19.2 mm cavity ceiling keeps the very steep triangular transition from thinning the roof or cutting retained hardware; this makes the diagonal shoulder more substantial than the photographed plate. The centered status light remains in the triangular crown near its diagonal. No metallic construction, printability, strength, acoustic or RF performance is certified."
+}

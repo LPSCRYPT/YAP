@@ -1,0 +1,76 @@
+{
+  "id": 2,
+  "name": "Cushion Square",
+  "family": "minimal",
+  "description": "Compact four-sided cushion with rounded corners and a shallow, restrained roof taper.",
+  "body_mm": [
+    50.0,
+    51.75,
+    21.3
+  ],
+  "with_bail_length_mm": 57.95,
+  "clip_thickness_mm": 33.3,
+  "outer_volume_mm3": 51596.0,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7960
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 10816
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 3000
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5878
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3672
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      22.982252925496777,
+      8.364855981258176
+    ],
+    [
+      -22.04045590445028,
+      15.432893369874785
+    ],
+    [
+      4.212966238565234,
+      -23.892918835438273
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25
+}

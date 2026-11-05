@@ -1,0 +1,76 @@
+{
+  "id": 4,
+  "name": "Offset Soft",
+  "family": "minimal",
+  "description": "Asymmetric clipped outline with physically softened perimeter corners and a rounded shoulder transition.",
+  "body_mm": [
+    50.0,
+    50.0,
+    21.8
+  ],
+  "with_bail_length_mm": 56.2,
+  "clip_thickness_mm": 33.8,
+  "outer_volume_mm3": 49513.6,
+  "issues": [],
+  "component_containment_checked": true,
+  "shell_extraction_samples": 8,
+  "clip_release_samples": 7,
+  "parts": [
+    {
+      "part": "RearBase",
+      "closed_reimported_mesh": true,
+      "facets": 7682
+    },
+    {
+      "part": "WholeBodyShell",
+      "closed_reimported_mesh": true,
+      "facets": 7158
+    },
+    {
+      "part": "LowerCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 2944
+    },
+    {
+      "part": "UpperCarrier",
+      "closed_reimported_mesh": true,
+      "facets": 5824
+    },
+    {
+      "part": "TopRetainer",
+      "closed_reimported_mesh": true,
+      "facets": 3622
+    },
+    {
+      "part": "LightGuide",
+      "closed_reimported_mesh": true,
+      "facets": 312
+    },
+    {
+      "part": "ClipReceiverAdapter",
+      "closed_reimported_mesh": true,
+      "facets": 1332
+    },
+    {
+      "part": "SlideOnClip",
+      "closed_reimported_mesh": true,
+      "facets": 376
+    }
+  ],
+  "closure_centres_mm": [
+    [
+      23.12063975842818,
+      8.415224669259576
+    ],
+    [
+      -19.68264375768947,
+      13.781935531030449
+    ],
+    [
+      4.0608825705522715,
+      -23.03040949397558
+    ]
+  ],
+  "revision": 2,
+  "profile_scale_mm": 25.0
+}

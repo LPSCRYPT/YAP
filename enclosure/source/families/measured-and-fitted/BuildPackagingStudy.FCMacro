@@ -1,0 +1,111 @@
+from enclosure_runtime import output_dir, source_path, artifact_path, document, new_document
+import FreeCAD as App, FreeCADGui as Gui, Part, json, os
+from pivy import coin
+OUT=output_dir('measured-and-fitted')
+source=document('Recorder_300mAh').XIAO.Shape.copy()
+source.Placement=App.Placement()
+d=new_document('Recorder_Internal_Layouts')
+d.Label='300 mAh + SD — internal packaging study'
+p=d.addObject('Spreadsheet::Sheet','Parameters')
+# Physical dimensions and reserved installation tiles. Unknown modules are explicit assumptions.
+specs={
+ 'Battery':((20,30,6),(22,34,7.2),'Protected pack ASSUMED; extra space is provisional, not a cell swelling specification',(0.3,0.65,0.95)),
+ 'XIAO':((17.78,22.48198115,4.46),(20,27,5.5),'Actual board geometry; no pin headers',(0.1,0.55,0.32)),
+ 'SD':((18,24,3),(20,27,4),'ASSUMED compact reader plus seated card; 8-pin module not measured',(0.25,0.3,0.4)),
+ 'Amplifier':((18,18,3),(20,20,4),'ASSUMED headerless MAX98357A breakout',(0.45,0.35,0.8)),
+ 'MicLeft':((10,10,2),(12,12,3),'ASSUMED microphone module; larger than previous bare-mic keepout',(0.85,0.35,0.65)),
+ 'MicRight':((10,10,2),(12,12,3),'ASSUMED matched second microphone module',(0.85,0.35,0.65)),
+ 'Speaker':((10,10,2.9),(12,12,5),'PUI AS01008MR-2-R body; tile includes provisional gasket/acoustic clearance',(0.35,0.35,0.38)),
+ 'Motor':((10,10,3),(12,12,4),'ASSUMED ERM motor; hard mounting and vibration isolation still needed',(0.7,0.7,0.72)),
+ 'Driver':((10,10,3),(12,12,4),'ASSUMED driver/interconnect area: MOSFET, diode, resistors, local decoupling',(0.7,0.45,0.2)),
+ 'Button':((6,6,3.1),(8,8,5),'ASSUMED switch; tile includes actuator/travel budget',(0.95,0.55,0.15)),
+ 'LED':((1.6,0.8,0.6),(4,4,3),'0603 body; tile reserves resistor, wires/light guide',(0.2,0.9,0.35)),
+ 'Antenna':((17,8,1),(20,10,13.5),'UNVERIFIED external antenna envelope; entire tile is RF/no-metal reservation, not a validated keepout',(0.95,0.8,0.2))}
+row=1
+for name,(physical,tile,note,color) in specs.items():
+ for suffix,values in [('Body',physical),('Tile',tile)]:
+  for axis,value in zip('XYZ',values):
+   alias=name+suffix+axis;p.set('A%d'%row,alias);p.set('B%d'%row,str(value));p.setAlias('B%d'%row,alias);row+=1
+ p.set('D%d'%(row-6),note)
+for text in ['All units mm. Physical boxes are procurement assumptions unless marked actual.',
+ 'Tile dimensions include local clearance budgets. Touching tiles do not imply touching components.',
+ 'Positions are editable in each tile Placement; this is NOT an automatic packing solver.',
+ 'Antenna tile is provisional. Obtain antenna drawing and manufacturer RF keepout.',
+ 'No headers included. Wiring uses local perimeter and stack gaps; detailed routing remains unverified.',
+ 'SD extraction and USB cable volumes are external service space, not added to internal dimensions.',
+ 'Microphone/speaker ducts, structural mounts, battery insulation and enclosure walls are not designed.',
+ 'GPIO assignment, power supply current and simultaneous I2S/SD operation remain electrically unverified.',
+ 'Edit Parameters, recompute, then rerun clearance analysis; larger modules may collide.']:
+ p.set('A%d'%row,text);row+=1
+layouts=[
+ ('Stacked','A — compact stacked',0,{'Battery':(0,0,0),'XIAO':(0,0,8),'SD':(24,0,0),'Amplifier':(24,0,6),'MicLeft':(0,34,0),'MicRight':(12,34,0),'Speaker':(24,28,7),'Motor':(24,28,0),'Driver':(0,28,8),'Button':(38,28,8),'LED':(40,39,8),'Antenna':(0,46,0)}),
+ ('Flat','B — side-by-side / thin',85,{'Battery':(0,0,0),'XIAO':(24,0,0),'SD':(46,0,0),'Amplifier':(24,29,0),'MicLeft':(0,50,0),'MicRight':(14,50,0),'Speaker':(46,29,0),'Motor':(46,43,0),'Driver':(0,36,0),'Button':(14,36,0),'LED':(18,46,0),'Antenna':(26,51,0)}),
+ ('Overlap','C — partial overlap / separate bay',185,{'Battery':(0,0,0),'XIAO':(12,0,8),'SD':(34,0,0),'Amplifier':(34,29,0),'MicLeft':(0,36,6),'MicRight':(14,36,6),'Speaker':(0,22,8),'Motor':(0,36,0),'Driver':(14,36,0),'Button':(34,29,6),'LED':(44,29,6),'Antenna':(0,50,0)})]
+study=[]
+for key,title,offset,positions in layouts:
+ group=d.addObject('App::Part',key);group.Label=title
+ group.addProperty('App::PropertyString','Assumptions','Study');group.Assumptions='Headerless modules; adjustable provisional envelopes. Not a verified minimum.'
+ tiles=[];parts=[];services=[]
+ for name,(physical,tile,note,color) in specs.items():
+  tileobj=d.addObject('Part::Box',key+'_'+name+'_Reservation');tileobj.Label=name+' — installation / clearance reservation'
+  for prop,axis in zip(['Length','Width','Height'],'XYZ'):
+   tileobj.setExpression(prop,'Parameters.'+name+'Tile'+axis)
+  if name=='Antenna' and key=='Flat':tileobj.setExpression('Height',None);tileobj.Height=7.2
+  tileobj.Placement.Base=App.Vector(*positions[name]);group.addObject(tileobj)
+  tileobj.ViewObject.DisplayMode='Wireframe';tileobj.ViewObject.LineColor=color;tileobj.ViewObject.Visibility=False
+  tileobj.addProperty('App::PropertyString','Basis','Study');tileobj.Basis=note
+  if name=='XIAO':
+   obj=d.addObject('Part::Feature',key+'_'+name);obj.Shape=source.copy()
+  elif name in ['Speaker','Motor']:
+   obj=d.addObject('Part::Cylinder',key+'_'+name);obj.setExpression('Radius','Parameters.'+name+'BodyX/2');obj.setExpression('Height','Parameters.'+name+'BodyZ')
+  else:
+   obj=d.addObject('Part::Box',key+'_'+name)
+   for prop,axis in zip(['Length','Width','Height'],'XYZ'):obj.setExpression(prop,'Parameters.'+name+'Body'+axis)
+  for axis in 'xyz':
+   dim=axis.upper()
+   margin='(Parameters.'+name+'Tile'+dim+'-Parameters.'+name+'Body'+dim+')/2' if axis!='z' else '0.5'
+   if name in ['Speaker','Motor'] and axis in 'xy':margin='Parameters.'+name+'Tile'+dim+'/2'
+   obj.setExpression('Placement.Base.'+axis,tileobj.Name+'.Placement.Base.'+axis+'/1 mm+'+margin)
+  obj.Label=name+' — '+note;obj.ViewObject.ShapeColor=color;group.addObject(obj);parts.append(obj);tiles.append(tileobj)
+ for device,depth,width in [('XIAO',16,14),('SD',18,18)]:
+  t=d.getObject(key+'_'+device+'_Reservation')
+  service=d.addObject('Part::Box',key+'_'+device+'_Access');service.Length=width;service.Width=depth;service.Height=5
+  service.setExpression('Placement.Base.x',t.Name+'.Placement.Base.x+1 mm')
+  service.setExpression('Placement.Base.y',t.Name+'.Placement.Base.y-%g mm'%depth)
+  service.setExpression('Placement.Base.z',t.Name+'.Placement.Base.z')
+  service.Label=device+' — EXTERNAL insertion/removal access';service.ViewObject.DisplayMode='Wireframe';service.ViewObject.LineColor=(0.25,0.8,0.9);group.addObject(service);services.append(service)
+ d.recompute()
+ bounds=App.BoundBox()
+ for t in tiles:bounds.add(t.Shape.BoundBox)
+ outline=d.addObject('Part::Box',key+'_InternalBounds');outline.Label='INTERNAL STUDY BOUNDS — not an enclosure'
+ outline.Length=bounds.XLength;outline.Width=bounds.YLength;outline.Height=bounds.ZLength
+ outline.ViewObject.DisplayMode='Wireframe';outline.ViewObject.LineColor=(0.8,0.8,0.8);group.addObject(outline)
+ collisions=[]
+ for i,a in enumerate(tiles):
+  for b in tiles[i+1:]:
+   v=a.Shape.common(b.Shape).Volume
+   if v>0.001:collisions.append([a.Name,b.Name,round(v,4)])
+ for a,t in zip(parts,tiles):assert a.Shape.cut(t.Shape).Volume<0.001,(a.Name,'outside reservation')
+ for s in services:
+  for o in parts:assert s.Shape.common(o.Shape).Volume<0.001,(s.Name,o.Name,'access obstructed')
+ assert not collisions,collisions
+ volume=sum(o.Shape.Volume for o in parts)
+ group.addProperty('App::PropertyString','InternalDimensions','Study');group.InternalDimensions='%.1f x %.1f x %.1f mm'%(bounds.XLength,bounds.YLength,bounds.ZLength)
+ report={'layout':key,'internal_mm':[round(bounds.XLength,2),round(bounds.YLength,2),round(bounds.ZLength,2)],'component_volume_mm3':round(volume,1),'bounding_volume_mm3':round(bounds.XLength*bounds.YLength*bounds.ZLength,1),'reserved_tile_collisions':collisions,'external_access_clear':True}
+ study.append(report)
+ group.Placement.Base=App.Vector(offset,0,0)
+ caption=d.addObject('App::Annotation',key+'_Caption');caption.LabelText=[title,group.InternalDimensions,'PROVISIONAL MODULES / NO SHELL'];caption.Position=App.Vector(offset,-32,0);caption.ViewObject.FontSize=14;caption.ViewObject.TextColor=(0.95,0.95,0.95)
+summary=d.addObject('Spreadsheet::Sheet','LayoutResults')
+for col,text in zip('ABCDEFG',['Layout','Width mm','Length mm','Height mm','Body volume mm3','Bounding volume mm3','Caveat']):summary.set(col+'1',text)
+for i,report in enumerate(study,2):
+ values=[report['layout']]+report['internal_mm']+[report['component_volume_mm3'],report['bounding_volume_mm3'],'No routing, acoustic or RF validation; conditional packing study']
+ for col,value in zip('ABCDEFG',values):summary.set(col+str(i),str(value))
+summary.set('A6','Results and bounding outlines are snapshots of the generated layout; update after edits.')
+d.recompute();App.setActiveDocument(d.Name)
+v=Gui.activeDocument().activeView();v.viewAxonometric();v.fitAll()
+d.saveAs(OUT+'/Recorder-300mAh-Internal-Layouts.FCStd')
+v.saveImage(OUT+'/Recorder-300mAh-Layouts-Isometric.png',1800,1000,'Current')
+v.viewTop();v.fitAll();v.saveImage(OUT+'/Recorder-300mAh-Layouts-Top.png',1800,1000,'Current')
+v.viewAxonometric();v.fitAll()
+with open(OUT+'/packaging-study-results.json','w') as f:json.dump(study,f,indent=2)
+print(json.dumps(study))

@@ -24,8 +24,14 @@ enum Transcriber {
         }
     }
 
+    /// The language picked in Settings, or the phone's.
+    static var preferredLocale: Locale {
+        let id = UserDefaults.standard.string(forKey: "transcriptionLanguage") ?? ""
+        return id.isEmpty ? Locale.current : Locale(identifier: id)
+    }
+
     /// Target piece length. Each cut moves back up to `searchSeconds` to land in a pause.
-    static let pieceSeconds = 60.0
+    static let pieceSeconds = 30.0
     static let searchSeconds = 8.0
 
     /// The transcript as phrases of timed pieces (times in seconds from the start of the file).
@@ -84,7 +90,7 @@ enum Transcriber {
     #if compiler(>=6.2)
     @available(iOS 26.0, *)
     private static func appleTranscriber() async -> SpeechTranscriber? {
-        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale.current)
+        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Transcriber.preferredLocale)
         if found == nil { found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale(identifier: "en-US")) }
         guard let locale = found else { return nil }
         return SpeechTranscriber(locale: locale, transcriptionOptions: [], reportingOptions: [], attributeOptions: [.audioTimeRange])
@@ -103,7 +109,7 @@ enum Transcriber {
     @available(iOS 26.0, *)
     private static func transcribeWithAnalyzer(_ pieces: [Piece], progress: @escaping @MainActor (Double) -> Void,
                                                partial: @escaping @MainActor ([[TimedText]]) -> Void) async throws -> [[TimedText]] {
-        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale.current)
+        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Transcriber.preferredLocale)
         if found == nil { found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale(identifier: "en-US")) }
         guard let locale = found else { throw Failure.unavailable }
         func makeTranscriber() -> SpeechTranscriber {
@@ -120,6 +126,11 @@ enum Transcriber {
         for (i, piece) in pieces.enumerated() {
             let transcriber = makeTranscriber()
             let analyzer = SpeechAnalyzer(modules: [transcriber])
+            if !Vocabulary.words.isEmpty {
+                let context = AnalysisContext()
+                context.contextualStrings[.general] = Vocabulary.words
+                try? await analyzer.setContext(context)
+            }
             let file = try AVAudioFile(forReading: piece.url)
             async let results: [[TimedText]] = transcriber.results.reduce(into: []) { out, result in
                 if result.isFinal { out.append(Speakers.pieces(of: result.text, phrase: result.range)) }
@@ -142,7 +153,7 @@ enum Transcriber {
 
     private static func transcribeClassic(_ pieces: [Piece], progress: @escaping @MainActor (Double) -> Void,
                                           partial: @escaping @MainActor ([[TimedText]]) -> Void) async throws -> [[TimedText]] {
-        guard let recognizer = SFSpeechRecognizer(locale: Locale.current) ?? SFSpeechRecognizer(locale: Locale(identifier: "en-US")),
+        guard let recognizer = SFSpeechRecognizer(locale: Transcriber.preferredLocale) ?? SFSpeechRecognizer(locale: Locale(identifier: "en-US")),
               recognizer.isAvailable else { throw Failure.unavailable }
         var all: [[TimedText]] = []
         for (i, piece) in pieces.enumerated() {
@@ -180,6 +191,7 @@ enum Transcriber {
         request.requiresOnDeviceRecognition = recognizer.supportsOnDeviceRecognition
         request.shouldReportPartialResults = false
         request.addsPunctuation = true
+        request.contextualStrings = Vocabulary.words
         return try await withCheckedThrowingContinuation { c in
             var done = false
             recognizer.recognitionTask(with: request) { result, error in
@@ -258,7 +270,7 @@ enum Transcriber {
 /// This is what Omi uses on iOS 17+. Runs on the Neural Engine; audio stays on the phone.
 enum Parakeet {
     /// Parakeet v2 is English only; other languages use Apple's classic recognizer.
-    static var suitsLanguage: Bool { Locale.current.language.languageCode?.identifier == "en" }
+    static var suitsLanguage: Bool { Transcriber.preferredLocale.language.languageCode?.identifier == "en" }
 
     private actor Loader {
         static let shared = Loader()

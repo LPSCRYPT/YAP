@@ -60,6 +60,8 @@ struct NotesView: View {
                 }
             }
             .searchable(text: $query, prompt: "Search conversations")
+            .onChange(of: model.store.notes) { _, notes in DailyRecap.refresh(notes) }
+            .task { DailyRecap.refresh(model.store.notes) }
             .navigationTitle("Pendant")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -123,6 +125,13 @@ struct PendantCard: View {
                     .buttonStyle(.borderedProminent)
                 }
             }
+            if model.link.liveNote == nil {
+                Button { model.showPhoneRecorder = true } label: {
+                    Label(model.link.connected ? "Record with phone instead" : "Record with phone",
+                          systemImage: "iphone.gen3.radiowaves.left.and.right").frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+            }
             if let name = model.link.downloading {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Downloading Note \(Int(name.dropFirst().prefix(4)) ?? 0)")
@@ -182,6 +191,7 @@ struct NoteDetailView: View {
     @State private var renaming = false
     @State private var newTitle = ""
     @State private var copied = false
+    @State private var pdf: ShareItem?
 
     private var note: Note? { model.store.notes.first { $0.name == name } }
 
@@ -215,11 +225,12 @@ struct NoteDetailView: View {
                             ProgressView("Transcribing on your device…")
                         }
                         // Show what's done so far
-                        if let ph = model.partialPhrases[note.name], !ph.isEmpty {
-                            lines(AppModel.paragraphs(ph), note: note, tapNames: false)
+                        if model.partialPhrases[note.name]?.isEmpty == false {
+                            lines(model.progressLines(note.name), note: note, tapNames: false)
                         }
                     } else if let t = note.transcript, !t.isEmpty {
                         SummarySection(note: note)
+                        TalkTimeView(note: note)
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
                                 Text("Transcript").font(.headline)
@@ -252,6 +263,11 @@ struct NoteDetailView: View {
                                 copied = true
                             }
                         }
+                        if let t = note.transcript, !t.isEmpty {
+                            Button("Share as PDF", systemImage: "doc.richtext") {
+                                pdf = PDFExport.make(note, lines: model.displayLines(for: note), names: model.names(for: note)).map(ShareItem.init)
+                            }
+                        }
                         ShareLink("Share audio", item: note.audioURL)
                         if note.insights != nil {
                             Button("Rename", systemImage: "pencil") { newTitle = note.heading; renaming = true }
@@ -282,6 +298,7 @@ struct NoteDetailView: View {
                 Button("Cancel", role: .cancel) {}
             }
             .alert("Copied", isPresented: $copied) { Button("OK", role: .cancel) {} }
+            .sheet(item: $pdf) { ShareSheet(items: [$0.url]) }
         } else {
             Text("Note deleted").foregroundStyle(.secondary)
         }

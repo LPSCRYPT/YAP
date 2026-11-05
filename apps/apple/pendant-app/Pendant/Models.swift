@@ -317,10 +317,14 @@ struct SettingsView: View {
                 NavigationLink { ModelsView() } label: {
                     Label("Models and downloads", systemImage: "cpu")
                 }
+                NavigationLink { VocabularyView() } label: {
+                    Label("Language and custom words", systemImage: "character.book.closed")
+                }
                 NavigationLink { PeopleView() } label: {
                     Label(model.people.me == nil ? "Teach Pendant your voice" : "People", systemImage: "person.2")
                 }
             }
+            DailyRecapSettings()
             Section("Pendant") {
                 Toggle("Free up pendant after download", isOn: $model.deleteAfterDownload)
                 Toggle("Split on 2 min of quiet, hide silent clips", isOn: $model.autoSplit)

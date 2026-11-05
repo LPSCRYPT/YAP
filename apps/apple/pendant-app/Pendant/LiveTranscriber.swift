@@ -214,7 +214,7 @@ private final class LiveEngine {
 
     /// onText(text, pieces): pieces with word times for a finished phrase, nil while still guessing.
     func run(_ onText: @escaping @MainActor (String, [TimedText]?) -> Void) async throws {
-        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale.current)
+        var found = await SpeechTranscriber.supportedLocale(equivalentTo: Transcriber.preferredLocale)
         if found == nil { found = await SpeechTranscriber.supportedLocale(equivalentTo: Locale(identifier: "en-US")) }
         guard let locale = found else { throw Transcriber.Failure.unavailable }
         let transcriber = SpeechTranscriber(locale: locale, transcriptionOptions: [],
@@ -223,6 +223,11 @@ private final class LiveEngine {
             try await install.downloadAndInstall()   // first time only, on the phone
         }
         let analyzer = SpeechAnalyzer(modules: [transcriber])
+        if !Vocabulary.words.isEmpty {
+            let context = AnalysisContext()
+            context.contextualStrings[.general] = Vocabulary.words
+            try? await analyzer.setContext(context)
+        }
         self.analyzer = analyzer
         format = await SpeechAnalyzer.bestAvailableAudioFormat(compatibleWith: [transcriber])
         let (stream, continuation) = AsyncStream<AnalyzerInput>.makeStream()
@@ -298,7 +303,7 @@ private final class ClassicLiveEngine {
     private var closed: Set<Int> = []
 
     init?(onText: @escaping (String, [TimedText]?) -> Void) {
-        guard let r = SFSpeechRecognizer(locale: Locale.current) ?? SFSpeechRecognizer(locale: Locale(identifier: "en-US")),
+        guard let r = SFSpeechRecognizer(locale: Transcriber.preferredLocale) ?? SFSpeechRecognizer(locale: Locale(identifier: "en-US")),
               r.isAvailable else { return nil }
         recognizer = r
         self.onText = onText
@@ -317,6 +322,7 @@ private final class ClassicLiveEngine {
         r.shouldReportPartialResults = true
         r.requiresOnDeviceRecognition = recognizer.supportsOnDeviceRecognition
         r.addsPunctuation = true
+        r.contextualStrings = Vocabulary.words
         let offset = fed
         requestStart = fed
         open += 1

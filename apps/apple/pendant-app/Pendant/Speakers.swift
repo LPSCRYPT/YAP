@@ -44,15 +44,20 @@ enum Speakers {
 
     /// Who spoke when in a saved recording. Reads the file a minute at a time.
     /// nil if the model isn't available (not downloaded yet and no internet).
-    static func turns(for url: URL) async -> [SpeakerTurn]? {
+    /// `onPartial` gets who-spoke-when so far after every 30 s of audio, so bubbles can show while it works.
+    static func turns(for url: URL, onPartial: (@Sendable ([SpeakerTurn]) -> Void)? = nil) async -> [SpeakerTurn]? {
         #if canImport(FluidAudio)
-        guard let models = try? await SpeakerModels.shared.load() else { return nil }
-        return try? await Task.detached(priority: .utility) {
-            let diarizer = SortformerDiarizer(config: SpeakerModels.config)
+        // The faster "efficient" model for files (about 4x the speed); the live one if that can't load
+        var config = SpeakerModels.fileConfig
+        var loaded = try? await SpeakerModels.shared.load(forFiles: true)
+        if loaded == nil { config = SpeakerModels.config; loaded = try? await SpeakerModels.shared.load() }
+        guard let models = loaded else { return nil }
+        return try? await Task.detached(priority: .userInitiated) {
+            let diarizer = SortformerDiarizer(config: config)
             diarizer.initialize(models: models)
             let file = try AVAudioFile(forReading: url)
             let rate = file.processingFormat.sampleRate
-            let chunk = AVAudioFrameCount(rate * 60)
+            let chunk = AVAudioFrameCount(rate * 30)
             guard let buf = AVAudioPCMBuffer(pcmFormat: file.processingFormat, frameCapacity: chunk) else { return [] }
             while file.framePosition < file.length {
                 try Task.checkCancellation()
@@ -60,6 +65,7 @@ enum Speakers {
                 guard buf.frameLength > 0, let s = buf.floatChannelData?[0] else { break }
                 let samples = Array(UnsafeBufferPointer(start: s, count: Int(buf.frameLength)))
                 _ = try diarizer.process(samples: samples, sourceSampleRate: rate)
+                onPartial?(turns(from: diarizer.timeline))
             }
             _ = try diarizer.finalizeSession()
             return turns(from: diarizer.timeline)
@@ -107,7 +113,8 @@ enum Speakers {
         let people = Set(lines.compactMap(\.speaker))
         if people.count < max(1, minPeople) {
             let all = lines.map { $0.text.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }.joined(separator: " ")
-            return all.isEmpty ? [] : [SpeakerLine(id: 0, speaker: nil, text: all, start: lines.first?.start ?? -1)]
+            // minPeople 1: no separate voices found, so it's all one person (still shown as a bubble)
+            return all.isEmpty ? [] : [SpeakerLine(id: 0, speaker: minPeople <= 1 ? 1 : nil, text: all, start: lines.first?.start ?? -1)]
         }
         return lines.map { SpeakerLine(id: $0.id, speaker: $0.speaker, text: $0.text.trimmingCharacters(in: .whitespaces), start: $0.start) }
             .filter { !$0.text.isEmpty }
@@ -124,6 +131,15 @@ enum Speakers {
             }
         }
         return Dictionary(uniqueKeysWithValues: numbers.map { ($0.value, $0.key) })
+    }
+
+    /// Seconds each Person N talked.
+    static func talkTime(_ results: [[TimedText]], turns: [SpeakerTurn]) -> [(person: Int, seconds: Double)] {
+        slots(results, turns: turns).map { n, slot in
+            (n, turns.filter { $0.speaker == slot }.reduce(0) { $0 + max(0, $1.end - $1.start) })
+        }
+        .filter { $0.1 >= 1 }
+        .sorted { $0.0 < $1.0 }
     }
 
     /// Transcript text saved to disk: "Person 1: …" lines, or plain text for one voice.
@@ -149,6 +165,7 @@ enum Speakers {
     /// The words only, without "Person N:" names (to compare two versions of a transcript).
     static func words(_ text: String) -> String {
         parse(text).map(\.text).joined(separator: " ")
+            .split(whereSeparator: \.isWhitespace).joined(separator: " ")
     }
 
     /// Keeps the phrases and turns between `from` and `to` seconds, with times moved to start at 0.
@@ -204,17 +221,20 @@ actor SpeakerModels {
     static let shared = SpeakerModels()
     /// ~1 s delay when live, good accuracy (about 20% error on hard meeting audio).
     static let config = SortformerConfig.balancedV2_1
-    private var models: SortformerModels?
-    private var loading: Task<SortformerModels, Error>?
+    /// Saved recordings: same accuracy family, bigger steps, about 4x faster than the live one.
+    static let fileConfig = SortformerConfig.efficientV2_1
+    private var models: [Bool: SortformerModels] = [:]
+    private var loading: [Bool: Task<SortformerModels, Error>] = [:]
 
-    func load() async throws -> SortformerModels {
-        if let models { return models }
-        if let loading { return try await loading.value }   // live and files share one download
-        let task = Task { try await SortformerModels.loadFromHuggingFace(config: Self.config) }
-        loading = task
-        defer { loading = nil }
+    func load(forFiles: Bool = false) async throws -> SortformerModels {
+        if let m = models[forFiles] { return m }
+        if let t = loading[forFiles] { return try await t.value }   // one download shared by everyone
+        let config = forFiles ? Self.fileConfig : Self.config
+        let task = Task { try await SortformerModels.loadFromHuggingFace(config: config) }
+        loading[forFiles] = task
+        defer { loading[forFiles] = nil }
         let m = try await task.value
-        models = m
+        models[forFiles] = m
         return m
     }
 }
